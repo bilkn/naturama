@@ -1,4 +1,6 @@
-import "./style.scss";
-import "./test";
-alert('hello from webpack');
-alert('hello from webpack');
+import './style.scss';
+import './test';
+import ReactDOM from 'react-dom';
+import App from '../src/components/App/App';
+
+ReactDOM.render(<App />, document.getElementById("root"));

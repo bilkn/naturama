@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -9,7 +8,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'main.[contenthash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
   },
   optimization: {
     minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],
@@ -18,7 +17,6 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: 'style.[contenthash].css' }),
     new HtmlWebpackPlugin({
       filename: 'index.[contenthash].html',
-      /* template: './src/template.html' */
       minify: {
         removeAttributeQuotes: true,
         collapseWhitespace: true,
@@ -29,6 +27,11 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.js/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
@@ -38,13 +41,16 @@ module.exports = {
       },
       {
         test: /\.(svg|png|jpg|gif)$/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[hash].[ext]',
-            outputPath: 'imgs',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/',
+              publicPath: 'assets/',
+            },
           },
-        },
+        ],
       },
     ],
   },
