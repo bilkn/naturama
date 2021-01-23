@@ -1,57 +1,50 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const path = require('path');
+
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
   output: {
-    filename: 'main.[contenthash].js',
     path: path.resolve(__dirname, 'build'),
+    filename: 'static/js/[name][contenthash].js',
   },
-  optimization: {
-    minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],
+  devServer: {
+    port: 8000,
+    contentBase: path.join(__dirname, 'dist'),
+    hot: true,
   },
-  plugins: [
-    new MiniCssExtractPlugin({ filename: 'style.[contenthash].css' }),
-    new HtmlWebpackPlugin({
-      filename: 'index.[contenthash].html',
-      minify: {
-        removeAttributeQuotes: true,
-        collapseWhitespace: true,
-        removeComments: true,
-      },
-    }),
-  ],
   module: {
     rules: [
       {
-        test: /\.js/,
+        test: /\.html$/,
+        loader: 'html-loader',
+      },
+      {
         exclude: /node_modules/,
+        test: /\.(js)$/,
         loader: 'babel-loader',
       },
       {
-        test: /\.scss$/,
+        test: /\.scss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.html$/,
-        use: ['html-loader'],
-      },
-      {
-        test: /\.(svg|png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'assets/',
-              publicPath: 'assets/',
-            },
-          },
-        ],
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets',
+          name: '[name].[ext]',
+        },
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name][contenthash].css',
+    }),
+  ],
 };
