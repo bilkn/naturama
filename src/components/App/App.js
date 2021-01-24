@@ -1,10 +1,10 @@
 import React from 'react';
-import Fetch from '../Fetch/Fetch';
 import 'regenerator-runtime/runtime.js';
+import AppHead from '../AppHead/AppHead';
 function App() {
   return (
     <>
-      <Fetch />
+     <AppHead />
     </>
   );
 }

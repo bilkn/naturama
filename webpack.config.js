@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-
+const devMode = process.env.NODE_ENV !== 'production';
 module.exports = {
   mode: 'production',
   entry: './src/index.js',
@@ -13,7 +13,7 @@ module.exports = {
     port: 8000,
     contentBase: path.join(__dirname, 'dist'),
     hot: true,
-    open: true
+    open: true,
   },
   module: {
     rules: [
@@ -28,7 +28,16 @@ module.exports = {
       },
       {
         test: /\.scss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+          },
+
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
