@@ -1,5 +1,5 @@
 {
-  "name": "naturama",
+  "name": "naturamo",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,7 +9,7 @@
     "dev": "webpack serve --mode development"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bilkan Konus",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.12.10",

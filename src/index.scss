@@ -1,3 +1,22 @@
+@import './styles/variables';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
 body {
-  background-color: green;
+  background: $site-background;
 }

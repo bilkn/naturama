@@ -1,10 +1,12 @@
 import React from 'react';
-import Fetch from '../Fetch/Fetch';
 import 'regenerator-runtime/runtime.js';
+import AppHead from '../AppHead/AppHead';
+import MobileNav from '../MobileNav/MobileNav';
 function App() {
   return (
     <>
-      <Fetch />
+     <AppHead />
+     <MobileNav />
     </>
   );
 }

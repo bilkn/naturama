@@ -11,7 +11,9 @@
         ".babelrc": true,
         "webpack.config.js": true,
         "node_modules": true,
-        "**/.babelrc": true
+        "**/.babelrc": true,
+        ".eslintrc.js": true,
+        "debug.log": true
     },
     "explorerExclude.backup": null
 }
