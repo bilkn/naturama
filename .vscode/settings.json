@@ -1,0 +1,17 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "*.json": true,
+        "**/*.json": true,
+        ".gitignore": true,
+        ".babelrc": true,
+        "webpack.config.js": true,
+        "node_modules": true,
+        "**/.babelrc": true
+    },
+    "explorerExclude.backup": null
+}

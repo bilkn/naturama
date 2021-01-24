@@ -1,5 +1,12 @@
+import React from 'react';
+import Fetch from '../Fetch/Fetch';
+import 'regenerator-runtime/runtime.js';
 function App() {
-  console.log("hello");
+  return (
+    <>
+      <Fetch />
+    </>
+  );
 }
 
 export default App;

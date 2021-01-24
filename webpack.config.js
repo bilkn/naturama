@@ -13,6 +13,7 @@ module.exports = {
     port: 8000,
     contentBase: path.join(__dirname, 'dist'),
     hot: true,
+    open: true
   },
   module: {
     rules: [
