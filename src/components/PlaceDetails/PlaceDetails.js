@@ -1,5 +1,5 @@
 import React from 'react'
-
+import "./PlaceDetails.scss";
 function PlaceDetails() {
     return (
       <div className="place-details">

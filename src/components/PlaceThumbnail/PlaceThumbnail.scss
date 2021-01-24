@@ -1,0 +1,9 @@
+ .place-thumbnail {
+  height: 90%;
+  width: 100%;
+  &__img {
+    object-fit: cover;
+    height: 90%;
+    width: 100%;
+  }
+}
