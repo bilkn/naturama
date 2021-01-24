@@ -5,14 +5,15 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "*.json": false,
-        "**/*.json": false,
+        "*.json": true,
+        "**/*.json": true,
         ".gitignore": true,
         ".babelrc": true,
         "webpack.config.js": true,
         "node_modules": true,
         "**/.babelrc": true,
-        ".eslintrc.js": true
+        ".eslintrc.js": true,
+        "debug.log": true
     },
     "explorerExclude.backup": null
 }

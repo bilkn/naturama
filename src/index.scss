@@ -8,6 +8,15 @@
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
 body {
   background: $site-background;
 }
