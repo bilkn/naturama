@@ -6,7 +6,7 @@ function PlaceThumbnail() {
   return (
     <div className="place-thumbnail">
       <img src={img} alt="" className="place-thumbnail__img" />
-      <p className="place-thumbnail__name"></p>
+      <p className="place-thumbnail__name">Wild Jungle</p>
     </div>
   );
 }

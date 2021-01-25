@@ -1,5 +1,28 @@
 @import '../../styles/variables';
 
 .place-details {
+  align-items: center;
   background: $sec-color;
+  box-shadow: 0 8px 15px #1b1b1b;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -4px;
+  padding: 0.8rem 1rem;
+ 
+  // place-details__distance
+  &__distance {
+      
+  }
+  
 }
+
+.place-details-location-container {
+  align-items: center;
+  display: flex;
+
+   // .place-details-location-container__icon
+  &__icon {
+    margin-right: 7px;
+  }
+}
+
