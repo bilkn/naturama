@@ -1,3 +1,11 @@
+@import "../../styles/variables";
 .daily-place-list {
-    
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 80%;
+  justify-content: center;
+  padding: $mobile-page-padding;
+  // daily-place-list__place
+  &__place {
+  }
 }

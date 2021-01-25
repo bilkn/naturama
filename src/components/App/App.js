@@ -7,9 +7,9 @@ import MobileNav from '../MobileNav/MobileNav';
 function App() {
   return (
     <>
-     <AppHead />
-     <Home/>
-     <MobileNav />
+      <AppHead />
+      <DailyPlaceList />
+      <MobileNav />
     </>
   );
 }
