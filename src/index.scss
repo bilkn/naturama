@@ -8,6 +8,10 @@
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 li {
   list-style: none;
 }
@@ -20,4 +24,8 @@ button {
 body {
   background: $site-background;
   font-family: $main-font;
+}
+
+.no-border {
+  border: none;
 }

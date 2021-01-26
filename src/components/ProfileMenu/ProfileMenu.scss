@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+.profile-menu-list__item {
+    background: $sec-color;
+    border-bottom: 1px solid rgb(141, 141, 141);
+    color: $icon-color;
+    font-size: 1.8rem;
+    padding: 0.3rem 1rem;
+}
+
+.profile-menu-list__icon {
+    width: 50px;
+}
+
+.profile-menu-list__link {
+    color: inherit;
+}
