@@ -1,0 +1,28 @@
+ @import "../../styles/variables";
+
+ .place-thumbnail {
+  height: auto;
+  position: relative;
+  width: 100%;
+  &__img {
+    object-fit: cover;
+    height: auto;
+    width: 100%;
+  }
+  &__icon {
+    color: #fff;
+    font-size: 30px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    opacity: 0.7;
+  }
+  &__name {
+    bottom: 30px;
+    color: #fff;
+    font-family: $main-font;
+    font-size: 1.2rem;
+    left: 15px;
+    position: absolute;
+  }
+}
