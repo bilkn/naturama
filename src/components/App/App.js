@@ -6,11 +6,12 @@ import Favourites from '../Favourites/Favourites';
 import Home from '../Home/Home';
 import MobileNav from '../MobileNav/MobileNav';
 import Profile from '../Profile/Profile';
+import SocialLinks from '../SocialLinks/SocialLinks';
 function App() {
   return (
     <>
       <AppHead />
-      <Profile />
+      <SocialLinks />
       <MobileNav />
     </>
   );
