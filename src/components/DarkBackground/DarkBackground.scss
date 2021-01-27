@@ -1,0 +1,17 @@
+.dark-background {
+  background-color: rgba(0, 0, 0, 0.8);
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  transition: opacity 300ms ease;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+  width: 100vw;
+  z-index: 100000;
+}
+
+.dark-background--visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

@@ -1,0 +1,12 @@
+.fullscreen-picture {
+    align-items: center;
+    background: #4A5745;
+    display: flex;
+    height: 100vh;
+
+    // fullscreen-picture__img 
+    &__img {
+        height: 30vh;
+        width: 100%;
+    } 
+}

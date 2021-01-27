@@ -2,13 +2,12 @@
 .profile {
   background: $profile-bg-color;
   color: $icon-color;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  height: 75vh;
   margin-top: 90px;
-  padding-bottom: 45%;
+  position: relative;
+  overflow: hidden scroll;
   // profile__footer
   &__footer {
-    align-self: center;
+    text-align: center;
   }
 }

@@ -7,7 +7,7 @@ function Profile() {
     <div className="profile">
       <ProfileThumbnail />
       <ProfileMenu />
-      <footer className="profile__footer">Design and coded by Bilkan Konus</footer>
+      <footer className="profile__footer">Code and design by Bilkan Konus</footer>
     </div>
   );
 }

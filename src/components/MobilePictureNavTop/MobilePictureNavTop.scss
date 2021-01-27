@@ -1,0 +1,14 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.mobile-picture-nav-top {
+  @include appHeadFixed($mobile-nav-height, 1000);
+  background: $sec-color;
+  color: $icon-color;
+  display: flex;
+  padding: 0 1rem;
+  // mobile-picture-nav-top__btn
+  &__btn {
+    font-size: $common-icon-font-size;
+  }
+}
