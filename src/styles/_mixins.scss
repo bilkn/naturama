@@ -16,3 +16,21 @@
   position: fixed;
   width: $width;
 }
+
+@mixin mobileNavBottomFixed($height, $z-index) {
+  bottom: 0;
+  height: $height;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  z-index: $z-index;
+}
+
+@mixin appHeadFixed($height, $z-index) {
+  height: $height;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: $z-index;
+}

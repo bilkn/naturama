@@ -1,10 +1,7 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 .app-head {
+    @include appHeadFixed($mobile-nav-height, 1000);
     background: $sec-color;
-    left: 0;
-    padding: 0.5rem 0;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: 1000;
+    padding: $mobile-nav-padding;
 }
