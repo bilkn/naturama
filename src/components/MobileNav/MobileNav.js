@@ -1,18 +1,23 @@
 import React from 'react';
-import "./MobileNav.scss";
+import './MobileNav.scss';
+import { Link } from 'react-router-dom';
 function MobileNav() {
   return (
     <nav className="mobile-nav">
       <ul className="mobile-nav-list">
         <li className="mobile-nav-list-item">
-          <button className="mobile-nav-list-item__btn">
-            <i className="fas fa-home mobile-nav-list-item__icon"></i>
-          </button>
+          <Link to="/">
+            <button className="mobile-nav-list-item__btn">
+              <i className="fas fa-home mobile-nav-list-item__icon"></i>
+            </button>
+          </Link>
         </li>
         <li className="mobile-nav-list-item">
-          <button className="mobile-nav-list-item__btn">
-            <i className="fas fa-star mobile-nav-list-item__icon"></i>
-          </button>
+          <Link to="/favourites">
+            <button className="mobile-nav-list-item__btn">
+              <i className="fas fa-star mobile-nav-list-item__icon"></i>
+            </button>
+          </Link>
         </li>
         <li className="mobile-nav-list-item mobile-nav-list-item--shuffle-item">
           <button className="mobile-nav-list-item__btn">
@@ -20,14 +25,18 @@ function MobileNav() {
           </button>
         </li>
         <li className="mobile-nav-list-item ">
-          <button className="mobile-nav-list-item__btn">
-            <i className="fas fa-user mobile-nav-list-item__icon"></i>
-          </button>
+          <Link to="/profile">
+            <button className="mobile-nav-list-item__btn">
+              <i className="fas fa-user mobile-nav-list-item__icon"></i>
+            </button>
+          </Link>
         </li>
         <li className="mobile-nav-list-item ">
-          <button className="mobile-nav-list-item__btn">
-            <i className="fas fa-list-alt mobile-nav-list-item__icon"></i>
-          </button>
+          <Link to="/daily-place-list">
+            <button className="mobile-nav-list-item__btn">
+              <i className="fas fa-list-alt mobile-nav-list-item__icon"></i>
+            </button>
+          </Link>
         </li>
       </ul>
     </nav>
