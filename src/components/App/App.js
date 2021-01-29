@@ -9,13 +9,11 @@ import Home from '../Home/Home';
 import MobileNav from '../MobileNav/MobileNav';
 import Profile from '../Profile/Profile';
 import SocialLinks from '../SocialLinks/SocialLinks';
-import { createBrowserHistory } from 'history';
 function App() {
-  const history = createBrowserHistory();
   return (
     <>
       <AppHead />
-      <Router history={history}>
+      <Router>
         <Route exact path="/" component={Home}></Route>
         <Route path="/favourites" component={Favourites}></Route>
         <Route path="/profile" component={Profile}></Route>

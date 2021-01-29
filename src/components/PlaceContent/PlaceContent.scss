@@ -1,5 +1,14 @@
 .place-content {
-    height: 300px;
+    height: max-content;
     margin-bottom: 2rem;
     width: 95vw;
+}
+
+@media (min-width: 768px)  {
+  
+    .place-content {
+        width: 80vw;
+    }
+ 
+  
 }
