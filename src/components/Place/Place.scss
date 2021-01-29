@@ -1,6 +1,13 @@
+@import "../../styles/variables";
 .place {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: 6rem 0 0 0;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 6rem 0 0 0;
+}
+
+@media (min-width: 768px) {
+  .place {
+    padding: $tablet-page-padding;
+  }
 }
