@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './PlaceThumbnail.scss';
 function PlaceThumbnail(props) {
   const { classNames, icon, children, place } = props;
@@ -6,13 +6,14 @@ function PlaceThumbnail(props) {
   let imgHeight = null;
   let imgWidth = null;
   let placeName = null;
+
   if (place) {
-    placeImg = place.preview.source;
-    imgHeight = place.preview.height;
-    imgWidth = place.preview.width;
+    placeImg = place.preview ? place.preview.source : '';
+    imgHeight = place.preview ? place.preview.height : '';
+    imgWidth = place.preview ? place.preview.width : '';
     placeName = place.name;
   }
-  console.log(place);
+
   return (
     <div className={classNames.join(' ')}>
       <img

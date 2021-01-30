@@ -1,7 +1,5 @@
-function filterPlacesByPreferences (user, places) {
-    const filteredPlaces = places.filter(place=> {
-       
-    })
+function filterPlacesByPreferences(places) {
+  return places.filter((place) => place.properties.wikidata);
 }
 
 export default filterPlacesByPreferences;

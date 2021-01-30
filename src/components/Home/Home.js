@@ -8,7 +8,7 @@ function Home() {
   const [user, setUser] = userContext;
 
   useEffect(() => {
-    if (!user.location.lat || !user.location.lonn) {
+    if (!user.location.lat || !user.location.lon) {
       setUserLocation(setUser);
     }
   }, []);
