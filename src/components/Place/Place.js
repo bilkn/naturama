@@ -12,7 +12,11 @@ function Place() {
   return (
     <div className="place">
       <PlaceContent>
-        <PlaceThumbnail classNames={['place-thumbnail']} icon="fas fa-map" />
+        <PlaceThumbnail
+          place={place}
+          classNames={['place-thumbnail']}
+          icon="fas fa-map"
+        />
         <PlaceDetails place={place} />
       </PlaceContent>
       <PlaceDescription place={place} />
