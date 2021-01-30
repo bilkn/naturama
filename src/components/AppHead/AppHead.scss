@@ -5,8 +5,13 @@
   align-items: center;
   background: $sec-color;
   display: flex;
-  height: $tablet-nav-height;
+  height: $mobile-nav-height;
   justify-content: center;
   padding: $mobile-nav-padding;
 }
 
+@media (min-width: 768px) {
+  .app-head {
+    height: $tablet-nav-height;
+  }
+}
