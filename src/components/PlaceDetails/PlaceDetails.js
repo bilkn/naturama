@@ -1,6 +1,7 @@
 import React from 'react'
 import "./PlaceDetails.scss";
-function PlaceDetails() {
+function PlaceDetails({place}) {
+
     return (
       <div className="place-details">
         <div className="place-details-location-container">

@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './MobileNav.scss';
 import { Link } from 'react-router-dom';
-import getLocation from '../../helpers/getLocation';
-import getPlaces from '../../helpers/getPlaces';
+import getPlaceByXID from '../../helpers/getPlaceByXID';
+import PlaceContext from '../../context/PlaceContext';
 function MobileNav() {
-
-  const shuffleBtnHandler = async ()=> {
-    const places = await getPlaces(29, 40);
-    
-  }
+  const context = useContext(PlaceContext);
+  const [, setPlace] = context;
+  const shuffleBtnHandler = async () => {
+    const place = await getPlaceByXID();
+    setPlace(place);
+  };
   return (
     <nav className="mobile-nav">
       <ul className="mobile-nav-list">
@@ -27,7 +28,10 @@ function MobileNav() {
           </Link>
         </li>
         <li className="mobile-nav-list-item mobile-nav-list-item--shuffle-item">
-          <button className="mobile-nav-list-item__btn" onClick= {shuffleBtnHandler}>
+          <button
+            className="mobile-nav-list-item__btn"
+            onClick={shuffleBtnHandler}
+          >
             <i className="fas fa-random mobile-nav-list-item__icon"></i>
           </button>
         </li>

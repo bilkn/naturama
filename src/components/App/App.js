@@ -7,19 +7,22 @@ import Favourites from '../Favourites/Favourites';
 import FullscreenPicture from '../FullScreenPicture/FullScreenPicture';
 import Home from '../Home/Home';
 import MobileNav from '../MobileNav/MobileNav';
+import PlaceProvider from '../PlaceProvider/PlaceProvider';
 import Profile from '../Profile/Profile';
 import SocialLinks from '../SocialLinks/SocialLinks';
 function App() {
   return (
     <>
-      <AppHead />
-      <Router>
-        <Route exact path="/" component={Home}></Route>
-        <Route path="/favourites" component={Favourites}></Route>
-        <Route path="/profile" component={Profile}></Route>
-        <Route path="/daily-place-list" component={DailyPlaceList}></Route>
+      <PlaceProvider>
+        <AppHead />
+        <Router>
+          <Route exact path="/" component={Home}></Route>
+          <Route path="/favourites" component={Favourites}></Route>
+          <Route path="/profile" component={Profile}></Route>
+          <Route path="/daily-place-list" component={DailyPlaceList}></Route>
         <MobileNav />
-      </Router>
+        </Router>
+      </PlaceProvider>
     </>
   );
 }
