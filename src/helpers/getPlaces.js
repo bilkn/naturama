@@ -1,7 +1,7 @@
 import fetchData from './fetchdata';
 
-async function getPlaces(lat, lon) {
-  const places = await fetchData(lat, lon);
+async function getPlaces(user) {
+  const places = await fetchData(user);
   return places;
 }
 

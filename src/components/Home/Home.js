@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import PlaceContext from '../../context/PlaceContext';
 import UserContext from '../../context/UserContext';
 import setUserLocation from '../../helpers/setUserLocation';
 import Place from '../Place/Place';

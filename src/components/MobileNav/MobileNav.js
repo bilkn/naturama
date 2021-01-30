@@ -10,21 +10,17 @@ import filterPlacesByPreferences from '../../helpers/filterPlacesByPreferences';
 function MobileNav() {
   const placeContext = useContext(PlaceContext);
   const userContext = useContext(UserContext);
-  const [user, setUser] = userContext;
+  const [user] = userContext;
   const [, setPlace] = placeContext;
 
   const shuffleBtnHandler = async () => {
-    console.log("clicked")
-    const lat = user.location.lat;
-    const lon = user.location.lon;
     try {
-      const places = await getPlaces(lat, lon);
+      const places = await getPlaces(user);
       const filteredPlaces = filterPlacesByPreferences(places);
-      const randomPlace = pickRandomPlace(filteredPlaces); 
+      const randomPlace = pickRandomPlace(filteredPlaces);
       const xid = randomPlace.properties.xid;
       const place = await getPlaceByXID(xid);
-      console.log(place);
-      setPlace(place); 
+      setPlace(place);
     } catch (err) {
       // !!! Add modal
     }

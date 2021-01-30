@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './PlaceThumbnail.scss';
+import NoImg from "../../assets/no-image.png";
 function PlaceThumbnail(props) {
   const { classNames, icon, children, place } = props;
-  let placeImg = null;
-  let imgHeight = null;
-  let imgWidth = null;
+  let placeImg = NoImg;
+  let imgHeight = 300;
+  let imgWidth = 300;
   let placeName = null;
-
   if (place) {
-    placeImg = place.preview ? place.preview.source : '';
-    imgHeight = place.preview ? place.preview.height : '';
-    imgWidth = place.preview ? place.preview.width : '';
+    placeImg = place.preview ? place.preview.source : NoImg;
+    imgHeight = place.preview ? place.preview.height : 300;
+    imgWidth = place.preview ? place.preview.width : 300;
     placeName = place.name;
   }
 
