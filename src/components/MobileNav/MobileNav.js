@@ -3,12 +3,21 @@ import './MobileNav.scss';
 import { Link } from 'react-router-dom';
 import getPlaceByXID from '../../helpers/getPlaceByXID';
 import PlaceContext from '../../context/PlaceContext';
+import getPlaces from '../../helpers/getPlaces';
+import UserContext from '../../context/UserContext';
 function MobileNav() {
-  const context = useContext(PlaceContext);
-  const [, setPlace] = context;
+  const placeContext = useContext(PlaceContext);
+  const userContext = useContext(UserContext);
+  const [user, setUser] = userContext;
+  const [, setPlace] = placeContext;
+
   const shuffleBtnHandler = async () => {
-    const place = await getPlaceByXID();
-    setPlace(place);
+    const lat = user.location.lat;
+    const lon = user.location.lon;
+    const places = await getPlaces(lat, lon);
+    console.log(places);
+   /*  const place = await getPlaceByXID();
+    setPlace(place); */
   };
   return (
     <nav className="mobile-nav">
