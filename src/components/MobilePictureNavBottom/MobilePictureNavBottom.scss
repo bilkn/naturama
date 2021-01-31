@@ -2,7 +2,7 @@
 @import '../../styles/variables';
 
 .mobile-picture-nav-bottom {
-  @include mobileNavBottomFixed($mobile-nav-height, 1000);
+  @include MobileNavBottomFixed($mobile-nav-height, 1000);
   background: $sec-color;
 }
 

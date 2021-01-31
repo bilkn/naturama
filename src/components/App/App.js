@@ -8,6 +8,7 @@ import FullscreenPicture from '../FullScreenPicture/FullScreenPicture';
 import Home from '../Home/Home';
 import MobileNav from '../MobileNav/MobileNav';
 import PlaceProvider from '../PlaceProvider/PlaceProvider';
+import Preferences from '../Preferences/Preferences';
 import Profile from '../Profile/Profile';
 import SocialLinks from '../SocialLinks/SocialLinks';
 import TitleProvider from '../TitleProvider/TitleProvider';
@@ -20,13 +21,14 @@ function App() {
           <PlaceProvider>
             <AppHead />
             <Router>
-              <Route exact path="/" component={Home}></Route>
+           {/*    <Route exact path="/" component={Home}></Route>
               <Route path="/favourites" component={Favourites}></Route>
               <Route path="/profile" component={Profile}></Route>
               <Route
                 path="/daily-place-list"
                 component={DailyPlaceList}
-              ></Route>
+              ></Route> */}
+             <Preferences />
               <MobileNav />
             </Router>
           </PlaceProvider>

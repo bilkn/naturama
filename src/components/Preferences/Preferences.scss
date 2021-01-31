@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+.preferences {
+  padding: $mobile-page-padding;
+  // preferences__map-options-list
+  &__map-options-list {
+    color: $icon-color;
+    display: flex;
+    flex-direction: column;
+  }
+}
