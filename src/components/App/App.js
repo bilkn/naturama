@@ -10,22 +10,28 @@ import MobileNav from '../MobileNav/MobileNav';
 import PlaceProvider from '../PlaceProvider/PlaceProvider';
 import Profile from '../Profile/Profile';
 import SocialLinks from '../SocialLinks/SocialLinks';
+import TitleProvider from '../TitleProvider/TitleProvider';
 import UserProvider from '../UserProvider/UserProvider';
 function App() {
   return (
     <>
-      <UserProvider>
-        <PlaceProvider>
-          <AppHead />
-          <Router>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/favourites" component={Favourites}></Route>
-            <Route path="/profile" component={Profile}></Route>
-            <Route path="/daily-place-list" component={DailyPlaceList}></Route>
-            <MobileNav />
-          </Router>
-        </PlaceProvider>
-      </UserProvider>
+      <TitleProvider>
+        <UserProvider>
+          <PlaceProvider>
+            <AppHead />
+            <Router>
+              <Route exact path="/" component={Home}></Route>
+              <Route path="/favourites" component={Favourites}></Route>
+              <Route path="/profile" component={Profile}></Route>
+              <Route
+                path="/daily-place-list"
+                component={DailyPlaceList}
+              ></Route>
+              <MobileNav />
+            </Router>
+          </PlaceProvider>
+        </UserProvider>
+      </TitleProvider>
     </>
   );
 }

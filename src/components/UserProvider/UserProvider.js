@@ -4,7 +4,7 @@ import UserContext from '../../context/UserContext';
 function UserProvider(props) {
   const initialUserState = {
     preferences: {
-      distance: 500000,
+      searchRadius: 500000,
     },
     favourites: [],
     location: {
