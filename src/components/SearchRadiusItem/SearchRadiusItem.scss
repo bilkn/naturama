@@ -1,0 +1,15 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+.search-radius-item {
+  @include PreferencesItemStyle;
+
+  &__label {
+  }
+  // search-radius-item__input
+  &__input {
+    background: none;
+    border: none;
+    color: $icon-color;
+    font-size: $preferences-font-size;
+  }
+}

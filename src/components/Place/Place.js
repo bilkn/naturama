@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PlaceContext from '../../context/PlaceContext';
-import getPlaces from '../../helpers/getPlaces';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import PlaceDescription from '../PlaceDescription/PlaceDescription';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
@@ -8,10 +7,9 @@ import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
 import './Place.scss';
 function Place() {
   const context = useContext(PlaceContext);
-  const [place, setPlace] = context;
-  
 
-  
+  const [place] = context;
+
   return (
     <div className="place">
       <PlaceContent>

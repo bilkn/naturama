@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+.preferences {
+  background: $profile-bg-color;
+  height: 70vh;
+  margin-top: 7rem;
+  padding-top: 2rem;
+  // preferences__map-options-list
+  &__map-options-list {
+    color: $icon-color;
+    display: flex;
+    flex-direction: column;
+  }
+}

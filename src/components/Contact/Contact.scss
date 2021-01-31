@@ -1,0 +1,25 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+.contact {
+  @include CenteredAndFixedElement(80%, 180px);
+  background: $sec-color;
+  border: 1px solid black;
+  color: $icon-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  // contact__signature 
+  &__signature {
+      text-align: center;
+  }
+}
+
+.contact-list {
+    display: flex;
+    justify-content: space-between;
+  &__link {
+    color: $icon-color;
+    font-size: $social-icon-font-size;
+  }
+}

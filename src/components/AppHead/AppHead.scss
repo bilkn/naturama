@@ -1,10 +1,12 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 .app-head {
-  @include appHeadFixed($mobile-nav-height, 1000);
+  @include AppHeadFixed($mobile-nav-height, 1000);
   align-items: center;
   background: $sec-color;
+  color: $icon-color;
   display: flex;
+  font-size: 1.5rem;
   height: $mobile-nav-height;
   justify-content: center;
   padding: $mobile-nav-padding;

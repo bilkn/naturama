@@ -17,7 +17,7 @@
   width: $width;
 }
 
-@mixin mobileNavBottomFixed($height, $z-index) {
+@mixin MobileNavBottomFixed($height, $z-index) {
   bottom: 0;
   height: $height;
   left: 0;
@@ -26,11 +26,21 @@
   z-index: $z-index;
 }
 
-@mixin appHeadFixed($height, $z-index) {
+@mixin AppHeadFixed($height, $z-index) {
   height: $height;
   left: 0;
   position: fixed;
   top: 0;
   width: 100vw;
   z-index: $z-index;
+}
+
+
+@mixin PreferencesItemStyle {
+  align-items: center;
+  background: $sec-color;
+  display: flex;
+  font-size: $preferences-font-size;
+  padding: 0.4rem 1rem;
+  width: 100%;
 }
