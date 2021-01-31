@@ -4,6 +4,7 @@ import 'regenerator-runtime/runtime.js';
 import AppHead from '../AppHead/AppHead';
 import Contact from '../Contact/Contact';
 import DailyPlaceList from '../DailyPlaceList/DailyPlaceList';
+import EditProfile from '../EditProfile/EditProfile';
 import Favourites from '../Favourites/Favourites';
 import FullscreenPicture from '../FullScreenPicture/FullScreenPicture';
 import Home from '../Home/Home';
@@ -30,7 +31,7 @@ function App() {
                 component={DailyPlaceList}
               ></Route>
               <MobileNav />
-              <Contact/>
+              <EditProfile />
             </Router>
           </PlaceProvider>
         </UserProvider>

@@ -1,0 +1,27 @@
+@import '../../styles/variables';
+
+.picture-input-container {
+  // picture-input-container__label
+  &__label {
+    align-items: center;
+    background-color: rgb(151, 149, 149);
+    border-radius: 50%;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    font-size: 2rem;
+    height: $person-img-size;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: color 100ms ease;
+    width: $person-img-size;
+  }
+  .picture-input-container__label:hover {
+    color: #000000b2;
+  }
+
+  // picture-input-container__icon
+  &__icon {
+    background: none;
+  }
+}

@@ -1,0 +1,11 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.edit-profile {
+  @include CenteredAndFixedElement(85%, 180px);
+  align-items: center;
+  background: $sec-color;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
