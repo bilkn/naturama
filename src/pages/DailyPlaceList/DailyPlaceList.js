@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import TitleContext from '../../context/TitleContext';
-import AddFavouriteButton from '../AddFavouriteButton/AddFavouriteButton';
-import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
+import AddFavouriteButton from '../../components/AddFavouriteButton/AddFavouriteButton';
+import PlaceThumbnail from '../../components/PlaceThumbnail/PlaceThumbnail';
 import './DailyPlaceList.scss';
+import MobileNav from '../../components/MobileNav/MobileNav';
 function DailyPlaceList() {
   const titleContext = useContext(TitleContext);
   const [, setTitle] = titleContext;
@@ -32,6 +33,7 @@ function DailyPlaceList() {
       >
         <AddFavouriteButton />
       </PlaceThumbnail>
+      <MobileNav />
     </div>
   );
 }

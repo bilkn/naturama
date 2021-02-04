@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import TitleContext from '../../context/TitleContext';
-import ProfileMenu from '../ProfileMenu/ProfileMenu';
-import ProfileThumbnail from '../ProfileThumbnail/ProfileThumbnail';
+import ProfileThumbnail from "../../components/ProfileThumbnail/ProfileThumbnail";
+import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import './Profile.scss';
+import MobileNav from '../../components/MobileNav/MobileNav';
 function Profile() {
   const titleContext = useContext(TitleContext);
   const [, setTitle] = titleContext;
@@ -17,6 +18,7 @@ function Profile() {
       <footer className="profile__footer">
         Code and design by Bilkan Konus
       </footer>
+      <MobileNav />
     </div>
   );
 }
