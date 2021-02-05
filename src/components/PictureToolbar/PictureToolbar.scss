@@ -1,18 +1,19 @@
 @import '../../styles/mixins';
 @import '../../styles/variables';
 
-.mobile-picture-nav-bottom {
+.picture-toolbar {
   @include MobileNavBottomFixed($mobile-nav-height, 1000);
   background: $sec-color;
+  z-index: 10000;
 }
 
-.mobile-picture-nav-bottom-list {
+.picture-toolbar-list {
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: space-between;
   padding: $mobile-nav-padding;
-  // mobile-picture-nav-bottom-list
+  // picture-toolbar-list
   &__btn {
       color: $icon-color;
     font-size: $common-icon-font-size;

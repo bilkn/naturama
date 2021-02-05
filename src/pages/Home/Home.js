@@ -1,17 +1,19 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TitleContext from '../../context/TitleContext';
 import UserContext from '../../context/UserContext';
 import setUserLocation from '../../helpers/setUserLocation';
-import Place from '../Place/Place';
+import Place from '../../components/Place/Place';
+import MobileNav from '../../components/MobileNav/MobileNav';
 function Home() {
   const userContext = useContext(UserContext);
   const titleContext = useContext(TitleContext);
   const [user, setUser] = userContext;
-   const [, setTitle] = titleContext;
+ 
+  const [, setTitle] = titleContext;
 
-   useEffect(() => {
-     setTitle(null);
-   }, []);
+  useEffect(() => {
+    setTitle(null);
+  }, []);
 
   useEffect(() => {
     if (!user.location.lat || !user.location.lon) {
@@ -20,7 +22,8 @@ function Home() {
   }, []);
   return (
     <div className="home">
-      <Place />
+      <Place  />
+      <MobileNav />
     </div>
   );
 }

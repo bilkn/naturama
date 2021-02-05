@@ -1,0 +1,9 @@
+.name-input { 
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  width: 200px;
+}
+
+.name-input::placeholder {
+  text-align: center;
+}
