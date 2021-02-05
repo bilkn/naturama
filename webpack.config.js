@@ -11,9 +11,11 @@ module.exports = {
   },
   devServer: {
     port: 8000,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'public'),
     hot: true,
     open: true,
+    historyApiFallback: true,
+    inline: true,
   },
   module: {
     rules: [
@@ -52,6 +54,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'public/index.html',
+      inject: true,
     }),
     new MiniCssExtractPlugin({
       filename: 'static/css/[name][contenthash].css',

@@ -9,6 +9,7 @@ function Place(props) {
   const {onPlaceClick} = props;
   const context = useContext(PlaceContext);
   const [place] = context;
+ 
 
   return (
     <div className="place" onClick= {onPlaceClick}>

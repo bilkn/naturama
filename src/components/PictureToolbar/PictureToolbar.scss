@@ -4,6 +4,7 @@
 .picture-toolbar {
   @include MobileNavBottomFixed($mobile-nav-height, 1000);
   background: $sec-color;
+  z-index: 10000;
 }
 
 .picture-toolbar-list {

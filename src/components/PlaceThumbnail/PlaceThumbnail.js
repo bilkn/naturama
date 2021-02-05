@@ -14,7 +14,6 @@ function PlaceThumbnail(props) {
     imgWidth = place.preview ? place.preview.width : 300;
     placeName = place.name;
   }
-
   return (
     <div className={classNames.join(' ')}>
       <Link to="/fullscreen-picture" className={classNames.join(' ')}>

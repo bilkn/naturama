@@ -5,6 +5,7 @@ function PlaceDetails({place}) {
   let location = null;
   if (place) {
     location = place.address.state;
+    
   }
 
     return (
