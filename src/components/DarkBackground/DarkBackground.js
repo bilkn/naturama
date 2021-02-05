@@ -1,21 +1,21 @@
-/* import './DarkBackground.scss';
-import { AppContext } from '../../context/AppContext/AppContext';
-import { useEffect, useContext } from 'react';
+import './DarkBackground.scss';
+import React, { useEffect } from 'react';
+
 function DarkBackground(props) {
-
-
-
- 
+  const { showDarkBackground, setShowDarkBackground, setShowEdit } = props;
+  const backgroundHandler = () => {
+    setShowEdit(false);
+    setShowDarkBackground(false);
+  };
   useEffect(() => {
-    showBackground
+    showDarkBackground
       ? (document.body.style.overflow = 'hidden')
       : (document.body.style.overflow = 'initial');
-  }, [showBackground]);
-  const className = showBackground
+  }, [showDarkBackground]);
+  const className = showDarkBackground
     ? 'dark-background dark-background--visible'
     : 'dark-background';
   return <div className={className} onClick={backgroundHandler}></div>;
 }
 
 export default DarkBackground;
- */

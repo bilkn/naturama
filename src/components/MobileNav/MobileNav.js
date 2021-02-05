@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
 import './MobileNav.scss';
 import { Link } from 'react-router-dom';
-import getPlaceByXID from '../../helpers/getPlaceByXID';
-import getPlaces from '../../helpers/getPlaces';
-import pickRandomPlace from '../../helpers/pickRandomPlace';
+
 import PlaceContext from '../../context/PlaceContext';
 import UserContext from '../../context/UserContext';
-import filterPlacesByPreferences from '../../helpers/filterPlacesByPreferences';
+import { getRandomPlace } from '../../helpers/getRandomPlace';
 function MobileNav() {
   const placeContext = useContext(PlaceContext);
   const userContext = useContext(UserContext);
@@ -15,11 +13,7 @@ function MobileNav() {
 
   const shuffleBtnHandler = async () => {
     try {
-      const places = await getPlaces(user);
-      const filteredPlaces = filterPlacesByPreferences(places);
-      const randomPlace = pickRandomPlace(filteredPlaces);
-      const xid = randomPlace.properties.xid;
-      const place = await getPlaceByXID(xid);
+      const place = await getRandomPlace(user);
       setPlace(place);
     } catch (err) {
       // !!! Add modal

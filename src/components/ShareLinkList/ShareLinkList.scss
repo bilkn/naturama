@@ -50,9 +50,10 @@
 
   // share-link-list__link
   &__link {
+    align-items: center;
     color: inherit;
     cursor: pointer;
-    display: block;
+    display: flex;
     font-size: 20px;
     padding: 1rem 2rem;
     text-align: left;

@@ -1,6 +1,8 @@
 @import '../../styles/variables';
 
 .picture-input-container {
+  display: flex;
+  justify-content: center;
   // picture-input-container__label
   &__label {
     align-items: center;
