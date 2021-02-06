@@ -5,9 +5,13 @@ import PictureToolbar from '../../components/PictureToolbar/PictureToolbar';
 import NoImg from '../../assets/no-image.png';
 import PlaceContext from '../../context/PlaceContext';
 import ShareLinkList from '../../components/ShareLinkList/ShareLinkList';
+import DarkBackgroundContext from '../../context/DarkBackGroundContext';
+import DarkBackground from '../../components/DarkBackground/DarkBackground';
 function FullscreenPicture() {
   const [showShareLink, setShowShareLinks] = useState(false);
   const [place] = useContext(PlaceContext);
+  const darkBackgroundContext = useContext(DarkBackgroundContext);
+  const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
   let placeImg = NoImg;
   let imgHeight = 300;
   let imgWidth = 300;
@@ -28,9 +32,18 @@ function FullscreenPicture() {
         height={imgHeight}
         className="fullscreen-picture__img"
       />
-      <MobilePictureNavTop />
-      <PictureToolbar setShowShareLinks={setShowShareLinks} />
+      <MobilePictureNavTop place={place} />
+      <PictureToolbar
+        setShowShareLinks={setShowShareLinks}
+        setShowDarkBackground={setShowDarkBackground}
+      />
       {showShareLink && <ShareLinkList />}
+      {showDarkBackground && (
+        <DarkBackground
+          setShowShareLinks={setShowShareLinks}
+          setShowDarkBackground={setShowDarkBackground}
+        />
+      )}
     </div>
   );
 }

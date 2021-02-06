@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './ProfileMenu.scss';
 import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import DarkBackground from '../DarkBackground/DarkBackground';
+import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 function ProfileMenu() {
+  const darkBackgroundContext = useContext(DarkBackgroundContext);
+  const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
   const [showEdit, setShowEdit] = useState(false);
-  const [showDarkBackground, setShowDarkBackground] = useState(false);
 
   const handleEditProfile = () => {
     setShowDarkBackground(!showDarkBackground);
@@ -20,7 +22,6 @@ function ProfileMenu() {
       )}
       {showDarkBackground && (
         <DarkBackground
-          showDarkBackground={showDarkBackground}
           setShowDarkBackground={setShowDarkBackground}
           setShowEdit={setShowEdit}
         />

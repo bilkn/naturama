@@ -1,7 +1,8 @@
 import './ShareLinkList.scss';
-import React from 'react';
+import React, { } from 'react';
 function ShareLinkList() {
   /*  const url = encodeURI("www.google.com.tr"); */
+
   return (
     <ul className="share-link-list">
       <li className="share-link-list__item">
