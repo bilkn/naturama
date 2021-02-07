@@ -1,9 +1,8 @@
 @import '../../styles/variables';
 .preferences {
   background: $profile-bg-color;
-  height: 70vh;
-  margin-top: 7rem;
-  padding-top: 2rem;
+  padding: 6rem 0 75px 0;
+  z-index: 1000;
   // preferences__map-options-list
   &__map-options-list {
     color: $icon-color;

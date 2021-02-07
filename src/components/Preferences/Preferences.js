@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import TitleContext from '../../context/TitleContext';
 import LocationItem from '../LocationItem/LocationItem';
+import MobileNav from '../MobileNav/MobileNav';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
 function Preferences() {
@@ -14,6 +15,7 @@ function Preferences() {
       <ul className="preferences__map-options-list">
         <SearchRadiusItem />
         <LocationItem />
+        <MobileNav />
       </ul>
     </div>
   );

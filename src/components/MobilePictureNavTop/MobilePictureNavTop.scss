@@ -8,15 +8,17 @@
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
+
   // mobile-picture-nav-top__btn
-  &__btn {
+  &__link {
     color: $icon-color;
     font-size: $common-icon-font-size;
   }
   // mobile-picture-nav-top__name
   &__name {
     color: $icon-color;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    text-align: center;
   }
   // mobile-picture-nav-top__empty-div
   &__empty-div {

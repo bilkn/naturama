@@ -11,6 +11,7 @@ import DarkBackgroundProvider from '../../providers/DarkBackgroundProvider/DarkB
 import PlaceProvider from '../../providers/PlaceProvider/PlaceProvider';
 import UserProvider from '../../providers/UserProvider/UserProvider';
 import TitleProvider from '../../providers/TitleProvider/TitleProvider';
+import Preferences from '../Preferences/Preferences';
 function App() {
   return (
     <>
@@ -32,6 +33,11 @@ function App() {
                   exact
                   path="/fullscreen-picture"
                   component={FullscreenPicture}
+                ></Route>
+                <Route
+                  exact
+                  path="/preferences"
+                  component={Preferences}
                 ></Route>
               </Router>
             </PlaceProvider>
