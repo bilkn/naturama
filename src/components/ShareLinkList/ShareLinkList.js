@@ -1,13 +1,27 @@
 import './ShareLinkList.scss';
-import React, { } from 'react';
+import React, { useContext } from 'react';
+import PlaceContext from '../../context/PlaceContext';
 function ShareLinkList() {
   /*  const url = encodeURI("www.google.com.tr"); */
+  const placeContext = useContext(PlaceContext);
+  const [place] = placeContext;
 
+  const handleTwitterShare = async (e) => {
+    e.preventDefault();
+    /* const name = place.name; */
+    const wikiURL = place.wikipedia;
+    const url = `https://twitter.com/intent/tweet?url=${wikiURL}`;
+    console.log(url)
+
+    /*  window.open(url, '_blank'); */
+  };
   return (
     <ul className="share-link-list">
       <li className="share-link-list__item">
         <a
-          className="share-link-list__link twitter-share-button" /* href={`https://twitter.com/intent/tweet?url=${url}`} */
+          className="share-link-list__link twitter-share-button"
+          href="www.google.com.tr"
+          onClick={handleTwitterShare}
         >
           <i
             className="fa fa-twitter share-link-list__icon"

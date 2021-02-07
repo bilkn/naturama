@@ -11,7 +11,6 @@ function ProfileMenu() {
   const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
   const [showEdit, setShowEdit] = useState(false);
   const [showContact, setShowContact] = useState(false);
-  const [showPreferences, setshowPreferences] = useState(false);
 
   const handleEditProfile = () => {
     setShowDarkBackground(!showDarkBackground);
@@ -20,10 +19,6 @@ function ProfileMenu() {
   const handleContact = () => {
     setShowDarkBackground(!showDarkBackground);
     setShowContact(!showContact);
-  };
-  const handlePreferences = () => {
-    setShowDarkBackground(!showDarkBackground);
-    setshowPreferences(!showPreferences);
   };
   return (
     <div className="profile-menu">
@@ -34,7 +29,6 @@ function ProfileMenu() {
         />
       )}
       {showContact && <Contact />}
-      {showPreferences && <Preferences />}
       {showDarkBackground && (
         <DarkBackground
           setShowDarkBackground={setShowDarkBackground}
