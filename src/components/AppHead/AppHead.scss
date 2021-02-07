@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 .app-head {
-  @include AppHeadFixed($mobile-nav-height, 1000);
+  @include AppHeadFixed($mobile-nav-height, $mobile-nav-index);
   align-items: center;
   background: $sec-color;
   color: $icon-color;

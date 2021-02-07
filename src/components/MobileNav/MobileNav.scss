@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 
 .mobile-nav {
-  @include MobileNavBottomFixed($mobile-nav-height, 1000);
+  @include MobileNavBottomFixed($mobile-nav-height, $mobile-nav-index);
 }
 .mobile-nav-list {
   align-items: center;

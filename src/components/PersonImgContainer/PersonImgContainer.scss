@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+.person-img-container {
+  border-radius: 50%;
+  height: $person-img-size;
+  width: $person-img-size;
+
+  // person-img-container__img
+  &__img {
+    border-radius: 50%;
+    object-fit: cover;
+    height: $person-img-size;
+    width: $person-img-size;
+  }
+}
