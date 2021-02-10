@@ -9,7 +9,7 @@ function Home() {
   const placeContext = useContext(PlaceContext);
   const userContext = useContext(UserContext);
   const titleContext = useContext(TitleContext);
-  const [user] = userContext;
+  const [userState] = userContext;
   const [, setTitle] = titleContext;
   const [place, setPlace] = placeContext;
 
@@ -18,16 +18,16 @@ function Home() {
   }, []);
 
   useEffect(async () => {
-    if (!place && user) {
+    if (!place && userState) {
       try {
-        const place = await getRandomPlace(user);
+        const place = await getRandomPlace(userState);
         setPlace(place);
       } catch (err) {
         console.log(err);
         // !!! addModal
       }
     }
-  }, [user]);
+  }, [userState]);
 
   return (
     <div className="home">

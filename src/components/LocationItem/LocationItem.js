@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import './LocationItem.scss';
 function LocationItem(props) {
-  const { lonValue, latValue, setLonValue, setLatValue } = props;
+  const { latValue, lonValue, setLatValue, setLonValue } = props;
   const style = {
     marginRight: '1rem',
     marginLeft: '2.5rem',
   };
 
-  const handleOnChangeLon = (e) => {
-    e.preventDefault();
-    const value = e.target.value;
-    setLonValue(value);
-  };
   const handleOnChangeLat = (e) => {
     e.preventDefault();
-    const value = e.target.value;
+    let value = e.target.value;
+    value = value > 90 ? 90 : value < -90 ? -90 : value;
     setLatValue(value);
+  };
+  const handleOnChangeLon = (e) => {
+    e.preventDefault();
+    let value = e.target.value;
+    value = value > 180 ? 180 : value < -180 ? -180 : value;
+    setLonValue(value);
   };
 
   useEffect(() => {
@@ -29,6 +31,15 @@ function LocationItem(props) {
       </label>
       <div className="location-input-container">
         <input
+          type="number"
+          className="location-input-container__input"
+          placeholder="lat"
+          value={latValue}
+          onChange={handleOnChangeLat}
+          min="-90"
+          max="90"
+        />
+        <input
           id="location"
           type="number"
           className="location-input-container__input"
@@ -36,13 +47,8 @@ function LocationItem(props) {
           style={style}
           value={lonValue}
           onChange={handleOnChangeLon}
-        />
-        <input
-          type="number"
-          className="location-input-container__input"
-          placeholder="lat"
-          value={latValue}
-          onChange={handleOnChangeLat}
+          min="-180"
+          max="180"
         />
       </div>
     </li>

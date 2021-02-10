@@ -10,24 +10,41 @@ function Preferences() {
   const userContext = useContext(UserContext);
   const [userState, dispatchUser] = userContext;
   const [, setTitle] = titleContext;
-  const [lonValue, setLonValue] = useState('');
   const [latValue, setLatValue] = useState('');
+  const [lonValue, setLonValue] = useState('');
   useEffect(() => {
+    const preferences = userState.profile.preferences;
     setTitle('Preferences');
-    console.log(user);
-    return ()=> {
-      
-    }
+    console.log(latValue, lonValue);
+    const newProfile = {
+      ...userState.profile,
+      preferences: {
+        ...preferences,
+        location: {
+          lat: latValue,
+          lon: lonValue,
+        },
+      },
+    };
+    console.log('retun effect');
+    dispatchUser({ type: 'CHANGE_PROFILE', payload: newProfile });
+  }, [lonValue, latValue]);
+  useEffect(() => {
+    const preferences = userState.profile.preferences;
+    const lat = preferences.location.lat;
+    const lon = preferences.location.lon;
+    setLatValue(lat);
+    setLonValue(lon);
   }, []);
   return (
     <div className="preferences">
       <ul className="preferences__map-options-list">
         <SearchRadiusItem />
         <LocationItem
-          lonValue={lonValue}
           latValue={latValue}
-          setLonValue={setLonValue}
+          lonValue={lonValue}
           setLatValue={setLatValue}
+          setLonValue={setLonValue}
         />
         <MobileNav />
       </ul>

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import UserContext from '../../context/UserContext';
 import initialize from '../../helpers/initilalize';
 import userReducer from '../../reducers/UserReducer';
