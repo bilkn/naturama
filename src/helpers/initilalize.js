@@ -1,6 +1,6 @@
 import setUserLocation from './setUserLocation';
 import db from './dexie';
-async function initialize(setUser) {
+async function initialize(dispatch) {
   const result = await db.profile.get(3);
   if (!result) {
     await initializeDB();
@@ -12,10 +12,10 @@ async function initialize(setUser) {
   if (!location.lat || !location.lon) {
     setUserLocation(db);
   }
-  setTimeout(() => initUser(setUser), 10);
+  setTimeout(() => initUser(dispatch), 10);
 }
 
-async function initUser(setUser) {
+async function initUser(dispatch) {
   const profileItems = await db.table('profile').toArray();
   const favouritesItems = await db.table('favourites').toArray();
   const dailyListItems = await db.table('dailyList').toArray();
@@ -32,7 +32,7 @@ async function initUser(setUser) {
     dailyList: dailyListItems,
     history: historyItems,
   };
-  setUser(dbData);
+  dispatch({ type: 'INIT', payload: dbData });
 }
 
 async function initializeDB() {

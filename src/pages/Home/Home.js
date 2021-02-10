@@ -18,9 +18,8 @@ function Home() {
   }, []);
 
   useEffect(async () => {
-    if (!place && user && user.profile.preferences.location.lat) {
+    if (!place && user) {
       try {
-        console.log(user);
         const place = await getRandomPlace(user);
         setPlace(place);
       } catch (err) {
