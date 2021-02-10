@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useEffect, useReducer } from 'react';
 import UserContext from '../../context/UserContext';
+import initialize from '../../helpers/initilalize';
+import userReducer from '../../reducers/UserReducer';
 
 function UserProvider(props) {
-  const initialUserState = {
-    preferences: {
-      searchRadius: 500000,
-    },
-    favourites: [],
-    location: {
-      lat: '',
-      lon: '',
-    },
-  };
-  const [user, setUser] = React.useState(initialUserState);
-  return <UserContext.Provider value={[user, setUser]} {...props} />;
+
+  
+  const [state, dispatch] = useReducer(userReducer, null);
+
+  useEffect(() => {
+    if (!state) initialize(dispatch);
+  }, []);
+  return <UserContext.Provider value={[state, dispatch]} {...props} />;
 }
 
 export default UserProvider;

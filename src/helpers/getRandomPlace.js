@@ -5,8 +5,9 @@ import filterPlacesByPreferences from './filterPlacesByPreferences';
 
 export async function getRandomPlace(user) {
   const places = await getPlaces(user);
-  const filteredPlaces = filterPlacesByPreferences(places);
-  const randomPlace = pickRandomPlace(filteredPlaces);
+  console.table(places)
+  const filteredPlaces =  filterPlacesByPreferences(places);
+  const randomPlace =  pickRandomPlace(filteredPlaces);
   const xid = randomPlace.properties.xid;
   const place = await getPlaceByXID(xid);
   return place;

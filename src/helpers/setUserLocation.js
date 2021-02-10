@@ -1,4 +1,4 @@
-function setUserLocation(setUser) {
+function setUserLocation(db) {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const lat = Math.round(position.coords.latitude);
@@ -7,12 +7,19 @@ function setUserLocation(setUser) {
         lat: lat,
         lon: lon,
       };
-      setUser((oldUser) => {
-        return {
-          ...oldUser,
-          location: location,
-        };
-      });
+      const props = await db.table('profile').toArray();
+      const prefProps = props[2].preferences;
+      try {
+        await db.profile.update(3, {
+          preferences: {
+            ...prefProps,
+            location: location,
+          },
+        });
+      } catch (err) {
+        console.log(err);
+        // !!! ADD MODAL
+      }
     });
   } else {
     console.log('No geolocation');
