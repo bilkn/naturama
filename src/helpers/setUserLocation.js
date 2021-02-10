@@ -16,6 +16,7 @@ function setUserLocation(db) {
             location: location,
           },
         });
+        console.log('UPDATE DB');
       } catch (err) {
         console.log(err);
         // !!! ADD MODAL

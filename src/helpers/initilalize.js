@@ -8,21 +8,29 @@ async function initialize(setUser) {
 
   const preferencesData = await db.profile.get(3);
   const preferences = preferencesData.preferences;
-  console.log(preferences);
   const location = preferences.location;
   if (!location.lat || !location.lon) {
-    console.log('initialize location');
     setUserLocation(db);
   }
-  initUser(setUser);
+  setTimeout(() => initUser(setUser), 10);
 }
 
 async function initUser(setUser) {
+  const profileItems = await db.table('profile').toArray();
+  const favouritesItems = await db.table('favourites').toArray();
+  const dailyListItems = await db.table('dailyList').toArray();
+  const historyItems = await db.table('history').toArray();
+  const [username, picture, preferences] = profileItems;
+
   const dbData = {
-    profile: await db.profile,
-    favourites: await db.favourites,
-    dailyList: await db.dailyList,
-    history: await db.history,
+    profile: {
+      username: username.username,
+      picture: picture.picture,
+      preferences: preferences.preferences,
+    },
+    favourites: favouritesItems,
+    dailyList: dailyListItems,
+    history: historyItems,
   };
   setUser(dbData);
 }
@@ -33,7 +41,7 @@ async function initializeDB() {
     { picture: null },
     {
       preferences: {
-        radius: 20000,
+        radius: 200000,
         location: {
           lat: null,
           lon: null,

@@ -16,6 +16,7 @@ function MobileNav() {
       const place = await getRandomPlace(user);
       setPlace(place);
     } catch (err) {
+      console.log(err)
       // !!! Add modal
     }
   };

@@ -18,11 +18,13 @@ function Home() {
   }, []);
 
   useEffect(async () => {
-    if (!place) {
+    if (!place && user && user.profile.preferences.location.lat) {
       try {
+        console.log(user);
         const place = await getRandomPlace(user);
         setPlace(place);
-      } catch {
+      } catch (err) {
+        console.log(err);
         // !!! addModal
       }
     }
