@@ -1,4 +1,5 @@
 import './PersonImgContainer.scss';
+import React from 'react';
 function PersonImgContainer({ createFileURL, currentPicture, nameContainer }) {
   return (
     <div className="person-img-container">

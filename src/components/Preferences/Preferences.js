@@ -15,7 +15,6 @@ function Preferences() {
   useEffect(() => {
     const preferences = userState.profile.preferences;
     setTitle('Preferences');
-    console.log(latValue, lonValue);
     const newProfile = {
       ...userState.profile,
       preferences: {

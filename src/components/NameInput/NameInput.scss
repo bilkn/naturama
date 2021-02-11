@@ -1,9 +1,20 @@
-.name-input { 
+.name-input {
+  appearance: none;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 10px;
+  display: block;
   font-size: 1.2rem;
-  padding: 0.5rem 1rem;
-  width: 200px;
-}
-
-.name-input::placeholder {
+  margin-bottom: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  height: 35px;
   text-align: center;
+  width: 100%;
+
+  &__name-input:focus::placeholder {
+    color: #e0e0e0;
+  }
+  &__name-input::placeholder {
+    color: #2e2e31;
+  }
 }

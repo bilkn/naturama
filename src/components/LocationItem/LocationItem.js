@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './LocationItem.scss';
 function LocationItem(props) {
   const { latValue, lonValue, setLatValue, setLonValue } = props;
