@@ -11,7 +11,7 @@ function ProfileMenu() {
   const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
   const [showEdit, setShowEdit] = useState(false);
   const [showContact, setShowContact] = useState(false);
-
+ 
   const handleEditProfile = () => {
     setShowDarkBackground(!showDarkBackground);
     setShowEdit(!showEdit);

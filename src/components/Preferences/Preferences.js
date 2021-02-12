@@ -12,22 +12,26 @@ function Preferences() {
   const [, setTitle] = titleContext;
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
+  const [radiusValue, setRadiusValue] = useState('');
   useEffect(() => {
-    const preferences = userState.profile.preferences;
+    const profile = userState.profile;
+    const preferences = profile.preferences;
+    const lat = preferences.location.lat;
+    const lon = preferences.location.lon;
+    const radius = preferences.radius;
     setTitle('Preferences');
     const newProfile = {
       ...userState.profile,
       preferences: {
-        ...preferences,
+        radius: radiusValue || radius,
         location: {
-          lat: latValue,
-          lon: lonValue,
+          lat: latValue || lat,
+          lon: lonValue || lon,
         },
       },
     };
-    console.log('retun effect');
     dispatchUser({ type: 'CHANGE_PROFILE', payload: newProfile });
-  }, [lonValue, latValue]);
+  }, [lonValue, latValue, radiusValue]);
   useEffect(() => {
     const preferences = userState.profile.preferences;
     const lat = preferences.location.lat;
@@ -35,10 +39,18 @@ function Preferences() {
     setLatValue(lat);
     setLonValue(lon);
   }, []);
+  useEffect(() => {
+    const preferences = userState.profile.preferences;
+    const radius = preferences.radius;
+    setRadiusValue(radius);
+  }, []);
   return (
     <div className="preferences">
       <ul className="preferences__map-options-list">
-        <SearchRadiusItem />
+        <SearchRadiusItem
+          radiusValue={radiusValue}
+          setRadiusValue={setRadiusValue}
+        />
         <LocationItem
           latValue={latValue}
           lonValue={lonValue}

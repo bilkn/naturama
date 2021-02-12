@@ -22,7 +22,6 @@ function Home() {
       try {
         const place = await getRandomPlace(userState);
         setPlace(place);
-        console.log(userState)
       } catch (err) {
         console.log(err);
         // !!! addModal

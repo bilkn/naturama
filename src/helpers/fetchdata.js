@@ -1,6 +1,6 @@
 async function fetchData(user) {
   const preferences = user.profile.preferences;
-  const location = preferences['location'];
+  const location = preferences.location;
   const lat = location.lat;
   const lon = location.lon;
   const searchRadius = preferences.radius;
