@@ -1,10 +1,10 @@
 @import '../../styles/variables';
-.person-img-container {
+.avatar-container {
   border-radius: 50%;
   height: $person-img-size;
   width: $person-img-size;
 
-  // person-img-container__img
+  // avatar-container__img
   &__img {
     border-radius: 50%;
     object-fit: cover;

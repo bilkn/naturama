@@ -1,12 +1,11 @@
 import React from 'react';
-import PersonPicture from '../PersonPicture/PersonPicture';
+import Avatar from '../Avatar/Avatar';
 import './ProfileThumbnail.scss';
 
 function ProfileThumbnail() {
- 
   return (
     <div className="profile-thumbnail">
-      <PersonPicture />
+      <Avatar />
       <h2 className="profile-thumbnail__person-name">JOHN MICHAEL</h2>
     </div>
   );

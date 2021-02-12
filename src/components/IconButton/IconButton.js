@@ -1,11 +1,11 @@
 import React from 'react';
 import './IconButton.scss';
 function IconButton(props) {
-  const { iconclass } = props;
+  const { iconClass, handleBtnClick } = props;
 
   return (
-    <button className="icon-button" {...props}>
-      <i className={iconclass} />
+    <button className="icon-button" onClick={handleBtnClick}>
+      <i className={iconClass} />
     </button>
   );
 }
