@@ -3,7 +3,6 @@ import './ProfileMenu.scss';
 import DarkBackground from '../DarkBackground/DarkBackground';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import Contact from '../Contact/Contact';
-import Preferences from '../Preferences/Preferences';
 import { Link } from 'react-router-dom';
 import EditProfile from '../EditProfile/EditProfile';
 function ProfileMenu() {

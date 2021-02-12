@@ -11,6 +11,11 @@ function userReducer(state, action) {
         profile: action.payload,
       };
     }
+    case 'EDIT_USER': {
+      return {
+        ...action.payload,
+      };
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

@@ -1,11 +1,11 @@
 import React from 'react';
 import './NameInput.scss';
-function NameInput({ name, setName }) {
+function NameInput({ username, setUsername }) {
   const handleChange = (e) => {
     e.preventDefault;
-    if (name.length > 15) console.log('long name');
+    if (username.length > 15) console.log('long name');
     // Add modal
-    else setName(e.target.value);
+    else setUsername(e.target.value);
   };
   return (
     <>
@@ -14,7 +14,7 @@ function NameInput({ name, setName }) {
         className="name-input"
         maxLength="15"
         placeholder="Name"
-        value={name}
+        value={username}
         onChange={handleChange}
       />
     </>

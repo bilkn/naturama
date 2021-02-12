@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import TitleContext from '../../context/TitleContext';
 import UserContext from '../../context/UserContext';
+import createNewUser from '../../helpers/createNewUser';
 import LocationItem from '../LocationItem/LocationItem';
 import MobileNav from '../MobileNav/MobileNav';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
 function Preferences() {
   const titleContext = useContext(TitleContext);
-  const userContext = useContext(UserContext);
-  const [userState, dispatchUser] = userContext;
+  const [userState, dispatchUser] = useContext(UserContext);
   const [, setTitle] = titleContext;
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
@@ -20,18 +20,15 @@ function Preferences() {
     const lon = preferences.location.lon;
     const radius = preferences.radius;
     setTitle('Preferences');
-    const newProfile = {
-      ...userState.profile,
-      preferences: {
-        radius: radiusValue || radius,
-        location: {
-          lat: latValue || lat,
-          lon: lonValue || lon,
-        },
-      },
-    };
-    dispatchUser({ type: 'CHANGE_PROFILE', payload: newProfile });
+    // Condition can be added in the future.
+    const newUser = createNewUser(userState, [
+      ['radius', radiusValue || radius],
+      ['location', { lat: latValue || lat, lon: lonValue || lon }],
+    ]);
+    console.log("new user",newUser);
+    dispatchUser({ type: 'EDIT_USER', payload: newUser });
   }, [lonValue, latValue, radiusValue]);
+
   useEffect(() => {
     const preferences = userState.profile.preferences;
     const lat = preferences.location.lat;
