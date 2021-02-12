@@ -7,7 +7,10 @@ function SearchRadiusItem({ radiusValue, setRadiusValue }) {
   };
   return (
     <li className="search-radius-item">
-      <label htmlFor="search-radius" className="search-radius-item__label">
+      <label
+        htmlFor="search-radius-item__label"
+        className="search-radius-item__label"
+      >
         Search Radius:
       </label>
       <input
@@ -17,6 +20,7 @@ function SearchRadiusItem({ radiusValue, setRadiusValue }) {
         value={radiusValue || ''}
         onChange={handleChange}
       />
+      <span className="search-radius-item__span">KM</span>
     </li>
   );
 }

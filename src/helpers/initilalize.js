@@ -41,7 +41,7 @@ async function initializeDB() {
     { picture: null },
     {
       preferences: {
-        radius: 200000,
+        radius: 200,
         location: {
           lat: null,
           lon: null,

@@ -14,32 +14,37 @@ function Preferences() {
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
   useEffect(() => {
-    const profile = userState.profile;
-    const preferences = profile.preferences;
-    const lat = preferences.location.lat;
-    const lon = preferences.location.lon;
-    const radius = preferences.radius;
-    setTitle('Preferences');
-    // Condition can be added in the future.
-    const newUser = createNewUser(userState, [
-      ['radius', radiusValue || radius],
-      ['location', { lat: latValue || lat, lon: lonValue || lon }],
-    ]);
-    console.log("new user",newUser);
-    dispatchUser({ type: 'EDIT_USER', payload: newUser });
+    if (userState) {
+      const profile = userState.profile;
+      const preferences = profile.preferences;
+      const lat = preferences.location.lat;
+      const lon = preferences.location.lon;
+      const radius = preferences.radius;
+      setTitle('Preferences');
+      // Condition can be added in the future.
+      const newUser = createNewUser(userState, [
+        ['radius', radiusValue || radius],
+        ['location', { lat: latValue || lat, lon: lonValue || lon }],
+      ]);
+      dispatchUser({ type: 'EDIT_USER', payload: newUser });
+    }
   }, [lonValue, latValue, radiusValue]);
 
   useEffect(() => {
-    const preferences = userState.profile.preferences;
-    const lat = preferences.location.lat;
-    const lon = preferences.location.lon;
-    setLatValue(lat);
-    setLonValue(lon);
+    if (userState) {
+      const preferences = userState.profile.preferences;
+      const lat = preferences.location.lat;
+      const lon = preferences.location.lon;
+      setLatValue(lat);
+      setLonValue(lon);
+    }
   }, []);
   useEffect(() => {
+    if (userState) {
     const preferences = userState.profile.preferences;
     const radius = preferences.radius;
     setRadiusValue(radius);
+    }
   }, []);
   return (
     <div className="preferences">
