@@ -2,7 +2,7 @@
 @import '../../styles/variables';
 .search-radius-item {
   @include PreferencesItemStyle;
-
+  justify-content: space-between;
   &__label {
   }
   // search-radius-item__input
@@ -11,5 +11,6 @@
     border: none;
     color: $icon-color;
     font-size: $preferences-font-size;
+    width: 150px;
   }
 }

@@ -7,5 +7,12 @@
   background: $sec-color;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 1rem 2rem;
+  z-index: 1000000000000;
+  // .edit-profile__name-container
+  &__name-container {
+    position: relative;
+    width: 60%;
+  }
 }

@@ -6,10 +6,14 @@ function userReducer(state, action) {
       };
     }
     case 'CHANGE_PROFILE': {
-      console.log(action.payload, "payload")
       return {
         ...state,
-        profile: action.payload ,
+        profile: action.payload,
+      };
+    }
+    case 'EDIT_USER': {
+      return {
+        ...action.payload,
       };
     }
     default: {

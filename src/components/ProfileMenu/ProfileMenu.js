@@ -1,17 +1,16 @@
 import React, { useContext, useState } from 'react';
 import './ProfileMenu.scss';
-import EditPersonUI from '../EditPersonUI/EditPersonUI';
 import DarkBackground from '../DarkBackground/DarkBackground';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import Contact from '../Contact/Contact';
-import Preferences from '../Preferences/Preferences';
 import { Link } from 'react-router-dom';
+import EditProfile from '../EditProfile/EditProfile';
 function ProfileMenu() {
   const darkBackgroundContext = useContext(DarkBackgroundContext);
   const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
   const [showEdit, setShowEdit] = useState(false);
   const [showContact, setShowContact] = useState(false);
-
+ 
   const handleEditProfile = () => {
     setShowDarkBackground(!showDarkBackground);
     setShowEdit(!showEdit);
@@ -23,7 +22,7 @@ function ProfileMenu() {
   return (
     <div className="profile-menu">
       {showEdit && (
-        <EditPersonUI
+        <EditProfile
           setShowEdit={setShowEdit}
           setShowDarkBackground={setShowDarkBackground}
         />

@@ -10,9 +10,9 @@ async function initialize(dispatch) {
   const preferences = preferencesData.preferences;
   const location = preferences.location;
   if (!location.lat || !location.lon) {
-    setUserLocation(db);
+    setUserLocation(db, dispatch);
   }
-  setTimeout(() => initUser(dispatch), 10);
+  initUser(dispatch);
 }
 
 async function initUser(dispatch) {

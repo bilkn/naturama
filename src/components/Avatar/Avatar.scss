@@ -1,5 +1,5 @@
 @import '../../styles/variables';
-.person-picture-container {
+.avatar-container {
   border-radius: 50%;
   color: white;
   height: $person-img-size;
@@ -9,7 +9,7 @@
   z-index: 1;
 }
 
-.person-picture-container__picture {
+.avatar-container__picture {
   border-radius: 50%;
   box-shadow: 2px 10px 5px #2c2c2c;
   height: $person-img-size;
