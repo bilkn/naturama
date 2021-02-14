@@ -36,7 +36,7 @@ function Preferences() {
     }
   }, [userState]);
   const handleWindowClick = async () => {
-    // Saves the configured preferences to the state and database .
+    // Saves the configured preferences to the state and database after closing the preferences.
     if (!document.querySelector('.preferences')) {
       if (userState) {
         const profile = userState.profile;

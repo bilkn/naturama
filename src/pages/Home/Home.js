@@ -15,7 +15,6 @@ function Home() {
   }, []);
 
   useEffect(async () => {
-    console.log("hello")
     if (!place && userState) {
       try {
         const place = await getRandomPlace(userState);
