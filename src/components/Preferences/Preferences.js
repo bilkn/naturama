@@ -6,6 +6,7 @@ import LocationItem from '../LocationItem/LocationItem';
 import MobileNav from '../MobileNav/MobileNav';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
+import db from '../../helpers/dexie';
 function Preferences() {
   const titleContext = useContext(TitleContext);
   const [userState, dispatchUser] = useContext(UserContext);
@@ -14,19 +15,32 @@ function Preferences() {
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
   useEffect(() => {
+    setTitle('Preferences');
+  }, []);
+  useEffect(async () => {
     if (userState) {
       const profile = userState.profile;
       const preferences = profile.preferences;
       const lat = preferences.location.lat;
       const lon = preferences.location.lon;
       const radius = preferences.radius;
-      setTitle('Preferences');
-      // Condition can be added in the future.
+      const newPreferences = {
+        radius: radiusValue || radius,
+        location: {
+          lat: latValue || lat,
+          lon: lonValue || lon,
+        },
+      };
       const newUser = createNewUser(userState, [
-        ['radius', radiusValue || radius],
-        ['location', { lat: latValue || lat, lon: lonValue || lon }],
+        ['preferences', newPreferences],
       ]);
-      dispatchUser({ type: 'EDIT_USER', payload: newUser });
+      try {
+        await db.profile.update(3, { preferences: newPreferences });
+        dispatchUser({ type: 'EDIT_USER', payload: newUser });
+      } catch (err) {
+        console.log(err)
+        // Add notification.
+      }
     }
   }, [lonValue, latValue, radiusValue]);
 
@@ -41,11 +55,12 @@ function Preferences() {
   }, []);
   useEffect(() => {
     if (userState) {
-    const preferences = userState.profile.preferences;
-    const radius = preferences.radius;
-    setRadiusValue(radius);
+      const preferences = userState.profile.preferences;
+      const radius = preferences.radius;
+      setRadiusValue(radius);
     }
   }, []);
+
   return (
     <div className="preferences">
       <ul className="preferences__map-options-list">

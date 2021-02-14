@@ -5,7 +5,6 @@ import Place from '../../components/Place/Place';
 import MobileNav from '../../components/MobileNav/MobileNav';
 import PlaceContext from '../../context/PlaceContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
-import createNewUser from '../../helpers/createNewUser';
 function Home() {
   const placeContext = useContext(PlaceContext);
   const userContext = useContext(UserContext);
@@ -19,6 +18,7 @@ function Home() {
   }, []);
 
   useEffect(async () => {
+    console.table(userState)
     if (!place && userState) {
       try {
         const place = await getRandomPlace(userState);
