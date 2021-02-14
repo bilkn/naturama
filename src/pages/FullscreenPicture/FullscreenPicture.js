@@ -7,10 +7,15 @@ import PlaceContext from '../../context/PlaceContext';
 import ShareLinkList from '../../components/ShareLinkList/ShareLinkList';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import DarkBackground from '../../components/DarkBackground/DarkBackground';
+import UserContext from "../../context/UserContext";
 function FullscreenPicture() {
   const [showShareLink, setShowShareLinks] = useState(false);
-  const [place] = useContext(PlaceContext);
   const [showDarkBackground, setShowDarkBackground] = useContext(DarkBackgroundContext);
+  const [place] = useContext(PlaceContext);
+  const [userState, dispatch] = useContext(UserContext);
+
+
+  // !!! Refactor this code
   let placeImg = NoImg;
   let imgHeight = 300;
   let imgWidth = 300;

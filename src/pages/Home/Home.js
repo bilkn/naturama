@@ -10,11 +10,12 @@ function Home() {
   const [userState] = useContext(UserContext);
   const [, setTitle] = useContext(TitleContext);
 
-  useEffect(async () => {
+  useEffect(() => {
     setTitle(null);
   }, []);
 
   useEffect(async () => {
+    console.log("hello")
     if (!place && userState) {
       try {
         const place = await getRandomPlace(userState);
