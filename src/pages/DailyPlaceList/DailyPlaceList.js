@@ -5,8 +5,7 @@ import PlaceThumbnail from '../../components/PlaceThumbnail/PlaceThumbnail';
 import './DailyPlaceList.scss';
 import MobileNav from '../../components/MobileNav/MobileNav';
 function DailyPlaceList() {
-  const titleContext = useContext(TitleContext);
-  const [, setTitle] = titleContext;
+  const [, setTitle] = useContext(TitleContext);
 
   useEffect(() => {
     setTitle('Daily List');

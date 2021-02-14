@@ -8,9 +8,8 @@ import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
 import db from '../../helpers/dexie';
 function Preferences() {
-  const titleContext = useContext(TitleContext);
+  const [, setTitle] = useContext(TitleContext);
   const [userState, dispatchUser] = useContext(UserContext);
-  const [, setTitle] = titleContext;
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');

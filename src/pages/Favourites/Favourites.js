@@ -5,8 +5,7 @@ import AddFavouriteButton from '../../components/AddFavouriteButton/AddFavourite
 import TitleContext from '../../context/TitleContext';
 import MobileNav from '../../components/MobileNav/MobileNav';
 function Favourites() {
-  const titleContext = useContext(TitleContext);
-  const [, setTitle] = titleContext;
+  const [, setTitle] = useContext(TitleContext);
   
   useEffect(()=> {
     setTitle("Favourites")

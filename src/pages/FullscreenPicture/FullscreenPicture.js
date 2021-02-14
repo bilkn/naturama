@@ -10,8 +10,7 @@ import DarkBackground from '../../components/DarkBackground/DarkBackground';
 function FullscreenPicture() {
   const [showShareLink, setShowShareLinks] = useState(false);
   const [place] = useContext(PlaceContext);
-  const darkBackgroundContext = useContext(DarkBackgroundContext);
-  const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
+  const [showDarkBackground, setShowDarkBackground] = useContext(DarkBackgroundContext);
   let placeImg = NoImg;
   let imgHeight = 300;
   let imgWidth = 300;

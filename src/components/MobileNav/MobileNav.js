@@ -6,17 +6,15 @@ import PlaceContext from '../../context/PlaceContext';
 import UserContext from '../../context/UserContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
 function MobileNav() {
-  const placeContext = useContext(PlaceContext);
-  const userContext = useContext(UserContext);
-  const [user] = userContext;
-  const [, setPlace] = placeContext;
+  const [, setPlace] = useContext(PlaceContext);
+  const [user] = useContext(UserContext);
 
   const shuffleBtnHandler = async () => {
     try {
       const place = await getRandomPlace(user);
       setPlace(place);
     } catch (err) {
-      console.log(err)
+      console.log(err);
       // !!! Add modal
     }
   };
