@@ -14,6 +14,8 @@ function Preferences() {
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
+
+ 
   useEffect(() => {
     setTitle('Preferences');
   }, []);
@@ -52,14 +54,15 @@ function Preferences() {
       setLatValue(lat);
       setLonValue(lon);
     }
-  }, []);
+  }, [userState]);
+
   useEffect(() => {
     if (userState) {
       const preferences = userState.profile.preferences;
       const radius = preferences.radius;
       setRadiusValue(radius);
     }
-  }, []);
+  }, [userState]);
 
   return (
     <div className="preferences">

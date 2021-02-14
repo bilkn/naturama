@@ -9,7 +9,7 @@ function UserProvider(props) {
   useEffect(() => {
     if (!userState) {
       try {
-        initialize(userState, dispatch);
+        initialize(dispatch);
       } catch (err) {
         console.log(err);
         // Add notification

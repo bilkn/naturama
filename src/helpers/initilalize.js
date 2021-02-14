@@ -2,7 +2,7 @@ import db from './dexie';
 import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
-async function initialize(userState, dispatch) {
+async function initialize(dispatch) {
   const result = await db.profile.get(3);
   if (!result) {
     await initializeDB();

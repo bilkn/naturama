@@ -13,7 +13,9 @@
         "node_modules": true,
         "**/.babelrc": true,
         ".eslintrc.js": true,
-        "debug.log": true
+        "debug.log": true,
+        "build": true,
+        ".vscode": true
     },
     "explorerExclude.backup": null
 }

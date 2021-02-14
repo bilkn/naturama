@@ -18,7 +18,6 @@ function Home() {
   }, []);
 
   useEffect(async () => {
-    console.table(userState)
     if (!place && userState) {
       try {
         const place = await getRandomPlace(userState);
