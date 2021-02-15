@@ -4,14 +4,19 @@ import initialize from '../../helpers/initilalize';
 import userReducer from '../../reducers/UserReducer';
 
 function UserProvider(props) {
-
-  
-  const [state, dispatch] = useReducer(userReducer, null);
+  const [userState, dispatch] = useReducer(userReducer, null);
 
   useEffect(() => {
-    if (!state) initialize(dispatch);
+    if (!userState) {
+      try {
+        initialize(dispatch);
+      } catch (err) {
+        console.log(err);
+        // Add notification
+      }
+    }
   }, []);
-  return <UserContext.Provider value={[state, dispatch]} {...props} />;
+  return <UserContext.Provider value={[userState, dispatch]} {...props} />;
 }
 
 export default UserProvider;

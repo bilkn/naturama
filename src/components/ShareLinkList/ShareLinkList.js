@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import PlaceContext from '../../context/PlaceContext';
 function ShareLinkList() {
   /*  const url = encodeURI("www.google.com.tr"); */
-  const placeContext = useContext(PlaceContext);
-  const [place] = placeContext;
+  const [place] = useContext(PlaceContext);
+
 
   const handleTwitterShare = async (e) => {
     e.preventDefault();

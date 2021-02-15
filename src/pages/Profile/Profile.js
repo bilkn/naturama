@@ -4,16 +4,17 @@ import ProfileThumbnail from '../../components/ProfileThumbnail/ProfileThumbnail
 import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
 import './Profile.scss';
 import MobileNav from '../../components/MobileNav/MobileNav';
+import UserContext from '../../context/UserContext';
 function Profile() {
-  const titleContext = useContext(TitleContext);
-  const [, setTitle] = titleContext;
-
+  const [, setTitle] = useContext(TitleContext);
+  const [userState] = useContext(UserContext);
+  
   useEffect(() => {
     setTitle('Profile');
   }, []);
   return (
     <div className="profile">
-      <ProfileThumbnail />
+      <ProfileThumbnail userState={userState}/>
       <ProfileMenu />
       <MobileNav />
     </div>

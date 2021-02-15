@@ -6,13 +6,11 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
 import './Place.scss';
 function Place(props) {
-  const {onPlaceClick} = props;
-  const placeContext = useContext(PlaceContext);
-  const [place] = placeContext;
- 
+  const { onPlaceClick } = props;
+  const [place] = useContext(PlaceContext);
 
   return (
-    <div className="place" onClick= {onPlaceClick}>
+    <div className="place" onClick={onPlaceClick}>
       <PlaceContent>
         <PlaceThumbnail
           place={place}

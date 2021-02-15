@@ -6,41 +6,70 @@ import LocationItem from '../LocationItem/LocationItem';
 import MobileNav from '../MobileNav/MobileNav';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
+import db from '../../helpers/dexie';
 function Preferences() {
-  const titleContext = useContext(TitleContext);
-  const [userState, dispatchUser] = useContext(UserContext);
-  const [, setTitle] = titleContext;
+  const [, setTitle] = useContext(TitleContext);
+  const [userState, dispatch] = useContext(UserContext);
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
-  useEffect(() => {
-    const profile = userState.profile;
-    const preferences = profile.preferences;
-    const lat = preferences.location.lat;
-    const lon = preferences.location.lon;
-    const radius = preferences.radius;
-    setTitle('Preferences');
-    // Condition can be added in the future.
-    const newUser = createNewUser(userState, [
-      ['radius', radiusValue || radius],
-      ['location', { lat: latValue || lat, lon: lonValue || lon }],
-    ]);
-    console.log("new user",newUser);
-    dispatchUser({ type: 'EDIT_USER', payload: newUser });
-  }, [lonValue, latValue, radiusValue]);
 
   useEffect(() => {
-    const preferences = userState.profile.preferences;
-    const lat = preferences.location.lat;
-    const lon = preferences.location.lon;
-    setLatValue(lat);
-    setLonValue(lon);
+    setTitle('Preferences');
   }, []);
+ 
   useEffect(() => {
-    const preferences = userState.profile.preferences;
-    const radius = preferences.radius;
-    setRadiusValue(radius);
-  }, []);
+    if (userState) {
+      const preferences = userState.profile.preferences;
+      const lat = preferences.location.lat;
+      const lon = preferences.location.lon;
+      setLatValue(lat);
+      setLonValue(lon);
+    }
+  }, [userState]);
+
+  useEffect(() => {
+    if (userState) {
+      const preferences = userState.profile.preferences;
+      const radius = preferences.radius;
+      setRadiusValue(radius);
+    }
+  }, [userState]);
+  const handleWindowClick = async () => {
+    // Saves the configured preferences to the state and database after closing the preferences.
+    if (!document.querySelector('.preferences')) {
+      if (userState) {
+        const profile = userState.profile;
+        const preferences = profile.preferences;
+        const lat = preferences.location.lat;
+        const lon = preferences.location.lon;
+        const radius = preferences.radius;
+        const newPreferences = {
+          radius: radiusValue || radius,
+          location: {
+            lat: latValue || lat,
+            lon: lonValue || lon,
+          },
+        };
+        const newUser = createNewUser(userState, [
+          ['preferences', newPreferences],
+        ]);
+        try {
+          await db.profile.update(3, { preferences: newPreferences });
+          dispatch({ type: 'EDIT_USER', payload: newUser });
+        } catch (err) {
+          console.log(err);
+          // Add notification.
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleWindowClick);
+    return () => window.removeEventListener('click', handleWindowClick);
+  }, [latValue, lonValue, radiusValue]);
+
   return (
     <div className="preferences">
       <ul className="preferences__map-options-list">

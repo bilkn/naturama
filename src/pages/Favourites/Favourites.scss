@@ -1,7 +1,10 @@
 @import '../../styles/mixins';
 .favourites {
-  @include ListStyle;
+  padding: $mobile-page-padding;
+}
 
+.favourites-list {
+  @include ListStyle;
 }
 
 @media (min-width: 768px) {
@@ -9,4 +12,3 @@
     padding: $tablet-page-padding;
   }
 }
-

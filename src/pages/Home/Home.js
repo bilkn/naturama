@@ -5,19 +5,14 @@ import Place from '../../components/Place/Place';
 import MobileNav from '../../components/MobileNav/MobileNav';
 import PlaceContext from '../../context/PlaceContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
-import createNewUser from '../../helpers/createNewUser';
 function Home() {
-  const placeContext = useContext(PlaceContext);
-  const userContext = useContext(UserContext);
-  const titleContext = useContext(TitleContext);
-  const [userState] = userContext;
-  const [, setTitle] = titleContext;
-  const [place, setPlace] = placeContext;
+  const [place, setPlace] = useContext(PlaceContext);
+  const [userState] = useContext(UserContext);
+  const [, setTitle] = useContext(TitleContext);
 
-  useEffect(async () => {
+  useEffect(() => {
     setTitle(null);
   }, []);
-
   useEffect(async () => {
     if (!place && userState) {
       try {

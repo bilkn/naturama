@@ -16,6 +16,13 @@ function userReducer(state, action) {
         ...action.payload,
       };
     }
+
+    case 'ADD_PLACE': {
+      return {
+        ...state,
+        favourites: action.payload,
+      };
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

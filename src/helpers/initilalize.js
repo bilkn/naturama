@@ -1,18 +1,15 @@
-import setUserLocation from './setUserLocation';
 import db from './dexie';
+import createFileURL from './createFileURL';
+import arrayBufferToBlob from './arrayBufferToBlob';
+import getUserLocation from './getUserLocation';
+import { getRandomPlace } from './getRandomPlace';
+import getDailyPlaceList from './getDailyPlaceList';
 async function initialize(dispatch) {
   const result = await db.profile.get(3);
   if (!result) {
     await initializeDB();
   }
-
-  const preferencesData = await db.profile.get(3);
-  const preferences = preferencesData.preferences;
-  const location = preferences.location;
-  if (!location.lat || !location.lon) {
-    setUserLocation(db, dispatch);
-  }
-  initUser(dispatch);
+  await initUser(dispatch);
 }
 
 async function initUser(dispatch) {
@@ -21,11 +18,17 @@ async function initUser(dispatch) {
   const dailyListItems = await db.table('dailyList').toArray();
   const historyItems = await db.table('history').toArray();
   const [username, picture, preferences] = profileItems;
-
+  let pictureBlob = null;
+  if (picture.picture) {
+    pictureBlob = arrayBufferToBlob(picture.picture);
+  }
   const dbData = {
     profile: {
       username: username.username,
-      picture: picture.picture,
+      picture: {
+        file: pictureBlob || null,
+        url: pictureBlob ? createFileURL(pictureBlob) : null,
+      },
       preferences: preferences.preferences,
     },
     favourites: favouritesItems,
@@ -36,15 +39,19 @@ async function initUser(dispatch) {
 }
 
 async function initializeDB() {
+  const location = await getUserLocation();
+  const dailyPlaceList = await getDailyPlaceList();
+  await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
     { username: '' },
-    { picture: null },
+    {
+      picture: null,
+    },
     {
       preferences: {
-        radius: 200000,
+        radius: 200,
         location: {
-          lat: null,
-          lon: null,
+          ...location, // !!! Test this.
         },
       },
     },

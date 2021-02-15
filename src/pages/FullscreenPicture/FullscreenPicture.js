@@ -9,9 +9,12 @@ import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import DarkBackground from '../../components/DarkBackground/DarkBackground';
 function FullscreenPicture() {
   const [showShareLink, setShowShareLinks] = useState(false);
+  const [showDarkBackground, setShowDarkBackground] = useContext(
+    DarkBackgroundContext
+  );
   const [place] = useContext(PlaceContext);
-  const darkBackgroundContext = useContext(DarkBackgroundContext);
-  const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
+
+  // !!! Refactor this code
   let placeImg = NoImg;
   let imgHeight = 300;
   let imgWidth = 300;
@@ -34,6 +37,7 @@ function FullscreenPicture() {
       />
       <MobilePictureNavTop place={place} />
       <PictureToolbar
+        place={place}
         setShowShareLinks={setShowShareLinks}
         setShowDarkBackground={setShowDarkBackground}
       />

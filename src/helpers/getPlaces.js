@@ -1,4 +1,4 @@
-import fetchData from './fetchdata';
+import fetchData from './fetchData';
 
 async function getPlaces(user) {
   const places = await fetchData(user);

@@ -2,11 +2,13 @@ import React from 'react';
 import Avatar from '../Avatar/Avatar';
 import './ProfileThumbnail.scss';
 
-function ProfileThumbnail() {
+function ProfileThumbnail({ userState }) {
   return (
     <div className="profile-thumbnail">
-      <Avatar />
-      <h2 className="profile-thumbnail__person-name">JOHN MICHAEL</h2>
+      <Avatar userState = {userState} />
+      <h2 className="profile-thumbnail__person-username">
+        {(userState && userState.profile.username) || ''}
+      </h2>
     </div>
   );
 }

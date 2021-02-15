@@ -6,8 +6,7 @@ import Contact from '../Contact/Contact';
 import { Link } from 'react-router-dom';
 import EditProfile from '../EditProfile/EditProfile';
 function ProfileMenu() {
-  const darkBackgroundContext = useContext(DarkBackgroundContext);
-  const [showDarkBackground, setShowDarkBackground] = darkBackgroundContext;
+  const [showDarkBackground, setShowDarkBackground] = useContext(DarkBackgroundContext);
   const [showEdit, setShowEdit] = useState(false);
   const [showContact, setShowContact] = useState(false);
  
