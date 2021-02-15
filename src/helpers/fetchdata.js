@@ -1,4 +1,5 @@
 async function fetchData(user) {
+  console.log(user);
   const preferences = user.profile.preferences;
   const location = preferences.location;
   const lat = location.lat;

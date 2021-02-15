@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
 import db from '../../helpers/dexie';
-import IconButton from '../IconButton/IconButton';
 import './PictureToolbar.scss';
 function PictureToolbar(props) {
   const { place, setShowShareLinks, setShowDarkBackground } = props;
@@ -11,29 +10,31 @@ function PictureToolbar(props) {
     setShowDarkBackground(true);
     setShowShareLinks(true);
   };
-  console.log(place);
+
 
   const handleFavClick = async () => {
-    const img = place.preview
-      ? await getImgArrayBuffer(place.preview.source)
-      : null;
-    const placeText = place.wikipedia_extracts.text;
-    const favPlace = {
-      xid: place.xid,
-      content: {
-        name: place.name,
-        location: place.address.state,
-        text: placeText,
-      },
-      img: img,
-    };
-    const newPlaces = [...userState.favourites, favPlace];
-    try {
-      await db.favourites.add(favPlace, favPlace.xid);
-      dispatch({ type: 'ADD_PLACE', payload: newPlaces });
-    } catch (err) {
-      console.log(err);
-      // Add notification.
+    if (!(await db.favourites.get({ xid: place.xid }))) {
+      const img = place.preview
+        ? await getImgArrayBuffer(place.preview.source)
+        : null;
+      const placeText = place.wikipedia_extracts.text;
+      const favPlace = {
+        xid: place.xid,
+        content: {
+          name: place.name,
+          location: place.address.state,
+          text: placeText,
+        },
+        img: img,
+      };
+      const newPlaces = [...userState.favourites, favPlace];
+      try {
+        await db.favourites.add(favPlace, favPlace.xid);
+        dispatch({ type: 'ADD_PLACE', payload: newPlaces });
+      } catch (err) {
+        console.log(err);
+        // Add notification.
+      }
     }
   };
   const getImgArrayBuffer = async (url) => {
@@ -42,7 +43,7 @@ function PictureToolbar(props) {
     const imgArrayBuffer = await blobToArrayBuffer(imgBlob);
     return imgArrayBuffer;
   };
-  const addPlaceToDB = async () => {};
+/*   const addPlaceToDB = async () => {}; */
 
   return (
     <nav className="picture-toolbar">

@@ -47,8 +47,7 @@ async function initializeDB() {
       preferences: {
         radius: 200,
         location: {
-          lat: location.lat,
-          lon: location.lon,
+          ...location, // !!! Test this.
         },
       },
     },
