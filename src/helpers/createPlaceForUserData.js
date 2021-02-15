@@ -10,6 +10,7 @@ async function createPlaceForUserData(place) {
     content: {
       name: place.name,
       location: place.address.state,
+      distance: place.distance,
       text: placeText,
     },
     img: img,
