@@ -2,6 +2,8 @@ import db from './dexie';
 import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
+import { getRandomPlace } from './getRandomPlace';
+import getDailyPlaceList from './getDailyPlaceList';
 async function initialize(dispatch) {
   const result = await db.profile.get(3);
   if (!result) {
@@ -38,6 +40,8 @@ async function initUser(dispatch) {
 
 async function initializeDB() {
   const location = await getUserLocation();
+  const dailyPlaceList = await getDailyPlaceList();
+  await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
     { username: '' },
     {

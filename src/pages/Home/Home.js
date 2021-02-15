@@ -13,7 +13,6 @@ function Home() {
   useEffect(() => {
     setTitle(null);
   }, []);
-
   useEffect(async () => {
     if (!place && userState) {
       try {

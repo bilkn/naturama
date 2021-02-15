@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
-import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
+import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 function PictureToolbar(props) {
@@ -11,22 +11,9 @@ function PictureToolbar(props) {
     setShowShareLinks(true);
   };
 
-
   const handleFavClick = async () => {
     if (!(await db.favourites.get({ xid: place.xid }))) {
-      const img = place.preview
-        ? await getImgArrayBuffer(place.preview.source)
-        : null;
-      const placeText = place.wikipedia_extracts.text;
-      const favPlace = {
-        xid: place.xid,
-        content: {
-          name: place.name,
-          location: place.address.state,
-          text: placeText,
-        },
-        img: img,
-      };
+      const favPlace = await createPlaceForUserData(place);
       const newPlaces = [...userState.favourites, favPlace];
       try {
         await db.favourites.add(favPlace, favPlace.xid);
@@ -37,14 +24,6 @@ function PictureToolbar(props) {
       }
     }
   };
-  const getImgArrayBuffer = async (url) => {
-    const response = await fetch(url);
-    const imgBlob = await response.blob();
-    const imgArrayBuffer = await blobToArrayBuffer(imgBlob);
-    return imgArrayBuffer;
-  };
-/*   const addPlaceToDB = async () => {}; */
-
   return (
     <nav className="picture-toolbar">
       <ul className="picture-toolbar-list">

@@ -11,7 +11,7 @@ function createFileURL(file) {
   )
     return file;
   throw Error(
-    'Input must be a File, String (includes .png, .jpeg or .jpg), or Blob object.'
+    'Input must be a File, String (includes .png, .jpeg or .jpg), Blob or ArrayBuffer object.'
   );
 }
 
