@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
-import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 function PictureToolbar(props) {

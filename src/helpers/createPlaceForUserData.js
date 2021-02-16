@@ -10,7 +10,6 @@ async function createPlaceForUserData(place) {
     height: img ? place.preview.height : null,
     width: img ? place.preview.width : null,
   };
-  console.log("preview", preview);
   const userPlace = {
     xid: place.xid,
     content: {

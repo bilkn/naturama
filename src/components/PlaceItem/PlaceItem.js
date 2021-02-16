@@ -2,12 +2,9 @@ import React from 'react';
 import createFileURL from '../../helpers/createFileURL';
 import './PlaceItem.scss';
 function PlaceItem(props) {
-  const { place, setDisplayedPlace, children } = props;
-  const handlePlaceClick = ()=> {
-    setDisplayedPlace(place);
-  }
+  const { place, setSelectedPlace, children } = props;
   return (
-    <li className="place-item" onClick={handlePlaceClick}>
+    <li className="place-item" onClick={()=>setSelectedPlace(place)}>
       <img
         className="place-item__img"
         src={place.img ? createFileURL(place.img) : '../../assets/no-image.png'}

@@ -1,9 +1,9 @@
 import './ShareLinkList.scss';
 import React, { useContext } from 'react';
-import PlaceContext from '../../context/PlaceContext';
+import RandomPlaceContext from '../../context/RandomPlaceContext';
 function ShareLinkList() {
   /*  const url = encodeURI("www.google.com.tr"); */
-  const [place] = useContext(PlaceContext);
+  const [place] = useContext(RandomPlaceContext);
 
 
   const handleTwitterShare = async (e) => {

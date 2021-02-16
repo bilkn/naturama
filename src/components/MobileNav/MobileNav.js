@@ -1,20 +1,19 @@
 import React, { useContext } from 'react';
 import './MobileNav.scss';
 import { Link } from 'react-router-dom';
-import PlaceContext from '../../context/PlaceContext';
+import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
 import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 function MobileNav() {
-  const [, setPlace] = useContext(PlaceContext);
+  const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState] = useContext(UserContext);
 
   const shuffleBtnHandler = async () => {
     try {
       const place = await getRandomPlace(userState);
-      console.log("mobile nav place", place)
       const userPlace = await createPlaceForUserData(place);
-      setPlace(userPlace);
+      setRandomPlace(userPlace);
     } catch (err) {
       console.log(err);
       // !!! Add modal
