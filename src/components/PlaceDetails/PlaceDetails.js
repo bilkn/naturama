@@ -14,7 +14,7 @@ function PlaceDetails({ place }) {
           {location || 'Unknown'}
         </p>
       </div>
-      <p className="place-details__distance">{place && place.distance} km</p>
+      <p className="place-details__distance">Distance: {place && place.distance} km</p>
     </div>
   );
 }

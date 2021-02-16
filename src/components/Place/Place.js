@@ -5,12 +5,10 @@ import PlaceDescription from '../PlaceDescription/PlaceDescription';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
 import './Place.scss';
-function Place(props) {
-  const { onPlaceClick } = props;
+function Place() {
   const [place] = useContext(PlaceContext);
-
   return (
-    <div className="place" onClick={onPlaceClick}>
+    <div className="place">
       <PlaceContent>
         <PlaceThumbnail
           place={place}

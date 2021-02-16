@@ -10,8 +10,8 @@ import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
 function EditProfile(props) {
   const { setShowEdit, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
-  const [username, setUsername] = useState(userState.profile.username || '');
-  const [picture, setPicture] = useState(userState.profile.picture.url);
+  const [username, setUsername] = useState((userState && userState.profile.username) || '');
+  const [picture, setPicture] = useState(userState && userState.profile.picture.url);
   const handleBtnClick = async () => {
     setShowDarkBackground(false);
     setShowEdit(false);

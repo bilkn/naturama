@@ -12,7 +12,7 @@ function PictureToolbar(props) {
   };
 
   const handleFavClick = async () => {
-    if (!(await db.favourites.get({ xid: place.xid }))) {
+    if (!(userState.favourites.some((favPlace) => favPlace.xid === place.xid))) {
       const favPlace = await createPlaceForUserData(place);
       const newPlaces = [...userState.favourites, favPlace];
       try {

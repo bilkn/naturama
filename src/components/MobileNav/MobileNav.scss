@@ -11,13 +11,28 @@
   height: 100%;
   justify-content: space-between;
   padding: $mobile-nav-padding;
+}
 
-  // mobile-nav-list-item
-  &-item {
-    &__btn {
-      color: $icon-color;
-      font-size: 2rem;
-    }
+.mobile-nav-list-item {
+  &__btn {
+    color: $icon-color;
+    font-size: 2rem;
+    position: relative;
+  }
+  // mobile-nav-list-item__counter
+  &__counter {
+    align-items: center;
+    background: black;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    font-size: 0.9rem;
+    height: 23px;
+    justify-content: center;
+    position: absolute;
+    right: -6px;
+    top: -6px;
+    width: 23px;
   }
 }
 

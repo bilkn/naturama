@@ -7,11 +7,11 @@ import UserContext from '../../context/UserContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
 function MobileNav() {
   const [, setPlace] = useContext(PlaceContext);
-  const [user] = useContext(UserContext);
+  const [userState] = useContext(UserContext);
 
   const shuffleBtnHandler = async () => {
     try {
-      const place = await getRandomPlace(user);
+      const place = await getRandomPlace(userState);
       setPlace(place);
     } catch (err) {
       console.log(err);
@@ -53,6 +53,11 @@ function MobileNav() {
         <li className="mobile-nav-list-item ">
           <Link to="/daily-place-list">
             <button className="mobile-nav-list-item__btn">
+              {userState && userState.dailyList.length && (
+                <span className="mobile-nav-list-item__counter">
+                  {userState.dailyList.length}
+                </span>
+              )}
               <i className="fas fa-list-alt mobile-nav-list-item__icon"></i>
             </button>
           </Link>
