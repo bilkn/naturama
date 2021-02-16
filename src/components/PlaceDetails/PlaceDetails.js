@@ -3,7 +3,7 @@ import './PlaceDetails.scss';
 function PlaceDetails({ place }) {
   let location = null;
   if (place) {
-    location = place.address.state;
+    location = place.content.location;
   }
 
   return (
@@ -14,7 +14,7 @@ function PlaceDetails({ place }) {
           {location || 'Unknown'}
         </p>
       </div>
-      <p className="place-details__distance">Distance: {place && place.distance} km</p>
+      <p className="place-details__distance">Distance: {place && place.content.distance} km</p>
     </div>
   );
 }

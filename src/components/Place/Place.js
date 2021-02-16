@@ -5,8 +5,10 @@ import PlaceDescription from '../PlaceDescription/PlaceDescription';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
 import './Place.scss';
-function Place() {
-  const [place] = useContext(PlaceContext);
+function Place({place}) {
+  const [placeState] = useContext(PlaceContext);
+  place = place || placeState;
+  console.log(place)
   return (
     <div className="place">
       <PlaceContent>

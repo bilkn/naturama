@@ -5,6 +5,7 @@ import Place from '../../components/Place/Place';
 import MobileNav from '../../components/MobileNav/MobileNav';
 import PlaceContext from '../../context/PlaceContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
+import createPlaceForUserData from "../../helpers/createPlaceForUserData";
 function Home() {
   const [place, setPlace] = useContext(PlaceContext);
   const [userState] = useContext(UserContext);
@@ -17,7 +18,8 @@ function Home() {
     if (!place && userState) {
       try {
         const place = await getRandomPlace(userState);
-        setPlace(place);
+        const userPlace = await createPlaceForUserData(place);
+        setPlace(userPlace);
       } catch (err) {
         console.log(err);
         // !!! addModal

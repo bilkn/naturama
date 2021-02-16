@@ -14,7 +14,7 @@ import TitleProvider from '../../providers/TitleProvider/TitleProvider';
 import Preferences from '../Preferences/Preferences';
 import db from '../../helpers/dexie';
 import DBProvider from '../../providers/DBProvider/DBProvider';
-import "normalize.css";
+import 'normalize.css';
 
 function App() {
   useEffect(async () => {
