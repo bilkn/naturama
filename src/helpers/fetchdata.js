@@ -4,7 +4,7 @@ async function fetchData(user) {
   const lat = location.lat;
   const lon = location.lon;
   const searchRadius = preferences.radius;
-  const radiusInCm = searchRadius * 100000;
+  const radiusInCm = searchRadius * 1000;
   const url = `https://api.opentripmap.com/0.1/en/places/radius?radius=${radiusInCm}&lon=${lon}&lat=${lat}&kinds=natural&apikey=5ae2e3f221c38a28845f05b66e6185a474b772f0503b9bf316db4ad4`;
   try {
     const data = await fetch(url);

@@ -1,6 +1,6 @@
 import React from 'react';
 import './PlaceThumbnail.scss';
-import NoImg from "../../assets/no-image.png";
+import NoImg from '../../assets/no-image.png';
 import { Link } from 'react-router-dom';
 function PlaceThumbnail(props) {
   const { classNames, icon, children, place } = props;
@@ -9,10 +9,10 @@ function PlaceThumbnail(props) {
   let imgWidth = 300;
   let placeName = null;
   if (place) {
-    placeImg = place.preview ? place.preview.source : NoImg;
-    imgHeight = place.preview ? place.preview.height : 300;
-    imgWidth = place.preview ? place.preview.width : 300;
-    placeName = place.name;
+    placeImg = place.preview.source || NoImg;
+    imgHeight = place.preview.height || 300;
+    imgWidth = place.preview.width || 300;
+    placeName = place.content.name;
   }
   return (
     <div className={classNames.join(' ')}>

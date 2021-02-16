@@ -1,18 +1,19 @@
 import React, { useContext } from 'react';
 import './MobileNav.scss';
 import { Link } from 'react-router-dom';
-
-import PlaceContext from '../../context/PlaceContext';
+import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
+import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 function MobileNav() {
-  const [, setPlace] = useContext(PlaceContext);
-  const [user] = useContext(UserContext);
+  const [, setRandomPlace] = useContext(RandomPlaceContext);
+  const [userState] = useContext(UserContext);
 
   const shuffleBtnHandler = async () => {
     try {
-      const place = await getRandomPlace(user);
-      setPlace(place);
+      const place = await getRandomPlace(userState);
+      const userPlace = await createPlaceForUserData(place);
+      setRandomPlace(userPlace);
     } catch (err) {
       console.log(err);
       // !!! Add modal
@@ -53,6 +54,11 @@ function MobileNav() {
         <li className="mobile-nav-list-item ">
           <Link to="/daily-place-list">
             <button className="mobile-nav-list-item__btn">
+              {userState && userState.dailyList.length && (
+                <span className="mobile-nav-list-item__counter">
+                  {userState.dailyList.length}
+                </span>
+              )}
               <i className="fas fa-list-alt mobile-nav-list-item__icon"></i>
             </button>
           </Link>

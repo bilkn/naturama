@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
-import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 function PictureToolbar(props) {
@@ -12,11 +11,10 @@ function PictureToolbar(props) {
   };
 
   const handleFavClick = async () => {
-    if (!(await db.favourites.get({ xid: place.xid }))) {
-      const favPlace = await createPlaceForUserData(place);
-      const newPlaces = [...userState.favourites, favPlace];
+    if (!(userState.favourites.some((favPlace) => favPlace.xid === place.xid))) {
+      const newPlaces = [...userState.favourites, place];
       try {
-        await db.favourites.add(favPlace, favPlace.xid);
+        await db.favourites.add(place, place.xid);
         dispatch({ type: 'ADD_PLACE', payload: newPlaces });
       } catch (err) {
         console.log(err);

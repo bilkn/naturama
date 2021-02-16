@@ -2,7 +2,6 @@ import db from './dexie';
 import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
-import { getRandomPlace } from './getRandomPlace';
 import getDailyPlaceList from './getDailyPlaceList';
 async function initialize(dispatch) {
   const result = await db.profile.get(3);

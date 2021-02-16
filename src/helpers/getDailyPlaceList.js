@@ -11,10 +11,16 @@ async function getDailyPlaceList(user, placeCount = 5) {
     userData,
     filterPlacesByPreferences(places)
   );
+
   return Promise.all(
-    filteredPlaces
-      .slice(0, placeCount)
-      .map(async (place) => await getPlaceByXID(place.properties.xid))
+    filteredPlaces.slice(0, placeCount).map(async (place) => {
+      const placeData = await getPlaceByXID(place.properties.xid);
+      const distance = Math.round(place.properties.dist/1000).toFixed();
+      return {
+        ...placeData,
+        distance: distance,
+      };
+    })
   ).then((places) =>
     Promise.all(
       places.map(async (place) => await createPlaceForUserData(place))

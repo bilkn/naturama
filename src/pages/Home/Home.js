@@ -3,21 +3,25 @@ import TitleContext from '../../context/TitleContext';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import MobileNav from '../../components/MobileNav/MobileNav';
-import PlaceContext from '../../context/PlaceContext';
+import RandomPlaceContext from '../../context/RandomPlaceContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
+import createPlaceForUserData from '../../helpers/createPlaceForUserData';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 function Home() {
-  const [place, setPlace] = useContext(PlaceContext);
+  const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState] = useContext(UserContext);
   const [, setTitle] = useContext(TitleContext);
-
+  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const handleClick = () => setSelectedPlace(randomPlace);
   useEffect(() => {
     setTitle(null);
   }, []);
   useEffect(async () => {
-    if (!place && userState) {
+    if (!randomPlace && userState) {
       try {
         const place = await getRandomPlace(userState);
-        setPlace(place);
+        const userPlace = await createPlaceForUserData(place);
+        setRandomPlace(userPlace);
       } catch (err) {
         console.log(err);
         // !!! addModal
@@ -27,7 +31,7 @@ function Home() {
 
   return (
     <div className="home">
-      <Place />
+      <Place place={randomPlace} handleClick={handleClick} />
       <MobileNav />
     </div>
   );

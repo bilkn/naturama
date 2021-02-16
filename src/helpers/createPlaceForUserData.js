@@ -5,12 +5,22 @@ async function createPlaceForUserData(place) {
     ? await getImgArrayBuffer(place.preview.source)
     : null;
   const placeText = place.wikipedia_extracts.text;
+  const preview = {
+    source: img ? place.preview.source : '',
+    height: img ? place.preview.height : null,
+    width: img ? place.preview.width : null,
+  };
   const userPlace = {
     xid: place.xid,
     content: {
       name: place.name,
       location: place.address.state,
+      distance: place.distance,
       text: placeText,
+      wikipedia: place.wikipedia,
+    },
+    preview: {
+      ...preview,
     },
     img: img,
   };

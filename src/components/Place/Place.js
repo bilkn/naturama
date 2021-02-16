@@ -1,16 +1,12 @@
-import React, { useContext } from 'react';
-import PlaceContext from '../../context/PlaceContext';
+import React from 'react';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import PlaceDescription from '../PlaceDescription/PlaceDescription';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
 import './Place.scss';
-function Place(props) {
-  const { onPlaceClick } = props;
-  const [place] = useContext(PlaceContext);
-
+function Place({ place, handleClick }) {
   return (
-    <div className="place" onClick={onPlaceClick}>
+    <div className="place" onClick={handleClick}>
       <PlaceContent>
         <PlaceThumbnail
           place={place}

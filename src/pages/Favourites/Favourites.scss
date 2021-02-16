@@ -1,8 +1,4 @@
 @import '../../styles/mixins';
-.favourites {
-  padding: $mobile-page-padding;
-}
-
 .favourites-list {
   @include ListStyle;
 }

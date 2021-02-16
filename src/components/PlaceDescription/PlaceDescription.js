@@ -2,8 +2,8 @@ import React from 'react';
 import './PlaceDescription.scss';
 function PlaceDescription({ place }) {
   let placeText = null;
-  if (place && place.wikipedia_extracts) {
-    placeText = place.wikipedia_extracts.text;
+  if (place && place.content.text) {
+    placeText = place.content.text;
   }
   return (
     <div className="place-description">
