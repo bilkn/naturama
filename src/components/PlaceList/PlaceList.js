@@ -4,8 +4,8 @@ import './PlaceList.scss';
 function PlaceList(props) {
   const { userState, setSelectedPlace } = props;
   return (
-    <ul className="daily-place-list">
-      {userState.dailyList.map((place) => (
+    <ul className="place-list">
+      {userState && userState.dailyList.map((place) => (
         <PlaceItem
           place={place}
           setSelectedPlace={setSelectedPlace}

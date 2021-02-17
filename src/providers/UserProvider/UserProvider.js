@@ -6,10 +6,10 @@ import userReducer from '../../reducers/UserReducer';
 function UserProvider(props) {
   const [userState, dispatch] = useReducer(userReducer, null);
 
-  useEffect(() => {
+  useEffect(async() => {
     if (!userState) {
       try {
-        initialize(dispatch);
+        await initialize(dispatch);
       } catch (err) {
         console.log(err);
         // Add notification

@@ -1,6 +1,9 @@
 @import '../../styles/variables';
 .place-item {
+  box-shadow: 0 8px 15px #1b1b1b;
   position: relative;
+  height: 200px;
+  width: 100%;
   &__img {
     object-fit: cover;
     height: 100%;
