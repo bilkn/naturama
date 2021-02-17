@@ -7,6 +7,7 @@ import PlaceItem from '../../components/PlaceItem/PlaceItem';
 import IconButton from '../../components/IconButton/IconButton';
 import Place from '../../components/Place/Place';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
+import PlaceList from '../../components/PlaceList/PlaceList';
 function Favourites() {
   const [, setTitle] = useContext(TitleContext);
   const [userState] = useContext(UserContext);
@@ -17,19 +18,9 @@ function Favourites() {
 
   return (
     <div className="favourites">
-      <ul className="favourites-list">
-        {(selectedPlace && <Place place={selectedPlace} />) ||
-          (userState &&
-            userState.favourites.map((place) => (
-              <PlaceItem
-                place={place}
-                setSelectedPlace={setSelectedPlace}
-                key={place.xid}
-              >
-                {/* <IconButton btnClass="icon-btn" iconClass="fas fa-star" /> */}
-              </PlaceItem>
-            )))}
-      </ul>
+      {(selectedPlace && <Place place={selectedPlace} />) || (
+        <PlaceList userState={userState} setSelectedPlace={setSelectedPlace} />
+      )}
       <MobileNav />
     </div>
   );
