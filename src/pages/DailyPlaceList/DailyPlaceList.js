@@ -6,6 +6,7 @@ import PlaceItem from '../../components/PlaceItem/PlaceItem';
 import UserContext from '../../context/UserContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import Place from '../../components/Place/Place';
+import PlaceList from '../../components/PlaceList/PlaceList';
 function DailyPlaceList() {
   const [, setTitle] = useContext(TitleContext);
   const [userState] = useContext(UserContext);
@@ -14,21 +15,12 @@ function DailyPlaceList() {
     setTitle('Daily List');
   }, []);
   return (
-    // !!! Container block may be added in the future.
-    <ul className="daily-place-list">
-      {(selectedPlace && <Place place={selectedPlace} />) ||
-        (userState &&
-          userState.dailyList.map((place) => (
-            <PlaceItem
-              place={place}
-              setSelectedPlace={setSelectedPlace}
-              key={place.xid}
-            >
-              {/* <IconButton btnClass="icon-btn" iconClass="fas fa-star" /> */}
-            </PlaceItem>
-          )))}
+    <div className="daily-place-list">
+      {(selectedPlace && <Place place={selectedPlace} />) || (
+        <PlaceList userState={userState} setSelectedPlace={setSelectedPlace} />
+      )}
       <MobileNav />
-    </ul>
+    </div>
   );
 }
 
