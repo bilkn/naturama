@@ -2,15 +2,16 @@
 @import '../../styles/variables';
 
 .edit-profile {
-  @include CenteredAndFixedElement(85%, 180px);
+  @include CenteredAndFixedElement(80%, 180px);
   align-items: center;
   background: $sec-color;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 1rem 2rem;
   z-index: 1000000000000;
-  // .edit-profile__name-container
+  // .edit-profile-name-container
   &__name-container {
     position: relative;
     width: 60%;

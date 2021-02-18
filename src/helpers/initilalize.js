@@ -3,15 +3,16 @@ import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
 import getDailyPlaceList from './getDailyPlaceList';
-async function initialize(dispatch) {
+async function initialize(errorState, dispatch) {
   const result = await db.profile.get(3);
   if (!result) {
-    await initializeDB();
+    await initializeDB(errorState);
   }
-  await initUser(dispatch);
+  await initUserWithDB(dispatch);
+  // !!! Add initUserWithUserState function.
 }
 
-async function initUser(dispatch) {
+async function initUserWithDB(dispatch) {
   const profileItems = await db.table('profile').toArray();
   const favouritesItems = await db.table('favourites').toArray();
   const dailyListItems = await db.table('dailyList').toArray();
@@ -33,13 +34,25 @@ async function initUser(dispatch) {
     favourites: favouritesItems,
     dailyList: dailyListItems,
     history: historyItems,
+    isNotificationOpen: false,
+    notification: '',
   };
   dispatch({ type: 'INIT', payload: dbData });
 }
 
-async function initializeDB() {
+function initUserWithUserState(dispatch) {}
+
+async function initializeDB(errorState) {
+  const [error, setError] = errorState;
   const location = await getUserLocation();
-  const dailyPlaceList = await getDailyPlaceList();
+  let dailyPlaceList = [];
+  if (location) {
+    console.log(error);
+    dailyPlaceList = await getDailyPlaceList();
+  } else {
+    const newError = { ...error, isGeoActive: false };
+    setError(() => newError);
+  }
   await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
     { username: '' },
@@ -50,7 +63,7 @@ async function initializeDB() {
       preferences: {
         radius: 200,
         location: {
-          ...location, // !!! Test this.
+          ...location,
         },
       },
     },

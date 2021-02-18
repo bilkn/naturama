@@ -3,24 +3,28 @@
 .search-radius-item {
   @include PreferencesItemStyle;
   justify-content: space-between;
+
   // search-radius-item__label
   &__label {
     margin-right: 10px;
   }
+
   // search-radius-item__span
   &__span {
     font-size: 0.9rem;
   }
+
   // search-radius-item__input
   &__input {
     background: none;
     border: none;
     color: $icon-color;
     font-size: $preferences-font-size;
-    min-width: 0;
     max-width: 90px;
-  
+    min-width: 0;
   }
+
+  // search-radius-item__empty-span
   &__empty-span {
     height: 16px;
     width: 21px;

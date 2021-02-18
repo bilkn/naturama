@@ -2,7 +2,9 @@ import React from 'react';
 import './PlaceThumbnail.scss';
 import NoImg from '../../assets/no-image.png';
 import { Link } from 'react-router-dom';
+
 function PlaceThumbnail(props) {
+  // !!! This component may be reformatted in the future.
   const { classNames, icon, children, place } = props;
   let placeImg = NoImg;
   let imgHeight = 300;

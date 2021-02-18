@@ -5,15 +5,16 @@ function PlaceList(props) {
   const { userState, setSelectedPlace } = props;
   return (
     <ul className="place-list">
-      {userState && userState.dailyList.map((place) => (
-        <PlaceItem
-          place={place}
-          setSelectedPlace={setSelectedPlace}
-          key={place.xid}
-        >
-          {/* <IconButton btnClass="icon-btn" iconClass="fas fa-star" /> */}
-        </PlaceItem>
-      ))}
+      {userState &&
+        userState.dailyList.map((place) => (
+          <PlaceItem
+            place={place}
+            setSelectedPlace={setSelectedPlace}
+            key={place.xid}
+          >
+            {/* <IconButton btnClass="icon-btn" iconClass="fas fa-star" /> */}
+          </PlaceItem>
+        ))}
     </ul>
   );
 }

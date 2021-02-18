@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import TitleContext from '../../context/TitleContext';
 import UserContext from '../../context/UserContext';
-import createNewUser from '../../helpers/createNewUser';
+import modifyUser from '../../helpers/modifyUser';
 import LocationItem from '../LocationItem/LocationItem';
 import MobileNav from '../MobileNav/MobileNav';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
@@ -17,7 +17,7 @@ function Preferences() {
   useEffect(() => {
     setTitle('Preferences');
   }, []);
- 
+
   useEffect(() => {
     if (userState) {
       const preferences = userState.profile.preferences;
@@ -36,7 +36,8 @@ function Preferences() {
     }
   }, [userState]);
   const handleWindowClick = async () => {
-    // Saves the configured preferences to the state and database after closing the preferences.
+  
+    // Saves the configured preferences to the state and database, after closing the preferences.
     if (!document.querySelector('.preferences')) {
       if (userState) {
         const profile = userState.profile;
@@ -51,7 +52,7 @@ function Preferences() {
             lon: lonValue || lon,
           },
         };
-        const newUser = createNewUser(userState, [
+        const newUser = modifyUser(userState, [
           ['preferences', newPreferences],
         ]);
         try {

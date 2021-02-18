@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../../context/UserContext';
-import createNewUser from '../../helpers/createNewUser';
+import modifyUser from '../../helpers/modifyUser';
 import IconButton from '../IconButton/IconButton';
 import NameInput from '../NameInput/NameInput';
 import PictureInput from '../PictureInput/PictureInput';
@@ -10,44 +10,43 @@ import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
 function EditProfile(props) {
   const { setShowEdit, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
-  const [username, setUsername] = useState(
-    (userState && userState.profile.username) || ''
-  );
-  const [picture, setPicture] = useState(
-    userState && userState.profile.picture.url
-  );
+  const [username, setUsername] = useState('');
+  const [picture, setPicture] = useState(null);
+
+  /* userState.profile.picture.url */
   const handleBtnClick = async () => {
     setShowDarkBackground(false);
     setShowEdit(false);
-
-    const newUser = createNewUser(userState, [
-      ['username', username],
-      ['picture', picture],
-    ]);
-    try {
-      if (picture) addPictureToDB();
-      await db.profile.update(1, { username: username });
-      dispatch({ type: 'EDIT_USER', payload: newUser });
-    } catch (err) {
-      console.log(err);
-      // Add notify.
+    const newUser = createNewUser();
+    if (newUser) {
+      try {
+        if (picture) addPictureToDB();
+        await db.profile.update(1, { username: username });
+        dispatch({ type: 'EDIT_USER', payload: newUser });
+      } catch (err) {
+        console.log(err);
+        // Add notify.
+      }
     }
   };
 
   const addPictureToDB = async () => {
-    try {
-      const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
-      await db.profile.update(2, { picture: pictureArrayBuffer });
-    } catch (err) {
-      console.log(err);
-      // Add notification
-    }
+    const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
+    await db.profile.update(2, { picture: pictureArrayBuffer });
+  };
+
+  const createNewUser = () => {
+    let propArr = [];
+    if (!picture && !username) return null;
+    if (username) propArr.push(['username', username]);
+    if (picture) propArr.push(['picture', picture]);
+    return modifyUser(userState, propArr);
   };
 
   return (
     <div className="edit-profile">
       <PictureInput picture={picture} setPicture={setPicture} />
-      <div className="edit-profile__name-container">
+      <div className="edit-profile-name-container">
         <NameInput username={username} setUsername={setUsername} />
         <IconButton
           btnClass="icon-button"

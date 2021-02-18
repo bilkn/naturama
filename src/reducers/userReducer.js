@@ -21,8 +21,11 @@ function userReducer(state, action) {
       return {
         ...state,
         favourites: action.payload,
+        notification: 'Place has been added to your favourites.',
+        isNotificationOpen: true,
       };
     }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

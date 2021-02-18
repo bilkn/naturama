@@ -7,5 +7,5 @@ function AddFavouriteButton() {
     </button>
   );
 }
-
+// !!! This component may be deleted in the future.
 export default AddFavouriteButton;

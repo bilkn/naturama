@@ -8,6 +8,13 @@
   padding: 0;
 }
 
+html,
+body {
+  background: $site-background;
+  font-family: $main-font;
+  overflow-x: hidden;
+}
+
 a {
   text-decoration: none;
 }
@@ -19,13 +26,6 @@ li {
 button {
   background: none;
   border: none;
-}
-
-html,
-body {
-  background: $site-background;
-  font-family: $main-font;
-  overflow-x: hidden;
 }
 
 .no-border {

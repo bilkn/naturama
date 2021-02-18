@@ -33,7 +33,7 @@ function Contact() {
           </a>
         </li>
       </ul>
-      <p className="contact__signature">Design and coded by Bilkan Konus </p>
+      <p className="contact__signature">Design and coded by Bilkan Konus.</p>
     </div>
   );
 }

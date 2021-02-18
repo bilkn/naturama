@@ -7,17 +7,20 @@ import RandomPlaceContext from '../../context/RandomPlaceContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
 import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
+import ErrorContext from '../../context/ErrorContext';
 function Home() {
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState] = useContext(UserContext);
   const [, setTitle] = useContext(TitleContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [error] = useContext(ErrorContext);
   const handleClick = () => setSelectedPlace(randomPlace);
   useEffect(() => {
     setTitle(null);
   }, []);
+
   useEffect(async () => {
-    if (!randomPlace && userState) {
+    if (!randomPlace && userState && error.isGeoActive) {
       try {
         const place = await getRandomPlace(userState);
         const userPlace = await createPlaceForUserData(place);
@@ -31,7 +34,11 @@ function Home() {
 
   return (
     <div className="home">
-      <Place place={randomPlace} handleClick={handleClick} />
+      {randomPlace ? (
+        <Place place={randomPlace} handleClick={handleClick} />
+      ) : (
+        <h2>No location found.</h2>
+      )}
       <MobileNav />
     </div>
   );

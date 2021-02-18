@@ -9,7 +9,8 @@
 .location-input-container {
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 50%;
   // location-item-container__input
   &__input {
     font-size: 1.1rem;
