@@ -4,7 +4,7 @@ function NameInput({ username, setUsername }) {
   const handleChange = (e) => {
     e.preventDefault;
     if (username.length > 15) console.log('long name');
-    // Add notification
+    // !!! Add notification.
     else setUsername(e.target.value);
   };
   return (

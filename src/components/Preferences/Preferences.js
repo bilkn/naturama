@@ -17,7 +17,7 @@ function Preferences() {
   useEffect(() => {
     setTitle('Preferences');
   }, []);
- 
+
   useEffect(() => {
     if (userState) {
       const preferences = userState.profile.preferences;
@@ -36,7 +36,8 @@ function Preferences() {
     }
   }, [userState]);
   const handleWindowClick = async () => {
-    // Saves the configured preferences to the state and database after closing the preferences.
+  
+    // Saves the configured preferences to the state and database, after closing the preferences.
     if (!document.querySelector('.preferences')) {
       if (userState) {
         const profile = userState.profile;

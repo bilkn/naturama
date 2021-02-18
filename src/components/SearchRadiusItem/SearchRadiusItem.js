@@ -21,7 +21,6 @@ function SearchRadiusItem({ radiusValue, setRadiusValue }) {
         value={radiusValue || ''}
         onChange={handleChange}
       />
-
       <span className="search-radius-item__span">KM</span>
     </li>
   );

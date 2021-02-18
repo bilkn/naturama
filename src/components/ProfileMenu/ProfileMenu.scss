@@ -17,8 +17,10 @@
   &__icon {
     width: 50px;
   }
-  // profile-menu-list__link
-  &__link, &__btn {
+  // profile-menu-list__link,
+  // profile-menu-list__btn
+  &__link,
+  &__btn {
     color: inherit;
     font-size: inherit;
   }

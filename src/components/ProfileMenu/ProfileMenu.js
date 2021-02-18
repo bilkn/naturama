@@ -6,6 +6,7 @@ import Contact from '../Contact/Contact';
 import { Link } from 'react-router-dom';
 import EditProfile from '../EditProfile/EditProfile';
 import UserContext from '../../context/UserContext';
+
 function ProfileMenu() {
   const [showDarkBackground, setShowDarkBackground] = useContext(
     DarkBackgroundContext
@@ -13,15 +14,16 @@ function ProfileMenu() {
   const [showEdit, setShowEdit] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [userState] = useContext(UserContext);
+
   const handleEditProfile = () => {
     if (userState) {
       setShowDarkBackground(!showDarkBackground);
       setShowEdit(!showEdit);
-    }
-    else {
+    } else {
       // !!! Add notification
     }
   };
+
   const handleContact = () => {
     setShowDarkBackground(!showDarkBackground);
     setShowContact(!showContact);

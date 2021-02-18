@@ -3,7 +3,6 @@ import './Favourites.scss';
 import TitleContext from '../../context/TitleContext';
 import MobileNav from '../../components/MobileNav/MobileNav';
 import UserContext from '../../context/UserContext';
-import IconButton from '../../components/IconButton/IconButton';
 import Place from '../../components/Place/Place';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import PlaceList from '../../components/PlaceList/PlaceList';

@@ -11,10 +11,10 @@
   text-align: center;
   width: 100%;
 
-  &__name-input:focus::placeholder {
+  &:focus::placeholder {
     color: #e0e0e0;
   }
-  &__name-input::placeholder {
+  &::placeholder {
     color: #2e2e31;
   }
 }

@@ -46,7 +46,7 @@ function EditProfile(props) {
   return (
     <div className="edit-profile">
       <PictureInput picture={picture} setPicture={setPicture} />
-      <div className="edit-profile__name-container">
+      <div className="edit-profile-name-container">
         <NameInput username={username} setUsername={setUsername} />
         <IconButton
           btnClass="icon-button"

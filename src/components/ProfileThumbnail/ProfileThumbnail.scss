@@ -8,6 +8,7 @@
   margin-bottom: 2rem;
   padding: 1.5rem;
   position: relative;
+
   // profile-thumbnail__person-username
   &__person-username {
     margin-top: 2rem;
@@ -20,8 +21,8 @@
   content: '';
   display: block;
   height: 230px;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
   width: 100%;
 }
