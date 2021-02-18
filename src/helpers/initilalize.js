@@ -8,10 +8,11 @@ async function initialize(dispatch) {
   if (!result) {
     await initializeDB();
   }
-  await initUser(dispatch);
+  await initUserWithDB(dispatch);
+  // !!! Add initUserWithUserState function.
 }
 
-async function initUser(dispatch) {
+async function initUserWithDB(dispatch) {
   const profileItems = await db.table('profile').toArray();
   const favouritesItems = await db.table('favourites').toArray();
   const dailyListItems = await db.table('dailyList').toArray();
@@ -33,27 +34,34 @@ async function initUser(dispatch) {
     favourites: favouritesItems,
     dailyList: dailyListItems,
     history: historyItems,
+    notification: '',
   };
   dispatch({ type: 'INIT', payload: dbData });
 }
 
+function initUserWithUserState(dispatch) {}
+
 async function initializeDB() {
-  const location = await getUserLocation();
-  const dailyPlaceList = await getDailyPlaceList();
-  await db.dailyList.bulkAdd([...dailyPlaceList]);
-  await db.profile.bulkAdd([
-    { username: '' },
-    {
-      picture: null,
-    },
-    {
-      preferences: {
-        radius: 200,
-        location: {
-          ...location, // !!! Test this.
+    const location = await getUserLocation();
+    let dailyPlaceList = [];
+    if (location) {
+      dailyPlaceList = await getDailyPlaceList();
+      // !!! setError geo true.
+    }
+    await db.dailyList.bulkAdd([...dailyPlaceList]);
+    await db.profile.bulkAdd([
+      { username: '' },
+      {
+        picture: null,
+      },
+      {
+        preferences: {
+          radius: 200,
+          location: {
+            ...location,
+          },
         },
       },
-    },
-  ]);
+    ]);
 }
 export default initialize;

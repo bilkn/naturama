@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import ErrorContext from '../../context/ErrorContext';
 
 function ErrorProvider(props) {
   const defaultState = {
-    message: '',
-    isGeo: false,
-    isDB: false,
+    isGeoActive: false,
+    isDBActive: false,
   };
   const [error, setError] = useState(defaultState);
 
-  return <ErrorProvider.Provider value={{ error, setError }} {...props} />;
+  return <ErrorContext.Provider value={[error, setError]} {...props} />;
 }
 
 export default ErrorProvider;

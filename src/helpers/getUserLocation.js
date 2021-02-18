@@ -3,7 +3,7 @@ function getUserLocation() {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.permissions.query({ name: 'geolocation' }).then((resp) => {
-        resp.state === 'denied' && reject('GEOLOCATION_DENIED');
+        resp.state === 'denied' && resolve({lat: null, lon: null});
       });
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = Math.round(position.coords.latitude);
@@ -12,7 +12,6 @@ function getUserLocation() {
           lat: lat,
           lon: lon,
         };
-        console.log('hello');
         resolve(location);
       });
     } else {

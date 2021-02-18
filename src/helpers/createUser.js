@@ -1,7 +1,13 @@
 import getUserLocation from './getUserLocation';
 
-async function createUserTemplate() {
-  const location = await getUserLocation();
+async function createUser() {
+  let location = null;
+  try {
+    location = await getUserLocation();
+  } catch (err) {
+    console.log("location couldn't set.");
+    // !!! Add notification.
+  }
   const userTemplate = {
     profile: {
       username: '',
@@ -23,4 +29,4 @@ async function createUserTemplate() {
   return userTemplate;
 }
 
-export default createUserTemplate;
+export default createUser;

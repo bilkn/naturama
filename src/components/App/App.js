@@ -16,6 +16,7 @@ import Preferences from '../Preferences/Preferences';
 import db from '../../helpers/dexie';
 import DBProvider from '../../providers/DBProvider/DBProvider';
 import 'normalize.css';
+import ErrorProvider from '../../providers/ErrorProvider/ErrorProvider';
 
 function App() {
   useEffect(() => {
@@ -23,43 +24,45 @@ function App() {
   }, []);
   return (
     <>
-      <DBProvider>
-        <DarkBackgroundProvider>
-          <TitleProvider>
-            <UserProvider>
-              <SelectedPlaceProvider>
-                <PlaceProvider>
-                  <AppHead />
-                  <Router>
-                    <Route exact path="/" component={Home}></Route>
-                    <Route
-                      exact
-                      path="/favourites"
-                      component={Favourites}
-                    ></Route>
-                    <Route exact path="/profile" component={Profile}></Route>
-                    <Route
-                      exact
-                      path="/daily-place-list"
-                      component={DailyPlaceList}
-                    ></Route>
-                    <Route
-                      exact
-                      path="/fullscreen-picture"
-                      component={FullscreenPicture}
-                    ></Route>
-                    <Route
-                      exact
-                      path="/preferences"
-                      component={Preferences}
-                    ></Route>
-                  </Router>
-                </PlaceProvider>
-              </SelectedPlaceProvider>
-            </UserProvider>
-          </TitleProvider>
-        </DarkBackgroundProvider>
-      </DBProvider>
+      <ErrorProvider>
+        <DBProvider>
+          <DarkBackgroundProvider>
+            <TitleProvider>
+              <UserProvider>
+                <SelectedPlaceProvider>
+                  <PlaceProvider>
+                    <AppHead />
+                    <Router>
+                      <Route exact path="/" component={Home}></Route>
+                      <Route
+                        exact
+                        path="/favourites"
+                        component={Favourites}
+                      ></Route>
+                      <Route exact path="/profile" component={Profile}></Route>
+                      <Route
+                        exact
+                        path="/daily-place-list"
+                        component={DailyPlaceList}
+                      ></Route>
+                      <Route
+                        exact
+                        path="/fullscreen-picture"
+                        component={FullscreenPicture}
+                      ></Route>
+                      <Route
+                        exact
+                        path="/preferences"
+                        component={Preferences}
+                      ></Route>
+                    </Router>
+                  </PlaceProvider>
+                </SelectedPlaceProvider>
+              </UserProvider>
+            </TitleProvider>
+          </DarkBackgroundProvider>
+        </DBProvider>
+      </ErrorProvider>
     </>
   );
 }
