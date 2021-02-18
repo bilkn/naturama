@@ -10,15 +10,17 @@
   justify-content: space-between;
   padding: 1.5rem 2rem;
   z-index: 200;
-  // contact__signature 
+  // contact__signature
   &__signature {
-      text-align: center;
+    text-align: center;
   }
 }
 
 .contact-list {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+
+  // contact-list__link
   &__link {
     color: $icon-color;
     font-size: $social-icon-font-size;

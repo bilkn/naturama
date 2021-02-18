@@ -1,6 +1,7 @@
+import 'regenerator-runtime/runtime.js';
+import 'normalize.css';
 import React, { useEffect } from 'react';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
-import 'regenerator-runtime/runtime.js';
 import AppHead from '../AppHead/AppHead';
 import DailyPlaceList from '../../pages/DailyPlaceList/DailyPlaceList';
 import Favourites from '../../pages/Favourites/Favourites';
@@ -12,11 +13,10 @@ import PlaceProvider from '../../providers/RandomPlaceProvider/RandomPlaceProvid
 import SelectedPlaceProvider from '../../providers/SelectedPlaceProvider/SelectedPlaceProvider';
 import UserProvider from '../../providers/UserProvider/UserProvider';
 import TitleProvider from '../../providers/TitleProvider/TitleProvider';
+import DBProvider from '../../providers/DBProvider/DBProvider';
+import ErrorProvider from '../../providers/ErrorProvider/ErrorProvider';
 import Preferences from '../Preferences/Preferences';
 import db from '../../helpers/dexie';
-import DBProvider from '../../providers/DBProvider/DBProvider';
-import 'normalize.css';
-import ErrorProvider from '../../providers/ErrorProvider/ErrorProvider';
 
 function App() {
   useEffect(() => {

@@ -17,29 +17,30 @@ function EditProfile(props) {
   const handleBtnClick = async () => {
     setShowDarkBackground(false);
     setShowEdit(false);
-
-    const newUser = modifyUser(userState, [
-      ['username', username],
-      ['picture', picture],
-    ]);
-    try {
-      if (picture) addPictureToDB();
-      await db.profile.update(1, { username: username });
-      dispatch({ type: 'EDIT_USER', payload: newUser });
-    } catch (err) {
-      console.log(err);
-      // Add notify.
+    const newUser = createNewUser();
+    if (newUser) {
+      try {
+        if (picture) addPictureToDB();
+        await db.profile.update(1, { username: username });
+        dispatch({ type: 'EDIT_USER', payload: newUser });
+      } catch (err) {
+        console.log(err);
+        // Add notify.
+      }
     }
   };
 
   const addPictureToDB = async () => {
-    try {
-      const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
-      await db.profile.update(2, { picture: pictureArrayBuffer });
-    } catch (err) {
-      console.log(err);
-      // Add notification
-    }
+    const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
+    await db.profile.update(2, { picture: pictureArrayBuffer });
+  };
+
+  const createNewUser = () => {
+    let propArr = [];
+    if (!picture && !username) return null;
+    if (username) propArr.push(['username', username]);
+    if (picture) propArr.push(['picture', picture]);
+    return modifyUser(userState, propArr);
   };
 
   return (

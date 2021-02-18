@@ -13,12 +13,12 @@ function Home() {
   const [userState] = useContext(UserContext);
   const [, setTitle] = useContext(TitleContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const [error, setError] = useContext(ErrorContext);
+  const [error] = useContext(ErrorContext);
   const handleClick = () => setSelectedPlace(randomPlace);
   useEffect(() => {
     setTitle(null);
   }, []);
-  
+
   useEffect(async () => {
     if (!randomPlace && userState && error.isGeoActive) {
       try {
@@ -34,7 +34,11 @@ function Home() {
 
   return (
     <div className="home">
-      {randomPlace ? <Place place={randomPlace} handleClick={handleClick} /> : <h2>No location found.</h2>}
+      {randomPlace ? (
+        <Place place={randomPlace} handleClick={handleClick} />
+      ) : (
+        <h2>No location found.</h2>
+      )}
       <MobileNav />
     </div>
   );
