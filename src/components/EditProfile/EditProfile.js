@@ -45,9 +45,17 @@ function EditProfile(props) {
 
   return (
     <div className="edit-profile">
-      <PictureInput picture={picture} setPicture={setPicture} />
+      <PictureInput
+        picture={picture}
+        setPicture={setPicture}
+        userState={userState}
+      />
       <div className="edit-profile-name-container">
-        <NameInput username={username} setUsername={setUsername} />
+        <NameInput
+          username={username}
+          setUsername={setUsername}
+          userState={userState}
+        />
         <IconButton
           btnClass="icon-button"
           iconClass="fas fa-check-circle"
