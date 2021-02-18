@@ -14,7 +14,7 @@ function NameInput({ username, setUsername }) {
         className="name-input"
         maxLength="15"
         placeholder="Name"
-        value={username}
+        value={username ||""}
         onChange={handleChange}
       />
     </>

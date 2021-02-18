@@ -1,7 +1,9 @@
 import React from 'react';
 import createFileURL from '../../helpers/createFileURL';
 import './PictureInput.scss';
-function PictureInput({ setPicture }) {
+import Avatar from '../Avatar/Avatar';
+function PictureInput({ picture, setPicture }) {
+
   const handleChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -14,13 +16,20 @@ function PictureInput({ setPicture }) {
   };
 
   return (
-    <div className="picture-inpFut-container">
-      <label htmlFor="picture" className="picture-input-container__label">
-        <i
-          className="fas fa-camera picture-input-container__icon"
-          aria-hidden={true}
-        ></i>
-      </label>
+    <div className="picture-input-container">
+      {picture ? (
+        <label htmlFor="picture" className="picture-input-container__label">
+          <Avatar url={picture ? picture.url : ""} />
+        </label>
+      ) : (
+        <label htmlFor="picture" className="picture-input-container__label">
+          <i
+            className="fas fa-camera picture-input-container__icon"
+            aria-hidden={true}
+          ></i>
+        </label>
+      )}
+
       <input
         id="picture"
         type="file"
