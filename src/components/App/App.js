@@ -18,7 +18,7 @@ import DBProvider from '../../providers/DBProvider/DBProvider';
 import 'normalize.css';
 
 function App() {
-  useEffect(async () => {
+  useEffect(() => {
     db.open();
   }, []);
   return (

@@ -2,9 +2,10 @@
 @import '../../styles/variables';
 
 .edit-profile {
-  @include CenteredAndFixedElement(85%, 180px);
+  @include CenteredAndFixedElement(80%, 180px);
   align-items: center;
   background: $sec-color;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;

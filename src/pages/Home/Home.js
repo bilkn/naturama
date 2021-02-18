@@ -16,6 +16,7 @@ function Home() {
   useEffect(() => {
     setTitle(null);
   }, []);
+  
   useEffect(async () => {
     if (!randomPlace && userState) {
       try {
@@ -31,7 +32,7 @@ function Home() {
 
   return (
     <div className="home">
-      <Place place={randomPlace} handleClick={handleClick} />
+      {randomPlace ? <Place place={randomPlace} handleClick={handleClick} /> : <h2>No location found.</h2>}
       <MobileNav />
     </div>
   );

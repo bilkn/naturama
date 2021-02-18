@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../../context/UserContext';
-import createNewUser from '../../helpers/createNewUser';
+import modifyUser from '../../helpers/modifyUser';
 import IconButton from '../IconButton/IconButton';
 import NameInput from '../NameInput/NameInput';
 import PictureInput from '../PictureInput/PictureInput';
@@ -20,7 +20,7 @@ function EditProfile(props) {
     setShowDarkBackground(false);
     setShowEdit(false);
 
-    const newUser = createNewUser(userState, [
+    const newUser = modifyUser(userState, [
       ['username', username],
       ['picture', picture],
     ]);

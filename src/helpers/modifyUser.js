@@ -1,4 +1,4 @@
-function createNewUser(oldUser, targetKeys) {
+function modifyUser(oldUser, targetKeys) {
   let newUser = { ...oldUser };
 
   for (let key of targetKeys) {
@@ -15,4 +15,4 @@ function changeTargetKeys(obj, targetKey) {
   }
   return obj;
 }
-export default createNewUser;
+export default modifyUser;
