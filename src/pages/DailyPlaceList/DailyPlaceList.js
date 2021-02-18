@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import TitleContext from '../../context/TitleContext';
 import './DailyPlaceList.scss';
 import MobileNav from '../../components/MobileNav/MobileNav';
-import PlaceItem from '../../components/PlaceItem/PlaceItem';
 import UserContext from '../../context/UserContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import Place from '../../components/Place/Place';
 import PlaceList from '../../components/PlaceList/PlaceList';
+import { Redirect } from 'react-router';
 function DailyPlaceList() {
   const [, setTitle] = useContext(TitleContext);
   const [userState] = useContext(UserContext);
@@ -14,6 +14,10 @@ function DailyPlaceList() {
   useEffect(() => {
     setTitle('Daily List');
   }, []);
+
+   if (!userState) {
+     return <Redirect to="/" />;
+   }
   return (
     <div className="daily-place-list">
       {(selectedPlace && <Place place={selectedPlace} />) || (

@@ -1,0 +1,11 @@
+@import "../../styles/mixins";
+@import "../../styles/variables";
+
+.notification {
+    background:gainsboro;
+    padding: 1rem;
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    z-index: 200000;
+}

@@ -1,12 +1,15 @@
-import React from 'react'
-
+import React, { useContext } from 'react';
+import UserContext from '../../context/UserContext';
+import "./Notification.scss";
 function Notification() {
-    
-    return (
-        <div className="notification">
-            
-        </div>
-    )
+  const [userState] = useContext(UserContext);
+
+  
+  return (
+    <div className="notification">
+      <p className="notification__text">{userState.notification}</p>
+    </div>
+  );
 }
 
-export default Notification
+export default Notification;

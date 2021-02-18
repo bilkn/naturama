@@ -3,8 +3,8 @@ import ErrorContext from '../../context/ErrorContext';
 
 function ErrorProvider(props) {
   const defaultState = {
-    isGeoActive: false,
-    isDBActive: false,
+    isGeoActive: true,
+    isDBActive: true,
   };
   const [error, setError] = useState(defaultState);
 

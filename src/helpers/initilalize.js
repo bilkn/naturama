@@ -3,10 +3,10 @@ import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
 import getDailyPlaceList from './getDailyPlaceList';
-async function initialize(dispatch) {
+async function initialize(errorState, dispatch) {
   const result = await db.profile.get(3);
   if (!result) {
-    await initializeDB();
+    await initializeDB(errorState);
   }
   await initUserWithDB(dispatch);
   // !!! Add initUserWithUserState function.
@@ -34,6 +34,7 @@ async function initUserWithDB(dispatch) {
     favourites: favouritesItems,
     dailyList: dailyListItems,
     history: historyItems,
+    isNotificationOpen: false,
     notification: '',
   };
   dispatch({ type: 'INIT', payload: dbData });
@@ -41,27 +42,31 @@ async function initUserWithDB(dispatch) {
 
 function initUserWithUserState(dispatch) {}
 
-async function initializeDB() {
-    const location = await getUserLocation();
-    let dailyPlaceList = [];
-    if (location) {
-      dailyPlaceList = await getDailyPlaceList();
-      // !!! setError geo true.
-    }
-    await db.dailyList.bulkAdd([...dailyPlaceList]);
-    await db.profile.bulkAdd([
-      { username: '' },
-      {
-        picture: null,
-      },
-      {
-        preferences: {
-          radius: 200,
-          location: {
-            ...location,
-          },
+async function initializeDB(errorState) {
+  const [error, setError] = errorState;
+  const location = await getUserLocation();
+  let dailyPlaceList = [];
+  if (location) {
+    console.log(error);
+    dailyPlaceList = await getDailyPlaceList();
+  } else {
+    const newError = { ...error, isGeoActive: false };
+    setError(() => newError);
+  }
+  await db.dailyList.bulkAdd([...dailyPlaceList]);
+  await db.profile.bulkAdd([
+    { username: '' },
+    {
+      picture: null,
+    },
+    {
+      preferences: {
+        radius: 200,
+        location: {
+          ...location,
         },
       },
-    ]);
+    },
+  ]);
 }
 export default initialize;
