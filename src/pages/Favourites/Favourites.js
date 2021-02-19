@@ -20,10 +20,14 @@ function Favourites() {
   if (!userState) {
     return <Redirect to="/" />;
   }
+
   return (
     <div className="favourites">
       {(selectedPlace && <Place place={selectedPlace} />) || (
-        <PlaceList userState={userState} setSelectedPlace={setSelectedPlace} />
+        <PlaceList
+          list = {userState.favourites}
+          setSelectedPlace={setSelectedPlace}
+        />
       )}
       <MobileNav />
       {userState.isNotificationOpen && <Notification />}

@@ -15,13 +15,16 @@ function DailyPlaceList() {
     setTitle('Daily List');
   }, []);
 
-   if (!userState) {
-     return <Redirect to="/" />;
-   }
+  if (!userState) {
+    return <Redirect to="/" />;
+  }
   return (
     <div className="daily-place-list">
       {(selectedPlace && <Place place={selectedPlace} />) || (
-        <PlaceList userState={userState} setSelectedPlace={setSelectedPlace} />
+        <PlaceList
+          list={userState.dailyList}
+          setSelectedPlace={setSelectedPlace}
+        />
       )}
       <MobileNav />
     </div>

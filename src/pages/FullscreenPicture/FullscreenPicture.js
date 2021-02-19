@@ -14,7 +14,7 @@ function FullscreenPicture() {
   );
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const place = selectedPlace;
-
+  
   const { preview } = place;
   let placeImg = (preview && preview.source) || NoImg;
   let imgHeight = (preview && preview.height) || 300;
@@ -35,6 +35,7 @@ function FullscreenPicture() {
         className="fullscreen-picture__img"
       />
       <MobilePictureNavTop
+        path={'/'}
         place={selectedPlace}
         handleReturnClick={handleReturnClick}
       />

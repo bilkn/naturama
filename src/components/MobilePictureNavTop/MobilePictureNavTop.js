@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './MobilePictureNavTop.scss';
-function MobilePictureNavTop({ place, handleReturnClick }) {
+function MobilePictureNavTop(props) {
+  const { path, place, handleReturnClick } = props;
   return (
     <div className="mobile-picture-nav-top">
       <Link
         className="mobile-picture-nav-top__link"
-        to="/"
+        to={path}
         onClick={handleReturnClick}
       >
         <i className="fa fa-arrow-left" aria-hidden="true"></i>

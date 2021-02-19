@@ -5,13 +5,23 @@ import './PictureToolbar.scss';
 function PictureToolbar(props) {
   const { place, setShowShareLinks, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
+
   const handleShareClick = () => {
     setShowDarkBackground(true);
     setShowShareLinks(true);
   };
 
+  const isPersonInFav = () => {
+
+    const result = userState.favourites.some(
+      (favPlace) => favPlace.xid === place.xid
+    );
+    return result;
+  }
+   
+
   const handleFavClick = async () => {
-    if (!(userState.favourites.some((favPlace) => favPlace.xid === place.xid))) {
+    if (!isPersonInFav()) {
       const newPlaces = [...userState.favourites, place];
       try {
         await db.favourites.add(place, place.xid);
@@ -22,6 +32,7 @@ function PictureToolbar(props) {
       }
     }
   };
+
   return (
     <nav className="picture-toolbar">
       <ul className="picture-toolbar-list">
@@ -38,7 +49,11 @@ function PictureToolbar(props) {
             className="picture-toolbar-list__btn"
             onClick={handleFavClick}
           >
-            <i className="fas fa-star picture-toolbar-list__icon"></i>
+            {isPersonInFav() ? (
+              <i className="fas fa-star picture-toolbar-list__icon"></i>
+            ) : (
+              <i className="far fa-star picture-toolbar-list__icon"></i>
+            )}
           </button>
         </li>
         <li className="picture-toolbar-list__item">
