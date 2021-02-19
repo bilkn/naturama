@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import createFileURL from '../../helpers/createFileURL';
 import './PictureInput.scss';
 import Avatar from '../Avatar/Avatar';
+import validatePicture from '../../helpers/validatePicture';
 function PictureInput({ picture, setPicture, userState }) {
   useEffect(() => {
     const { picture } = userState.profile;
@@ -10,12 +11,16 @@ function PictureInput({ picture, setPicture, userState }) {
   // !!! Add picture validation.
   const handleChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+
+    if (file && validatePicture(file)) {
       const pictureObj = {
         file,
         url: createFileURL(file),
       };
       setPicture(pictureObj);
+    } else {
+      console.log('please provide jpeg or png');
+      // Add notify.
     }
   };
 
