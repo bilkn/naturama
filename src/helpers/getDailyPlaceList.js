@@ -5,7 +5,7 @@ import filterPlacesByPreferences from './filterPlacesByPreferences';
 import getPlaceByXID from './getPlaceByXID';
 
 async function getDailyPlaceList(user, placeCount = 5) {
-  const userData = user ? user : await createUser();
+  const userData = user || (await createUser());
   const places = await fetchData(userData);
   const filteredPlaces = filterPlacesByUserHistory(
     userData,
@@ -15,10 +15,10 @@ async function getDailyPlaceList(user, placeCount = 5) {
   return Promise.all(
     filteredPlaces.slice(0, placeCount).map(async (place) => {
       const placeData = await getPlaceByXID(place.properties.xid);
-      const distance = Math.round(place.properties.dist/1000).toFixed();
+      const distance = Math.round(place.properties.dist / 1000).toFixed();
       return {
         ...placeData,
-        distance: distance,
+        distance,
       };
     })
   ).then((places) =>

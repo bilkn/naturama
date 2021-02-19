@@ -4,7 +4,7 @@ function NameInput(props) {
   const { username, setUsername, userState } = props;
 
   useEffect(() => {
-    const username = userState.profile.username;
+    const {profile:{username} }= userState;
     if (username) setUsername(username);
   }, []);
   

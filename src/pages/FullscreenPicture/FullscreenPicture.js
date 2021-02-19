@@ -13,18 +13,14 @@ function FullscreenPicture() {
     DarkBackgroundContext
   );
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const place = selectedPlace; // !!! Can be changed.
-  // !!! Refactor this code.
-  let placeImg = NoImg;
-  let imgHeight = 300;
-  let imgWidth = 300;
-  let placeName = null;
-  if (place) {
-    placeImg = place.preview ? place.preview.source : NoImg;
-    imgHeight = place.preview ? place.preview.height : 300;
-    imgWidth = place.preview ? place.preview.width : 300;
-    placeName = place.name;
-  }
+  const place = selectedPlace;
+
+  const { preview } = place;
+  let placeImg = (preview && preview.source) || NoImg;
+  let imgHeight = (preview && preview.height) || 300;
+  let imgWidth = (preview && preview.source) || 300;
+  let placeName = place.name || '';
+
   const handleReturnClick = () => {
     setSelectedPlace(() => null);
   };

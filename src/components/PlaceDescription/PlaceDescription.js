@@ -1,13 +1,10 @@
 import React from 'react';
 import './PlaceDescription.scss';
 function PlaceDescription({ place }) {
-  let placeText = null;
-  if (place && place.content.text) {
-    placeText = place.content.text;
-  }
+  const placeText = (place && place.content.text) || '';
   return (
     <div className="place-description">
-      <p className="place-description__text">{placeText || ''}</p>
+      <p className="place-description__text">{placeText}</p>
     </div>
   );
 }

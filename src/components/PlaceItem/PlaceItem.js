@@ -4,7 +4,7 @@ import './PlaceItem.scss';
 function PlaceItem(props) {
   const { place, setSelectedPlace, children } = props;
   return (
-    <li className="place-item" onClick={()=>setSelectedPlace(place)}>
+    <li className="place-item" onClick={() => setSelectedPlace(place)}>
       <img
         className="place-item__img"
         src={place.img ? createFileURL(place.img) : '../../assets/no-image.png'}

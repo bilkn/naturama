@@ -21,7 +21,7 @@ function EditProfile(props) {
     if (newUser) {
       try {
         if (picture) addPictureToDB();
-        await db.profile.update(1, { username: username });
+        await db.profile.update(1, { username });
         dispatch({ type: 'EDIT_USER', payload: newUser });
       } catch (err) {
         console.log(err);

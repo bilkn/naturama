@@ -8,6 +8,7 @@ import { getRandomPlace } from '../../helpers/getRandomPlace';
 import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import ErrorContext from '../../context/ErrorContext';
+import Loader from '../../components/Loader/Loader';
 function Home() {
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState] = useContext(UserContext);
@@ -27,7 +28,7 @@ function Home() {
         setRandomPlace(userPlace);
       } catch (err) {
         console.log(err);
-        // !!! addModal
+        // !!! addModal or Error component.
       }
     }
   }, [userState]);
@@ -37,7 +38,7 @@ function Home() {
       {randomPlace ? (
         <Place place={randomPlace} handleClick={handleClick} />
       ) : (
-        <h2>No location found.</h2>
+        <Loader />
       )}
       <MobileNav />
     </div>

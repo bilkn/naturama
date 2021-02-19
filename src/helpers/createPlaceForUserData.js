@@ -4,10 +4,12 @@ async function createPlaceForUserData(place) {
   const img = place.preview
     ? await getImgArrayBuffer(place.preview.source)
     : null;
-  const placeText = place.wikipedia_extracts.text;
+  const { wikipedia_extracts: wiki } = place;
+  const placeText = (wiki && wiki.text) || '';
+
   const preview = {
     source: img ? place.preview.source : '',
-    height: img ? place.preview.height : null,
+    height: img ? place.preview.height : null, 
     width: img ? place.preview.width : null,
   };
   const userPlace = {
@@ -22,7 +24,7 @@ async function createPlaceForUserData(place) {
     preview: {
       ...preview,
     },
-    img: img,
+    img,
   };
   return userPlace;
 }

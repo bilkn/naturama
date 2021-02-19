@@ -3,17 +3,16 @@ import createFileURL from '../../helpers/createFileURL';
 import './PictureInput.scss';
 import Avatar from '../Avatar/Avatar';
 function PictureInput({ picture, setPicture, userState }) {
-
   useEffect(() => {
-    const picture = userState.profile.picture;
+    const { picture } = userState.profile;
     if (picture) setPicture(picture);
   }, []);
-
+  // !!! Add picture validation.
   const handleChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const pictureObj = {
-        file: file,
+        file,
         url: createFileURL(file),
       };
       setPicture(pictureObj);
