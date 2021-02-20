@@ -17,7 +17,6 @@ function PictureToolbar(props) {
 
   const handleFavClick = async () => {
     const favResult = isPlaceInFav();
-    console.log(place);
     const newPlaces = favResult
       ? [
           ...userState.favourites.filter(
@@ -37,7 +36,6 @@ function PictureToolbar(props) {
       console.log(err);
       //
     }
-    console.log(newPlaces);
   };
 
   return (

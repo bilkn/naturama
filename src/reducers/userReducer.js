@@ -34,6 +34,12 @@ function userReducer(state, action) {
         isNotificationOpen: true,
       };
     }
+    case 'ADD_HISTORY': {
+      return {
+        ...state,
+        history: action.payload,
+      };
+    }
 
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

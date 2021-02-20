@@ -16,8 +16,8 @@ async function initUserWithDB(dispatch) {
   const profileItems = await db.table('profile').toArray();
   const favouritesItems = await db.table('favourites').toArray();
   const dailyListItems = await db.table('dailyList').toArray();
-  const historyItems = await db.table('history').toArray();
-
+  let historyItems = await db.table('history').toArray();
+  historyItems = historyItems.map(({ xid }) => xid);
   const [{ username }, { picture }, { preferences }] = profileItems;
   let pictureBlob = picture && arrayBufferToBlob(picture);
   const dbData = {

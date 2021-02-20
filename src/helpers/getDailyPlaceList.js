@@ -7,10 +7,7 @@ import getPlaceByXID from './getPlaceByXID';
 async function getDailyPlaceList(user, placeCount = 5) {
   const userData = user || (await createUser());
   const places = await fetchData(userData);
-  const filteredPlaces = filterPlacesByUserHistory(
-    userData,
-    filterPlacesByPreferences(places)
-  );
+  const filteredPlaces = filterPlacesByPreferences(userData, places);
 
   return Promise.all(
     filteredPlaces.slice(0, placeCount).map(async (place) => {
@@ -28,8 +25,6 @@ async function getDailyPlaceList(user, placeCount = 5) {
   );
 }
 
-function filterPlacesByUserHistory(user, places) {
-  return places.filter((place) => !user.history.includes(place.xid));
-}
+
 
 export default getDailyPlaceList;
