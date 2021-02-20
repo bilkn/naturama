@@ -11,7 +11,6 @@ function PictureInput({ picture, setPicture, userState }) {
   // !!! Add picture validation.
   const handleChange = (e) => {
     const file = e.target.files[0];
-
     if (file && validatePicture(file)) {
       const pictureObj = {
         file,

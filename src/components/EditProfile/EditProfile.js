@@ -20,7 +20,7 @@ function EditProfile(props) {
     const newUser = createNewUser();
     if (newUser) {
       try {
-        if (picture) addPictureToDB();
+        if (picture.file) addPictureToDB();
         await db.profile.update(1, { username });
         dispatch({ type: 'EDIT_USER', payload: newUser });
       } catch (err) {
