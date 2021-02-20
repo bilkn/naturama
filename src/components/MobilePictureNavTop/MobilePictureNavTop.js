@@ -1,17 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import ReturnControl from '../ReturnControl/ReturnControl';
 import './MobilePictureNavTop.scss';
 function MobilePictureNavTop(props) {
   const { path, place, handleReturnClick } = props;
   return (
     <div className="mobile-picture-nav-top">
-      <Link
-        className="mobile-picture-nav-top__link"
-        to={path}
-        onClick={handleReturnClick}
-      >
-        <i className="fa fa-arrow-left" aria-hidden="true"></i>
-      </Link>
+     <ReturnControl path={path} handleReturnClick={handleReturnClick}/>
       <p className="mobile-picture-nav-top__name">
         {(place && place.content.name) || ''}
       </p>

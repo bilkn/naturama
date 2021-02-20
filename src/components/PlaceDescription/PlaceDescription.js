@@ -1,7 +1,7 @@
 import React from 'react';
 import './PlaceDescription.scss';
 function PlaceDescription({ place }) {
-  const placeText = (place && place.content.text) || '';
+  const placeText = (place && place.content.text) || "No description.";
   return (
     <div className="place-description">
       <p className="place-description__text">{placeText}</p>
