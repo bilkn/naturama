@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import "./ReturnControl.scss";
-function ReturnControl({path, handleReturnClick}) {
+import "./ReturnLink.scss";
+function ReturnLink({path, handleReturnClick}) {
     return (
       <Link
-        className="return-control"
+        className="return-link"
         to={path}
         onClick={handleReturnClick}
       >
@@ -13,4 +13,4 @@ function ReturnControl({path, handleReturnClick}) {
     );
 }
 
-export default ReturnControl
+export default ReturnLink

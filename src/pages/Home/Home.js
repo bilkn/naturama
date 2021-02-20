@@ -10,6 +10,8 @@ import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import ErrorContext from '../../context/ErrorContext';
 import Loader from '../../components/Loader/Loader';
 import db from '../../helpers/dexie';
+import AppHead from '../../components/AppHead/AppHead';
+import Logo from '../../components/Logo/Logo';
 function Home() {
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
@@ -38,14 +40,19 @@ function Home() {
   }, [userState]);
 
   return (
-    <div className="home">
-      {randomPlace ? (
-        <Place place={randomPlace} handleClick={handleClick} />
-      ) : (
-        <Loader />
-      )}
-      <MobileNav />
-    </div>
+    <>
+      <AppHead>
+        <Logo />
+      </AppHead>
+      <div className="home">
+        {randomPlace ? (
+          <Place place={randomPlace} handleClick={handleClick} />
+        ) : (
+          <Loader />
+        )}
+        <MobileNav />
+      </div>
+    </>
   );
 }
 

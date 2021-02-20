@@ -4,9 +4,10 @@ import PlaceDescription from '../PlaceDescription/PlaceDescription';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
 import './Place.scss';
-function Place({ place, handleClick }) {
+function Place({ place, handleClick, children }) {
   return (
     <div className="place" onClick={handleClick}>
+      {children}
       <PlaceContent>
         <PlaceThumbnail
           place={place}
