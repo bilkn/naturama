@@ -1,0 +1,12 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
+.mobile-nav-top {
+  @include AppHeadFixed($mobile-nav-height, $mobile-picture-nav-index);
+  align-items: center;
+  background: $sec-color;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+
+}

@@ -26,6 +26,21 @@ function userReducer(state, action) {
       };
     }
 
+    case 'REMOVE_PLACE': {
+      return {
+        ...state,
+        favourites: action.payload,
+        notification: 'Place has been removed from your favourites.',
+        isNotificationOpen: true,
+      };
+    }
+    case 'ADD_HISTORY': {
+      return {
+        ...state,
+        history: action.payload,
+      };
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

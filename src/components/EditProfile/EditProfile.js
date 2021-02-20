@@ -20,8 +20,8 @@ function EditProfile(props) {
     const newUser = createNewUser();
     if (newUser) {
       try {
-        if (picture) addPictureToDB();
-        await db.profile.update(1, { username: username });
+        if (picture.file) addPictureToDB();
+        await db.profile.update(1, { username });
         dispatch({ type: 'EDIT_USER', payload: newUser });
       } catch (err) {
         console.log(err);
@@ -45,11 +45,20 @@ function EditProfile(props) {
 
   return (
     <div className="edit-profile">
-      <PictureInput picture={picture} setPicture={setPicture} />
+  
+      <PictureInput
+        picture={picture}
+        setPicture={setPicture}
+        userState={userState}
+      />
       <div className="edit-profile-name-container">
-        <NameInput username={username} setUsername={setUsername} />
+        <NameInput
+          username={username}
+          setUsername={setUsername}
+          userState={userState}
+        />
         <IconButton
-          btnClass="icon-button"
+          btnClass="edit-profile-name-container__btn"
           iconClass="fas fa-check-circle"
           handleBtnClick={handleBtnClick}
         />

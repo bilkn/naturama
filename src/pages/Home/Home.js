@@ -8,9 +8,13 @@ import { getRandomPlace } from '../../helpers/getRandomPlace';
 import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import ErrorContext from '../../context/ErrorContext';
+import Loader from '../../components/Loader/Loader';
+import db from '../../helpers/dexie';
+import AppHead from '../../components/AppHead/AppHead';
+import Logo from '../../components/Logo/Logo';
 function Home() {
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
-  const [userState] = useContext(UserContext);
+  const [userState, dispatch] = useContext(UserContext);
   const [, setTitle] = useContext(TitleContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
@@ -24,23 +28,31 @@ function Home() {
       try {
         const place = await getRandomPlace(userState);
         const userPlace = await createPlaceForUserData(place);
+        const newHistory = [...userState.history, userPlace.xid];
         setRandomPlace(userPlace);
+        dispatch({ type: 'ADD_HISTORY', payload: newHistory });
+        db.history.put({ xid: userPlace.xid });
       } catch (err) {
         console.log(err);
-        // !!! addModal
+        // !!! addModal or Error component.
       }
     }
   }, [userState]);
 
   return (
-    <div className="home">
-      {randomPlace ? (
-        <Place place={randomPlace} handleClick={handleClick} />
-      ) : (
-        <h2>No location found.</h2>
-      )}
-      <MobileNav />
-    </div>
+    <>
+      <AppHead>
+        <Logo />
+      </AppHead>
+      <div className="home">
+        {randomPlace ? (
+          <Place place={randomPlace} handleClick={handleClick} />
+        ) : (
+          <Loader />
+        )}
+        <MobileNav />
+      </div>
+    </>
   );
 }
 

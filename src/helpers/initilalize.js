@@ -16,20 +16,18 @@ async function initUserWithDB(dispatch) {
   const profileItems = await db.table('profile').toArray();
   const favouritesItems = await db.table('favourites').toArray();
   const dailyListItems = await db.table('dailyList').toArray();
-  const historyItems = await db.table('history').toArray();
-  const [username, picture, preferences] = profileItems;
-  let pictureBlob = null;
-  if (picture.picture) {
-    pictureBlob = arrayBufferToBlob(picture.picture);
-  }
+  let historyItems = await db.table('history').toArray();
+  historyItems = historyItems.map(({ xid }) => xid);
+  const [{ username }, { picture }, { preferences }] = profileItems;
+  let pictureBlob = picture && arrayBufferToBlob(picture);
   const dbData = {
     profile: {
-      username: username.username,
+      username,
       picture: {
         file: pictureBlob || null,
         url: pictureBlob ? createFileURL(pictureBlob) : null,
       },
-      preferences: preferences.preferences,
+      preferences,
     },
     favourites: favouritesItems,
     dailyList: dailyListItems,
@@ -47,7 +45,6 @@ async function initializeDB(errorState) {
   const location = await getUserLocation();
   let dailyPlaceList = [];
   if (location) {
-    console.log(error);
     dailyPlaceList = await getDailyPlaceList();
   } else {
     const newError = { ...error, isGeoActive: false };

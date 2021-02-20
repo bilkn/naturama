@@ -31,7 +31,6 @@ function App() {
               <UserProvider>
                 <SelectedPlaceProvider>
                   <PlaceProvider>
-                    <AppHead />
                     <Router>
                       <Route exact path="/" component={Home}></Route>
                       <Route

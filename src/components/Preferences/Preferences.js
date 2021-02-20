@@ -20,9 +20,9 @@ function Preferences() {
 
   useEffect(() => {
     if (userState) {
-      const preferences = userState.profile.preferences;
-      const lat = preferences.location.lat;
-      const lon = preferences.location.lon;
+      const {profile: {preferences}} = userState;
+      const {location: {lat}} = preferences;
+      const {location: {lon}} = preferences;
       setLatValue(lat);
       setLonValue(lon);
     }
@@ -30,8 +30,8 @@ function Preferences() {
 
   useEffect(() => {
     if (userState) {
-      const preferences = userState.profile.preferences;
-      const radius = preferences.radius;
+      const {profile: {preferences}} = userState;
+      const {radius} = preferences;
       setRadiusValue(radius);
     }
   }, [userState]);
@@ -40,11 +40,11 @@ function Preferences() {
     // Saves the configured preferences to the state and database, after closing the preferences.
     if (!document.querySelector('.preferences')) {
       if (userState) {
-        const profile = userState.profile;
-        const preferences = profile.preferences;
-        const lat = preferences.location.lat;
-        const lon = preferences.location.lon;
-        const radius = preferences.radius;
+        const {profile} = userState;
+        const {preferences} = profile;
+        const {location: {lat}}= preferences;
+        const {location: {lon}} = preferences;
+        const {radius} = preferences;
         const newPreferences = {
           radius: radiusValue || radius,
           location: {

@@ -1,10 +1,7 @@
 import React from 'react';
 import './PlaceDetails.scss';
 function PlaceDetails({ place }) {
-  let location = null;
-  if (place) {
-    location = place.content.location;
-  }
+  const location = place ? place.content.location : null;
 
   return (
     <div className="place-details">
@@ -14,7 +11,9 @@ function PlaceDetails({ place }) {
           {location || 'Unknown'}
         </p>
       </div>
-      <p className="place-details__distance">Distance: {place && place.content.distance} km</p>
+      <p className="place-details__distance">
+        Distance: {place && place.content.distance} km
+      </p>
     </div>
   );
 }

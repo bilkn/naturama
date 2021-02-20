@@ -10,10 +10,16 @@
   flex-direction: column;
   justify-content: center;
   padding: 1rem 2rem;
-  z-index: 1000000000000;
-  // .edit-profile-name-container
-  &__name-container {
-    position: relative;
-    width: 60%;
+  z-index: $edit-profile-index;
+}
+
+.edit-profile-name-container {
+  position: relative;
+  width: 70%;
+  // edit-profile-name-container__btn
+  &__btn {
+    position: absolute;
+    right: -50px;
+    top: 0;
   }
 }

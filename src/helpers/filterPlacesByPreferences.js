@@ -1,5 +1,7 @@
-function filterPlacesByPreferences(places) {
-  return places.filter((place) => place.properties.wikidata);
+function filterPlacesByPreferences(user, places) {
+  return places.filter(
+    (place) =>
+      place.properties.wikidata && !user.history.includes(place.properties.xid)
+  );
 }
-// !!! This function can be changed. 
 export default filterPlacesByPreferences;

@@ -8,6 +8,10 @@ import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import PlaceList from '../../components/PlaceList/PlaceList';
 import Notification from '../../components/Notification/Notification';
 import { Redirect } from 'react-router-dom';
+import IconButton from '../../components/IconButton/IconButton';
+import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
+import AppHead from '../../components/AppHead/AppHead';
+import PageName from '../../components/PageName/PageName';
 function Favourites() {
   const [, setTitle] = useContext(TitleContext);
   const [userState] = useContext(UserContext);
@@ -16,14 +20,31 @@ function Favourites() {
   useEffect(() => {
     setTitle('Favourites');
   }, []);
+  const handleBtnClick = () => setSelectedPlace(null);
 
   if (!userState) {
     return <Redirect to="/" />;
   }
+
   return (
     <div className="favourites">
-      {(selectedPlace && <Place place={selectedPlace} />) || (
-        <PlaceList userState={userState} setSelectedPlace={setSelectedPlace} />
+      <AppHead>
+        <PageName pageName="Favourites" />
+      </AppHead>
+      {(selectedPlace && (
+        <Place place={selectedPlace}>
+          <MobileNavTop>
+            <IconButton
+              iconClass="fa fa-arrow-left"
+              handleBtnClick={handleBtnClick}
+            />
+          </MobileNavTop>
+        </Place>
+      )) || (
+        <PlaceList
+          list={userState.favourites}
+          setSelectedPlace={setSelectedPlace}
+        />
       )}
       <MobileNav />
       {userState.isNotificationOpen && <Notification />}

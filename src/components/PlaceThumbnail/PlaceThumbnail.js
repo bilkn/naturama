@@ -4,18 +4,13 @@ import NoImg from '../../assets/no-image.png';
 import { Link } from 'react-router-dom';
 
 function PlaceThumbnail(props) {
-  // !!! This component may be reformatted in the future.
   const { classNames, icon, children, place } = props;
-  let placeImg = NoImg;
-  let imgHeight = 300;
-  let imgWidth = 300;
-  let placeName = null;
-  if (place) {
-    placeImg = place.preview.source || NoImg;
-    imgHeight = place.preview.height || 300;
-    imgWidth = place.preview.width || 300;
-    placeName = place.content.name;
-  }
+  const preview = place && place.preview;
+  const placeImg = (preview && preview.source) || NoImg;
+  const imgHeight = (preview && preview.height) || 300;
+  const imgWidth = (preview && preview.width) || 300;
+  const placeName = place.content.name;
+
   return (
     <div className={classNames.join(' ')}>
       <Link to="/fullscreen-picture" className={classNames.join(' ')}>

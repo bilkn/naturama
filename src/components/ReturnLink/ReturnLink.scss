@@ -1,5 +1,7 @@
+@import '../../styles/mixins';
 @import '../../styles/variables';
-.icon-button {
+
+.return-link {
   color: $icon-color;
   font-size: $common-icon-font-size;
 }

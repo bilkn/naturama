@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import createFileURL from '../../helpers/createFileURL';
 import './PictureInput.scss';
 import Avatar from '../Avatar/Avatar';
-function PictureInput({ picture, setPicture }) {
+import validatePicture from '../../helpers/validatePicture';
+function PictureInput({ picture, setPicture, userState }) {
+  useEffect(() => {
+    const { picture } = userState.profile;
+    if (picture) setPicture(picture);
+  }, []);
+  // !!! Add picture validation.
   const handleChange = (e) => {
     const file = e.target.files[0];
-    if (file) {
+    if (file && validatePicture(file)) {
       const pictureObj = {
-        file: file,
+        file,
         url: createFileURL(file),
       };
       setPicture(pictureObj);
+    } else {
+      console.log('please provide jpeg or png');
+      // Add notify.
     }
   };
 

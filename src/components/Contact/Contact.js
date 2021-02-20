@@ -28,7 +28,10 @@ function Contact() {
           </a>
         </li>
         <li className="contact-list__item">
-          <a href="#" className="contact-list__link">
+          <a
+            href="mailto:bilkan.konus@hotmail.com"
+            className="contact-list__link"
+          >
             <i className="fas fa-at contact-list__icon"></i>
           </a>
         </li>
