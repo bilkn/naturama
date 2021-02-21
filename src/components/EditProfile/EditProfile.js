@@ -13,7 +13,6 @@ function EditProfile(props) {
   const [username, setUsername] = useState('');
   const [picture, setPicture] = useState(null);
 
-  /* userState.profile.picture.url */
   const handleBtnClick = async () => {
     setShowDarkBackground(false);
     setShowEdit(false);
@@ -60,7 +59,7 @@ function EditProfile(props) {
         <IconButton
           btnClass="edit-profile-name-container__btn"
           iconClass="fas fa-check-circle"
-          handleBtnClick={handleBtnClick}
+          onClick={handleBtnClick}
         />
       </div>
     </div>

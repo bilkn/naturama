@@ -7,6 +7,7 @@ import { getRandomPlace } from '../../helpers/getRandomPlace';
 import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import db from '../../helpers/dexie';
+import IconButton from '../IconButton/IconButton';
 function MobileNav() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
@@ -15,6 +16,7 @@ function MobileNav() {
 
   const handleShuffleClick = async () => {
     if (canUserRequest) {
+      setRandomPlace(null);
       setCanUserRequest(() => false);
       const timeout = setTimeout(() => {
         setCanUserRequest(() => true);
@@ -45,31 +47,33 @@ function MobileNav() {
       <ul className="mobile-nav-list">
         <li className="mobile-nav-list-item">
           <Link to="/">
-            <button className="mobile-nav-list-item__btn">
-              <i className="fas fa-home mobile-nav-list-item__icon"></i>
-            </button>
+            <IconButton
+              btnClass="mobile-nav-list-item__btn"
+              iconClass="fas fa-home mobile-nav-list-item__icon"
+            />
           </Link>
         </li>
         <li className="mobile-nav-list-item">
           <Link to="/favourites">
-            <button className="mobile-nav-list-item__btn">
-              <i className="fas fa-star mobile-nav-list-item__icon"></i>
-            </button>
+            <IconButton
+              btnClass="mobile-nav-list-item__btn"
+              iconClass="fas fa-star mobile-nav-list-item__icon"
+            />
           </Link>
         </li>
         <li className="mobile-nav-list-item mobile-nav-list-item--shuffle-item">
-          <button
-            className="mobile-nav-list-item__btn"
-            onClick={handleShuffleClick}
-          >
-            <i className="fas fa-random mobile-nav-list-item__icon"></i>
-          </button>
+          <IconButton
+            btnClass="mobile-nav-list-item__btn"
+            iconClass="fas fa-random  mobile-nav-list-item__icon"
+            handleBtnClick={handleShuffleClick}
+          />
         </li>
         <li className="mobile-nav-list-item ">
           <Link to="/profile">
-            <button className="mobile-nav-list-item__btn">
-              <i className="fas fa-user mobile-nav-list-item__icon"></i>
-            </button>
+            <IconButton
+              btnClass="mobile-nav-list-item__btn"
+              iconClass="fas fa-user  mobile-nav-list-item__icon"
+            />
           </Link>
         </li>
         <li className="mobile-nav-list-item ">

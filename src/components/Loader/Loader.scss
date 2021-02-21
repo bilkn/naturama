@@ -1,5 +1,11 @@
-
-
+@import '../../styles/variables';
+.loader {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: $mobile-page-padding;
+}
 
 .lds-facebook {
   display: inline-block;

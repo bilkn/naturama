@@ -7,6 +7,9 @@ import MobileNav from '../MobileNav/MobileNav';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
 import db from '../../helpers/dexie';
+import MobileNavTop from '../MobileNavTop/MobileNavTop';
+import EmptyDiv from '../EmptyDiv/EmptyDiv';
+import ReturnLink from '../ReturnLink/ReturnLink';
 function Preferences() {
   const [, setTitle] = useContext(TitleContext);
   const [userState, dispatch] = useContext(UserContext);
@@ -20,9 +23,15 @@ function Preferences() {
 
   useEffect(() => {
     if (userState) {
-      const {profile: {preferences}} = userState;
-      const {location: {lat}} = preferences;
-      const {location: {lon}} = preferences;
+      const {
+        profile: { preferences },
+      } = userState;
+      const {
+        location: { lat },
+      } = preferences;
+      const {
+        location: { lon },
+      } = preferences;
       setLatValue(lat);
       setLonValue(lon);
     }
@@ -30,21 +39,26 @@ function Preferences() {
 
   useEffect(() => {
     if (userState) {
-      const {profile: {preferences}} = userState;
-      const {radius} = preferences;
+      const {
+        profile: { preferences },
+      } = userState;
+      const { radius } = preferences;
       setRadiusValue(radius);
     }
   }, [userState]);
   const handleWindowClick = async () => {
-  
     // Saves the configured preferences to the state and database, after closing the preferences.
     if (!document.querySelector('.preferences')) {
       if (userState) {
-        const {profile} = userState;
-        const {preferences} = profile;
-        const {location: {lat}}= preferences;
-        const {location: {lon}} = preferences;
-        const {radius} = preferences;
+        const { profile } = userState;
+        const { preferences } = profile;
+        const {
+          location: { lat },
+        } = preferences;
+        const {
+          location: { lon },
+        } = preferences;
+        const { radius } = preferences;
         const newPreferences = {
           radius: radiusValue || radius,
           location: {
@@ -73,6 +87,11 @@ function Preferences() {
 
   return (
     <div className="preferences">
+      <MobileNavTop>
+        <ReturnLink path="/profile"/>
+        <h2 className="preferences__header">Preferences</h2>
+        <EmptyDiv />
+      </MobileNavTop>
       <ul className="preferences__map-options-list">
         <SearchRadiusItem
           radiusValue={radiusValue}

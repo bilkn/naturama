@@ -7,23 +7,27 @@ import ShareLinkList from '../../components/ShareLinkList/ShareLinkList';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import DarkBackground from '../../components/DarkBackground/DarkBackground';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
-import ReturnLink from '../../components/ReturnLink/ReturnLink';
 import EmptyDiv from '../../components/EmptyDiv/EmptyDiv';
-function FullscreenPicture() {
+import IconButton from '../../components/IconButton/IconButton';
+import { Redirect } from 'react-router';
+function FullscreenPicture({ history }) {
   const [showShareLink, setShowShareLinks] = useState(false);
   const [showDarkBackground, setShowDarkBackground] = useContext(
     DarkBackgroundContext
   );
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const place = selectedPlace;
-
+  if (!place) {
+    return <Redirect to="/" />;
+  }
   const { preview } = place;
   let placeImg = (preview && preview.source) || NoImg;
   let imgHeight = (preview && preview.height) || 300;
   let imgWidth = (preview && preview.source) || 300;
   let placeName = place.name || '';
 
-  const handleReturnClick = () => {
+  const handleBtnClick = () => {
+    history.goBack();
     setSelectedPlace(() => null);
   };
 
@@ -37,7 +41,10 @@ function FullscreenPicture() {
         className="fullscreen-picture__img"
       />
       <MobileNavTop>
-        <ReturnLink path="/" handleReturnClick={handleReturnClick} />
+        <IconButton
+          iconClass="fa fa-arrow-left"
+          handleBtnClick={handleBtnClick}
+        />
         <p className="fullscreen-picture_name">{place && place.content.name}</p>
         <EmptyDiv />
       </MobileNavTop>
