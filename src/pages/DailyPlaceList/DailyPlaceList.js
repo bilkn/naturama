@@ -42,7 +42,6 @@ function DailyPlaceList() {
           setSelectedPlace={setSelectedPlace}
         />
       )}
-      <MobileNav />
     </div>
   );
 }

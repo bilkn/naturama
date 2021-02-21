@@ -1,35 +1,40 @@
 import React, { useContext, useState } from 'react';
 import './MobileNav.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
 import { getRandomPlace } from '../../helpers/getRandomPlace';
 import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import db from '../../helpers/dexie';
+import IconButton from '../IconButton/IconButton';
+import ErrorContext from '../../context/ErrorContext';
 function MobileNav() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [canUserRequest, setCanUserRequest] = useState(true);
-
+  const [error, setError] = useContext(ErrorContext);
+  const location = useLocation();
   const handleShuffleClick = async () => {
-    if (canUserRequest) {
+    if (canUserRequest && error.isGeoActive) {
+      setRandomPlace(() => null);
       setCanUserRequest(() => false);
       const timeout = setTimeout(() => {
         setCanUserRequest(() => true);
         clearTimeout(timeout);
       }, 2000);
       try {
-        const place = await getRandomPlace(userState);
+        const place = await getRandomPlace(userState); // !!! Add stop system for fetching after unmount.
         const userPlace = await createPlaceForUserData(place);
         const newHistory = [...userState.history, userPlace.xid];
+        // If place is found, noPlace error will be false.
+        if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
         setRandomPlace(userPlace);
         dispatch({ type: 'ADD_HISTORY', payload: newHistory });
         db.history.put({ xid: userPlace.xid });
       } catch (err) {
-        console.log(err);
-        // !!! Add modal
+        setError({ ...error, isPlaceFound: false });
       }
     } else {
       console.log('You can fetch after 2 sec.');
@@ -37,44 +42,53 @@ function MobileNav() {
     }
   };
 
-  const handleNavClick = () => {
+  const handleNavClick = (e) => {
+    const nav = e.target.closest('nav');
+    const clickedItem = e.target.closest('li');
+    const listArray = Array.from(nav.querySelectorAll('li'));
+    listArray.forEach((li) => {
+      if (li.classList.contains('active-tab'))
+        li.classList.remove('active-tab');
+    });
+    clickedItem.classList.add('active-tab');
     setSelectedPlace(null);
   };
   return (
-    <nav className="mobile-nav" onClick={handleNavClick}>
+    <nav
+      className="mobile-nav"
+      onClick={handleNavClick}
+      style={{
+        visibility:
+          location.pathname === '/fullscreen-picture' ? 'hidden' : 'visible',
+      }}
+    >
       <ul className="mobile-nav-list">
         <li className="mobile-nav-list-item">
-          <Link to="/">
-            <button className="mobile-nav-list-item__btn">
-              <i className="fas fa-home mobile-nav-list-item__icon"></i>
-            </button>
+          <Link to="/" className="mobile-nav-list-item__link">
+            <i className="fas fa-home mobile-nav-list-item__icon" />
           </Link>
         </li>
         <li className="mobile-nav-list-item">
-          <Link to="/favourites">
-            <button className="mobile-nav-list-item__btn">
-              <i className="fas fa-star mobile-nav-list-item__icon"></i>
-            </button>
+          <Link to="/favourites" className="mobile-nav-list-item__link">
+            <i className="fas fa-star mobile-nav-list-item__icon" />
           </Link>
         </li>
         <li className="mobile-nav-list-item mobile-nav-list-item--shuffle-item">
-          <button
-            className="mobile-nav-list-item__btn"
-            onClick={handleShuffleClick}
-          >
-            <i className="fas fa-random mobile-nav-list-item__icon"></i>
-          </button>
+          <IconButton
+            btnClass="mobile-nav-list-item__btn"
+            iconClass="fas fa-random  mobile-nav-list-item__icon"
+            handleBtnClick={handleShuffleClick}
+          />
         </li>
         <li className="mobile-nav-list-item ">
-          <Link to="/profile">
-            <button className="mobile-nav-list-item__btn">
-              <i className="fas fa-user mobile-nav-list-item__icon"></i>
-            </button>
+          <Link to="/profile" className="mobile-nav-list-item__link">
+            <i className="fas fa-user mobile-nav-list-item__icon" />
           </Link>
         </li>
         <li className="mobile-nav-list-item ">
-          <Link to="/daily-place-list">
-            <button className="mobile-nav-list-item__btn">
+          <Link to="/daily-place-list" className="mobile-nav-list-item__link">
+            <i className="fas fa-list-alt mobile-nav-list-item__icon">
+              {' '}
               {userState ? (
                 userState.dailyList.length ? (
                   <span className="mobile-nav-list-item__counter">
@@ -86,8 +100,7 @@ function MobileNav() {
               ) : (
                 ''
               )}
-              <i className="fas fa-list-alt mobile-nav-list-item__icon"></i>
-            </button>
+            </i>
           </Link>
         </li>
       </ul>

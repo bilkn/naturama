@@ -13,7 +13,6 @@ function EditProfile(props) {
   const [username, setUsername] = useState('');
   const [picture, setPicture] = useState(null);
 
-  /* userState.profile.picture.url */
   const handleBtnClick = async () => {
     setShowDarkBackground(false);
     setShowEdit(false);
@@ -45,7 +44,6 @@ function EditProfile(props) {
 
   return (
     <div className="edit-profile">
-  
       <PictureInput
         picture={picture}
         setPicture={setPicture}

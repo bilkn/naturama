@@ -9,4 +9,9 @@
     display: flex;
     flex-direction: column;
   }
+  // preferences__header
+  &__header {
+    color: $icon-color;
+    font-size: 1.4rem;
+  }
 }

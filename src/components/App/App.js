@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime.js';
 import 'normalize.css';
 import React, { useEffect } from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import AppHead from '../AppHead/AppHead';
 import DailyPlaceList from '../../pages/DailyPlaceList/DailyPlaceList';
 import Favourites from '../../pages/Favourites/Favourites';
@@ -17,6 +17,7 @@ import DBProvider from '../../providers/DBProvider/DBProvider';
 import ErrorProvider from '../../providers/ErrorProvider/ErrorProvider';
 import Preferences from '../Preferences/Preferences';
 import db from '../../helpers/dexie';
+import MobileNav from '../MobileNav/MobileNav';
 
 function App() {
   useEffect(() => {
@@ -32,28 +33,31 @@ function App() {
                 <SelectedPlaceProvider>
                   <PlaceProvider>
                     <Router>
-                      <Route exact path="/" component={Home}></Route>
-                      <Route
-                        exact
-                        path="/favourites"
-                        component={Favourites}
-                      ></Route>
-                      <Route exact path="/profile" component={Profile}></Route>
-                      <Route
-                        exact
-                        path="/daily-place-list"
-                        component={DailyPlaceList}
-                      ></Route>
-                      <Route
-                        exact
-                        path="/fullscreen-picture"
-                        component={FullscreenPicture}
-                      ></Route>
-                      <Route
-                        exact
-                        path="/preferences"
-                        component={Preferences}
-                      ></Route>
+                      <MobileNav />
+                      <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route
+                          exact
+                          path="/favourites"
+                          component={Favourites}
+                        />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route
+                          exact
+                          path="/daily-place-list"
+                          component={DailyPlaceList}
+                        />
+                        <Route
+                          exact
+                          path="/fullscreen-picture"
+                          component={FullscreenPicture}
+                        />
+                        <Route
+                          exact
+                          path="/preferences"
+                          component={Preferences}
+                        />
+                      </Switch>
                     </Router>
                   </PlaceProvider>
                 </SelectedPlaceProvider>

@@ -5,6 +5,7 @@ function ErrorProvider(props) {
   const defaultState = {
     isGeoActive: true,
     isDBActive: true,
+    isPlaceFound: true,
   };
   const [error, setError] = useState(defaultState);
 
