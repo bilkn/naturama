@@ -1,0 +1,12 @@
+@import '../../styles/variables';
+.error {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  padding: $mobile-page-padding;
+  text-align: center;
+}
+
+
