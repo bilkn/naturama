@@ -103,7 +103,6 @@ function Preferences() {
           setLatValue={setLatValue}
           setLonValue={setLonValue}
         />
-        <MobileNav />
       </ul>
     </div>
   );

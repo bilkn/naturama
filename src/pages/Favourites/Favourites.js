@@ -46,7 +46,6 @@ function Favourites() {
           setSelectedPlace={setSelectedPlace}
         />
       )}
-      <MobileNav />
       {userState.isNotificationOpen && <Notification />}
     </div>
   );

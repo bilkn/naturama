@@ -21,7 +21,6 @@ function Profile() {
       </AppHead>
       <ProfileThumbnail userState={userState} />
       <ProfileMenu />
-      <MobileNav />
     </div>
   );
 }

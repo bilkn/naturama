@@ -17,6 +17,7 @@ import DBProvider from '../../providers/DBProvider/DBProvider';
 import ErrorProvider from '../../providers/ErrorProvider/ErrorProvider';
 import Preferences from '../Preferences/Preferences';
 import db from '../../helpers/dexie';
+import MobileNav from '../MobileNav/MobileNav';
 
 function App() {
   useEffect(() => {
@@ -32,33 +33,30 @@ function App() {
                 <SelectedPlaceProvider>
                   <PlaceProvider>
                     <Router>
+                      <MobileNav />
                       <Switch>
-                        <Route exact path="/" component={Home}></Route>
+                        <Route exact path="/" component={Home} />
                         <Route
                           exact
                           path="/favourites"
                           component={Favourites}
-                        ></Route>
-                        <Route
-                          exact
-                          path="/profile"
-                          component={Profile}
-                        ></Route>
+                        />
+                        <Route exact path="/profile" component={Profile} />
                         <Route
                           exact
                           path="/daily-place-list"
                           component={DailyPlaceList}
-                        ></Route>
+                        />
                         <Route
                           exact
                           path="/fullscreen-picture"
                           component={FullscreenPicture}
-                        ></Route>
+                        />
                         <Route
                           exact
                           path="/preferences"
                           component={Preferences}
-                        ></Route>
+                        />
                       </Switch>
                     </Router>
                   </PlaceProvider>

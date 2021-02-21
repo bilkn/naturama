@@ -23,7 +23,7 @@ function Home() {
   useEffect(() => {
     setTitle(null);
   }, []);
-
+  
   useEffect(async () => {
     if (!randomPlace && userState && error.isGeoActive) {
       try {
@@ -58,7 +58,6 @@ function Home() {
             <Error text="No place is found." />
           ))}
 
-        <MobileNav />
       </div>
     </>
   );

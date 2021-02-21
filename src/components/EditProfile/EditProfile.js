@@ -44,7 +44,6 @@ function EditProfile(props) {
 
   return (
     <div className="edit-profile">
-  
       <PictureInput
         picture={picture}
         setPicture={setPicture}
@@ -59,7 +58,7 @@ function EditProfile(props) {
         <IconButton
           btnClass="edit-profile-name-container__btn"
           iconClass="fas fa-check-circle"
-          onClick={handleBtnClick}
+          handleBtnClick={handleBtnClick}
         />
       </div>
     </div>
