@@ -25,6 +25,8 @@ async function createUser() {
     favourites: [],
     dailyList: [],
     history: [],
+    isNotificationOpen: false,
+    notification: '',
   };
   return userTemplate;
 }
