@@ -55,9 +55,8 @@ function Home() {
           ) : error.isPlaceFound ? (
             <Loader />
           ) : (
-            <Error text="No place is found." />
+            <Error text="No place was found." />
           ))}
-
       </div>
     </>
   );
