@@ -3,13 +3,15 @@ import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
 import getDailyPlaceList from './getDailyPlaceList';
+import createUser from './createUser';
 async function initialize(errorState, dispatch) {
-  const result = await db.profile.get(3);
-  if (!result) {
-    await initializeDB(errorState);
+  if (window.indexedDB) {
+    const result = await db.profile.get(3);
+    !result && (await initializeDB(errorState));
+    initUserWithDB(dispatch);
+  } else {
+    await initUserWithoutDB(dispatch);
   }
-  await initUserWithDB(dispatch);
-  // !!! Add initUserWithUserState function.
 }
 
 async function initUserWithDB(dispatch) {
@@ -20,6 +22,7 @@ async function initUserWithDB(dispatch) {
   historyItems = historyItems.map(({ xid }) => xid);
   const [{ username }, { picture }, { preferences }] = profileItems;
   let pictureBlob = picture && arrayBufferToBlob(picture);
+  
   const dbData = {
     profile: {
       username,
@@ -38,7 +41,10 @@ async function initUserWithDB(dispatch) {
   dispatch({ type: 'INIT', payload: dbData });
 }
 
-function initUserWithUserState(dispatch) {}
+async function initUserWithoutDB(dispatch) {
+  const freshUser = await createUser();
+  dispatch({ type: 'INIT', payload: freshUser });
+}
 
 async function initializeDB(errorState) {
   const [error, setError] = errorState;

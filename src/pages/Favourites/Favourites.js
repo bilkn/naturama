@@ -12,6 +12,7 @@ import IconButton from '../../components/IconButton/IconButton';
 import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import AppHead from '../../components/AppHead/AppHead';
 import PageName from '../../components/PageName/PageName';
+import Error from '../../components/Error/Error';
 function Favourites() {
   const [, setTitle] = useContext(TitleContext);
   const [userState] = useContext(UserContext);
@@ -31,21 +32,25 @@ function Favourites() {
       <AppHead>
         <PageName pageName="Favourites" />
       </AppHead>
-      {(selectedPlace && (
-        <Place place={selectedPlace}>
-          <MobileNavTop>
-            <IconButton
-              iconClass="fa fa-arrow-left"
-              handleBtnClick={handleBtnClick}
-            />
-          </MobileNavTop>
-        </Place>
-      )) || (
-        <PlaceList
-          list={userState.favourites}
-          setSelectedPlace={setSelectedPlace}
-        />
-      )}
+
+      {(!userState.favourites.length && (
+        <Error text="Your favourite list is empty." />
+      )) ||
+        (selectedPlace && (
+          <Place place={selectedPlace}>
+            <MobileNavTop>
+              <IconButton
+                iconClass="fa fa-arrow-left"
+                handleBtnClick={handleBtnClick}
+              />
+            </MobileNavTop>
+          </Place>
+        )) || (
+          <PlaceList
+            list={userState.favourites}
+            setSelectedPlace={setSelectedPlace}
+          />
+        )}
       {userState.isNotificationOpen && <Notification />}
     </div>
   );

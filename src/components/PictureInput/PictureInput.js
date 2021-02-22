@@ -11,14 +11,19 @@ function PictureInput({ picture, setPicture, userState }) {
   // !!! Add picture validation.
   const handleChange = (e) => {
     const file = e.target.files[0];
-    if (file && validatePicture(file)) {
+    const fileSizeInMB = file && file.size / 1024 / 1024;
+    console.log(fileSizeInMB);
+    if (fileSizeInMB > 5) {
+      console.log('Picture size must be lower than 5 MB.');
+      // Add notify
+    } else if (file && validatePicture(file)) {
       const pictureObj = {
         file,
         url: createFileURL(file),
       };
       setPicture(pictureObj);
     } else {
-      console.log('please provide jpeg or png');
+      console.log('Please provide jpeg or png.');
       // Add notify.
     }
   };

@@ -11,6 +11,7 @@ import AppHead from '../../components/AppHead/AppHead';
 import PageName from '../../components/PageName/PageName';
 import IconButton from '../../components/IconButton/IconButton';
 import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
+import Error from '../../components/Error/Error';
 function DailyPlaceList() {
   const [, setTitle] = useContext(TitleContext);
   const [userState] = useContext(UserContext);
@@ -22,26 +23,31 @@ function DailyPlaceList() {
   if (!userState) {
     return <Redirect to="/" />;
   }
+ 
   return (
     <div className="daily-place-list">
       <AppHead>
         <PageName pageName="Daily List" />
       </AppHead>
-      {(selectedPlace && (
-        <Place place={selectedPlace}>
-          <MobileNavTop>
-            <IconButton
-              iconClass="fa fa-arrow-left"
-              handleBtnClick={handleBtnClick}
-            />
-          </MobileNavTop>
-        </Place>
-      )) || (
-        <PlaceList
-          list={userState.dailyList}
-          setSelectedPlace={setSelectedPlace}
-        />
-      )}
+
+      {(!userState.dailyList.length && (
+        <Error text="No place was found." />
+      )) ||
+        (selectedPlace && (
+          <Place place={selectedPlace}>
+            <MobileNavTop>
+              <IconButton
+                iconClass="fa fa-arrow-left"
+                handleBtnClick={handleBtnClick}
+              />
+            </MobileNavTop>
+          </Place>
+        )) || (
+          <PlaceList
+            list={userState.dailyList}
+            setSelectedPlace={setSelectedPlace}
+          />
+        )}
     </div>
   );
 }
