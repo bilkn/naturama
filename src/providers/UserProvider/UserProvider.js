@@ -4,10 +4,14 @@ import initialize from '../../helpers/initilalize';
 import userReducer from '../../reducers/UserReducer';
 import ErrorContext from '../../context/ErrorContext';
 import initUserWithoutDB from '../../helpers/initUserWithoutDB';
+import db from '../../helpers/dexie';
 function UserProvider(props) {
   const [userState, dispatch] = useReducer(userReducer, null);
   const errorState = useContext(ErrorContext);
   const [error, setError] = errorState;
+   useEffect(() => {
+     db.open();
+   }, []);
   useEffect(async () => {
     if (!userState) {
       try {
@@ -19,6 +23,7 @@ function UserProvider(props) {
       }
     }
   }, []);
+  
   return <UserContext.Provider value={[userState, dispatch]} {...props} />;
 }
 

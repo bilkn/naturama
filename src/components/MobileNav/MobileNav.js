@@ -5,62 +5,34 @@ import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
 import ErrorContext from '../../context/ErrorContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
-import { getRandomPlace } from '../../helpers/getRandomPlace';
-import createPlaceForUserData from '../../helpers/createPlaceForUserData';
-import db from '../../helpers/dexie';
-import tryToSetLocation from '../../helpers/tryToSetLocation';
 import IconButton from '../IconButton/IconButton';
+import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
+import UserRequestContext from '../../context/UserRequestContext';
 
 function MobileNav() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const [canUserRequest, setCanUserRequest] = useState(true);
   const [error, setError] = useContext(ErrorContext);
+  const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const location = useLocation();
 
-  const handleShuffleClick = async () => {};
-
-  const preventRequestForAWhile = () => {
-    setRandomPlace(() => null);
-    setCanUserRequest(() => false);
-    const timeout = setTimeout(() => {
-      setCanUserRequest(() => true);
-      clearTimeout(timeout);
-    }, 2000);
-  };
-
-  const triggerRandomPlaceRequest = async () => {
-    const {
-      location: { lat },
-      location: { lon },
-    } = userState.profile.preferences;
-    if (!lat || !lon) {
-      const user = [userState, dispatch];
-      await tryToSetLocation(user);
-    } else if (canUserRequest) {
-      preventRequestForAWhile();
-      try {
-        await requestRandomPlace();
-      } catch (err) {
-        setError({ ...error, isPlaceFound: false });
-      }
-    } else {
-      console.log('You can fetch after 2 sec.');
-      // !!! Add notif.
+  const handleShuffleClick = async () => {
+    const errorState = [error, setError];
+    const requestState = [canUserRequest, setCanUserRequest];
+    const user = [userState, dispatch];
+    const args = {
+      user,
+      requestState,
+      errorState,
+      setRandomPlace,
+    };
+    try {
+      await triggerRandomPlaceRequest(args);
+    } catch(err) {
+      console.log(err)
+      setError({ ...error, isPlaceFound: false });
     }
-  };
-  
-  const requestRandomPlace = async () => {
-    const place = await getRandomPlace(userState); // !!! Add stop system for fetching after unmount.
-    const userPlace = await createPlaceForUserData(place);
-    const newHistory = [...userState.history, userPlace.xid];
-
-    // If place is found, isPlaceFound will set to true.
-    if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
-    setRandomPlace(userPlace);
-    dispatch({ type: 'ADD_HISTORY', payload: newHistory });
-    db.history.put({ xid: userPlace.xid });
   };
 
   const handleNavClick = (e) => {
@@ -74,6 +46,7 @@ function MobileNav() {
     clickedItem.classList.add('active-tab');
     setSelectedPlace(null);
   };
+
   return (
     <nav
       className="mobile-nav"
