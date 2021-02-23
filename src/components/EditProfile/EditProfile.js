@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../../context/UserContext';
-import modifyUser from '../../helpers/modifyUser';
 import IconButton from '../IconButton/IconButton';
 import NameInput from '../NameInput/NameInput';
 import PictureInput from '../PictureInput/PictureInput';
 import './EditProfile.scss';
 import db from '../../helpers/dexie';
 import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
+import editUser from '../../helpers/editUser';
 function EditProfile(props) {
   const { setShowEdit, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
@@ -39,7 +39,7 @@ function EditProfile(props) {
     if (!picture && !username) return null;
     if (username) propArr.push(['username', username]);
     if (picture) propArr.push(['picture', picture]);
-    return modifyUser(userState, propArr);
+    return editUser(userState, propArr);
   };
 
   return (

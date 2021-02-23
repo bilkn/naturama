@@ -3,7 +3,8 @@ import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
 import getDailyPlaceList from './getDailyPlaceList';
-import createUser from './createUser';
+import initUserWithoutDB from './initUserWithoutDB';
+
 async function initialize(errorState, dispatch) {
   if (window.indexedDB) {
     const result = await db.profile.get(3);
@@ -22,7 +23,7 @@ async function initUserWithDB(dispatch) {
   historyItems = historyItems.map(({ xid }) => xid);
   const [{ username }, { picture }, { preferences }] = profileItems;
   let pictureBlob = picture && arrayBufferToBlob(picture);
-  
+
   const dbData = {
     profile: {
       username,
@@ -41,20 +42,11 @@ async function initUserWithDB(dispatch) {
   dispatch({ type: 'INIT', payload: dbData });
 }
 
-async function initUserWithoutDB(dispatch) {
-  const freshUser = await createUser();
-  dispatch({ type: 'INIT', payload: freshUser });
-}
-
 async function initializeDB(errorState) {
-  const [error, setError] = errorState;
   const location = await getUserLocation();
   let dailyPlaceList = [];
-  if (location) {
+  if (location.lat && location.lon) {
     dailyPlaceList = await getDailyPlaceList();
-  } else {
-    const newError = { ...error, isGeoActive: false };
-    setError(() => newError);
   }
   await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([

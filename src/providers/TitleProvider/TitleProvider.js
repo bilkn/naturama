@@ -1,9 +1,14 @@
 import React from 'react';
-import TitleContext from '../../context/TitleContext';
+import UserRequestContext from '../../context/UserRequestContext';
 
-function TitleProvider(props) {
-  const [title, setTitle] = React.useState('');
-  return <TitleContext.Provider value={[title, setTitle]} {...props} />;
+function UserRequestProvider(props) {
+  const [canUserRequest, setCanUserRequest] = React.useState('');
+  return (
+    <UserRequestContext.Provider
+      value={[canUserRequest, setCanUserRequest]}
+      {...props}
+    />
+  );
 }
 
-export default TitleProvider;
+export default UserRequestProvider;

@@ -1,7 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import TitleContext from '../../context/TitleContext';
 import './DailyPlaceList.scss';
-import MobileNav from '../../components/MobileNav/MobileNav';
 import UserContext from '../../context/UserContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import Place from '../../components/Place/Place';
@@ -13,12 +11,9 @@ import IconButton from '../../components/IconButton/IconButton';
 import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import Error from '../../components/Error/Error';
 function DailyPlaceList() {
-  const [, setTitle] = useContext(TitleContext);
   const [userState] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  useEffect(() => {
-    setTitle('Daily List');
-  }, []);
+
   const handleBtnClick = () => setSelectedPlace(null);
   if (!userState) {
     return <Redirect to="/" />;

@@ -3,7 +3,6 @@ import ErrorContext from '../../context/ErrorContext';
 
 function ErrorProvider(props) {
   const defaultState = {
-    isGeoActive: true,
     isDBActive: true,
     isPlaceFound: true,
   };
