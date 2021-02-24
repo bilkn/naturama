@@ -42,7 +42,7 @@ async function initUserWithDB(dispatch) {
   dispatch({ type: 'INIT', payload: dbData });
 }
 
-async function initializeDB(errorState) {
+async function initializeDB() {
   const location = await getUserLocation();
   let dailyPlaceList = [];
   if (location.lat && location.lon) {

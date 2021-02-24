@@ -7,12 +7,13 @@ async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
   const [canUserRequest, setCanUserRequest] = requestState;
   const [userState] = user;
+  const [error] =errorState
   const {
     location: { lat },
     location: { lon },
   } = userState.profile.preferences;
   if (!lat || !lon) {
-    await tryToSetLocation(user);
+    await tryToSetLocation(user,error);
   } else if (canUserRequest) {
     preventRequestForAWhile(setRandomPlace, setCanUserRequest);
     await requestRandomPlace({ user, errorState, setRandomPlace });
@@ -35,15 +36,15 @@ const requestRandomPlace = async (args) => {
   const { user, errorState, setRandomPlace } = args;
   const [error, setError] = errorState;
   const [userState, dispatch] = user;
-  const place = await getRandomPlace(userState); // !!! Add stop system for fetching after unmount.
+  const place = await getRandomPlace(userState); 
   const userPlace = await createPlaceForUserData(place);
   const newHistory = [...userState.history, userPlace.xid];
 
-  // If place is found, isPlaceFound will set to true.
+  // If place is found, isPlaceFound will be set to true.
   if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
   setRandomPlace(userPlace);
   dispatch({ type: 'ADD_HISTORY', payload: newHistory });
-  db.history.put({ xid: userPlace.xid });
+   error.isDBActive && db.history.put({ xid: userPlace.xid });
 };
 
 export default triggerRandomPlaceRequest;

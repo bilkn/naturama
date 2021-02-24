@@ -1,13 +1,8 @@
 import getUserLocation from './getUserLocation';
 
 async function createUser() {
-  let location = null;
-  try {
-    location = await getUserLocation();
-  } catch (err) {
-    console.log("location couldn't set.");
-    // !!! Add notification.
-  }
+  const location = await getUserLocation();
+  console.log("location", location)
   const userTemplate = {
     profile: {
       username: '',

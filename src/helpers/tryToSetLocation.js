@@ -3,7 +3,7 @@ import getUserLocation from './getUserLocation';
 import db from './dexie';
 
 // If location values are empty, it tries to set location (useful when the user has activated geolocation after disabling it).
-const tryToSetLocation = async (user) => {
+const tryToSetLocation = async (user, error) => {
   const [userState, dispatch] = user;
   const {
     profile: { preferences },
@@ -15,9 +15,9 @@ const tryToSetLocation = async (user) => {
     location,
   };
   const newUser = editUser(userState, [['preferences', newPreferences]]);
-  await db.profile.update(3, { preferences: newPreferences });
+  error.isDBActive &&
+    (await db.profile.update(3, { preferences: newPreferences }));
   dispatch({ type: 'EDIT_USER', payload: newUser });
-
 };
 
 export default tryToSetLocation;

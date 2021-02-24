@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext} from 'react';
 import ProfileThumbnail from '../../components/ProfileThumbnail/ProfileThumbnail';
 import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
 import './Profile.scss';

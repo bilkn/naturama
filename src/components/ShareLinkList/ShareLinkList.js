@@ -5,15 +5,17 @@ function ShareLinkList() {
   /*  const url = encodeURI("www.google.com.tr"); */
   const [place] = useContext(RandomPlaceContext);
 
-
   const handleTwitterShare = async (e) => {
     e.preventDefault();
     /* const name = place.name; */
-    const wikiURL = place.wikipedia;
-    const url = `https://twitter.com/intent/tweet?url=${wikiURL}`;
-    console.log(url)
+    const {
+      content: { wikipedia: wikiURL },
+    } = place;
 
-    /*  window.open(url, '_blank'); */
+    // Solves spaced url bug for twitter.
+    const replacedURL = wikiURL.replace(/%20/g, '_');
+    const url = `https://twitter.com/intent/tweet?url=${replacedURL}`;
+    window.open(url, '_blank');
   };
   return (
     <ul className="share-link-list">

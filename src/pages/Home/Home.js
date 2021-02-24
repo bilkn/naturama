@@ -23,24 +23,27 @@ function Home() {
   const userLocation =
     (userState && userState.profile.preferences.location) || null;
 
-  useEffect(async () => {
-    if (!randomPlace && userState && userLocation) {
-      const errorState = [error, setError];
-      const requestState = [canUserRequest, setCanUserRequest];
-      const user = [userState, dispatch];
-      const args = {
-        user,
-        requestState,
-        errorState,
-        setRandomPlace,
-      };
-      try {
-        await triggerRandomPlaceRequest(args);
-      } catch(err) {
-        console.log(err)
-        setError({ ...error, isPlaceFound: false });
+  useEffect(() => {
+    async function fetchData() {
+      if (!randomPlace && userState && userLocation) {
+        const errorState = [error, setError];
+        const requestState = [canUserRequest, setCanUserRequest];
+        const user = [userState, dispatch];
+        const args = {
+          user,
+          requestState,
+          errorState,
+          setRandomPlace,
+        };
+        try {
+          await triggerRandomPlaceRequest(args);
+        } catch (err) {
+          console.log(err);
+          setError({ ...error, isPlaceFound: false });
+        }
       }
     }
+    fetchData();
   }, [userState]);
 
   return (

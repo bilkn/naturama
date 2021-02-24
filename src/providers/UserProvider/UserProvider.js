@@ -9,21 +9,32 @@ function UserProvider(props) {
   const [userState, dispatch] = useReducer(userReducer, null);
   const errorState = useContext(ErrorContext);
   const [error, setError] = errorState;
-   useEffect(() => {
-     db.open();
-   }, []);
-  useEffect(async () => {
-    if (!userState) {
+
+  useEffect(() => {
+    async function openDB() {
       try {
-        await initialize(errorState, dispatch);
+        await db.open();
       } catch (err) {
-        console.log(err);
-        initUserWithoutDB(dispatch);
-        setError({ ...error, isDBActive: false });
+        setError({ ...error, isDBActive: false }); // !!! One of them may be removed in the future.
       }
     }
+    openDB();
   }, []);
-  
+
+  useEffect(() => {
+    async function init() {
+      if (!userState) {
+        try {
+          await initialize(errorState, dispatch);
+        } catch {
+          await initUserWithoutDB(dispatch);
+          setError({ ...error, isDBActive: false });
+        }
+      }
+    }
+    init();
+  }, []);
+
   return <UserContext.Provider value={[userState, dispatch]} {...props} />;
 }
 

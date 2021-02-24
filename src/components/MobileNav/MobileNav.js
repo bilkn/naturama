@@ -82,7 +82,6 @@ function MobileNav() {
         <li className="mobile-nav-list-item ">
           <Link to="/daily-place-list" className="mobile-nav-list-item__link">
             <i className="fas fa-list-alt mobile-nav-list-item__icon">
-              {' '}
               {userState ? (
                 userState.dailyList.length ? (
                   <span className="mobile-nav-list-item__counter">

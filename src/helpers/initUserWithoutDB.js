@@ -1,8 +1,8 @@
 import createUser from "./createUser";
 
 async function initUserWithoutDB(dispatch) {
-  const freshUser = await createUser();
-  dispatch({ type: 'INIT', payload: freshUser });
+  const newUser = await createUser();
+  dispatch({ type: 'INIT', payload: newUser });
 }
 
 export default initUserWithoutDB;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './FullscreenPicture.scss';
 import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import PictureToolbar from '../../components/PictureToolbar/PictureToolbar';
@@ -30,7 +30,6 @@ function FullscreenPicture({ history }) {
     history.goBack();
     setSelectedPlace(() => null);
   };
-
 
   return (
     <div className="fullscreen-picture">
