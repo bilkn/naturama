@@ -4,6 +4,7 @@ import arrayBufferToBlob from './arrayBufferToBlob';
 import getUserLocation from './getUserLocation';
 import getDailyPlaceList from './getDailyPlaceList';
 import initUserWithoutDB from './initUserWithoutDB';
+import isHoursPassed from './isHoursPassed';
 
 async function initialize(errorState, dispatch) {
   if (window.indexedDB) {
@@ -15,15 +16,31 @@ async function initialize(errorState, dispatch) {
   }
 }
 
-async function initUserWithDB(dispatch) {
-  const profileItems = await db.table('profile').toArray();
-  const favouritesItems = await db.table('favourites').toArray();
-  const dailyListItems = await db.table('dailyList').toArray();
-  let historyItems = await db.table('history').toArray();
-  historyItems = historyItems.map(({ xid }) => xid);
-  const [{ username }, { picture }, { preferences }] = profileItems;
-  let pictureBlob = picture && arrayBufferToBlob(picture);
+async function getDataFromDB() {
+  const profile = await db.table('profile').toArray();
+  const favourites = await db.table('favourites').toArray();
+  let history = await db.table('history').toArray();
+  history = history.map(({ xid }) => xid);
+  return { profile, favourites, history };
+}
 
+async function initUserWithDB(dispatch) {
+  const { profile, favourites, history } = await getDataFromDB();
+  const [
+    { username },
+    { picture },
+    { preferences },
+    { lastListUpdateDate },
+  ] = profile;
+
+  const pictureBlob = picture && arrayBufferToBlob(picture);
+
+  let dailyList = null;
+  // It updates the daily place list everyday.
+  if (isHoursPassed(0.001, lastListUpdateDate)) {
+    dailyList = await getDailyPlaceList();
+    await updateDailyListDB(dailyList);
+  } else dailyList = await db.table('dailyList').toArray();
   const dbData = {
     profile: {
       username,
@@ -33,9 +50,9 @@ async function initUserWithDB(dispatch) {
       },
       preferences,
     },
-    favourites: favouritesItems,
-    dailyList: dailyListItems,
-    history: historyItems,
+    favourites,
+    dailyList,
+    history,
     isNotificationOpen: false,
     notification: '',
   };
@@ -44,10 +61,8 @@ async function initUserWithDB(dispatch) {
 
 async function initializeDB() {
   const location = await getUserLocation();
-  let dailyPlaceList = [];
-  if (location.lat && location.lon) {
-    dailyPlaceList = await getDailyPlaceList();
-  }
+  const dailyPlaceList = location.lat && location.lon ? await getDailyPlaceList() : [];
+
   await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
     { username: '' },
@@ -62,6 +77,15 @@ async function initializeDB() {
         },
       },
     },
+    {
+      lastListUpdateDate: new Date(),
+    },
   ]);
+}
+
+async function updateDailyListDB(dailyPlaceList) {
+  await db.dailyList.clear();
+  await db.profile.update(4, {lastListUpdateDate:new Date()});
+  await db.dailyList.bulkPut([...dailyPlaceList]);
 }
 export default initialize;

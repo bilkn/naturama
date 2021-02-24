@@ -2,7 +2,6 @@ import getUserLocation from './getUserLocation';
 
 async function createUser() {
   const location = await getUserLocation();
-  console.log("location", location)
   const userTemplate = {
     profile: {
       username: '',
