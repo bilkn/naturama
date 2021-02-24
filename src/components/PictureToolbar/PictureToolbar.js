@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import ErrorContext from '../../context/ErrorContext';
 import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 function PictureToolbar(props) {
   const { place, setShowShareLinks, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
-
+  const [error] = useContext(ErrorContext);
   const handleShareClick = () => {
     setShowDarkBackground(true);
     setShowShareLinks(true);
@@ -26,10 +27,11 @@ function PictureToolbar(props) {
       : [...userState.favourites, place];
     try {
       if (!favResult) {
-        await db.favourites.add(place, place.xid);
+        error.isDBActive && (await db.favourites.add(place, place.xid));
         dispatch({ type: 'ADD_PLACE', payload: newPlaces });
       } else {
-        await db.favourites.where('xid').equals(place.xid).delete();
+        error.isDBActive &&
+          (await db.favourites.where('xid').equals(place.xid).delete());
         dispatch({ type: 'REMOVE_PLACE', payload: newPlaces });
       }
     } catch (err) {

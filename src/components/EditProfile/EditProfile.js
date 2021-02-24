@@ -1,18 +1,19 @@
 import React, { useContext, useState } from 'react';
 import UserContext from '../../context/UserContext';
-import modifyUser from '../../helpers/modifyUser';
 import IconButton from '../IconButton/IconButton';
 import NameInput from '../NameInput/NameInput';
 import PictureInput from '../PictureInput/PictureInput';
 import './EditProfile.scss';
 import db from '../../helpers/dexie';
 import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
+import editUser from '../../helpers/editUser';
+import ErrorContext from '../../context/ErrorContext';
 function EditProfile(props) {
   const { setShowEdit, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [picture, setPicture] = useState(null);
-
+  const [error, setError] = useContext(ErrorContext);
   const handleBtnClick = async () => {
     setShowDarkBackground(false);
     setShowEdit(false);
@@ -20,7 +21,7 @@ function EditProfile(props) {
     if (newUser) {
       try {
         if (picture.file) addPictureToDB();
-        await db.profile.update(1, { username });
+        error.isDBActive && (await db.profile.update(1, { username }));
         dispatch({ type: 'EDIT_USER', payload: newUser });
       } catch (err) {
         console.log(err);
@@ -31,7 +32,7 @@ function EditProfile(props) {
 
   const addPictureToDB = async () => {
     const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
-    await db.profile.update(2, { picture: pictureArrayBuffer });
+    error.isDBActive && await db.profile.update(2, { picture: pictureArrayBuffer });
   };
 
   const createNewUser = () => {
@@ -39,7 +40,7 @@ function EditProfile(props) {
     if (!picture && !username) return null;
     if (username) propArr.push(['username', username]);
     if (picture) propArr.push(['picture', picture]);
-    return modifyUser(userState, propArr);
+    return editUser(userState, propArr);
   };
 
   return (

@@ -4,18 +4,13 @@ import './PictureInput.scss';
 import Avatar from '../Avatar/Avatar';
 import validatePicture from '../../helpers/validatePicture';
 function PictureInput({ picture, setPicture, userState }) {
-  useEffect(() => {
-    const { picture } = userState.profile;
-    if (picture) setPicture(picture);
-  }, []);
-  // !!! Add picture validation.
+
   const handleChange = (e) => {
     const file = e.target.files[0];
     const fileSizeInMB = file && file.size / 1024 / 1024;
-    console.log(fileSizeInMB);
     if (fileSizeInMB > 5) {
       console.log('Picture size must be lower than 5 MB.');
-      // Add notify
+      // !!! Add notify
     } else if (file && validatePicture(file)) {
       const pictureObj = {
         file,
@@ -24,9 +19,14 @@ function PictureInput({ picture, setPicture, userState }) {
       setPicture(pictureObj);
     } else {
       console.log('Please provide jpeg or png.');
-      // Add notify.
+      // !!! Add notify.
     }
   };
+
+  useEffect(() => {
+    const { picture } = userState.profile;
+    if (picture) setPicture(picture);
+  }, []);
 
   return (
     <div className="picture-input-container">

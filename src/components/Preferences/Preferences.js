@@ -1,26 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
-import TitleContext from '../../context/TitleContext';
 import UserContext from '../../context/UserContext';
-import modifyUser from '../../helpers/modifyUser';
+import editUser from '../../helpers/editUser';
 import LocationItem from '../LocationItem/LocationItem';
-import MobileNav from '../MobileNav/MobileNav';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
 import db from '../../helpers/dexie';
 import MobileNavTop from '../MobileNavTop/MobileNavTop';
 import EmptyDiv from '../EmptyDiv/EmptyDiv';
 import ReturnLink from '../ReturnLink/ReturnLink';
+import ErrorContext from '../../context/ErrorContext';
+
 function Preferences() {
-  const [, setTitle] = useContext(TitleContext);
   const [userState, dispatch] = useContext(UserContext);
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
-
-  useEffect(() => {
-    setTitle('Preferences');
-  }, []);
-
+  const [error, setError] = useContext(ErrorContext);
   useEffect(() => {
     if (userState) {
       const {
@@ -66,11 +61,10 @@ function Preferences() {
             lon: lonValue || lon,
           },
         };
-        const newUser = modifyUser(userState, [
-          ['preferences', newPreferences],
-        ]);
+        const newUser = editUser(userState, [['preferences', newPreferences]]);
         try {
-          await db.profile.update(3, { preferences: newPreferences });
+          error.isDBActive &&
+            (await db.profile.update(3, { preferences: newPreferences }));
           dispatch({ type: 'EDIT_USER', payload: newUser });
         } catch (err) {
           console.log(err);
@@ -88,7 +82,7 @@ function Preferences() {
   return (
     <div className="preferences">
       <MobileNavTop>
-        <ReturnLink path="/profile"/>
+        <ReturnLink path="/profile" />
         <h2 className="preferences__header">Preferences</h2>
         <EmptyDiv />
       </MobileNavTop>

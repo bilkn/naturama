@@ -1,44 +1,37 @@
 import React, { useContext, useState } from 'react';
-import './MobileNav.scss';
 import { Link, useLocation } from 'react-router-dom';
+import './MobileNav.scss';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
-import { getRandomPlace } from '../../helpers/getRandomPlace';
-import createPlaceForUserData from '../../helpers/createPlaceForUserData';
-import SelectedPlaceContext from '../../context/SelectedPlaceContext';
-import db from '../../helpers/dexie';
-import IconButton from '../IconButton/IconButton';
 import ErrorContext from '../../context/ErrorContext';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
+import IconButton from '../IconButton/IconButton';
+import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
+import UserRequestContext from '../../context/UserRequestContext';
+
 function MobileNav() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const [canUserRequest, setCanUserRequest] = useState(true);
   const [error, setError] = useContext(ErrorContext);
+  const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const location = useLocation();
+
   const handleShuffleClick = async () => {
-    if (canUserRequest && error.isGeoActive) {
-      setRandomPlace(() => null);
-      setCanUserRequest(() => false);
-      const timeout = setTimeout(() => {
-        setCanUserRequest(() => true);
-        clearTimeout(timeout);
-      }, 2000);
-      try {
-        const place = await getRandomPlace(userState); // !!! Add stop system for fetching after unmount.
-        const userPlace = await createPlaceForUserData(place);
-        const newHistory = [...userState.history, userPlace.xid];
-        // If place is found, noPlace error will be false.
-        if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
-        setRandomPlace(userPlace);
-        dispatch({ type: 'ADD_HISTORY', payload: newHistory });
-        db.history.put({ xid: userPlace.xid });
-      } catch (err) {
-        setError({ ...error, isPlaceFound: false });
-      }
-    } else {
-      console.log('You can fetch after 2 sec.');
-      // !!! Add notif.
+    const errorState = [error, setError];
+    const requestState = [canUserRequest, setCanUserRequest];
+    const user = [userState, dispatch];
+    const args = {
+      user,
+      requestState,
+      errorState,
+      setRandomPlace,
+    };
+    try {
+      await triggerRandomPlaceRequest(args);
+    } catch(err) {
+      console.log(err)
+      setError({ ...error, isPlaceFound: false });
     }
   };
 
@@ -53,6 +46,7 @@ function MobileNav() {
     clickedItem.classList.add('active-tab');
     setSelectedPlace(null);
   };
+
   return (
     <nav
       className="mobile-nav"
@@ -88,7 +82,6 @@ function MobileNav() {
         <li className="mobile-nav-list-item ">
           <Link to="/daily-place-list" className="mobile-nav-list-item__link">
             <i className="fas fa-list-alt mobile-nav-list-item__icon">
-              {' '}
               {userState ? (
                 userState.dailyList.length ? (
                   <span className="mobile-nav-list-item__counter">

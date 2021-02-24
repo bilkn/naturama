@@ -1,44 +1,49 @@
 import React, { useContext, useEffect } from 'react';
-import TitleContext from '../../context/TitleContext';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
-import MobileNav from '../../components/MobileNav/MobileNav';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
-import { getRandomPlace } from '../../helpers/getRandomPlace';
-import createPlaceForUserData from '../../helpers/createPlaceForUserData';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import ErrorContext from '../../context/ErrorContext';
 import Loader from '../../components/Loader/Loader';
-import db from '../../helpers/dexie';
 import AppHead from '../../components/AppHead/AppHead';
 import Logo from '../../components/Logo/Logo';
 import Error from '../../components/Error/Error';
+import UserRequestContext from '../../context/UserRequestContext';
+import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
+
 function Home() {
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
-  const [, setTitle] = useContext(TitleContext);
+  const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error, setError] = useContext(ErrorContext);
+
   const handleClick = () => setSelectedPlace(randomPlace);
+
+  const userLocation =
+    (userState && userState.profile.preferences.location) || null;
+
   useEffect(() => {
-    setTitle(null);
-  }, []);
-  
-  useEffect(async () => {
-    if (!randomPlace && userState && error.isGeoActive) {
-      try {
-        const place = await getRandomPlace(userState);
-        const userPlace = await createPlaceForUserData(place);
-        if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
-        const newHistory = [...userState.history, userPlace.xid];
-        setRandomPlace(userPlace);
-        dispatch({ type: 'ADD_HISTORY', payload: newHistory });
-        db.history.put({ xid: userPlace.xid });
-      } catch {
-        setError({ ...error, isPlaceFound: false });
-        // !!! addModal or Error component.
+    async function fetchData() {
+      if (!randomPlace && userState && userLocation) {
+        const errorState = [error, setError];
+        const requestState = [canUserRequest, setCanUserRequest];
+        const user = [userState, dispatch];
+        const args = {
+          user,
+          requestState,
+          errorState,
+          setRandomPlace,
+        };
+        try {
+          await triggerRandomPlaceRequest(args);
+        } catch (err) {
+          console.log(err);
+          setError({ ...error, isPlaceFound: false });
+        }
       }
     }
+    fetchData();
   }, [userState]);
 
   return (
@@ -47,8 +52,8 @@ function Home() {
         <Logo />
       </AppHead>
       <div className="home">
-        {(!error.isGeoActive && (
-          <Error text="You must activate your geolocation" />
+        {(userLocation && !(userLocation.lat || userLocation.lon) && (
+          <Error text="You must activate your geolocation." />
         )) ||
           (randomPlace ? (
             <Place place={randomPlace} handleClick={handleClick} />
