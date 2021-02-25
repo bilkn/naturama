@@ -1,5 +1,4 @@
-import React, { useContext, useEffect } from 'react';
-import './DailyPlaceList.scss';
+import React, { useContext} from 'react';
 import UserContext from '../../context/UserContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import Place from '../../components/Place/Place';
