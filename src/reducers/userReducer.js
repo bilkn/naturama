@@ -41,6 +41,14 @@ function userReducer(state, action) {
       };
     }
 
+    case 'CLEAR_NOTIFICATION': {
+      return {
+        ...state,
+        notification: '',
+        isNotificationOpen: false,
+      };
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

@@ -46,7 +46,7 @@ function Favourites() {
             setSelectedPlace={setSelectedPlace}
           />
         )}
-      {userState.isNotificationOpen && <Notification />}
+    
     </div>
   );
 }

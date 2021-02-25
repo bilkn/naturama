@@ -44,7 +44,17 @@ function Home() {
       }
     }
     fetchData();
-  }, [userState]);
+  }, [
+    userState,
+    canUserRequest,
+    setCanUserRequest,
+    dispatch,
+    error,
+    setError,
+    randomPlace,
+    setRandomPlace,
+    userLocation,
+  ]);
 
   return (
     <>

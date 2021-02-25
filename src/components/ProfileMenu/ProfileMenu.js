@@ -62,9 +62,9 @@ function ProfileMenu() {
         </li>
         <li className="profile-menu-list__item">
           <i className="fas fa-question-circle profile-menu-list__icon" />
-          <a href="#" className="profile-menu-list__link">
+          <Link to="/help" className="profile-menu-list__link">
             Help
-          </a>
+          </Link>
         </li>
         <li className="profile-menu-list__item no-border">
           <i className="fas fa-envelope profile-menu-list__icon" />

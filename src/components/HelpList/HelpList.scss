@@ -1,0 +1,8 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+.help-list {
+  padding: $mobile-page-padding;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  list-style: decimal;
+}

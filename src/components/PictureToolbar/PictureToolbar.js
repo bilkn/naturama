@@ -4,7 +4,13 @@ import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 function PictureToolbar(props) {
-  const { place, setShowShareLinks, setShowDarkBackground } = props;
+  const {
+    place,
+    setShowShareLinks,
+    setShowDarkBackground,
+    timerID,
+    setTimerID,
+  } = props;
   const [userState, dispatch] = useContext(UserContext);
   const [error] = useContext(ErrorContext);
   const handleShareClick = () => {
@@ -17,6 +23,17 @@ function PictureToolbar(props) {
   };
 
   const handleFavClick = async () => {
+    if (timerID) {
+      console.log("timer", timerID);
+      clearTimeout(timerID);
+    }
+    const timeout = setTimeout(() => {
+      dispatch({ type: 'CLEAR_NOTIFICATION' });
+      clearTimeout(timeout);
+      setTimerID(() => null);
+    }, 2000);
+
+    setTimerID(() => timeout);
     const favResult = isPlaceInFav();
     const newPlaces = favResult
       ? [
@@ -40,6 +57,7 @@ function PictureToolbar(props) {
     }
   };
 
+  
   return (
     <nav className="picture-toolbar">
       <ul className="picture-toolbar-list">
@@ -65,6 +83,7 @@ function PictureToolbar(props) {
         </li>
         <li className="picture-toolbar-list__item">
           <button className="picture-toolbar-list__btn">
+            <a href="https://api.opentripmap.com/0.1/en/tiles/pois/14/10/10.pbf?apikey=5ae2e3f221c38a28845f05b66e6185a474b772f0503b9bf316db4ad4"></a>
             <i className="fas fa-map picture-toolbar-list__icon"></i>
           </button>
         </li>

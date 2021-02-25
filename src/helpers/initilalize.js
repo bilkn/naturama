@@ -37,7 +37,7 @@ async function initUserWithDB(dispatch) {
 
   let dailyList = null;
   // It updates the daily place list everyday.
-  if (isHoursPassed(0.001, lastListUpdateDate)) {
+  if (isHoursPassed(24, lastListUpdateDate)) {
     dailyList = await getDailyPlaceList();
     await updateDailyListDB(dailyList);
   } else dailyList = await db.table('dailyList').toArray();
@@ -61,7 +61,8 @@ async function initUserWithDB(dispatch) {
 
 async function initializeDB() {
   const location = await getUserLocation();
-  const dailyPlaceList = location.lat && location.lon ? await getDailyPlaceList() : [];
+  const dailyPlaceList =
+    location.lat && location.lon ? await getDailyPlaceList() : [];
 
   await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
@@ -85,7 +86,7 @@ async function initializeDB() {
 
 async function updateDailyListDB(dailyPlaceList) {
   await db.dailyList.clear();
-  await db.profile.update(4, {lastListUpdateDate:new Date()});
+  await db.profile.update(4, { lastListUpdateDate: new Date() });
   await db.dailyList.bulkPut([...dailyPlaceList]);
 }
 export default initialize;

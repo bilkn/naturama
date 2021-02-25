@@ -10,12 +10,16 @@ import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import EmptyDiv from '../../components/EmptyDiv/EmptyDiv';
 import IconButton from '../../components/IconButton/IconButton';
 import { Redirect } from 'react-router';
+import Notification from '../../components/Notification/Notification';
+import UserContext from '../../context/UserContext';
 function FullscreenPicture({ history }) {
   const [showShareLink, setShowShareLinks] = useState(false);
+  const [userState] = useContext(UserContext);
   const [showDarkBackground, setShowDarkBackground] = useContext(
     DarkBackgroundContext
   );
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [timerID, setTimerID] = useState(null);
   const place = selectedPlace;
   if (!place) {
     return <Redirect to="/" />;
@@ -33,6 +37,7 @@ function FullscreenPicture({ history }) {
 
   return (
     <div className="fullscreen-picture">
+      {userState.isNotificationOpen && <Notification />}
       <img
         src={placeImg}
         alt={placeName}
@@ -52,6 +57,8 @@ function FullscreenPicture({ history }) {
         place={selectedPlace}
         setShowShareLinks={setShowShareLinks}
         setShowDarkBackground={setShowDarkBackground}
+        timerID={timerID}
+        setTimerID={setTimerID}
       />
       {showShareLink && <ShareLinkList />}
       {showDarkBackground && (

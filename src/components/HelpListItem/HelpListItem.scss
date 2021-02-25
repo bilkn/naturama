@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+.help-list-item {
+    margin-bottom: 1rem;
+    &__title {
+        color: black;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    &__text {
+        font-size: 1.2rem;
+        color: ghostwhite;
+    }
+}

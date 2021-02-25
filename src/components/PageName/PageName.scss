@@ -1,3 +1,5 @@
+@import "../../styles/mixins";
 .page-name {
+    color: $icon-color;
     font-size: 1.5rem;
 }
