@@ -12,7 +12,7 @@
         "webpack.config.js": true,
         "node_modules": true,
         "**/.babelrc": true,
-        ".eslintrc.js": true,
+        ".eslintrc.js": false,
         "debug.log": true,
         "build": true,
         ".vscode": true

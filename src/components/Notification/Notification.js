@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UserContext from '../../context/UserContext';
 import './Notification.scss';
 function Notification() {
   const [userState] = useContext(UserContext);
+
 
   return (
     <div className="notification">

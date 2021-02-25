@@ -4,7 +4,13 @@ import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 function PictureToolbar(props) {
-  const { place, setShowShareLinks, setShowDarkBackground } = props;
+  const {
+    place,
+    setShowShareLinks,
+    setShowDarkBackground,
+    timerID,
+    setTimerID,
+  } = props;
   const [userState, dispatch] = useContext(UserContext);
   const [error] = useContext(ErrorContext);
   const handleShareClick = () => {
@@ -17,6 +23,17 @@ function PictureToolbar(props) {
   };
 
   const handleFavClick = async () => {
+    if (timerID) {
+      console.log("timer", timerID);
+      clearTimeout(timerID);
+    }
+    const timeout = setTimeout(() => {
+      dispatch({ type: 'CLEAR_NOTIFICATION' });
+      clearTimeout(timeout);
+      setTimerID(() => null);
+    }, 2000);
+
+    setTimerID(() => timeout);
     const favResult = isPlaceInFav();
     const newPlaces = favResult
       ? [
