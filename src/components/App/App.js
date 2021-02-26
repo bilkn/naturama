@@ -17,7 +17,6 @@ import Preferences from '../Preferences/Preferences';
 import Profile from '../../pages/Profile/Profile';
 import MobileNav from '../MobileNav/MobileNav';
 import Help from '../../pages/Help/Help';
-
 function App() {
   return (
     <>

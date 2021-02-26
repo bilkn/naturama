@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -29,8 +29,8 @@ function MobileNav() {
     };
     try {
       await triggerRandomPlaceRequest(args);
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
       setError({ ...error, isPlaceFound: false });
     }
   };

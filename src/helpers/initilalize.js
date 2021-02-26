@@ -11,6 +11,7 @@ async function initialize(errorState, dispatch) {
     const result = await db.profile.get(3);
     !result && (await initializeDB(errorState));
     initUserWithDB(dispatch);
+    console.log("init with db")
   } else {
     await initUserWithoutDB(dispatch);
   }
