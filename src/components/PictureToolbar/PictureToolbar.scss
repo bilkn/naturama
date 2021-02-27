@@ -12,9 +12,11 @@
   height: 100%;
   justify-content: space-between;
   padding: $mobile-nav-padding;
-  // picture-toolbar-list
-  &__btn {
-      color: $icon-color;
+  // picture-toolbar-list__btn,
+  // picture-toolbar-list__link
+  &__btn,
+  &__link {
+    color: $icon-color;
     font-size: $common-icon-font-size;
   }
 }

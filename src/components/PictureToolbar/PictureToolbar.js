@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import ErrorContext from '../../context/ErrorContext';
 import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
@@ -56,7 +57,6 @@ function PictureToolbar(props) {
     }
   };
 
-  
   return (
     <nav className="picture-toolbar">
       <ul className="picture-toolbar-list">
@@ -81,10 +81,9 @@ function PictureToolbar(props) {
           </button>
         </li>
         <li className="picture-toolbar-list__item">
-          <button className="picture-toolbar-list__btn">
-            <a href="https://api.opentripmap.com/0.1/en/tiles/pois/14/10/10.pbf?apikey=5ae2e3f221c38a28845f05b66e6185a474b772f0503b9bf316db4ad4"></a>
+          <Link to="/map" className="picture-toolbar-list__link">
             <i className="fas fa-map picture-toolbar-list__icon"></i>
-          </button>
+          </Link>
         </li>
       </ul>
     </nav>

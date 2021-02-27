@@ -35,7 +35,7 @@ function UserProvider(props) {
       }
     }
     init();
-  }, [error, errorState, setError, userState]);
+  }, []);
 
   return <UserContext.Provider value={[userState, dispatch]} {...props} />;
 }
