@@ -33,7 +33,6 @@ function MobileNav() {
     }
   };
 
-
   useEffect(() => {
     let itemOrder = null;
     switch (location.pathname) {
@@ -50,7 +49,7 @@ function MobileNav() {
         itemOrder = 5;
         break;
       default:
-        break;
+        return;
     }
     const navItems = document.querySelectorAll('.mobile-nav-list li');
     navItems.forEach((item) => {
