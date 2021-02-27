@@ -25,8 +25,6 @@ function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      console.log('fetching');
-      console.log(userLocation);
       if (!randomPlace && userState && userLocation) {
         const errorState = [error, setError];
         const requestState = [canUserRequest, setCanUserRequest];

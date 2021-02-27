@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -46,6 +46,11 @@ function MobileNav() {
     clickedItem.classList.add('active-tab');
     setSelectedPlace(null);
   };
+
+  useEffect(() => {
+
+   
+  }, [location])
 
   return (
     <nav

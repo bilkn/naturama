@@ -24,7 +24,6 @@ function PictureToolbar(props) {
 
   const handleFavClick = async () => {
     if (timerID) {
-      console.log("timer", timerID);
       clearTimeout(timerID);
     }
     const timeout = setTimeout(() => {

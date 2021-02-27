@@ -13,7 +13,7 @@ function EditProfile(props) {
   const [userState, dispatch] = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [picture, setPicture] = useState(null);
-  const [error, setError] = useContext(ErrorContext);
+  const [error] = useContext(ErrorContext);
   const handleBtnClick = async () => {
     setShowDarkBackground(false);
     setShowEdit(false);

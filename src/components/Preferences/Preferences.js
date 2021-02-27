@@ -15,7 +15,7 @@ function Preferences() {
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
-  const [error, setError] = useContext(ErrorContext);
+  const [error] = useContext(ErrorContext);
   useEffect(() => {
     if (userState) {
       const {
@@ -41,43 +41,45 @@ function Preferences() {
       setRadiusValue(radius);
     }
   }, [userState]);
-  const handleWindowClick = async () => {
-    // Saves the configured preferences to the state and database, after closing the preferences.
-    if (!document.querySelector('.preferences')) {
-      if (userState) {
-        const { profile } = userState;
-        const { preferences } = profile;
-        const {
-          location: { lat },
-        } = preferences;
-        const {
-          location: { lon },
-        } = preferences;
-        const { radius } = preferences;
-        const newPreferences = {
-          radius: radiusValue || radius,
-          location: {
-            lat: latValue || lat,
-            lon: lonValue || lon,
-          },
-        };
-        const newUser = editUser(userState, [['preferences', newPreferences]]);
-        try {
-          error.isDBActive &&
-            (await db.profile.update(3, { preferences: newPreferences }));
-          dispatch({ type: 'EDIT_USER', payload: newUser });
-        } catch (err) {
-          console.log(err);
-          // Add notification.
-        }
-      }
-    }
-  };
 
   useEffect(() => {
+    const handleWindowClick = async () => {
+      // Saves the configured preferences to the state and database, after closing the preferences.
+      if (!document.querySelector('.preferences')) {
+        if (userState) {
+          const { profile } = userState;
+          const { preferences } = profile;
+          const {
+            location: { lat },
+          } = preferences;
+          const {
+            location: { lon },
+          } = preferences;
+          const { radius } = preferences;
+          const newPreferences = {
+            radius: radiusValue || radius,
+            location: {
+              lat: latValue || lat,
+              lon: lonValue || lon,
+            },
+          };
+          const newUser = editUser(userState, [
+            ['preferences', newPreferences],
+          ]);
+          try {
+            error.isDBActive &&
+              (await db.profile.update(3, { preferences: newPreferences }));
+            dispatch({ type: 'EDIT_USER', payload: newUser });
+          } catch (err) {
+            console.log(err);
+            // Add notification.
+          }
+        }
+      }
+    };
     window.addEventListener('click', handleWindowClick);
     return () => window.removeEventListener('click', handleWindowClick);
-  }, [latValue, lonValue, radiusValue]);
+  }, [latValue, lonValue, radiusValue, dispatch, error.isDBActive, userState]);
 
   return (
     <div className="preferences">

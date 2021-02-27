@@ -5,8 +5,8 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "*.json": false,
-        "**/*.json": false,
+        "*.json": true,
+        "**/*.json": true,
         ".gitignore": true,
         ".babelrc": true,
         "webpack.config.js": true,
@@ -14,7 +14,7 @@
         "**/.babelrc": true,
         ".eslintrc.js": true,
         "debug.log": true,
-        "build": true,
+        "build": false,
         ".vscode": true
     },
     "explorerExclude.backup": null

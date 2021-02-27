@@ -6,7 +6,7 @@ function NameInput(props) {
   useEffect(() => {
     const {profile:{username} }= userState;
     if (username) setUsername(username);
-  }, []);
+  }, [setUsername, userState]);
   
   const handleChange = (e) => {
     e.preventDefault;

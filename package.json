@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "homepage": "http://yuribenjamin.github.io/naturama",
+  "homepage": "https://bilkn.github.io/naturama/",
   "scripts": {
     "build": "webpack --mode=production",
     "start": "webpack serve --mode development",
