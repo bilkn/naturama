@@ -40,7 +40,17 @@ function ProfileMenu() {
       dispatch({ type: 'RESET_DATABASE', payload: await createUser() });
       await db.open();
       await initialize(errorState, dispatch);
-      // !!! Add notif. 
+      // !!! Add notif.
+    } catch (err) {
+      console.log(err);
+      // !!! Add notif.
+    }
+  };
+
+  const handleRemovePlaceHistory = async () => {
+    try {
+      await db.history.clear();
+      dispatch({ type: 'CLEAR_HISTORY', payload: [] });
     } catch (err) {
       console.log(err);
       // !!! Add notif.
@@ -98,9 +108,16 @@ function ProfileMenu() {
       <div className="profile-menu-reset-container">
         <button
           className="profile-menu-reset-container__btn"
+          onClick={handleRemovePlaceHistory}
+          style={{marginBottom:"1rem"}}
+        >
+          Remove Place History
+        </button>
+        <button
+          className="profile-menu-reset-container__btn"
           onClick={handleReset}
         >
-          Reset data
+          Reset all data
         </button>
       </div>
     </div>

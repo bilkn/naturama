@@ -49,10 +49,18 @@ function userReducer(state, action) {
       };
     }
 
-    case "RESET_DATABASE": {
+    case 'RESET_DATABASE': {
       return {
         ...state,
         notification: 'Database has been reset.',
+        isNotificationOpen: true,
+      };
+    }
+    case 'CLEAR_HISTORY': {
+      return {
+        ...state,
+        history: action.payload,
+        notification: 'Place history has been removed.',
         isNotificationOpen: true,
       };
     }

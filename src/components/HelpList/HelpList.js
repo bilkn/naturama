@@ -6,7 +6,7 @@ function HelpList() {
     <ol className="help-list">
       <HelpListItem
         title="Home"
-        text="If your location is set correctly, you will automatically see a new location suggestion on the home page, every time you open the app."
+        text="If your location is set correctly, you will automatically see a new place suggestion on the home page, every time you open the app."
       />
       <HelpListItem
         title="Favourites"
