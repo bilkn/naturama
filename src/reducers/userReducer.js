@@ -49,6 +49,14 @@ function userReducer(state, action) {
       };
     }
 
+    case "RESET_DATABASE": {
+      return {
+        ...state,
+        notification: 'Database has been reset.',
+        isNotificationOpen: true,
+      };
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

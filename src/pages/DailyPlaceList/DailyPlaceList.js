@@ -32,7 +32,7 @@ function DailyPlaceList() {
             <MobileNavTop>
               <IconButton
                 iconClass="fa fa-arrow-left"
-                handleBtnClick={handleBtnClick}
+                onClick={handleBtnClick}
               />
             </MobileNavTop>
           </Place>

@@ -84,7 +84,7 @@ function MobileNav() {
           <IconButton
             btnClass="mobile-nav-list-item__btn"
             iconClass="fas fa-random  mobile-nav-list-item__icon"
-            handleBtnClick={handleShuffleClick}
+            onClick={handleShuffleClick}
           />
         </li>
         <li className="mobile-nav-list-item ">

@@ -48,7 +48,7 @@ function FullscreenPicture({ history }) {
       <MobileNavTop>
         <IconButton
           iconClass="fa fa-arrow-left"
-          handleBtnClick={handleBtnClick}
+          onClick={handleBtnClick}
         />
         <p className="fullscreen-picture_name">{place && place.content.name}</p>
         <EmptyDiv />

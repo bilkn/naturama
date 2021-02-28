@@ -14,9 +14,11 @@ function EditProfile(props) {
   const [username, setUsername] = useState('');
   const [picture, setPicture] = useState(null);
   const [error] = useContext(ErrorContext);
+
   const handleBtnClick = async () => {
-    setShowDarkBackground(false);
-    setShowEdit(false);
+    setShowDarkBackground(() => false);
+    setShowEdit(() => false);
+    console.log('hello');
     const newUser = createNewUser();
     if (newUser) {
       try {
@@ -32,7 +34,8 @@ function EditProfile(props) {
 
   const addPictureToDB = async () => {
     const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
-    error.isDBActive && await db.profile.update(2, { picture: pictureArrayBuffer });
+    error.isDBActive &&
+      (await db.profile.update(2, { picture: pictureArrayBuffer }));
   };
 
   const createNewUser = () => {
@@ -59,7 +62,7 @@ function EditProfile(props) {
         <IconButton
           btnClass="edit-profile-name-container__btn"
           iconClass="fas fa-check-circle"
-          handleBtnClick={handleBtnClick}
+          onClick={handleBtnClick}
         />
       </div>
     </div>
