@@ -1,9 +1,9 @@
 import './ShareLinkList.scss';
 import React, { useContext } from 'react';
-import RandomPlaceContext from '../../context/RandomPlaceContext';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 function ShareLinkList() {
-  const [place] = useContext(RandomPlaceContext);
-
+  const [place] = useContext(SelectedPlaceContext);
+  
   const getTwitterURL = () => {
     const {
       content: { wikipedia: wikiURL, name },

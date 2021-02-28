@@ -63,7 +63,7 @@ function Home() {
       </AppHead>
       <div className="home">
         {(!userLocation && (
-          <Error text="You must activate your geolocation." />
+          <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
           (randomPlace ? (
             <Place place={randomPlace} handleClick={handleClick} />

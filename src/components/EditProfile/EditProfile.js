@@ -18,7 +18,6 @@ function EditProfile(props) {
   const handleBtnClick = async () => {
     setShowDarkBackground(() => false);
     setShowEdit(() => false);
-    console.log('hello');
     const newUser = createNewUser();
     if (newUser) {
       try {

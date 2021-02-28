@@ -7,12 +7,14 @@ import ErrorContext from '../../context/ErrorContext';
 import IconButton from '../IconButton/IconButton';
 import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
 import UserRequestContext from '../../context/UserRequestContext';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 
 function MobileNav() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
   const [error, setError] = useContext(ErrorContext);
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
+  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();
 
   const handleShuffleClick = async () => {
@@ -35,7 +37,9 @@ function MobileNav() {
 
   useEffect(() => {
     let itemOrder = null;
-    switch (location.pathname) {
+    const path = location.pathname;
+    if (path !== '/favourites') setSelectedPlace(() => null);
+    switch (path) {
       case '/':
         itemOrder = 1;
         break;
