@@ -11,6 +11,7 @@ function UserProvider(props) {
   const [error, setError] = errorState;
 
   useEffect(() => {
+    console.log('UserProvider');
     async function openDB() {
       try {
         await db.open();
@@ -20,7 +21,7 @@ function UserProvider(props) {
       }
     }
     openDB();
-  }, [error, setError]);
+  }, [setError]);
 
   useEffect(() => {
     async function init() {

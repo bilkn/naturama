@@ -14,7 +14,7 @@ function MobileNav() {
   const [userState, dispatch] = useContext(UserContext);
   const [error, setError] = useContext(ErrorContext);
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
-  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();
 
   const handleShuffleClick = async () => {
@@ -38,7 +38,11 @@ function MobileNav() {
   useEffect(() => {
     let itemOrder = null;
     const path = location.pathname;
-    if (path !== '/favourites') setSelectedPlace(() => null);
+    console.log(path)
+    if (path !== '/favourites' && path !== '/fullscreen-picture') {
+      setSelectedPlace(() => null);
+    }
+
     switch (path) {
       case '/':
         itemOrder = 1;
@@ -63,7 +67,7 @@ function MobileNav() {
       `.mobile-nav-list li:nth-of-type(${itemOrder})`
     );
     navItem.classList.add('active-tab');
-  }, [location.pathname]);
+  }, [location.pathname, setSelectedPlace]);
 
   return (
     <nav

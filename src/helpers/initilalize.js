@@ -10,7 +10,7 @@ async function initialize(errorState, dispatch) {
   if (window.indexedDB) {
     const result = await db.profile.get(3);
     !result && (await initializeDB(errorState));
-    initUserWithDB(dispatch);
+    await initUserWithDB(dispatch);
   } else {
     await initUserWithoutDB(dispatch);
   }
