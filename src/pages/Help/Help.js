@@ -13,6 +13,7 @@ function Help() {
         <PageName pageName="Help" />
         <EmptyDiv />
       </MobileNavTop >
+      <HelpList />
     </div>
   );
 }

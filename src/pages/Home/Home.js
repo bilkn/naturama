@@ -21,7 +21,7 @@ function Home() {
   const handleClick = () => setSelectedPlace(randomPlace);
 
   const userLocation =
-    (userState && userState.profile.preferences.location) || null;
+    (userState && userState.profile.preferences.location.lat) || null;
 
   useEffect(() => {
     async function fetchData() {
@@ -62,7 +62,7 @@ function Home() {
         <Logo />
       </AppHead>
       <div className="home">
-        {(userLocation && !(userLocation.lat || userLocation.lon) && (
+        {(!userLocation && (
           <Error text="You must activate your geolocation." />
         )) ||
           (randomPlace ? (

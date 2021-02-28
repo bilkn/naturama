@@ -3,7 +3,7 @@ import ErrorContext from '../../context/ErrorContext';
 
 function ErrorProvider(props) {
   const defaultState = {
-    isDBActive: false,
+    isDBActive: true,
     isPlaceFound: true,
   };
   const [error, setError] = useState(defaultState);

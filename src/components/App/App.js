@@ -17,7 +17,7 @@ import Preferences from '../Preferences/Preferences';
 import Profile from '../../pages/Profile/Profile';
 import MobileNav from '../MobileNav/MobileNav';
 import Help from '../../pages/Help/Help';
-
+import Map from '../../pages/Map/Map';
 function App() {
   return (
     <>
@@ -54,6 +54,7 @@ function App() {
                           component={Preferences}
                         />
                         <Route exact path="/help" component={Help} />
+                        <Route exact path="/map" component={Map} />
                       </Switch>
                     </Router>
                   </PlaceProvider>

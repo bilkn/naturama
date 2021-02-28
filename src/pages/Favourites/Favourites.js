@@ -4,7 +4,6 @@ import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import PlaceList from '../../components/PlaceList/PlaceList';
-import Notification from '../../components/Notification/Notification';
 import { Redirect } from 'react-router-dom';
 import IconButton from '../../components/IconButton/IconButton';
 import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';

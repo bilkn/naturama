@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
 import ErrorContext from '../../context/ErrorContext';
-import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import IconButton from '../IconButton/IconButton';
 import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
 import UserRequestContext from '../../context/UserRequestContext';
@@ -12,7 +11,6 @@ import UserRequestContext from '../../context/UserRequestContext';
 function MobileNav() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
-  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error, setError] = useContext(ErrorContext);
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const location = useLocation();
@@ -29,40 +27,55 @@ function MobileNav() {
     };
     try {
       await triggerRandomPlaceRequest(args);
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
       setError({ ...error, isPlaceFound: false });
     }
   };
 
-  const handleNavClick = (e) => {
-    const nav = e.target.closest('nav');
-    const clickedItem = e.target.closest('li');
-    const listArray = Array.from(nav.querySelectorAll('li'));
-    listArray.forEach((li) => {
-      if (li.classList.contains('active-tab'))
-        li.classList.remove('active-tab');
+  useEffect(() => {
+    let itemOrder = null;
+    switch (location.pathname) {
+      case '/':
+        itemOrder = 1;
+        break;
+      case '/favourites':
+        itemOrder = 2;
+        break;
+      case '/profile':
+        itemOrder = 4;
+        break;
+      case '/daily-place-list':
+        itemOrder = 5;
+        break;
+      default:
+        return;
+    }
+    const navItems = document.querySelectorAll('.mobile-nav-list li');
+    navItems.forEach((item) => {
+      item.classList.remove('active-tab');
     });
-    clickedItem.classList.add('active-tab');
-    setSelectedPlace(null);
-  };
+    const navItem = document.querySelector(
+      `.mobile-nav-list li:nth-of-type(${itemOrder})`
+    );
+    navItem.classList.add('active-tab');
+  }, [location.pathname]);
 
   return (
     <nav
       className="mobile-nav"
-      onClick={handleNavClick}
       style={{
         visibility:
           location.pathname === '/fullscreen-picture' ? 'hidden' : 'visible',
       }}
     >
       <ul className="mobile-nav-list">
-        <li className="mobile-nav-list-item">
+        <li className="mobile-nav-list-item ">
           <Link to="/" className="mobile-nav-list-item__link">
             <i className="fas fa-home mobile-nav-list-item__icon" />
           </Link>
         </li>
-        <li className="mobile-nav-list-item">
+        <li className="mobile-nav-list-item ">
           <Link to="/favourites" className="mobile-nav-list-item__link">
             <i className="fas fa-star mobile-nav-list-item__icon" />
           </Link>

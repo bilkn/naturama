@@ -15,20 +15,20 @@ function UserProvider(props) {
       try {
         await db.open();
       } catch (err) {
-        console.log(err)
+        console.log(err);
         setError({ ...error, isDBActive: false }); // !!! One of them may be removed in the future.
       }
     }
     openDB();
-  }, []);
+  }, [error, setError]);
 
   useEffect(() => {
     async function init() {
       if (!userState) {
         try {
           await initialize(errorState, dispatch);
-        } catch(err) {
-          console.log(err)
+        } catch (err) {
+          console.log(err);
           await initUserWithoutDB(dispatch);
           setError({ ...error, isDBActive: false });
         }

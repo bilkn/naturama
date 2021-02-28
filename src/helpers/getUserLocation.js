@@ -1,20 +1,25 @@
 function getUserLocation() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
+    const options = {
+      timeout: 6000,
+    };
+    const error = () => {
+      resolve({ lat: '', lon: '' });
+    };
+    const success = (position) => {
+      const lat = Math.round(position.coords.latitude);
+      const lon = Math.round(position.coords.longitude);
+      const location = {
+        lat,
+        lon,
+      };
+      resolve(location);
+    };
+
     if (navigator.geolocation) {
-      navigator.permissions.query({ name: 'geolocation' }).then((resp) => {
-        resp.state === 'denied' && resolve({ lat: '', lon: '' });
-      });
-      navigator.geolocation.getCurrentPosition((position) => {
-        const lat = Math.round(position.coords.latitude);
-        const lon = Math.round(position.coords.longitude);
-        const location = {
-          lat,
-          lon,
-        };
-        resolve(location);
-      });
+      navigator.geolocation.getCurrentPosition(success, error, options);
     } else {
-      reject('NO_GEOLOCATION');
+      // !!! ADD NOTIF OR REJECT.
     }
   });
 }
