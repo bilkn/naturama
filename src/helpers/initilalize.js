@@ -5,6 +5,7 @@ import getUserLocation from './getUserLocation';
 import getDailyPlaceList from './getDailyPlaceList';
 import initUserWithoutDB from './initUserWithoutDB';
 import isHoursPassed from './isHoursPassed';
+import editUser from './editUser';
 
 async function initialize(errorState, dispatch) {
   if (window.indexedDB) {
@@ -36,11 +37,7 @@ async function initUserWithDB(dispatch) {
   const pictureBlob = picture && arrayBufferToBlob(picture);
 
   let dailyList = null;
-  // It updates the daily place list everyday.
-  if (isHoursPassed(24, lastListUpdateDate)) {
-    dailyList = await getDailyPlaceList();
-    await updateDailyListDB(dailyList);
-  } else dailyList = await db.table('dailyList').toArray();
+
   const dbData = {
     profile: {
       username,
@@ -51,12 +48,19 @@ async function initUserWithDB(dispatch) {
       preferences,
     },
     favourites,
-    dailyList,
+    dailyList: [],
     history,
     isNotificationOpen: false,
     notification: '',
   };
-  dispatch({ type: 'INIT', payload: dbData });
+
+  // It updates the daily place list everyday.
+  if (isHoursPassed(0.01, lastListUpdateDate)) {
+    dailyList = await getDailyPlaceList(dbData);
+    await updateDailyListDB(dailyList);
+  } else dailyList = await db.table('dailyList').toArray();
+  const editedUser = editUser(dbData, [['dailyList', dailyList]]);
+  dispatch({ type: 'INIT', payload: editedUser });
 }
 
 async function initializeDB() {
@@ -64,7 +68,6 @@ async function initializeDB() {
   const dailyPlaceList =
     location.lat && location.lon ? await getDailyPlaceList() : [];
 
-  
   await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
     { username: '' },
