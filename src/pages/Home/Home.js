@@ -62,7 +62,7 @@ function Home() {
         <Logo />
       </AppHead>
       <div className="home">
-        {(!userLocation && (
+        {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
           (randomPlace ? (

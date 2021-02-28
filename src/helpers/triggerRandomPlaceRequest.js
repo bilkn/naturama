@@ -7,13 +7,12 @@ async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
   const [canUserRequest, setCanUserRequest] = requestState;
   const [userState] = user;
-  const [error] =errorState
   const {
     location: { lat },
     location: { lon },
   } = userState.profile.preferences;
   if (!lat || !lon) {
-    await tryToSetLocation(user,error);
+    await tryToSetLocation(user,errorState);
   } else if (canUserRequest) {
     preventRequestForAWhile(setRandomPlace, setCanUserRequest);
     await requestRandomPlace({ user, errorState, setRandomPlace });
