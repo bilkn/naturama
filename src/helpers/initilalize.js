@@ -64,6 +64,7 @@ async function initializeDB() {
   const dailyPlaceList =
     location.lat && location.lon ? await getDailyPlaceList() : [];
 
+  
   await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
     { username: '' },

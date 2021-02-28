@@ -2,7 +2,7 @@ import React from 'react';
 import PlaceItem from '../PlaceItem/PlaceItem';
 import './PlaceList.scss';
 function PlaceList(props) {
-  const { list, setSelectedPlace } = props;
+  const { list, setSelectedPlace, ...otherProps } = props;
   return (
     <ul className="place-list">
       {list &&
@@ -11,6 +11,7 @@ function PlaceList(props) {
             place={place}
             setSelectedPlace={setSelectedPlace}
             key={place.xid}
+            {...otherProps}
           >
             {/* <IconButton btnClass="icon-btn" iconClass="fas fa-star" /> */}
           </PlaceItem>
