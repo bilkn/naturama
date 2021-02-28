@@ -10,6 +10,7 @@ import db from '../../helpers/dexie';
 import createUser from '../../helpers/createUser';
 import initialize from '../../helpers/initilalize';
 import ErrorContext from '../../context/ErrorContext';
+import Dialog from '../Dialog/Dialog';
 
 function ProfileMenu() {
   const [showDarkBackground, setShowDarkBackground] = useContext(
@@ -19,7 +20,11 @@ function ProfileMenu() {
   const [showContact, setShowContact] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
   const errorState = useContext(ErrorContext);
-
+  const [dialog, setDialog] = useState({
+    isDialogOpen: false,
+    text: '',
+    operation: '',
+  });
   const handleEditProfile = () => {
     if (userState) {
       setShowDarkBackground(!showDarkBackground);
@@ -34,30 +39,80 @@ function ProfileMenu() {
     setShowContact(!showContact);
   };
 
-  const handleReset = async () => {
-    try {
-      await db.delete();
-      dispatch({ type: 'RESET_DATABASE', payload: await createUser() });
-      await db.open();
-      await initialize(errorState, dispatch);
-      // !!! Add notif.
-    } catch (err) {
-      console.log(err);
-      // !!! Add notif.
+  const resetAllData = async () => {
+    await db.delete();
+    dispatch({ type: 'RESET_DATABASE', payload: await createUser() });
+    await db.open();
+    await initialize(errorState, dispatch);
+  };
+
+  const removePlaceHistory = async () => {
+    await db.history.clear();
+    dispatch({ type: 'CLEAR_HISTORY', payload: [] });
+  };
+
+  const handleDialog = (e) => {
+    const operation = e.target.dataset.op;
+
+    console.log(operation);
+    switch (operation) {
+      case 'clear':
+        setDialog({
+          isDialogOpen: true,
+          text: 'Are you really want to clear your history?',
+          operation,
+        });
+        break;
+      case 'reset':
+        setDialog({
+          isDialogOpen: true,
+          text: 'Are you really want to reset all of your data?',
+          operation,
+        });
+        break;
+      default:
+        break;
     }
   };
 
-  const handleRemovePlaceHistory = async () => {
+  const operationHandler = async () => {
     try {
-      await db.history.clear();
-      dispatch({ type: 'CLEAR_HISTORY', payload: [] });
+      switch (dialog.operation) {
+        case 'clear':
+          {
+            await removePlaceHistory();
+            // Add notif.
+          }
+          break;
+        case 'reset':
+          {
+            await resetAllData();
+            // Add notif.
+          }
+          break;
+        default:
+          break;
+      }
     } catch (err) {
       console.log(err);
-      // !!! Add notif.
     }
+    setDialog({
+      isDialogOpen: false,
+      text: '',
+      operation: '',
+    });
   };
+
   return (
     <div className="profile-menu">
+      {dialog.isDialogOpen && (
+        <Dialog
+          text={dialog.text}
+          operationHandler={operationHandler}
+          setDialog={setDialog}
+        />
+      )}
+
       {showEdit && (
         <EditProfile
           setShowEdit={setShowEdit}
@@ -108,14 +163,16 @@ function ProfileMenu() {
       <div className="profile-menu-reset-container">
         <button
           className="profile-menu-reset-container__btn"
-          onClick={handleRemovePlaceHistory}
-          style={{marginBottom:"1rem"}}
+          onClick={handleDialog}
+          style={{ marginBottom: '1rem' }}
+          data-op="clear"
         >
-          Remove Place History
+          Clear place history
         </button>
         <button
           className="profile-menu-reset-container__btn"
-          onClick={handleReset}
+          onClick={handleDialog}
+          data-op="reset"
         >
           Reset all data
         </button>

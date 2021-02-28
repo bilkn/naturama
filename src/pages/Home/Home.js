@@ -24,6 +24,7 @@ function Home() {
     (userState && userState.profile.preferences.location.lat) || null;
 
   useEffect(() => {
+    let mount = true;
     async function fetchData() {
       if (!randomPlace && userState && userLocation && canUserRequest) {
         const errorState = [error, setError];
@@ -39,11 +40,12 @@ function Home() {
           await triggerRandomPlaceRequest(args);
         } catch (err) {
           console.log(err);
-          setError({ ...error, isPlaceFound: false });
+          if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
         }
       }
     }
-    fetchData();
+    if (mount) fetchData();
+    return () => (mount = false);
   }, [
     userState,
     canUserRequest,

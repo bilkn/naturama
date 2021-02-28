@@ -31,7 +31,7 @@ function MobileNav() {
       await triggerRandomPlaceRequest(args);
     } catch (err) {
       console.log(err);
-      setError({ ...error, isPlaceFound: false });
+      if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
     }
   };
 
