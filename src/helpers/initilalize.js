@@ -55,7 +55,7 @@ async function initUserWithDB(dispatch) {
   };
 
   // It updates the daily place list everyday.
-  if (isHoursPassed(0.01, lastListUpdateDate)) {
+  if (isHoursPassed(24, lastListUpdateDate)) {
     dailyList = await getDailyPlaceList(dbData);
     await updateDailyListDB(dailyList);
   } else dailyList = await db.table('dailyList').toArray();

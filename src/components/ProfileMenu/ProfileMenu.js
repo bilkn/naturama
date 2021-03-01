@@ -20,8 +20,8 @@ function ProfileMenu() {
   const [showContact, setShowContact] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
   const errorState = useContext(ErrorContext);
+  const [showDialog, setShowDialog] = useState(false);
   const [dialog, setDialog] = useState({
-    isDialogOpen: false,
     text: '',
     operation: '',
   });
@@ -52,19 +52,18 @@ function ProfileMenu() {
   };
 
   const handleDialog = (e) => {
+    setShowDarkBackground(!showDarkBackground);
+    setShowDialog(!showDialog);
     const operation = e.target.dataset.op;
-
     switch (operation) {
       case 'clear':
         setDialog({
-          isDialogOpen: true,
           text: 'Are you really want to clear your history?',
           operation,
         });
         break;
       case 'reset':
         setDialog({
-          isDialogOpen: true,
           text: 'Are you really want to reset all of your data?',
           operation,
         });
@@ -104,11 +103,13 @@ function ProfileMenu() {
 
   return (
     <div className="profile-menu">
-      {dialog.isDialogOpen && (
+      {showDialog && (
         <Dialog
           text={dialog.text}
           operationHandler={operationHandler}
           setDialog={setDialog}
+          setShowDarkBackground={setShowDarkBackground}
+          setShowDialog={setShowDialog}
         />
       )}
 
@@ -124,6 +125,7 @@ function ProfileMenu() {
           setShowDarkBackground={setShowDarkBackground}
           setShowEdit={setShowEdit}
           setShowContact={setShowContact}
+          setShowDialog={setShowDialog}
         />
       )}
       <ul className="profile-menu-list">
