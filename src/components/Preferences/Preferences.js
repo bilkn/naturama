@@ -89,7 +89,7 @@ function Preferences() {
       setError({ ...error, isGeoActive: true });
     }
   };
-  
+
   return (
     <div className="preferences">
       <MobileNavTop>

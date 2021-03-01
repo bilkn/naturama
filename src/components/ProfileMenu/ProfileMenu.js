@@ -54,7 +54,6 @@ function ProfileMenu() {
   const handleDialog = (e) => {
     const operation = e.target.dataset.op;
 
-    console.log(operation);
     switch (operation) {
       case 'clear':
         setDialog({

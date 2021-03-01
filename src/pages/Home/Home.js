@@ -36,7 +36,6 @@ function Home() {
         try {
           await triggerRandomPlaceRequest(args);
         } catch (err) {
-          console.log(err);
           if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
         }
       }
