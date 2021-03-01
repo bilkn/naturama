@@ -10,7 +10,7 @@ function HelpList() {
       />
       <HelpListItem
         title="Favourites"
-        text="You can see the places you have added to your favorites on the favorites page."
+        text="You can see the places you have added to your favourites on the favourites page."
       />
       <HelpListItem
         title="Profile"

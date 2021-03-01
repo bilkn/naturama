@@ -20,13 +20,10 @@ function Home() {
 
   const handleClick = () => setSelectedPlace(randomPlace);
 
-  const userLocation =
-    (userState && userState.profile.preferences.location.lat) || null;
-
   useEffect(() => {
     let mount = true;
     async function fetchData() {
-      if (!randomPlace && userState && userLocation && canUserRequest) {
+      if (!randomPlace && userState && error.isGeoActive && canUserRequest) {
         const errorState = [error, setError];
         const requestState = [canUserRequest, setCanUserRequest];
         const user = [userState, dispatch];
@@ -55,7 +52,6 @@ function Home() {
     setError,
     randomPlace,
     setRandomPlace,
-    userLocation,
   ]);
 
   return (
