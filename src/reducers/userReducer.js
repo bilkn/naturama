@@ -49,6 +49,22 @@ function userReducer(state, action) {
       };
     }
 
+    case 'RESET_DATABASE': {
+      return {
+        ...state,
+        notification: 'Database has been reset.',
+        isNotificationOpen: true,
+      };
+    }
+    case 'CLEAR_HISTORY': {
+      return {
+        ...state,
+        history: action.payload,
+        notification: 'Place history has been removed.',
+        isNotificationOpen: true,
+      };
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }

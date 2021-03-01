@@ -20,12 +20,10 @@ function Home() {
 
   const handleClick = () => setSelectedPlace(randomPlace);
 
-  const userLocation =
-    (userState && userState.profile.preferences.location.lat) || null;
-
   useEffect(() => {
+    let mount = true;
     async function fetchData() {
-      if (!randomPlace && userState && userLocation) {
+      if (!randomPlace && userState && error.isGeoActive && canUserRequest) {
         const errorState = [error, setError];
         const requestState = [canUserRequest, setCanUserRequest];
         const user = [userState, dispatch];
@@ -38,12 +36,12 @@ function Home() {
         try {
           await triggerRandomPlaceRequest(args);
         } catch (err) {
-          console.log(err);
-          setError({ ...error, isPlaceFound: false });
+          if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
         }
       }
     }
-    fetchData();
+    if (mount) fetchData();
+    return () => (mount = false);
   }, [
     userState,
     canUserRequest,
@@ -53,7 +51,6 @@ function Home() {
     setError,
     randomPlace,
     setRandomPlace,
-    userLocation,
   ]);
 
   return (
@@ -62,8 +59,8 @@ function Home() {
         <Logo />
       </AppHead>
       <div className="home">
-        {(!userLocation && (
-          <Error text="You must activate your geolocation." />
+        {(!error.isGeoActive && (
+          <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
           (randomPlace ? (
             <Place place={randomPlace} handleClick={handleClick} />

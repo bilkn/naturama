@@ -7,12 +7,14 @@ import ErrorContext from '../../context/ErrorContext';
 import IconButton from '../IconButton/IconButton';
 import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
 import UserRequestContext from '../../context/UserRequestContext';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 
 function MobileNav() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
   const [error, setError] = useContext(ErrorContext);
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
+  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();
 
   const handleShuffleClick = async () => {
@@ -29,13 +31,18 @@ function MobileNav() {
       await triggerRandomPlaceRequest(args);
     } catch (err) {
       console.log(err);
-      setError({ ...error, isPlaceFound: false });
+      if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
     }
   };
 
   useEffect(() => {
     let itemOrder = null;
-    switch (location.pathname) {
+    const path = location.pathname;
+    if (path !== '/favourites' && path !== '/fullscreen-picture') {
+      setSelectedPlace(() => null);
+    }
+
+    switch (path) {
       case '/':
         itemOrder = 1;
         break;
@@ -59,7 +66,7 @@ function MobileNav() {
       `.mobile-nav-list li:nth-of-type(${itemOrder})`
     );
     navItem.classList.add('active-tab');
-  }, [location.pathname]);
+  }, [location.pathname, setSelectedPlace]);
 
   return (
     <nav
@@ -84,7 +91,7 @@ function MobileNav() {
           <IconButton
             btnClass="mobile-nav-list-item__btn"
             iconClass="fas fa-random  mobile-nav-list-item__icon"
-            handleBtnClick={handleShuffleClick}
+            onClick={handleShuffleClick}
           />
         </li>
         <li className="mobile-nav-list-item ">

@@ -1,22 +1,15 @@
-import React, { useContext} from 'react';
-import ProfileThumbnail from '../../components/ProfileThumbnail/ProfileThumbnail';
-import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
-import './Profile.scss';
-import UserContext from '../../context/UserContext';
+import React from 'react';
 import AppHead from '../../components/AppHead/AppHead';
 import PageName from '../../components/PageName/PageName';
+import ProfileContainer from '../../components/ProfileContainer/ProfileContainer';
 
 function Profile() {
-  const [userState] = useContext(UserContext);
-
-
   return (
-    <div className="profile">
+    <div>
       <AppHead>
         <PageName pageName="Profile" />
       </AppHead>
-      <ProfileThumbnail userState={userState} />
-      <ProfileMenu />
+      <ProfileContainer />
     </div>
   );
 }

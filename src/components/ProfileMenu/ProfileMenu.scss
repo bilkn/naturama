@@ -5,13 +5,13 @@
 }
 
 .profile-menu-list {
+  margin-bottom: 2rem;
   //profile-menu-list__item
   &__item {
     background: $sec-color;
     border-bottom: 1px solid rgb(141, 141, 141);
     color: $icon-color;
     font-size: 1.8rem;
-    padding: 0.3rem 1rem;
   }
   // profile-menu-list__icon
   &__icon {
@@ -21,7 +21,24 @@
   // profile-menu-list__btn
   &__link,
   &__btn {
+    align-items: center;
     color: inherit;
+    display: flex;
     font-size: inherit;
+    height: 100%;
+    padding: 0.3rem 1rem;
+    text-align: start;
+    width: 100%;
+  }
+}
+
+.profile-menu-reset-container {
+  // profile-menu-reset-container__btn
+  &__btn {
+    background-color: ivory;
+    display: block;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    margin: 0 auto;
   }
 }

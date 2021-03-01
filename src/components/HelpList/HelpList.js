@@ -5,20 +5,20 @@ function HelpList() {
   return (
     <ol className="help-list">
       <HelpListItem
+        title="Home"
+        text="If your location is set correctly, you will automatically see a new place suggestion on the home page, every time you open the app."
+      />
+      <HelpListItem
         title="Favourites"
-        text="You can add a place to your favourites, by this way you can still access the place picture, and description."
+        text="You can see the places you have added to your favourites on the favourites page."
       />
       <HelpListItem
         title="Profile"
-        text="You can add a place to your favourites, by this way you can still access the place picture, and description."
-      />
-      <HelpListItem
-        title="Contact"
-        text='In order to contact with me via my github, linkedin, or email, you can checkout the "Contact" section .'
+        text="You can customize your profile or contact with me on the profile page."
       />
       <HelpListItem
         title="Daily Place List"
-        text="If your browser, supports indexedDB, and you have give permission for browser storage (IndexedDB), 5 new place will be suggested to you everyday."
+        text="If you are not in incognito mode, and your location is set correctly, five new places will be suggested to you on the daily list page everyday."
       />
     </ol>
   );

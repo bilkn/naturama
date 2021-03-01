@@ -15,7 +15,7 @@ function Preferences() {
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
-  const [error] = useContext(ErrorContext);
+  const [error, setError] = useContext(ErrorContext);
   useEffect(() => {
     if (userState) {
       const {
@@ -66,6 +66,7 @@ function Preferences() {
           const newUser = editUser(userState, [
             ['preferences', newPreferences],
           ]);
+          configureGeoError();
           try {
             error.isDBActive &&
               (await db.profile.update(3, { preferences: newPreferences }));
@@ -80,6 +81,14 @@ function Preferences() {
     window.addEventListener('click', handleWindowClick);
     return () => window.removeEventListener('click', handleWindowClick);
   }, [latValue, lonValue, radiusValue, dispatch, error.isDBActive, userState]);
+
+  const configureGeoError = () => {
+    if (!latValue || !lonValue) {
+      setError({ ...error, isGeoActive: false });
+    } else if (!error.isGeoActive) {
+      setError({ ...error, isGeoActive: true });
+    }
+  };
 
   return (
     <div className="preferences">

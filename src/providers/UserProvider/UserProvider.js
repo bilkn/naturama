@@ -20,7 +20,7 @@ function UserProvider(props) {
       }
     }
     openDB();
-  }, [error, setError]);
+  }, [setError]);
 
   useEffect(() => {
     async function init() {
