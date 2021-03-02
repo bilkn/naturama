@@ -21,6 +21,7 @@ async function createUser() {
     history: [],
     isNotificationOpen: false,
     notification: '',
+    notifTimeoutID: null,
   };
   return userTemplate;
 }

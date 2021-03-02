@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+.profile-menu-list {
+  margin-bottom: 2rem;
+  //profile-menu-list__item
+  &__item {
+    background: $sec-color;
+    border-bottom: 1px solid rgb(141, 141, 141);
+    color: $icon-color;
+    font-size: 1.8rem;
+  }
+  // profile-menu-list__icon
+  &__icon {
+    width: 50px;
+  }
+  // profile-menu-list__link,
+  // profile-menu-list__btn
+  &__link,
+  &__btn {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    font-size: inherit;
+    height: 100%;
+    padding: 0.3rem 1rem;
+    text-align: start;
+    width: 100%;
+  }
+}

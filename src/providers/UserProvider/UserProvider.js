@@ -16,11 +16,11 @@ function UserProvider(props) {
         await db.open();
       } catch (err) {
         console.log(err);
-        setError({ ...error, isDBActive: false }); // !!! One of them may be removed in the future.
+        if (error.isDBActive) setError({ ...error, isDBActive: false });
       }
     }
     openDB();
-  }, [setError]);
+  }, [error, setError]);
 
   useEffect(() => {
     async function init() {
@@ -30,12 +30,12 @@ function UserProvider(props) {
         } catch (err) {
           console.log(err);
           await initUserWithoutDB(dispatch);
-          setError({ ...error, isDBActive: false });
+          if (error.isDBActive) setError({ ...error, isDBActive: false });
         }
       }
     }
     init();
-  }, []);
+  }, [errorState, userState, error, setError]);
 
   return <UserContext.Provider value={[userState, dispatch]} {...props} />;
 }

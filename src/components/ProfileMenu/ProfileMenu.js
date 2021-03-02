@@ -3,14 +3,15 @@ import './ProfileMenu.scss';
 import DarkBackground from '../DarkBackground/DarkBackground';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import Contact from '../Contact/Contact';
-import { Link } from 'react-router-dom';
 import EditProfile from '../EditProfile/EditProfile';
 import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
 import createUser from '../../helpers/createUser';
 import initialize from '../../helpers/initilalize';
+import createNotificationTimeout from '../../helpers/createNotificationTimeout';
 import ErrorContext from '../../context/ErrorContext';
 import Dialog from '../Dialog/Dialog';
+import ProfileMenuList from '../ProfileMenuList/ProfileMenuList';
 
 function ProfileMenu() {
   const [showDarkBackground, setShowDarkBackground] = useContext(
@@ -20,8 +21,8 @@ function ProfileMenu() {
   const [showContact, setShowContact] = useState(false);
   const [userState, dispatch] = useContext(UserContext);
   const errorState = useContext(ErrorContext);
+  const [showDialog, setShowDialog] = useState(false);
   const [dialog, setDialog] = useState({
-    isDialogOpen: false,
     text: '',
     operation: '',
   });
@@ -40,31 +41,46 @@ function ProfileMenu() {
   };
 
   const resetAllData = async () => {
+    const { notifTimeoutID } = userState;
+    if (notifTimeoutID) {
+      clearTimeout(notifTimeoutID);
+    }
     await db.delete();
-    dispatch({ type: 'RESET_DATABASE', payload: await createUser() });
     await db.open();
     await initialize(errorState, dispatch);
+    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
+    dispatch({
+      type: 'RESET_DATABASE',
+      payload: { newState: await createUser(), notifTimeoutID: newTimeoutID },
+    });
   };
 
   const removePlaceHistory = async () => {
+    const { notifTimeoutID } = userState;
+    if (notifTimeoutID) {
+      clearTimeout(notifTimeoutID);
+    }
     await db.history.clear();
-    dispatch({ type: 'CLEAR_HISTORY', payload: [] });
+    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
+    dispatch({
+      type: 'CLEAR_HISTORY',
+      payload: { history: [], notifTimeoutID: newTimeoutID },
+    });
   };
 
   const handleDialog = (e) => {
+    setShowDarkBackground(!showDarkBackground);
+    setShowDialog(!showDialog);
     const operation = e.target.dataset.op;
-
     switch (operation) {
       case 'clear':
         setDialog({
-          isDialogOpen: true,
           text: 'Are you really want to clear your history?',
           operation,
         });
         break;
       case 'reset':
         setDialog({
-          isDialogOpen: true,
           text: 'Are you really want to reset all of your data?',
           operation,
         });
@@ -96,7 +112,6 @@ function ProfileMenu() {
       console.log(err);
     }
     setDialog({
-      isDialogOpen: false,
       text: '',
       operation: '',
     });
@@ -104,11 +119,13 @@ function ProfileMenu() {
 
   return (
     <div className="profile-menu">
-      {dialog.isDialogOpen && (
+      {showDialog && (
         <Dialog
           text={dialog.text}
           operationHandler={operationHandler}
           setDialog={setDialog}
+          setShowDarkBackground={setShowDarkBackground}
+          setShowDialog={setShowDialog}
         />
       )}
 
@@ -124,41 +141,13 @@ function ProfileMenu() {
           setShowDarkBackground={setShowDarkBackground}
           setShowEdit={setShowEdit}
           setShowContact={setShowContact}
+          setShowDialog={setShowDialog}
         />
       )}
-      <ul className="profile-menu-list">
-        <li className="profile-menu-list__item">
-          <Link to="/preferences" className="profile-menu-list__link">
-            <i className="fas fa-cog profile-menu-list__icon" />
-            <span>Preferences</span>
-          </Link>
-        </li>
-        <li className="profile-menu-list__item">
-          <button
-            className="profile-menu-list__btn"
-            onClick={handleEditProfile}
-          >
-            <i className="fas fa-user-edit profile-menu-list__icon" />
-            Edit Profile
-          </button>
-        </li>
-        <li className="profile-menu-list__item">
-          <Link to="/help" className="profile-menu-list__link">
-            <i className="fas fa-question-circle profile-menu-list__icon" />
-            Help
-          </Link>
-        </li>
-        <li className="profile-menu-list__item no-border">
-          <button
-            href="#"
-            className="profile-menu-list__btn"
-            onClick={handleContact}
-          >
-            <i className="fas fa-envelope profile-menu-list__icon" />
-            <span> Contact</span>
-          </button>
-        </li>
-      </ul>
+      <ProfileMenuList
+        handleEditProfile={handleEditProfile}
+        handleContact={handleContact}
+      />
       <div className="profile-menu-reset-container">
         <button
           className="profile-menu-reset-container__btn"
@@ -176,6 +165,13 @@ function ProfileMenu() {
           Reset all data
         </button>
       </div>
+      <footer className="profile-menu__footer">
+        &copy; Powered by
+        <a
+          href="https://opentripmap.io/product"
+          className="profile-menu__attribute-link"
+        > OpenTripMap</a>
+      </footer>
     </div>
   );
 }

@@ -9,7 +9,7 @@ async function createPlaceForUserData(place) {
 
   const preview = {
     source: img ? place.preview.source : '',
-    height: img ? place.preview.height : null, 
+    height: img ? place.preview.height : null,
     width: img ? place.preview.width : null,
   };
   const userPlace = {
@@ -25,6 +25,7 @@ async function createPlaceForUserData(place) {
       ...preview,
     },
     img,
+    point: place.point,
   };
   return userPlace;
 }

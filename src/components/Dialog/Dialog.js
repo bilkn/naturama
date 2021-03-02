@@ -1,17 +1,24 @@
 import React from 'react';
 import './Dialog.scss';
 function Dialog(props) {
-  const { text, operationHandler, setDialog } = props;
+  const {
+    text,
+    operationHandler,
+    setDialog,
+    setShowDarkBackground,
+    setShowDialog,
+  } = props;
 
   const handleClick = (e) => {
     e.stopPropagation();
     const btnText = e.target.textContent;
-
     if (btnText === 'Yes') {
       operationHandler();
     } else if (btnText === 'No') {
-      setDialog({isDialogOpen:false, text:"", operation:""})
+      setDialog({ text: '', operation: '' });
     }
+    setShowDialog(false);
+    setShowDarkBackground(false);
   };
 
   return (

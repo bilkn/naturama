@@ -2,16 +2,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ErrorContext from '../../context/ErrorContext';
 import UserContext from '../../context/UserContext';
+import createNotificationTimeout from '../../helpers/createNotificationTimeout';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
+
 function PictureToolbar(props) {
-  const {
-    place,
-    setShowShareLinks,
-    setShowDarkBackground,
-    timerID,
-    setTimerID,
-  } = props;
+  const { place, setShowShareLinks, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
   const [error] = useContext(ErrorContext);
   const handleShareClick = () => {
@@ -24,16 +20,11 @@ function PictureToolbar(props) {
   };
 
   const handleFavClick = async () => {
-    if (timerID) {
-      clearTimeout(timerID);
+    const { notifTimeoutID } = userState;
+    if (notifTimeoutID) {
+      clearTimeout(notifTimeoutID);
     }
-    const timeout = setTimeout(() => {
-      dispatch({ type: 'CLEAR_NOTIFICATION' });
-      clearTimeout(timeout);
-      setTimerID(() => null);
-    }, 2000);
-
-    setTimerID(() => timeout);
+    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     const favResult = isPlaceInFav();
     const newPlaces = favResult
       ? [
@@ -43,17 +34,24 @@ function PictureToolbar(props) {
         ]
       : [...userState.favourites, place];
     try {
+      const payload = { favourites: newPlaces, notifTimeoutID: newTimeoutID };
       if (!favResult) {
         error.isDBActive && (await db.favourites.add(place, place.xid));
-        dispatch({ type: 'ADD_PLACE', payload: newPlaces });
+        dispatch({
+          type: 'ADD_PLACE',
+          payload,
+        });
       } else {
         error.isDBActive &&
           (await db.favourites.where('xid').equals(place.xid).delete());
-        dispatch({ type: 'REMOVE_PLACE', payload: newPlaces });
+        dispatch({
+          type: 'REMOVE_PLACE',
+          payload,
+        });
       }
     } catch (err) {
       console.log(err);
-      //
+      // !!! Add notif.
     }
   };
 

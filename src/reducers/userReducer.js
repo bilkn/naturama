@@ -18,20 +18,24 @@ function userReducer(state, action) {
     }
 
     case 'ADD_PLACE': {
+      const { favourites, notifTimeoutID } = action.payload;
       return {
         ...state,
-        favourites: action.payload,
+        favourites,
         notification: 'Place has been added to your favourites.',
         isNotificationOpen: true,
+        notifTimeoutID,
       };
     }
 
     case 'REMOVE_PLACE': {
+      const { favourites, notifTimeoutID } = action.payload;
       return {
         ...state,
-        favourites: action.payload,
+        favourites,
         notification: 'Place has been removed from your favourites.',
         isNotificationOpen: true,
+        notifTimeoutID,
       };
     }
     case 'ADD_HISTORY': {
@@ -46,6 +50,7 @@ function userReducer(state, action) {
         ...state,
         notification: '',
         isNotificationOpen: false,
+        notifTimeoutID: null,
       };
     }
 
@@ -57,11 +62,13 @@ function userReducer(state, action) {
       };
     }
     case 'CLEAR_HISTORY': {
+      const { history, notifTimeoutID } = action.payload;
       return {
         ...state,
-        history: action.payload,
+        history,
         notification: 'Place history has been removed.',
         isNotificationOpen: true,
+        notifTimeoutID,
       };
     }
 

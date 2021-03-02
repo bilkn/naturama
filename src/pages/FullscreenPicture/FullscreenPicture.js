@@ -19,7 +19,6 @@ function FullscreenPicture({ history }) {
     DarkBackgroundContext
   );
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const [timerID, setTimerID] = useState(null);
   const place = selectedPlace;
   if (!place) {
     return <Redirect to="/" />;
@@ -37,7 +36,6 @@ function FullscreenPicture({ history }) {
 
   return (
     <div className="fullscreen-picture">
-      {userState.isNotificationOpen && <Notification />}
       <img
         src={placeImg}
         alt={placeName}
@@ -46,10 +44,7 @@ function FullscreenPicture({ history }) {
         className="fullscreen-picture__img"
       />
       <MobileNavTop>
-        <IconButton
-          iconClass="fa fa-arrow-left"
-          onClick={handleBtnClick}
-        />
+        <IconButton iconClass="fa fa-arrow-left" onClick={handleBtnClick} />
         <p className="fullscreen-picture_name">{place && place.content.name}</p>
         <EmptyDiv />
       </MobileNavTop>
@@ -57,8 +52,6 @@ function FullscreenPicture({ history }) {
         place={selectedPlace}
         setShowShareLinks={setShowShareLinks}
         setShowDarkBackground={setShowDarkBackground}
-        timerID={timerID}
-        setTimerID={setTimerID}
       />
       {showShareLink && <ShareLinkList />}
       {showDarkBackground && (
