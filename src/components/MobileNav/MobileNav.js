@@ -38,13 +38,16 @@ function MobileNav() {
   };
 
   useEffect(() => {
-    let itemOrder = null;
     const neglectedPaths = ['/favourites', '/fullscreen-picture', '/map'];
     const path = location.pathname;
     if (!neglectedPaths.includes(path)) {
       setSelectedPlace(null);
     }
-
+  }, [location.pathname, setSelectedPlace]);
+  
+  useEffect(() => {
+    let itemOrder = null;
+    const path = location.pathname;
     switch (path) {
       case '/':
         itemOrder = 1;

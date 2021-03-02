@@ -1,4 +1,18 @@
 .leaflet-container {
     height: 70vh;
+    margin-top: 20%;
     width: 100%;
+}
+
+.map {
+    // map__place-name
+    &__place-name {
+        margin-bottom: 0.5rem;
+    }
+    // map__img
+    &__img {
+        display: block;
+        height: auto;
+        width: 100%;
+    }
 }
