@@ -3,7 +3,6 @@ import './ProfileMenu.scss';
 import DarkBackground from '../DarkBackground/DarkBackground';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import Contact from '../Contact/Contact';
-import { Link } from 'react-router-dom';
 import EditProfile from '../EditProfile/EditProfile';
 import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
@@ -12,6 +11,7 @@ import initialize from '../../helpers/initilalize';
 import createNotificationTimeout from '../../helpers/createNotificationTimeout';
 import ErrorContext from '../../context/ErrorContext';
 import Dialog from '../Dialog/Dialog';
+import ProfileMenuList from '../ProfileMenuList/ProfileMenuList';
 
 function ProfileMenu() {
   const [showDarkBackground, setShowDarkBackground] = useContext(
@@ -144,39 +144,10 @@ function ProfileMenu() {
           setShowDialog={setShowDialog}
         />
       )}
-      <ul className="profile-menu-list">
-        <li className="profile-menu-list__item">
-          <Link to="/preferences" className="profile-menu-list__link">
-            <i className="fas fa-cog profile-menu-list__icon" />
-            <span>Preferences</span>
-          </Link>
-        </li>
-        <li className="profile-menu-list__item">
-          <button
-            className="profile-menu-list__btn"
-            onClick={handleEditProfile}
-          >
-            <i className="fas fa-user-edit profile-menu-list__icon" />
-            Edit Profile
-          </button>
-        </li>
-        <li className="profile-menu-list__item">
-          <Link to="/help" className="profile-menu-list__link">
-            <i className="fas fa-question-circle profile-menu-list__icon" />
-            Help
-          </Link>
-        </li>
-        <li className="profile-menu-list__item no-border">
-          <button
-            href="#"
-            className="profile-menu-list__btn"
-            onClick={handleContact}
-          >
-            <i className="fas fa-envelope profile-menu-list__icon" />
-            <span> Contact</span>
-          </button>
-        </li>
-      </ul>
+      <ProfileMenuList
+        handleEditProfile={handleEditProfile}
+        handleContact={handleContact}
+      />
       <div className="profile-menu-reset-container">
         <button
           className="profile-menu-reset-container__btn"
@@ -194,6 +165,13 @@ function ProfileMenu() {
           Reset all data
         </button>
       </div>
+      <footer className="profile-menu__footer">
+        &copy; Powered by
+        <a
+          href="https://opentripmap.io/product"
+          className="profile-menu__attribute-link"
+        > OpenTripMap</a>
+      </footer>
     </div>
   );
 }
