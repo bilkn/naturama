@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ErrorContext from '../../context/ErrorContext';
 import UserContext from '../../context/UserContext';
+import createNotificationTimeout from '../../helpers/createNotificationTimeout';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 
@@ -23,11 +24,7 @@ function PictureToolbar(props) {
     if (notifTimeoutID) {
       clearTimeout(notifTimeoutID);
     }
-    const newTimeoutID = setTimeout(() => {
-      console.log("timeout callback")
-      dispatch({ type: 'CLEAR_NOTIFICATION' });
-      clearTimeout(newTimeoutID);
-    }, 2000);
+    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     const favResult = isPlaceInFav();
     const newPlaces = favResult
       ? [
