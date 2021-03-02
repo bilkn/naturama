@@ -39,9 +39,10 @@ function MobileNav() {
 
   useEffect(() => {
     let itemOrder = null;
+    const neglectedPaths = ['/favourites', '/fullscreen-picture', '/map'];
     const path = location.pathname;
-    if (path !== '/favourites' && path !== '/fullscreen-picture') {
-      setSelectedPlace(() => null);
+    if (!neglectedPaths.includes(path)) {
+      setSelectedPlace(null);
     }
 
     switch (path) {

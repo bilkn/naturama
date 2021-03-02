@@ -62,11 +62,13 @@ function userReducer(state, action) {
       };
     }
     case 'CLEAR_HISTORY': {
+      const { history, notifTimeoutID } = action.payload;
       return {
         ...state,
-        history: action.payload,
+        history,
         notification: 'Place history has been removed.',
         isNotificationOpen: true,
+        notifTimeoutID,
       };
     }
 

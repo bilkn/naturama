@@ -34,18 +34,19 @@ function PictureToolbar(props) {
         ]
       : [...userState.favourites, place];
     try {
+      const payload = { favourites: newPlaces, notifTimeoutID: newTimeoutID };
       if (!favResult) {
         error.isDBActive && (await db.favourites.add(place, place.xid));
         dispatch({
           type: 'ADD_PLACE',
-          payload: { favourites: newPlaces, notifTimeoutID: newTimeoutID },
+          payload,
         });
       } else {
         error.isDBActive &&
           (await db.favourites.where('xid').equals(place.xid).delete());
         dispatch({
           type: 'REMOVE_PLACE',
-          payload: { favourites: newPlaces, notifTimeoutID: newTimeoutID },
+          payload,
         });
       }
     } catch (err) {

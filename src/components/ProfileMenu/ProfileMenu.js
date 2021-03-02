@@ -9,6 +9,7 @@ import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
 import createUser from '../../helpers/createUser';
 import initialize from '../../helpers/initilalize';
+import createNotificationTimeout from '../../helpers/createNotificationTimeout';
 import ErrorContext from '../../context/ErrorContext';
 import Dialog from '../Dialog/Dialog';
 
@@ -40,15 +41,31 @@ function ProfileMenu() {
   };
 
   const resetAllData = async () => {
+    const { notifTimeoutID } = userState;
+    if (notifTimeoutID) {
+      clearTimeout(notifTimeoutID);
+    }
     await db.delete();
-    dispatch({ type: 'RESET_DATABASE', payload: await createUser() });
     await db.open();
     await initialize(errorState, dispatch);
+    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
+    dispatch({
+      type: 'RESET_DATABASE',
+      payload: { newState: await createUser(), notifTimeoutID: newTimeoutID },
+    });
   };
 
   const removePlaceHistory = async () => {
+    const { notifTimeoutID } = userState;
+    if (notifTimeoutID) {
+      clearTimeout(notifTimeoutID);
+    }
     await db.history.clear();
-    dispatch({ type: 'CLEAR_HISTORY', payload: [] });
+    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
+    dispatch({
+      type: 'CLEAR_HISTORY',
+      payload: { history: [], notifTimeoutID: newTimeoutID },
+    });
   };
 
   const handleDialog = (e) => {
