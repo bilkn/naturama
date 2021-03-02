@@ -19,7 +19,6 @@ function FullscreenPicture({ history }) {
     DarkBackgroundContext
   );
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const [timerID, setTimerID] = useState(null);
   const place = selectedPlace;
   if (!place) {
     return <Redirect to="/" />;
@@ -57,8 +56,6 @@ function FullscreenPicture({ history }) {
         place={selectedPlace}
         setShowShareLinks={setShowShareLinks}
         setShowDarkBackground={setShowDarkBackground}
-        timerID={timerID}
-        setTimerID={setTimerID}
       />
       {showShareLink && <ShareLinkList />}
       {showDarkBackground && (
