@@ -3,9 +3,15 @@
 
 .notification {
   background: gainsboro;
-  left: 20px;
+  border-radius: 10px;
+   font-size: 1.3rem;
+  left: 50%;
+  line-height: 2rem;
+  margin-left: -40vw;
   padding: 1rem;
   position: fixed;
+  text-align: center;
   top: 80px;
+  width: 80vw;
   z-index: $notification-index;
 }

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
@@ -16,6 +16,7 @@ function MobileNav() {
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();
+  const history = useHistory();
 
   const handleShuffleClick = async () => {
     if (error.isGeoActive) {
@@ -43,7 +44,7 @@ function MobileNav() {
     if (!neglectedPaths.includes(path)) {
       setSelectedPlace(null);
     }
-  }, [location.pathname, setSelectedPlace]);
+  }, [location.pathname, setSelectedPlace, history]);
   
   useEffect(() => {
     let itemOrder = null;
