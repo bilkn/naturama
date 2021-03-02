@@ -18,20 +18,22 @@ function MobileNav() {
   const location = useLocation();
 
   const handleShuffleClick = async () => {
-    const errorState = [error, setError];
-    const requestState = [canUserRequest, setCanUserRequest];
-    const user = [userState, dispatch];
-    const args = {
-      user,
-      requestState,
-      errorState,
-      setRandomPlace,
-    };
-    try {
-      await triggerRandomPlaceRequest(args);
-    } catch (err) {
-      console.log(err);
-      if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
+    if (error.isGeoActive) {
+      const errorState = [error, setError];
+      const requestState = [canUserRequest, setCanUserRequest];
+      const user = [userState, dispatch];
+      const args = {
+        user,
+        requestState,
+        errorState,
+        setRandomPlace,
+      };
+      try {
+        await triggerRandomPlaceRequest(args);
+      } catch (err) {
+        console.log(err);
+        if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
+      }
     }
   };
 

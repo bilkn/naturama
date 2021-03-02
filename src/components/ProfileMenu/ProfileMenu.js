@@ -95,7 +95,6 @@ function ProfileMenu() {
       console.log(err);
     }
     setDialog({
-      isDialogOpen: false,
       text: '',
       operation: '',
     });

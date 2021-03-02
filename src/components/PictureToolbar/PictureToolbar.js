@@ -53,7 +53,7 @@ function PictureToolbar(props) {
       }
     } catch (err) {
       console.log(err);
-      //
+      // !!! Add notif.
     }
   };
 
