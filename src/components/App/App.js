@@ -17,6 +17,7 @@ import Profile from '../../pages/Profile/Profile';
 import MobileNav from '../MobileNav/MobileNav';
 import Help from '../../pages/Help/Help';
 import Map from '../../pages/Map/Map';
+import NotificationContainer from '../NotificationContainer/NotificationContainer';
 function App() {
   return (
     <>
@@ -28,6 +29,7 @@ function App() {
                 <PlaceProvider>
                   <Router>
                     <MobileNav />
+                    <NotificationContainer />
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route exact path="/favourites" component={Favourites} />
