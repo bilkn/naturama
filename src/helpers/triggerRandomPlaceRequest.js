@@ -9,32 +9,29 @@ async function triggerRandomPlaceRequest(args) {
   const [canUserRequest, setCanUserRequest] = requestState;
   const [userState, dispatch] = user;
   const { notifTimeoutID } = userState;
-
   notifTimeoutID && clearTimeout(notifTimeoutID);
+  if (canUserRequest) {
+    const {
+      location: { lat },
+      location: { lon },
+    } = userState.profile.preferences;
 
-  const {
-    location: { lat },
-    location: { lon },
-  } = userState.profile.preferences;
-  if (!lat || !lon) {
-    await tryToSetLocation(user, errorState);
-  } else if (canUserRequest) {
     preventRequestForAWhile(setRandomPlace, setCanUserRequest);
+    (!lat || !lon) && (await tryToSetLocation(user, errorState));
     await requestRandomPlace({ user, errorState, setRandomPlace });
   } else {
     const newTimeout = createNotificationTimeout(dispatch, 1500);
     dispatch({ type: 'FAST_REQUEST', payload: newTimeout });
- 
   }
 }
 
 const preventRequestForAWhile = (setRandomPlace, setCanUserRequest) => {
-  setRandomPlace(() => null);
-  setCanUserRequest(() => false);
+  setRandomPlace(null);
+  setCanUserRequest(false);
   const timeout = setTimeout(() => {
-    setCanUserRequest(() => true);
+    setCanUserRequest(true);
     clearTimeout(timeout);
-  }, 2000);
+  }, 4000);
 };
 
 const requestRandomPlace = async (args) => {

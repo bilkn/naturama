@@ -12,7 +12,12 @@ function userReducer(state, action) {
       };
     }
     case 'EDIT_USER': {
-      const {newUser, notifTimeoutID} = action.payload;
+      return {
+        ...action.payload,
+      };
+    }
+    case 'SAVE_PREFERENCES': {
+      const { newUser, notifTimeoutID } = action.payload;
       return {
         ...newUser,
         notification: 'Changes have been saved.',
@@ -80,7 +85,7 @@ function userReducer(state, action) {
         ...state,
         notification: 'Picture size must be lower than 5 MB.',
         isNotificationOpen: true,
-        notifTimeoutID : action.payload
+        notifTimeoutID: action.payload,
       };
     }
     case 'INVALID_FILE_FORMAT': {
@@ -88,7 +93,7 @@ function userReducer(state, action) {
         ...state,
         notification: 'Picture must be in .png, or .jpeg format.',
         isNotificationOpen: true,
-        notifTimeoutID : action.payload
+        notifTimeoutID: action.payload,
       };
     }
     case 'FAST_REQUEST': {

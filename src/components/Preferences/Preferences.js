@@ -45,7 +45,7 @@ function Preferences() {
       try {
         error.isDBActive && (await db.profile.update(3, { preferences }));
         const newTimeoutID = createNotificationTimeout(dispatch, 2000);
-        dispatch({ type: 'EDIT_USER', payload: {newUser, notifTimeoutID :newTimeoutID }});
+        dispatch({ type: 'SAVE_PREFERENCES', payload: {newUser, notifTimeoutID :newTimeoutID }});
       } catch (err) {
         console.log(err);
       }
