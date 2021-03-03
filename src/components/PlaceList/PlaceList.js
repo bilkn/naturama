@@ -12,9 +12,7 @@ function PlaceList(props) {
             setSelectedPlace={setSelectedPlace}
             key={place.xid}
             {...otherProps}
-          >
-            {/* <IconButton btnClass="icon-btn" iconClass="fas fa-star" /> */}
-          </PlaceItem>
+          ></PlaceItem>
         ))}
     </ul>
   );

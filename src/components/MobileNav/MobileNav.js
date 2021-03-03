@@ -46,6 +46,7 @@ function MobileNav() {
     }
   }, [location.pathname, setSelectedPlace, history]);
 
+  // It adds "active-tab" class for styling, and removes the class from other tabs according to the path.
   useEffect(() => {
     let itemOrder = null;
     const path = location.pathname;

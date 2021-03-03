@@ -10,7 +10,7 @@ import EmptyDiv from '../EmptyDiv/EmptyDiv';
 import ReturnLink from '../ReturnLink/ReturnLink';
 import ErrorContext from '../../context/ErrorContext';
 
-function Preferences() {
+function Preferences({history}) {
   const [userState, dispatch] = useContext(UserContext);
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
@@ -34,27 +34,27 @@ function Preferences() {
 
   useEffect(() => {
     if (userState) {
-      const {
-        profile: { preferences },
-      } = userState;
+      const {profile: { preferences }} = userState;
       const { radius } = preferences;
       setRadiusValue(radius);
     }
   }, [userState]);
 
+  useEffect(()=> {
+
+    return ()=> {
+      
+    }
+  }, [])
   useEffect(() => {
     const handleWindowClick = async () => {
-      // Saves the configured preferences to the state and database, after closing the preferences.
+      // Saves the configured preferences to the state and the database, after closing the preferences.
       if (!document.querySelector('.preferences')) {
         if (userState) {
           const { profile } = userState;
           const { preferences } = profile;
-          const {
-            location: { lat },
-          } = preferences;
-          const {
-            location: { lon },
-          } = preferences;
+          const {location: { lat }} = preferences;
+          const {location: { lon }} = preferences;
           const { radius } = preferences;
           const newPreferences = {
             radius: radiusValue || radius,

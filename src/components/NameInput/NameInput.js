@@ -7,7 +7,7 @@ function NameInput(props) {
     const {
       profile: { username },
     } = userState;
-    if (username) setUsername(username);
+    username && setUsername(username);
   }, [setUsername, userState]);
 
   const handleChange = (e) => {
@@ -16,16 +16,14 @@ function NameInput(props) {
   };
 
   return (
-    <>
-      <input
-        type="text"
-        className="name-input"
-        maxLength="15"
-        placeholder="Name"
-        value={username || ''}
-        onChange={handleChange}
-      />
-    </>
+    <input
+      type="text"
+      className="name-input"
+      maxLength="15"
+      placeholder="Name"
+      value={username || ''}
+      onChange={handleChange}
+    />
   );
 }
 

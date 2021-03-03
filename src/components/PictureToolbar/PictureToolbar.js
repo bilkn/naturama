@@ -34,23 +34,28 @@ function PictureToolbar(props) {
         ]
       : [...userState.favourites, place];
     try {
-      const payload = { favourites: newPlaces, notifTimeoutID: newTimeoutID };
-      if (!favResult) {
-        error.isDBActive && (await db.favourites.add(place, place.xid));
-        dispatch({
-          type: 'ADD_PLACE',
-          payload,
-        });
-      } else {
-        error.isDBActive &&
-          (await db.favourites.where('xid').equals(place.xid).delete());
-        dispatch({
-          type: 'REMOVE_PLACE',
-          payload,
-        });
-      }
+      await handleFavOperation({newPlaces, newTimeoutID, favResult});
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const handleFavOperation = async (args) => {
+    const { newPlaces, newTimeoutID, favResult } = args;
+    const payload = { favourites: newPlaces, notifTimeoutID: newTimeoutID };
+    if (!favResult) {
+      error.isDBActive && (await db.favourites.add(place, place.xid));
+      dispatch({
+        type: 'ADD_PLACE',
+        payload,
+      });
+    } else {
+      error.isDBActive &&
+        (await db.favourites.where('xid').equals(place.xid).delete());
+      dispatch({
+        type: 'REMOVE_PLACE',
+        payload,
+      });
     }
   };
 

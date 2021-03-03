@@ -9,9 +9,7 @@ function PictureInput(props) {
 
   const handleChange = (e) => {
     const { notifTimeoutID } = userState;
-    if (notifTimeoutID) {
-      clearTimeout(notifTimeoutID);
-    }
+    notifTimeoutID && clearTimeout(notifTimeoutID);
     const file = e.target.files[0];
     validatePictureFile(file);
   };

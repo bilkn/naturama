@@ -55,9 +55,8 @@ function ProfileMenu() {
 
   const removePlaceHistory = async () => {
     const { notifTimeoutID } = userState;
-    if (notifTimeoutID) {
-      clearTimeout(notifTimeoutID);
-    }
+    notifTimeoutID && clearTimeout(notifTimeoutID);
+
     await db.history.clear();
     const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     dispatch({

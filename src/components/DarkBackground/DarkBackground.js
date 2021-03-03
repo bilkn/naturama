@@ -3,7 +3,7 @@ import React from 'react';
 
 function DarkBackground(props) {
   const backgroundHandler = () => {
-    // Sets to false all the states in the props, in order to close any popped UI.
+    // Sets all the states to false in the props, in order to close any popped UI.
     Object.values(props).forEach((prop) => {
       if (prop instanceof Function) prop(false);
     });
