@@ -1,15 +1,14 @@
+import clearNotificationIfExist from './clearNotificationIfExist';
 import createPlaceForUserData from './createPlaceForUserData';
 import db from './dexie';
 import { getRandomPlace } from './getRandomPlace';
 import tryToSetLocation from './tryToSetLocation';
-import createNotificationTimeout from './createNotificationTimeout';
 
 async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
   const [canUserRequest, setCanUserRequest] = requestState;
   const [userState, dispatch] = user;
-  const { notifTimeoutID } = userState;
-  notifTimeoutID && clearTimeout(notifTimeoutID);
+  clearNotificationIfExist(userState, dispatch);
   if (canUserRequest) {
     const {
       location: { lat },
@@ -20,8 +19,7 @@ async function triggerRandomPlaceRequest(args) {
     (!lat || !lon) && (await tryToSetLocation(user, errorState));
     await requestRandomPlace({ user, errorState, setRandomPlace });
   } else {
-    const newTimeout = createNotificationTimeout(dispatch, 1500);
-    dispatch({ type: 'FAST_REQUEST', payload: newTimeout });
+    dispatch({ type: 'FAST_REQUEST' });
   }
 }
 

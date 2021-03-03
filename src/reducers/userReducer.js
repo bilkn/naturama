@@ -17,34 +17,28 @@ function userReducer(state, action) {
       };
     }
     case 'SAVE_PREFERENCES': {
-      const { newUser, notifTimeoutID } = action.payload;
       return {
-        ...newUser,
+        ...action.payload,
         notification: 'Changes have been saved.',
         isNotificationOpen: true,
-        notifTimeoutID,
       };
     }
 
     case 'ADD_PLACE': {
-      const { favourites, notifTimeoutID } = action.payload;
       return {
         ...state,
-        favourites,
+        favourites: action.payload,
         notification: 'Place has been added to your favourites.',
         isNotificationOpen: true,
-        notifTimeoutID,
       };
     }
 
     case 'REMOVE_PLACE': {
-      const { favourites, notifTimeoutID } = action.payload;
       return {
         ...state,
-        favourites,
+        favourites: action.payload,
         notification: 'Place has been removed from your favourites.',
         isNotificationOpen: true,
-        notifTimeoutID,
       };
     }
     case 'ADD_HISTORY': {
@@ -59,7 +53,6 @@ function userReducer(state, action) {
         ...state,
         notification: '',
         isNotificationOpen: false,
-        notifTimeoutID: null,
       };
     }
 
@@ -71,13 +64,11 @@ function userReducer(state, action) {
       };
     }
     case 'CLEAR_HISTORY': {
-      const { history, notifTimeoutID } = action.payload;
       return {
         ...state,
-        history,
+        history: action.payload,
         notification: 'Place history has been removed.',
         isNotificationOpen: true,
-        notifTimeoutID,
       };
     }
     case 'INVALID_FILE_SIZE': {
@@ -85,7 +76,6 @@ function userReducer(state, action) {
         ...state,
         notification: 'Picture size must be lower than 5 MB.',
         isNotificationOpen: true,
-        notifTimeoutID: action.payload,
       };
     }
     case 'INVALID_FILE_FORMAT': {
@@ -93,7 +83,6 @@ function userReducer(state, action) {
         ...state,
         notification: 'Picture must be in .png, or .jpeg format.',
         isNotificationOpen: true,
-        notifTimeoutID: action.payload,
       };
     }
     case 'FAST_REQUEST': {
@@ -101,7 +90,6 @@ function userReducer(state, action) {
         ...state,
         notification: 'You have to wait a few seconds.',
         isNotificationOpen: true,
-        notifTimeoutID: action.payload,
       };
     }
 
