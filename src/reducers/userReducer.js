@@ -71,6 +71,30 @@ function userReducer(state, action) {
         notifTimeoutID,
       };
     }
+    case 'INVALID_FILE_SIZE': {
+      return {
+        ...state,
+        notification: 'Picture size must be lower than 5 MB.',
+        isNotificationOpen: true,
+        notifTimeoutID : action.payload
+      };
+    }
+    case 'INVALID_FILE_FORMAT': {
+      return {
+        ...state,
+        notification: 'Picture must be in .png, or .jpeg format.',
+        isNotificationOpen: true,
+        notifTimeoutID : action.payload
+      };
+    }
+    case 'FAST_REQUEST': {
+      return {
+        ...state,
+        notification: 'You have to wait a few seconds.',
+        isNotificationOpen: true,
+        notifTimeoutID: action.payload,
+      };
+    }
 
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);

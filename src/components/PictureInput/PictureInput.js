@@ -2,23 +2,37 @@ import React, { useEffect } from 'react';
 import createFileURL from '../../helpers/createFileURL';
 import './PictureInput.scss';
 import Avatar from '../Avatar/Avatar';
-import validatePicture from '../../helpers/validatePicture';
-function PictureInput({ picture, setPicture, userState }) {
+import validatePictureFormat from '../../helpers/validatePictureFormat';
+import createNotificationTimeout from '../../helpers/createNotificationTimeout';
+function PictureInput(props) {
+  const { picture, setPicture, userState, dispatch } = props;
+
   const handleChange = (e) => {
+    const { notifTimeoutID } = userState;
+    if (notifTimeoutID) {
+      clearTimeout(notifTimeoutID);
+    }
     const file = e.target.files[0];
+    validatePictureFile(file);
+  };
+
+  const validatePictureFile = (file) => {
     const fileSizeInMB = file && file.size / 1024 / 1024;
-    if (fileSizeInMB > 5) {
-      console.log('Picture size must be lower than 5 MB.');
-      // !!! Add notify
-    } else if (file && validatePicture(file)) {
-      const pictureObj = {
-        file,
-        url: createFileURL(file),
-      };
-      setPicture(pictureObj);
-    } else {
-      console.log('Please provide jpeg or png.');
-      // !!! Add notify.
+
+    if (file) {
+      if (!validatePictureFormat(file)) {
+        const newTimeoutID = createNotificationTimeout(dispatch, 3000);
+        dispatch({ type: 'INVALID_FILE_FORMAT', payload: newTimeoutID });
+      } else if (fileSizeInMB > 5) {
+        const newTimeoutID = createNotificationTimeout(dispatch, 3000);
+        dispatch({ type: 'INVALID_FILE_SIZE', payload: newTimeoutID });
+      } else {
+        const pictureObj = {
+          file,
+          url: createFileURL(file),
+        };
+        setPicture(pictureObj);
+      }
     }
   };
 

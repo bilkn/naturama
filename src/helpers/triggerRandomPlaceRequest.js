@@ -2,23 +2,29 @@ import createPlaceForUserData from './createPlaceForUserData';
 import db from './dexie';
 import { getRandomPlace } from './getRandomPlace';
 import tryToSetLocation from './tryToSetLocation';
+import createNotificationTimeout from './createNotificationTimeout';
 
 async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
   const [canUserRequest, setCanUserRequest] = requestState;
-  const [userState] = user;
+  const [userState, dispatch] = user;
+  const { notifTimeoutID } = userState;
+
+  notifTimeoutID && clearTimeout(notifTimeoutID);
+
   const {
     location: { lat },
     location: { lon },
   } = userState.profile.preferences;
   if (!lat || !lon) {
-    await tryToSetLocation(user,errorState);
+    await tryToSetLocation(user, errorState);
   } else if (canUserRequest) {
     preventRequestForAWhile(setRandomPlace, setCanUserRequest);
     await requestRandomPlace({ user, errorState, setRandomPlace });
   } else {
-    console.log('You can fetch after 2 sec.');
-    // !!! Add notif.
+    const newTimeout = createNotificationTimeout(dispatch, 1500);
+    dispatch({ type: 'FAST_REQUEST', payload: newTimeout });
+ 
   }
 }
 
@@ -35,7 +41,7 @@ const requestRandomPlace = async (args) => {
   const { user, errorState, setRandomPlace } = args;
   const [error, setError] = errorState;
   const [userState, dispatch] = user;
-  const place = await getRandomPlace(userState); 
+  const place = await getRandomPlace(userState);
   const userPlace = await createPlaceForUserData(place);
   const newHistory = [...userState.history, userPlace.xid];
 
@@ -43,7 +49,7 @@ const requestRandomPlace = async (args) => {
   if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
   setRandomPlace(userPlace);
   dispatch({ type: 'ADD_HISTORY', payload: newHistory });
-   error.isDBActive && db.history.put({ xid: userPlace.xid });
+  error.isDBActive && db.history.put({ xid: userPlace.xid });
 };
 
 export default triggerRandomPlaceRequest;

@@ -31,8 +31,6 @@ function ProfileMenu() {
     if (userState) {
       setShowDarkBackground(!showDarkBackground);
       setShowEdit(!showEdit);
-    } else {
-      // !!! Add notification
     }
   };
 
@@ -43,9 +41,8 @@ function ProfileMenu() {
 
   const resetAllData = async () => {
     const { notifTimeoutID } = userState;
-    if (notifTimeoutID) {
-      clearTimeout(notifTimeoutID);
-    }
+    notifTimeoutID && clearTimeout(notifTimeoutID);
+
     await db.delete();
     await db.open();
     await initialize(errorState, dispatch);
@@ -97,13 +94,11 @@ function ProfileMenu() {
         case 'clear':
           {
             await removePlaceHistory();
-            // Add notif.
           }
           break;
         case 'reset':
           {
             await resetAllData();
-            // Add notif.
           }
           break;
         default:

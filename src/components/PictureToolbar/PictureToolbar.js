@@ -22,9 +22,8 @@ function PictureToolbar(props) {
 
   const handleFavClick = async () => {
     const { notifTimeoutID } = userState;
-    if (notifTimeoutID) {
-      clearTimeout(notifTimeoutID);
-    }
+    notifTimeoutID && clearTimeout(notifTimeoutID);
+
     const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     const favResult = isPlaceInFav();
     const newPlaces = favResult
@@ -52,7 +51,6 @@ function PictureToolbar(props) {
       }
     } catch (err) {
       console.log(err);
-      // !!! Add notif.
     }
   };
 

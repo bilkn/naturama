@@ -21,7 +21,7 @@ function Home() {
   const handleClick = () => setSelectedPlace(randomPlace);
 
   useEffect(() => {
-    let mount = true;
+    let isMounted = true;
     async function fetchData() {
       if (!randomPlace && userState && error.isGeoActive && canUserRequest) {
         const errorState = [error, setError];
@@ -40,8 +40,8 @@ function Home() {
         }
       }
     }
-    if (mount) fetchData();
-    return () => (mount = false);
+    if (isMounted) fetchData();
+    return () => (isMounted = false);
   }, [
     userState,
     canUserRequest,

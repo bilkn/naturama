@@ -51,6 +51,7 @@ function EditProfile(props) {
         picture={picture}
         setPicture={setPicture}
         userState={userState}
+        dispatch={dispatch}
       />
       <div className="edit-profile-name-container">
         <NameInput

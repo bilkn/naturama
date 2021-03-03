@@ -56,7 +56,8 @@ function MobileNav() {
       case '/favourites':
         itemOrder = 2;
         break;
-      case ('/profile', '/help'):
+      case '/profile':
+      case '/help':
         itemOrder = 4;
         break;
       case '/daily-place-list':
