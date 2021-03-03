@@ -1,6 +1,9 @@
 @import '../../styles/variables';
 .preferences {
+  align-items: center;
   background: $profile-bg-color;
+  display: flex;
+  flex-direction: column;
   padding: 6rem 0 75px 0;
   z-index: 1000;
   // preferences__map-options-list
@@ -13,5 +16,11 @@
   &__header {
     color: $icon-color;
     font-size: 1.4rem;
+  }
+  // preferences__btn
+  &__btn {
+    background: ivory;
+    padding: 0.5rem 1rem;
+    width: max-content;
   }
 }

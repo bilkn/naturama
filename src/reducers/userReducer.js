@@ -12,8 +12,12 @@ function userReducer(state, action) {
       };
     }
     case 'EDIT_USER': {
+      const {newUser, notifTimeoutID} = action.payload;
       return {
-        ...action.payload,
+        ...newUser,
+        notification: 'Changes have been saved.',
+        isNotificationOpen: true,
+        notifTimeoutID,
       };
     }
 

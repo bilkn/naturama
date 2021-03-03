@@ -9,13 +9,15 @@ import MobileNavTop from '../MobileNavTop/MobileNavTop';
 import EmptyDiv from '../EmptyDiv/EmptyDiv';
 import ReturnLink from '../ReturnLink/ReturnLink';
 import ErrorContext from '../../context/ErrorContext';
+import createNotificationTimeout from '../../helpers/createNotificationTimeout';
 
-function Preferences({history}) {
+function Preferences() {
   const [userState, dispatch] = useContext(UserContext);
   const [latValue, setLatValue] = useState('');
   const [lonValue, setLonValue] = useState('');
   const [radiusValue, setRadiusValue] = useState('');
   const [error, setError] = useContext(ErrorContext);
+
   useEffect(() => {
     if (userState) {
       const {
@@ -23,64 +25,33 @@ function Preferences({history}) {
       } = userState;
       const {
         location: { lat },
-      } = preferences;
-      const {
         location: { lon },
+        radius,
       } = preferences;
+
       setLatValue(lat);
       setLonValue(lon);
-    }
-  }, [userState]);
-
-  useEffect(() => {
-    if (userState) {
-      const {profile: { preferences }} = userState;
-      const { radius } = preferences;
       setRadiusValue(radius);
     }
   }, [userState]);
 
-  useEffect(()=> {
+  const handleSaveChanges = async () => {
+    const {notifTimeoutID} = userState;
+    notifTimeoutID && clearTimeout(notifTimeoutID);
 
-    return ()=> {
-      
-    }
-  }, [])
-  useEffect(() => {
-    const handleWindowClick = async () => {
-      // Saves the configured preferences to the state and the database, after closing the preferences.
-      if (!document.querySelector('.preferences')) {
-        if (userState) {
-          const { profile } = userState;
-          const { preferences } = profile;
-          const {location: { lat }} = preferences;
-          const {location: { lon }} = preferences;
-          const { radius } = preferences;
-          const newPreferences = {
-            radius: radiusValue || radius,
-            location: {
-              lat: latValue || lat,
-              lon: lonValue || lon,
-            },
-          };
-          const newUser = editUser(userState, [
-            ['preferences', newPreferences],
-          ]);
-          configureGeoError();
-          try {
-            error.isDBActive &&
-              (await db.profile.update(3, { preferences: newPreferences }));
-            dispatch({ type: 'EDIT_USER', payload: newUser });
-          } catch (err) {
-            console.log(err);
-            // Add notification.
-          }
-        }
+    if (userState) {
+      const newUser = createNewUserWithInputValues();
+      const { preferences } = newUser.profile;
+      try {
+        error.isDBActive && (await db.profile.update(3, { preferences }));
+        const newTimeoutID = createNotificationTimeout(dispatch, 2000);
+        dispatch({ type: 'EDIT_USER', payload: {newUser, notifTimeoutID :newTimeoutID }});
+      } catch (err) {
+        console.log(err);
       }
-    };
-    window.addEventListener('click', handleWindowClick);
-    return () => window.removeEventListener('click', handleWindowClick);
-  }, [latValue, lonValue, radiusValue, dispatch, error.isDBActive, userState]);
+      configureGeoError();
+    }
+  };
 
   const configureGeoError = () => {
     if (!latValue || !lonValue) {
@@ -88,6 +59,24 @@ function Preferences({history}) {
     } else if (!error.isGeoActive) {
       setError({ ...error, isGeoActive: true });
     }
+  };
+
+  const createNewUserWithInputValues = () => {
+    const { profile } = userState;
+    const { preferences } = profile;
+    const {
+      location: { lat },
+      location: { lon },
+      radius,
+    } = preferences;
+    const newPreferences = {
+      radius: radiusValue || radius,
+      location: {
+        lat: latValue || lat,
+        lon: lonValue || lon,
+      },
+    };
+    return editUser(userState, [['preferences', newPreferences]]);
   };
 
   return (
@@ -109,6 +98,9 @@ function Preferences({history}) {
           setLonValue={setLonValue}
         />
       </ul>
+      <button className="preferences__btn" onClick={handleSaveChanges}>
+        Save Changes
+      </button>
     </div>
   );
 }

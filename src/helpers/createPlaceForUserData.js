@@ -12,20 +12,27 @@ async function createPlaceForUserData(place) {
     height: img ? place.preview.height : null,
     width: img ? place.preview.width : null,
   };
+  const {
+    name,
+    distance,
+    wikipedia,
+    point,
+    address: { state },
+  } = place;
   const userPlace = {
     xid: place.xid,
     content: {
-      name: place.name,
-      location: place.address.state,
-      distance: place.distance,
+      name,
+      location: state,
+      distance,
       text: placeText,
-      wikipedia: place.wikipedia,
+      wikipedia,
     },
     preview: {
       ...preview,
     },
     img,
-    point: place.point,
+    point,
   };
   return userPlace;
 }

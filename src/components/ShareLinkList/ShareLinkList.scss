@@ -21,15 +21,13 @@
     padding-top: 0.7rem;
     transition: background 200ms ease;
   }
+
   // share-link-list__icon
   &__icon {
     font-size: 30px;
     margin-right: 10px;
     width: 50px;
   }
-/*   &__item:hover {
-    background: lighten($options-ui-color, 5%);
-  } */
 
   // share-link-list__link
   &__link {
@@ -58,6 +56,7 @@
     position: absolute;
     right: 10px;
     width: max-content;
+    
     // person-options-container__name
     &__name {
       display: none;

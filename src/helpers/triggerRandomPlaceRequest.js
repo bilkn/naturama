@@ -45,7 +45,7 @@ const requestRandomPlace = async (args) => {
   const userPlace = await createPlaceForUserData(place);
   const newHistory = [...userState.history, userPlace.xid];
 
-  // If place is found, isPlaceFound will be set to true.
+  // If place is found, "isPlaceFound" state will be set to true.
   if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
   setRandomPlace(userPlace);
   dispatch({ type: 'ADD_HISTORY', payload: newHistory });
