@@ -7,7 +7,6 @@ function ProfileContainer() {
   const [userState] = useContext(UserContext);
   return (
     <div className="profile-container">
-      
       <ProfileThumbnail userState={userState} />
       <ProfileMenu />
     </div>

@@ -16,6 +16,15 @@ function userReducer(state, action) {
         ...action.payload,
       };
     }
+    case 'SAVE_PREFERENCES': {
+      const { newUser, notifTimeoutID } = action.payload;
+      return {
+        ...newUser,
+        notification: 'Changes have been saved.',
+        isNotificationOpen: true,
+        notifTimeoutID,
+      };
+    }
 
     case 'ADD_PLACE': {
       const { favourites, notifTimeoutID } = action.payload;
@@ -57,7 +66,7 @@ function userReducer(state, action) {
     case 'RESET_DATABASE': {
       return {
         ...state,
-        notification: 'Database has been reset.',
+        notification: 'Your data has been reset.',
         isNotificationOpen: true,
       };
     }
@@ -69,6 +78,30 @@ function userReducer(state, action) {
         notification: 'Place history has been removed.',
         isNotificationOpen: true,
         notifTimeoutID,
+      };
+    }
+    case 'INVALID_FILE_SIZE': {
+      return {
+        ...state,
+        notification: 'Picture size must be lower than 5 MB.',
+        isNotificationOpen: true,
+        notifTimeoutID: action.payload,
+      };
+    }
+    case 'INVALID_FILE_FORMAT': {
+      return {
+        ...state,
+        notification: 'Picture must be in .png, or .jpeg format.',
+        isNotificationOpen: true,
+        notifTimeoutID: action.payload,
+      };
+    }
+    case 'FAST_REQUEST': {
+      return {
+        ...state,
+        notification: 'You have to wait a few seconds.',
+        isNotificationOpen: true,
+        notifTimeoutID: action.payload,
       };
     }
 

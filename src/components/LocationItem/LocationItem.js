@@ -11,13 +11,13 @@ function LocationItem(props) {
     e.preventDefault();
     let value = e.target.value;
     value = value > 90 ? 90 : value < -90 ? -90 : value;
-    setLatValue(() => value);
+    setLatValue(+value);
   };
   const handleChangeLon = (e) => {
     e.preventDefault();
     let value = e.target.value;
     value = value > 180 ? 180 : value < -180 ? -180 : value;
-    setLonValue(() => value);
+    setLonValue(+value);
   };
 
   return (

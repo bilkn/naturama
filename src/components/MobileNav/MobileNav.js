@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
@@ -16,6 +16,7 @@ function MobileNav() {
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();
+  const history = useHistory();
 
   const handleShuffleClick = async () => {
     if (error.isGeoActive) {
@@ -38,13 +39,14 @@ function MobileNav() {
   };
 
   useEffect(() => {
-    const neglectedPaths = ['/favourites', '/fullscreen-picture', '/map'];
+    const neglectedPaths = ['/fullscreen-picture', '/map'];
     const path = location.pathname;
     if (!neglectedPaths.includes(path)) {
       setSelectedPlace(null);
     }
-  }, [location.pathname, setSelectedPlace]);
-  
+  }, [location.pathname, setSelectedPlace, history]);
+
+  // It adds "active-tab" class for styling, and removes the class from other tabs according to the path.
   useEffect(() => {
     let itemOrder = null;
     const path = location.pathname;
@@ -56,6 +58,8 @@ function MobileNav() {
         itemOrder = 2;
         break;
       case '/profile':
+      case '/help':
+      case '/preferences':
         itemOrder = 4;
         break;
       case '/daily-place-list':

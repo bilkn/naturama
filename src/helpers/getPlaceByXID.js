@@ -5,7 +5,7 @@ async function getPlaceByXID(xid) {
     const place = await data.json();
     return place;
   } else {
-    // !!! Add modal
+    throw Error("No place was found.")
   }
 }
 export default getPlaceByXID;

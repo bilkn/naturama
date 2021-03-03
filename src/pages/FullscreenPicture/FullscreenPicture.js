@@ -10,15 +10,12 @@ import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import EmptyDiv from '../../components/EmptyDiv/EmptyDiv';
 import IconButton from '../../components/IconButton/IconButton';
 import { Redirect } from 'react-router';
-import Notification from '../../components/Notification/Notification';
-import UserContext from '../../context/UserContext';
 function FullscreenPicture({ history }) {
   const [showShareLink, setShowShareLinks] = useState(false);
-  const [userState] = useContext(UserContext);
   const [showDarkBackground, setShowDarkBackground] = useContext(
     DarkBackgroundContext
   );
-  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [selectedPlace] = useContext(SelectedPlaceContext);
   const place = selectedPlace;
   if (!place) {
     return <Redirect to="/" />;
@@ -31,7 +28,6 @@ function FullscreenPicture({ history }) {
 
   const handleBtnClick = () => {
     history.goBack();
-    setSelectedPlace(() => null);
   };
 
   return (

@@ -10,6 +10,7 @@ function PictureToolbar(props) {
   const { place, setShowShareLinks, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
   const [error] = useContext(ErrorContext);
+
   const handleShareClick = () => {
     setShowDarkBackground(true);
     setShowShareLinks(true);
@@ -21,9 +22,8 @@ function PictureToolbar(props) {
 
   const handleFavClick = async () => {
     const { notifTimeoutID } = userState;
-    if (notifTimeoutID) {
-      clearTimeout(notifTimeoutID);
-    }
+    notifTimeoutID && clearTimeout(notifTimeoutID);
+
     const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     const favResult = isPlaceInFav();
     const newPlaces = favResult
@@ -34,24 +34,28 @@ function PictureToolbar(props) {
         ]
       : [...userState.favourites, place];
     try {
-      const payload = { favourites: newPlaces, notifTimeoutID: newTimeoutID };
-      if (!favResult) {
-        error.isDBActive && (await db.favourites.add(place, place.xid));
-        dispatch({
-          type: 'ADD_PLACE',
-          payload,
-        });
-      } else {
-        error.isDBActive &&
-          (await db.favourites.where('xid').equals(place.xid).delete());
-        dispatch({
-          type: 'REMOVE_PLACE',
-          payload,
-        });
-      }
+      await handleFavOperation({newPlaces, newTimeoutID, favResult});
     } catch (err) {
       console.log(err);
-      // !!! Add notif.
+    }
+  };
+
+  const handleFavOperation = async (args) => {
+    const { newPlaces, newTimeoutID, favResult } = args;
+    const payload = { favourites: newPlaces, notifTimeoutID: newTimeoutID };
+    if (!favResult) {
+      error.isDBActive && (await db.favourites.add(place, place.xid));
+      dispatch({
+        type: 'ADD_PLACE',
+        payload,
+      });
+    } else {
+      error.isDBActive &&
+        (await db.favourites.where('xid').equals(place.xid).delete());
+      dispatch({
+        type: 'REMOVE_PLACE',
+        payload,
+      });
     }
   };
 

@@ -18,8 +18,6 @@ function getUserLocation() {
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error, options);
-    } else {
-      // !!! ADD NOTIF OR REJECT.
     }
   });
 }

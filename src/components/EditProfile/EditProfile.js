@@ -8,6 +8,7 @@ import db from '../../helpers/dexie';
 import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
 import editUser from '../../helpers/editUser';
 import ErrorContext from '../../context/ErrorContext';
+
 function EditProfile(props) {
   const { setShowEdit, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
@@ -26,7 +27,6 @@ function EditProfile(props) {
         dispatch({ type: 'EDIT_USER', payload: newUser });
       } catch (err) {
         console.log(err);
-        // Add notify.
       }
     }
   };
@@ -51,6 +51,7 @@ function EditProfile(props) {
         picture={picture}
         setPicture={setPicture}
         userState={userState}
+        dispatch={dispatch}
       />
       <div className="edit-profile-name-container">
         <NameInput

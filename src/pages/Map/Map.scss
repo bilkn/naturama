@@ -1,10 +1,13 @@
+@import "../../styles/variables";
 .leaflet-container {
-    height: 70vh;
-    margin-top: 20%;
+    height: 100%;
     width: 100%;
+    z-index: $map-index;
 }
 
 .map {
+     height: 100vh;
+     padding-top: $mobile-nav-height;
     // map__place-name
     &__place-name {
         margin-bottom: 0.5rem;

@@ -3,12 +3,14 @@ import createFileURL from '../../helpers/createFileURL';
 import noImg from '../../assets/no-image-item.png';
 import './PlaceItem.scss';
 function PlaceItem(props) {
-  const { place, setSelectedPlace, children, ...otherProps } = props;
+  const { place, setSelectedPlace, children, ...otherProps } = props
+  ;
   const handleClick = () => {
     setSelectedPlace(place);
     const { onClick: handler } = otherProps;
     if (handler) handler(place);
   };
+  
   return (
     <li className="place-item" onClick={handleClick}>
       <img

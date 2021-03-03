@@ -2,48 +2,51 @@ import createPlaceForUserData from './createPlaceForUserData';
 import db from './dexie';
 import { getRandomPlace } from './getRandomPlace';
 import tryToSetLocation from './tryToSetLocation';
+import createNotificationTimeout from './createNotificationTimeout';
 
 async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
   const [canUserRequest, setCanUserRequest] = requestState;
-  const [userState] = user;
-  const {
-    location: { lat },
-    location: { lon },
-  } = userState.profile.preferences;
-  if (!lat || !lon) {
-    await tryToSetLocation(user,errorState);
-  } else if (canUserRequest) {
+  const [userState, dispatch] = user;
+  const { notifTimeoutID } = userState;
+  notifTimeoutID && clearTimeout(notifTimeoutID);
+  if (canUserRequest) {
+    const {
+      location: { lat },
+      location: { lon },
+    } = userState.profile.preferences;
+
     preventRequestForAWhile(setRandomPlace, setCanUserRequest);
+    (!lat || !lon) && (await tryToSetLocation(user, errorState));
     await requestRandomPlace({ user, errorState, setRandomPlace });
   } else {
-    console.log('You can fetch after 2 sec.');
-    // !!! Add notif.
+    const newTimeout = createNotificationTimeout(dispatch, 1500);
+    dispatch({ type: 'FAST_REQUEST', payload: newTimeout });
   }
 }
 
 const preventRequestForAWhile = (setRandomPlace, setCanUserRequest) => {
-  setRandomPlace(() => null);
-  setCanUserRequest(() => false);
+  setRandomPlace(null);
+  setCanUserRequest(false);
   const timeout = setTimeout(() => {
-    setCanUserRequest(() => true);
+    setCanUserRequest(true);
     clearTimeout(timeout);
-  }, 2000);
+  }, 4000);
 };
 
 const requestRandomPlace = async (args) => {
   const { user, errorState, setRandomPlace } = args;
   const [error, setError] = errorState;
   const [userState, dispatch] = user;
-  const place = await getRandomPlace(userState); 
+  const place = await getRandomPlace(userState);
   const userPlace = await createPlaceForUserData(place);
   const newHistory = [...userState.history, userPlace.xid];
 
-  // If place is found, isPlaceFound will be set to true.
+  // If place is found, "isPlaceFound" state will be set to true.
   if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
   setRandomPlace(userPlace);
   dispatch({ type: 'ADD_HISTORY', payload: newHistory });
-   error.isDBActive && db.history.put({ xid: userPlace.xid });
+  error.isDBActive && db.history.put({ xid: userPlace.xid });
 };
 
 export default triggerRandomPlaceRequest;

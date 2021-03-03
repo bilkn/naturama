@@ -26,12 +26,11 @@ function ProfileMenu() {
     text: '',
     operation: '',
   });
+
   const handleEditProfile = () => {
     if (userState) {
       setShowDarkBackground(!showDarkBackground);
       setShowEdit(!showEdit);
-    } else {
-      // !!! Add notification
     }
   };
 
@@ -42,9 +41,8 @@ function ProfileMenu() {
 
   const resetAllData = async () => {
     const { notifTimeoutID } = userState;
-    if (notifTimeoutID) {
-      clearTimeout(notifTimeoutID);
-    }
+    notifTimeoutID && clearTimeout(notifTimeoutID);
+
     await db.delete();
     await db.open();
     await initialize(errorState, dispatch);
@@ -57,9 +55,8 @@ function ProfileMenu() {
 
   const removePlaceHistory = async () => {
     const { notifTimeoutID } = userState;
-    if (notifTimeoutID) {
-      clearTimeout(notifTimeoutID);
-    }
+    notifTimeoutID && clearTimeout(notifTimeoutID);
+
     await db.history.clear();
     const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     dispatch({
@@ -96,13 +93,11 @@ function ProfileMenu() {
         case 'clear':
           {
             await removePlaceHistory();
-            // Add notif.
           }
           break;
         case 'reset':
           {
             await resetAllData();
-            // Add notif.
           }
           break;
         default:
@@ -170,7 +165,10 @@ function ProfileMenu() {
         <a
           href="https://opentripmap.io/product"
           className="profile-menu__attribute-link"
-        > OpenTripMap</a>
+        >
+          {' '}
+          OpenTripMap
+        </a>
       </footer>
     </div>
   );
