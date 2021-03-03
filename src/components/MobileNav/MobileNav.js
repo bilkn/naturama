@@ -39,13 +39,13 @@ function MobileNav() {
   };
 
   useEffect(() => {
-    const neglectedPaths = ['/favourites', '/fullscreen-picture', '/map'];
+    const neglectedPaths = ['/fullscreen-picture', '/map'];
     const path = location.pathname;
     if (!neglectedPaths.includes(path)) {
       setSelectedPlace(null);
     }
   }, [location.pathname, setSelectedPlace, history]);
-  
+
   useEffect(() => {
     let itemOrder = null;
     const path = location.pathname;
@@ -56,7 +56,7 @@ function MobileNav() {
       case '/favourites':
         itemOrder = 2;
         break;
-      case '/profile':
+      case ('/profile', '/help'):
         itemOrder = 4;
         break;
       case '/daily-place-list':

@@ -8,14 +8,13 @@ import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import PageName from '../../components/PageName/PageName';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 function Map({ history }) {
-  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [selectedPlace] = useContext(SelectedPlaceContext);
 
   if (!selectedPlace) {
     return <Redirect to="/" />;
   }
   const handleBtnClick = () => {
     history.goBack();
-    setSelectedPlace(() => null);
   };
 
   const {

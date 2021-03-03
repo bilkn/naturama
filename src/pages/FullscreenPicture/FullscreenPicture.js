@@ -15,7 +15,7 @@ function FullscreenPicture({ history }) {
   const [showDarkBackground, setShowDarkBackground] = useContext(
     DarkBackgroundContext
   );
-  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [selectedPlace] = useContext(SelectedPlaceContext);
   const place = selectedPlace;
   if (!place) {
     return <Redirect to="/" />;
@@ -28,7 +28,6 @@ function FullscreenPicture({ history }) {
 
   const handleBtnClick = () => {
     history.goBack();
-    setSelectedPlace(() => null);
   };
 
   return (

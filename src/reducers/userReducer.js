@@ -57,7 +57,7 @@ function userReducer(state, action) {
     case 'RESET_DATABASE': {
       return {
         ...state,
-        notification: 'Database has been reset.',
+        notification: 'Your data has been reset.',
         isNotificationOpen: true,
       };
     }

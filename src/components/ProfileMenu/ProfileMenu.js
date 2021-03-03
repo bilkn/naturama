@@ -26,6 +26,7 @@ function ProfileMenu() {
     text: '',
     operation: '',
   });
+
   const handleEditProfile = () => {
     if (userState) {
       setShowDarkBackground(!showDarkBackground);
@@ -170,7 +171,10 @@ function ProfileMenu() {
         <a
           href="https://opentripmap.io/product"
           className="profile-menu__attribute-link"
-        > OpenTripMap</a>
+        >
+          {' '}
+          OpenTripMap
+        </a>
       </footer>
     </div>
   );

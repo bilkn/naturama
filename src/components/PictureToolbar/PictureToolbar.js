@@ -10,6 +10,7 @@ function PictureToolbar(props) {
   const { place, setShowShareLinks, setShowDarkBackground } = props;
   const [userState, dispatch] = useContext(UserContext);
   const [error] = useContext(ErrorContext);
+
   const handleShareClick = () => {
     setShowDarkBackground(true);
     setShowShareLinks(true);
