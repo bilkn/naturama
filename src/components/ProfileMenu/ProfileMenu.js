@@ -8,10 +8,10 @@ import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
 import createUser from '../../helpers/createUser';
 import initialize from '../../helpers/initilalize';
-import createNotificationTimeout from '../../helpers/createNotificationTimeout';
 import ErrorContext from '../../context/ErrorContext';
 import Dialog from '../Dialog/Dialog';
 import ProfileMenuList from '../ProfileMenuList/ProfileMenuList';
+import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
 
 function ProfileMenu() {
   const [showDarkBackground, setShowDarkBackground] = useContext(
@@ -40,28 +40,24 @@ function ProfileMenu() {
   };
 
   const resetAllData = async () => {
-    const { notifTimeoutID } = userState;
-    notifTimeoutID && clearTimeout(notifTimeoutID);
+    clearNotificationIfExist(userState, dispatch);
 
     await db.delete();
     await db.open();
     await initialize(errorState, dispatch);
-    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     dispatch({
       type: 'RESET_DATABASE',
-      payload: { newState: await createUser(), notifTimeoutID: newTimeoutID },
+      payload: await createUser(),
     });
   };
 
   const removePlaceHistory = async () => {
-    const { notifTimeoutID } = userState;
-    notifTimeoutID && clearTimeout(notifTimeoutID);
+    clearNotificationIfExist(userState, dispatch);
 
     await db.history.clear();
-    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
     dispatch({
       type: 'CLEAR_HISTORY',
-      payload: { history: [], notifTimeoutID: newTimeoutID },
+      payload: [],
     });
   };
 

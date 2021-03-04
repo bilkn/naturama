@@ -33,7 +33,7 @@ function Dialog(props) {
           Yes
         </button>
         <button
-          className="dialog-controls__btn dialog-controls__btn--no-margin"
+          className="dialog-controls__btn dialog-controls__btn--no-btn"
           onClick={handleClick}
         >
           No

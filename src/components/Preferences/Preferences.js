@@ -9,7 +9,7 @@ import MobileNavTop from '../MobileNavTop/MobileNavTop';
 import EmptyDiv from '../EmptyDiv/EmptyDiv';
 import ReturnLink from '../ReturnLink/ReturnLink';
 import ErrorContext from '../../context/ErrorContext';
-import createNotificationTimeout from '../../helpers/createNotificationTimeout';
+import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
 
 function Preferences() {
   const [userState, dispatch] = useContext(UserContext);
@@ -36,16 +36,13 @@ function Preferences() {
   }, [userState]);
 
   const handleSaveChanges = async () => {
-    const {notifTimeoutID} = userState;
-    notifTimeoutID && clearTimeout(notifTimeoutID);
-
+   clearNotificationIfExist(userState, dispatch);
     if (userState) {
       const newUser = createNewUserWithInputValues();
       const { preferences } = newUser.profile;
       try {
         error.isDBActive && (await db.profile.update(3, { preferences }));
-        const newTimeoutID = createNotificationTimeout(dispatch, 2000);
-        dispatch({ type: 'SAVE_PREFERENCES', payload: {newUser, notifTimeoutID :newTimeoutID }});
+        dispatch({ type: 'SAVE_PREFERENCES', payload: newUser });
       } catch (err) {
         console.log(err);
       }

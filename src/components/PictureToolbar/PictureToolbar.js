@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import ErrorContext from '../../context/ErrorContext';
 import UserContext from '../../context/UserContext';
-import createNotificationTimeout from '../../helpers/createNotificationTimeout';
+import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
 import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
 
@@ -21,10 +21,9 @@ function PictureToolbar(props) {
   };
 
   const handleFavClick = async () => {
-    const { notifTimeoutID } = userState;
-    notifTimeoutID && clearTimeout(notifTimeoutID);
+    clearNotificationIfExist(userState, dispatch);
 
-    const newTimeoutID = createNotificationTimeout(dispatch, 2000);
+
     const favResult = isPlaceInFav();
     const newPlaces = favResult
       ? [
@@ -34,15 +33,15 @@ function PictureToolbar(props) {
         ]
       : [...userState.favourites, place];
     try {
-      await handleFavOperation({newPlaces, newTimeoutID, favResult});
+      await handleFavOperation({ newPlaces, favResult });
     } catch (err) {
       console.log(err);
     }
   };
 
   const handleFavOperation = async (args) => {
-    const { newPlaces, newTimeoutID, favResult } = args;
-    const payload = { favourites: newPlaces, notifTimeoutID: newTimeoutID };
+    const { newPlaces, favResult } = args;
+    const payload = newPlaces;
     if (!favResult) {
       error.isDBActive && (await db.favourites.add(place, place.xid));
       dispatch({

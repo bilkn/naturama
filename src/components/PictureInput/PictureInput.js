@@ -3,13 +3,12 @@ import createFileURL from '../../helpers/createFileURL';
 import './PictureInput.scss';
 import Avatar from '../Avatar/Avatar';
 import validatePictureFormat from '../../helpers/validatePictureFormat';
-import createNotificationTimeout from '../../helpers/createNotificationTimeout';
+import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
 function PictureInput(props) {
   const { picture, setPicture, userState, dispatch } = props;
 
   const handleChange = (e) => {
-    const { notifTimeoutID } = userState;
-    notifTimeoutID && clearTimeout(notifTimeoutID);
+    clearNotificationIfExist(userState, dispatch);
     const file = e.target.files[0];
     validatePictureFile(file);
   };
@@ -19,11 +18,9 @@ function PictureInput(props) {
 
     if (file) {
       if (!validatePictureFormat(file)) {
-        const newTimeoutID = createNotificationTimeout(dispatch, 3000);
-        dispatch({ type: 'INVALID_FILE_FORMAT', payload: newTimeoutID });
+        dispatch({ type: 'INVALID_FILE_FORMAT' });
       } else if (fileSizeInMB > 5) {
-        const newTimeoutID = createNotificationTimeout(dispatch, 3000);
-        dispatch({ type: 'INVALID_FILE_SIZE', payload: newTimeoutID });
+        dispatch({ type: 'INVALID_FILE_SIZE' });
       } else {
         const pictureObj = {
           file,
