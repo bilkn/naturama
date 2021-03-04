@@ -24,12 +24,16 @@
 
   // place-thumbnail__name
   &__name {
-    bottom: 30px;
+    background: #000000c9;
+    border-bottom-right-radius: 20px;
     color: #fff;
     font-family: $main-font;
     font-size: 1.2rem;
-    left: 15px;
+    left: 0;
+    max-width: 85%;
+    padding: 0.7rem 1.7rem;
     position: absolute;
+    top: 0;
   }
 }
 

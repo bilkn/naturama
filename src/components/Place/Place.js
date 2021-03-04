@@ -11,7 +11,6 @@ function Place({ place, handleClick, children }) {
       <PlaceContent>
         <PlaceThumbnail
           place={place}
-          classNames={['place-thumbnail']}
           icon="fas fa-map"
         />
         <PlaceDetails place={place} />

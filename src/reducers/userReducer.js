@@ -88,7 +88,7 @@ function userReducer(state, action) {
     case 'FAST_REQUEST': {
       return {
         ...state,
-        notification: 'You have to wait a few seconds.',
+        notification: 'Please wait a few seconds.',
         isNotificationOpen: true,
       };
     }

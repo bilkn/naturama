@@ -29,7 +29,7 @@ const preventRequestForAWhile = (setRandomPlace, setCanUserRequest) => {
   const timeout = setTimeout(() => {
     setCanUserRequest(true);
     clearTimeout(timeout);
-  }, 4000);
+  }, 2000);
 };
 
 const requestRandomPlace = async (args) => {
