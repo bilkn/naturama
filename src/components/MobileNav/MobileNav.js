@@ -32,7 +32,6 @@ function MobileNav() {
       try {
         await triggerRandomPlaceRequest(args);
       } catch (err) {
-        setCanUserRequest(true);
         if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
       }
     }
