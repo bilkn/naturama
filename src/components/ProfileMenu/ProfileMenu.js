@@ -57,7 +57,7 @@ function ProfileMenu() {
     await db.history.clear();
     dispatch({
       type: 'CLEAR_HISTORY',
-      payload: history,
+      payload: [],
     });
   };
 
