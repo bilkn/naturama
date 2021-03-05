@@ -9,13 +9,10 @@ function Place({ place, handleClick, children }) {
     <div className="place" onClick={handleClick}>
       {children}
       <PlaceContent>
-        <PlaceThumbnail
-          place={place}
-          icon="fas fa-map"
-        />
+        <PlaceThumbnail place={place} icon="fas fa-map" />
         <PlaceDetails place={place} />
+        <PlaceDescription place={place} />
       </PlaceContent>
-      <PlaceDescription place={place} />
     </div>
   );
 }

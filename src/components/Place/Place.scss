@@ -11,3 +11,8 @@
     padding: $tablet-page-padding;
   }
 }
+@media (min-width: 1024px) {
+  .place {
+    padding: $desktop-page-padding;
+  }
+}
