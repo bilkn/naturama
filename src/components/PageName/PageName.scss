@@ -1,5 +1,11 @@
-@import "../../styles/mixins";
+@import '../../styles/mixins';
 .page-name {
-    color: $icon-color;
-    font-size: 1.5rem;
+  color: $icon-color;
+  font-size: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .page-name {
+    display: none;
+  }
 }

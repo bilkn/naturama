@@ -5,3 +5,9 @@
   color: $icon-color;
   font-size: $common-icon-font-size;
 }
+
+@media (min-width: 1024px) {
+  .return-link {
+    display: none;
+  }
+}

@@ -11,6 +11,7 @@ import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import Error from '../../components/Error/Error';
 import db from '../../helpers/dexie';
 import ErrorContext from '../../context/ErrorContext';
+import Logo from '../../components/Logo/Logo';
 
 function DailyPlaceList() {
   const [userState, dispatch] = useContext(UserContext);
@@ -30,6 +31,7 @@ function DailyPlaceList() {
   return (
     <div className="daily-place-list">
       <AppHead>
+        <Logo className="logo--large-screen" />
         <PageName pageName="Daily List" />
       </AppHead>
 

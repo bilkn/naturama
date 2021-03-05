@@ -10,6 +10,7 @@ import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import AppHead from '../../components/AppHead/AppHead';
 import PageName from '../../components/PageName/PageName';
 import Error from '../../components/Error/Error';
+import Logo from '../../components/Logo/Logo';
 
 function Favourites() {
   const [userState] = useContext(UserContext);
@@ -24,6 +25,7 @@ function Favourites() {
   return (
     <div className="favourites">
       <AppHead>
+        <Logo className={'logo--large-screen'} />
         <PageName pageName="Favourites" />
       </AppHead>
 
@@ -45,7 +47,6 @@ function Favourites() {
             setSelectedPlace={setSelectedPlace}
           />
         )}
-    
     </div>
   );
 }

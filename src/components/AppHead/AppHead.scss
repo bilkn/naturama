@@ -17,3 +17,10 @@
     height: $tablet-nav-height;
   }
 }
+@media (min-width: 1024px) {
+  .app-head {
+    padding: $desktop-nav-padding;
+    height: $desktop-nav-height;
+    justify-content: space-between;
+  }
+}
