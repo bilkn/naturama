@@ -50,6 +50,7 @@ async function initUserWithDB(dispatch) {
     favourites,
     dailyList: [],
     history,
+    shuffleHistory: [],
     isNotificationOpen: false,
     notification: '',
   };

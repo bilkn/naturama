@@ -24,7 +24,10 @@ function DailyPlaceList() {
 
   const handlePlaceClick = (place) => {
     const newHistory = [...userState.history, place.xid];
-    dispatch({ type: 'ADD_HISTORY', payload: newHistory });
+    dispatch({
+      type: 'ADD_HISTORY',
+      payload: { history: newHistory, shufflePlace: place },
+    });
     error.isDBActive && db.history.put({ xid: place.xid });
   };
 

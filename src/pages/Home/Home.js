@@ -10,6 +10,7 @@ import Logo from '../../components/Logo/Logo';
 import Error from '../../components/Error/Error';
 import UserRequestContext from '../../context/UserRequestContext';
 import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
+import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
 
 function Home() {
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
@@ -59,6 +60,7 @@ function Home() {
         <Logo />
       </AppHead>
       <div className="home">
+        <AsideShuffle userState={userState} />
         {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||

@@ -42,9 +42,17 @@ function userReducer(state, action) {
       };
     }
     case 'ADD_HISTORY': {
+      const { history, shufflePlace } = action.payload;
+      const { shuffleHistory } = state;
+      const shuffleHistoryArr =
+        shuffleHistory.length > 4
+          ? [...shuffleHistory.slice(1, 4), shufflePlace]
+          : [...shuffleHistory, shufflePlace];
+
       return {
         ...state,
-        history: action.payload,
+        history,
+        shuffleHistory: shuffleHistoryArr,
       };
     }
 

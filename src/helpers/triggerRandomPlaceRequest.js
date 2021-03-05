@@ -43,7 +43,10 @@ const requestRandomPlace = async (args) => {
   // If place is found, "isPlaceFound" state will be set to true.
   if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
   setRandomPlace(userPlace);
-  dispatch({ type: 'ADD_HISTORY', payload: newHistory });
+  dispatch({
+    type: 'ADD_HISTORY',
+    payload: { history: newHistory, shufflePlace: userPlace },
+  });
   error.isDBActive && db.history.put({ xid: userPlace.xid });
 };
 

@@ -19,6 +19,7 @@ async function createUser() {
     favourites: [],
     dailyList: [],
     history: [],
+    shuffleHistory: [], 
     isNotificationOpen: false,
     notification: '',
   };
