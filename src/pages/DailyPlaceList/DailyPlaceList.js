@@ -11,6 +11,7 @@ import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import Error from '../../components/Error/Error';
 import db from '../../helpers/dexie';
 import ErrorContext from '../../context/ErrorContext';
+import Logo from '../../components/Logo/Logo';
 
 function DailyPlaceList() {
   const [userState, dispatch] = useContext(UserContext);
@@ -23,13 +24,17 @@ function DailyPlaceList() {
 
   const handlePlaceClick = (place) => {
     const newHistory = [...userState.history, place.xid];
-    dispatch({ type: 'ADD_HISTORY', payload: newHistory });
+    dispatch({
+      type: 'ADD_HISTORY',
+      payload: { history: newHistory, shufflePlace: place },
+    });
     error.isDBActive && db.history.put({ xid: place.xid });
   };
 
   return (
     <div className="daily-place-list">
       <AppHead>
+        <Logo className="logo--large-screen" />
         <PageName pageName="Daily List" />
       </AppHead>
 

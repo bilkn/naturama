@@ -10,6 +10,9 @@ import EmptyDiv from '../EmptyDiv/EmptyDiv';
 import ReturnLink from '../ReturnLink/ReturnLink';
 import ErrorContext from '../../context/ErrorContext';
 import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
+import PageName from '../PageName/PageName';
+import Logo from '../Logo/Logo';
+import AppHead from '../AppHead/AppHead';
 
 function Preferences() {
   const [userState, dispatch] = useContext(UserContext);
@@ -36,7 +39,7 @@ function Preferences() {
   }, [userState]);
 
   const handleSaveChanges = async () => {
-   clearNotificationIfExist(userState, dispatch);
+    clearNotificationIfExist(userState, dispatch);
     if (userState) {
       const newUser = createNewUserWithInputValues();
       const { preferences } = newUser.profile;
@@ -78,11 +81,12 @@ function Preferences() {
 
   return (
     <div className="preferences">
-      <MobileNavTop>
+      <AppHead style={{ justifyContent: 'space-between' }}>
+        <Logo className="logo--large-screen" />
         <ReturnLink path="/profile" />
-        <h2 className="preferences__header">Preferences</h2>
+        <PageName pageName="Preferences" />
         <EmptyDiv />
-      </MobileNavTop>
+      </AppHead>
       <ul className="preferences__map-options-list">
         <SearchRadiusItem
           radiusValue={radiusValue}

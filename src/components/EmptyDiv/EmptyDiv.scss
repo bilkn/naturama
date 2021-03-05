@@ -1,3 +1,9 @@
 .empty-div {
   width: 28px;
 }
+
+@media (min-width: 1024px) {
+  .empty-div {
+    display: none;
+  }
+}

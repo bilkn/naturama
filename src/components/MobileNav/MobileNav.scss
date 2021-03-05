@@ -87,3 +87,9 @@
     height: $tablet-nav-height;
   }
 }
+
+@media (min-width: 1024px) {
+  .mobile-nav {
+    display: none;
+  }
+}

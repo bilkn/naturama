@@ -1,0 +1,20 @@
+.app-head-nav {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .app-head-nav {
+    display: block;
+  }
+  .app-head-nav-list {
+    display: flex;
+    // app-head-nav-list__item
+    &__item {
+      margin-right: 20px;
+    }
+    // app-head-nav-list__link
+    &__link {
+      color: black;
+    }
+  }
+}

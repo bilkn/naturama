@@ -9,3 +9,10 @@
     width: 80vw;
   }
 }
+
+@media (min-width: 1024px) {
+  .place-content {
+    max-height: 50vh;
+    width: 50vw;
+  }
+}
