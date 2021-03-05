@@ -1,6 +1,14 @@
 import React from 'react';
 import PlaceItem from '../PlaceItem/PlaceItem';
+import PlaceName from '../PlaceName/PlaceName';
 import './PlaceList.scss';
+const placeNameStyle = {
+  bottom: 0,
+  borderBottomRightRadius: 0,
+  maxWidth: '100%',
+  top: 'unset',
+  width: '100%',
+};
 function PlaceList(props) {
   const { list, setSelectedPlace, ...otherProps } = props;
   return (
@@ -12,7 +20,9 @@ function PlaceList(props) {
             setSelectedPlace={setSelectedPlace}
             key={place.xid}
             {...otherProps}
-          ></PlaceItem>
+          >
+            <PlaceName name={place.content.name} style={placeNameStyle} />
+          </PlaceItem>
         ))}
     </ul>
   );

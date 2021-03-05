@@ -1,41 +1,17 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
-import RandomPlaceContext from '../../context/RandomPlaceContext';
 import UserContext from '../../context/UserContext';
-import ErrorContext from '../../context/ErrorContext';
 import IconButton from '../IconButton/IconButton';
-import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
-import UserRequestContext from '../../context/UserRequestContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
+import useFetchPlace from '../../hooks/useFetchPlace';
 
 function MobileNav() {
-  const [, setRandomPlace] = useContext(RandomPlaceContext);
-  const [userState, dispatch] = useContext(UserContext);
-  const [error, setError] = useContext(ErrorContext);
-  const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
+  const [userState] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const {fetchPlace} =  useFetchPlace();
   const location = useLocation();
   const history = useHistory();
-
-  const handleShuffleClick = async () => {
-    if (error.isGeoActive) {
-      const errorState = [error, setError];
-      const requestState = [canUserRequest, setCanUserRequest];
-      const user = [userState, dispatch];
-      const args = {
-        user,
-        requestState,
-        errorState,
-        setRandomPlace,
-      };
-      try {
-        await triggerRandomPlaceRequest(args);
-      } catch (err) {
-        if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
-      }
-    }
-  };
 
   useEffect(() => {
     const neglectedPaths = ['/fullscreen-picture', '/map'];
@@ -100,7 +76,7 @@ function MobileNav() {
           <IconButton
             btnClass="mobile-nav-list-item__btn"
             iconClass="fas fa-random  mobile-nav-list-item__icon"
-            onClick={handleShuffleClick}
+            onClick={() => fetchPlace()}
           />
         </li>
         <li className="mobile-nav-list-item ">
