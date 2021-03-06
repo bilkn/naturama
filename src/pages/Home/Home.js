@@ -10,6 +10,7 @@ import Logo from '../../components/Logo/Logo';
 import Error from '../../components/Error/Error';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
 import useFetchPlace from '../../hooks/useFetchPlace';
+import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
 
 function Home() {
   const [randomPlace] = useContext(RandomPlaceContext);
@@ -18,11 +19,8 @@ function Home() {
   const [error] = useContext(ErrorContext);
   const { fetchPlace } = useFetchPlace();
   const [showAside, setShowAside] = useState(false);
-  
 
-
-
- /*  useEffect(() => {
+  /*  useEffect(() => {
     let didMount = true;
     async function fetchData() {
       if (!randomPlace) {
@@ -60,7 +58,11 @@ function Home() {
         <Logo />
       </AppHead>
       <div className="home">
-        {showAside && <AsideShuffle userState={userState} />}
+        {showAside && (
+          <>
+            <AsideShuffle userState={userState} /> <AsidePictureToolbar />
+          </>
+        )}
         {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||

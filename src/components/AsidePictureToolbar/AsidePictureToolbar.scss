@@ -1,0 +1,24 @@
+@import '../../styles/variables';
+
+.aside-picture-toolbar {
+  align-items: center;
+  background: #b5b5b580;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+  box-shadow: 10px 10px 10px #0000004d;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  margin-top: -175px;
+  padding: 0.7rem 0;
+  position: fixed;
+  top: 50%;
+  width: 100px;
+}
+
+.aside-picture-toolbar-list {
+  &__btn {
+    height: 60px;
+    width: 60px;
+  }
+}
