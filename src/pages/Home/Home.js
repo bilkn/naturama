@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -17,10 +17,9 @@ function Home() {
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const { fetchPlace } = useFetchPlace();
-  const handleClick = () => setSelectedPlace(randomPlace);
+  const [showAside, setShowAside] = useState(false);
 
   useEffect(() => {
-    console.log('hello');
     let didMount = true;
     async function fetchData() {
       if (!randomPlace && userState) {
@@ -31,13 +30,28 @@ function Home() {
     return () => (didMount = false);
   }, [randomPlace, fetchPlace, userState]);
 
+  useEffect(() => {
+    let enableCall = true;
+    const handleResize = () => {
+      if (!enableCall) return;
+      enableCall = false;
+      const mql = window.matchMedia('(min-width:1024px)');
+      if (mql.matches) setShowAside(true);
+      else setShowAside(false);
+      setTimeout(() => (enableCall = true), 250);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleClick = () => setSelectedPlace(randomPlace);
   return (
     <>
       <AppHead>
         <Logo />
       </AppHead>
       <div className="home">
-        <AsideShuffle userState={userState} />
+        {showAside && <AsideShuffle userState={userState} />}
         {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||

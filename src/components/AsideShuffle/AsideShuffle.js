@@ -19,7 +19,7 @@ const placeNameStyle = {
 };
 function AsideShuffle({ userState }) {
   const { fetchPlace } = useFetchPlace();
-  
+    console.log("hello")
   return (
     <aside className="aside-shuffle">
       <IconButton iconClass="fas fa-random" onClick={() => fetchPlace()} />

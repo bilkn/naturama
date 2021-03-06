@@ -44,7 +44,6 @@ function userReducer(state, action) {
     case 'ADD_HISTORY': {
       const { history, shufflePlace } = action.payload;
       const { shuffleHistory } = state;
-      console.log(shuffleHistory);
       const shuffleHistoryArr =
         shuffleHistory.length < 4
           ? [...shuffleHistory, shufflePlace]
