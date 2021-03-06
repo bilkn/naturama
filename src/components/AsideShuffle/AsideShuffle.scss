@@ -1,16 +1,33 @@
 @import '../../styles/variables';
 .aside-shuffle {
-  background: gainsboro;
-  height: 70vh;
+  align-items: center;
+  background: #b5b5b580;
+  border-radius: 25px;
+  box-shadow: 10px 10px 10px #0000004d;
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  padding: 0.7rem 0;
   position: fixed;
   right: 50px;
   top: $mobile-nav-height + 60px;
   width: 200px;
+
+
+
+  // aside-shuffle__btn
+  &__btn {
+    background: $third-color;
+    box-shadow: 0 7px 20px black;
+    border-radius: 50%;
+    height: 60px;
+    margin-bottom: 1rem;
+    width: 60px;
+  }
 }
 
 .aside-shuffle-place-list {
-  align-items: center;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: center;
+  flex-direction: column;
+  padding: 0 15px;
 }

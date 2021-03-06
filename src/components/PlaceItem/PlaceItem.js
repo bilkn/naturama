@@ -10,15 +10,18 @@ function PlaceItem(props) {
     setSelectedPlace(place);
     if (handler) handler(place);
   };
-
   return (
-    <li className="place-item" onClick={handleClick} style={style}>
+    <li
+      className="place-item"
+      onClick={handleClick}
+      style={style}
+    >
       <img
         className="place-item__img"
         src={place.img ? createFileURL(place.img) : noImg}
         alt={place.content.name}
       />
-      
+
       {children}
     </li>
   );

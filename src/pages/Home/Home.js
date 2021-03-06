@@ -18,17 +18,26 @@ function Home() {
   const [error] = useContext(ErrorContext);
   const { fetchPlace } = useFetchPlace();
   const [showAside, setShowAside] = useState(false);
+  
 
-  useEffect(() => {
+
+
+ /*  useEffect(() => {
     let didMount = true;
     async function fetchData() {
-      if (!randomPlace && userState) {
+      if (!randomPlace) {
         await fetchPlace();
       }
     }
     if (didMount) fetchData();
     return () => (didMount = false);
-  }, [randomPlace, fetchPlace, userState]);
+  }, [randomPlace]); 
+ */
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width:1024px)');
+    if (mql.matches) setShowAside(true);
+    else setShowAside(false);
+  }, []);
 
   useEffect(() => {
     let enableCall = true;
@@ -38,7 +47,7 @@ function Home() {
       const mql = window.matchMedia('(min-width:1024px)');
       if (mql.matches) setShowAside(true);
       else setShowAside(false);
-      setTimeout(() => (enableCall = true), 250);
+      setTimeout(() => (enableCall = true), 200);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

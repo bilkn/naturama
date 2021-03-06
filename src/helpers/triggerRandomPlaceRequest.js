@@ -6,7 +6,7 @@ import tryToSetLocation from './tryToSetLocation';
 
 async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
-  const [,setCanUserRequest] = requestState;
+  const [, setCanUserRequest] = requestState;
   const [userState, dispatch] = user;
   clearNotificationIfExist(userState, dispatch);
 
