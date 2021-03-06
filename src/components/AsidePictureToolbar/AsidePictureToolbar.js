@@ -1,7 +1,8 @@
 import React from 'react';
 import IconButton from '../IconButton/IconButton';
 import useFavourite from '../../hooks/useFavourite';
-import "./AsidePictureToolbar.scss"
+import './AsidePictureToolbar.scss';
+import { Link } from 'react-router-dom';
 function AsidePictureToolbar() {
   const { handleFavClick, isPlaceInFav } = useFavourite(true);
 
@@ -10,7 +11,7 @@ function AsidePictureToolbar() {
       <ul className="aside-picture-toolbar-list">
         <li className="aside-picture-toolbar-list__item">
           <IconButton
-            btnClass="aside-picture-toolbar-list__btn"
+            btnClass=" aside-picture-toolbar-list__btn aside-picture-toolbar-list__btn--margin-left"
             iconClass="fas fa-share-square aside-picture-toolbar-list__icon"
           />
         </li>
@@ -24,7 +25,9 @@ function AsidePictureToolbar() {
           />
         </li>
         <li className="aside-picture-toolbar-list__item">
-          <IconButton />
+          <Link to="/map" className="aside-picture-toolbar-list__link">
+            <i className="fas fa-map aside-picture-toolbar-list__icon" />
+          </Link>
         </li>
       </ul>
     </aside>
