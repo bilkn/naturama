@@ -12,7 +12,7 @@ function useFetchPlace() {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
 
   const fetchPlace = async () => {
-    if (error.isGeoActive) {
+    if (error.isGeoActive && canUserRequest) {
       const errorState = [error, setError];
       const requestState = [canUserRequest, setCanUserRequest];
       const user = [userState, dispatch];
@@ -22,9 +22,11 @@ function useFetchPlace() {
       } catch (err) {
         if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
       }
+    } else {
+      canUserRequest && dispatch({ type: 'FAST_REQUEST' });
     }
   };
-  return {fetchPlace};
+  return { fetchPlace };
 }
 
 export default useFetchPlace;
