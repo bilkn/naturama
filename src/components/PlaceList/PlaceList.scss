@@ -1,4 +1,27 @@
-@import "../../styles/mixins";
+@import '../../styles/mixins';
+@import '../../styles/variables';
 .place-list {
- @include ListStyle;
+  @include ListStyle;
+  margin-top: $mobile-place-margin-top;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .place-list {
+    margin-top: $tablet-place-margin-top;
+    padding: $tablet-page-padding;
+    grid-template-columns: repeat(auto-fill, 320px);
+    // place-list__btn
+    &__btn {
+      display: initial;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .place-list {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    grid-template-columns: repeat(auto-fill, 300px);
+    width: 100%;
+  }
 }

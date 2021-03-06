@@ -45,7 +45,7 @@ function Home() {
       const mql = window.matchMedia('(min-width:1024px)');
       if (mql.matches) setShowAside(true);
       else setShowAside(false);
-      setTimeout(() => (enableCall = true), 200);
+      setTimeout(() => (enableCall = true), 100);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

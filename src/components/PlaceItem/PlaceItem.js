@@ -10,11 +10,17 @@ function PlaceItem(props) {
     setSelectedPlace(place);
     if (handler) handler(place);
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') setSelectedPlace(place);
+  };
   return (
     <li
       className="place-item"
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       style={style}
+      tabIndex="0"
     >
       <img
         className="place-item__img"

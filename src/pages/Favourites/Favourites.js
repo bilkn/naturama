@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import './Favourites.scss';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';

@@ -1,11 +1,15 @@
+@import '../../styles/variables';
+
 .place-content {
   height: max-content;
+  margin-top: $mobile-place-margin-top;
   width: 95vw;
 }
 
 @media (min-width: 768px) {
   .place-content {
-    width: 80vw;
+    margin-top: $tablet-place-margin-top;
+    width: 60vw;
   }
 }
 
