@@ -36,10 +36,19 @@ function PictureInput(props) {
     if (picture) setPicture(picture);
   }, [setPicture, userState.profile]);
 
+  const handleOnKeyUp = (e) => {
+    if (e.key === "Enter") e.target.click();
+  };
+
   return (
     <div className="picture-input-container">
       {picture ? (
-        <label htmlFor="picture" className="picture-input-container__label">
+        <label
+          tabIndex="0"
+          htmlFor="picture"
+          className="picture-input-container__label"
+          onKeyUp={handleOnKeyUp}
+        >
           <Avatar url={picture ? picture.url : ''} />
         </label>
       ) : (

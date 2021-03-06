@@ -2,7 +2,12 @@
 .profile-container {
   background: $profile-bg-color;
   color: $icon-color;
-  margin-top: 5rem;
+  height: 100vh;
   padding: $mobile-page-padding;
-  padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .profile-container {
+    padding: $tablet-page-padding;
+  }
 }

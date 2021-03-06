@@ -13,18 +13,22 @@ function useFetchPlace() {
 
   const fetchPlace = async () => {
     if (error.isGeoActive) {
-      const errorState = [error, setError];
-      const requestState = [canUserRequest, setCanUserRequest];
-      const user = [userState, dispatch];
-      const args = { user, requestState, errorState, setRandomPlace };
-      try {
-        await triggerRandomPlaceRequest(args);
-      } catch (err) {
-        if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
+      if (canUserRequest) {
+        const errorState = [error, setError];
+        const requestState = [canUserRequest, setCanUserRequest];
+        const user = [userState, dispatch];
+        const args = { user, requestState, errorState, setRandomPlace };
+        try {
+          await triggerRandomPlaceRequest(args);
+        } catch (err) {
+          if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
+        }
+      } else {
+        dispatch({ type: 'FAST_REQUEST' });
       }
     }
   };
-  return {fetchPlace};
+  return { fetchPlace };
 }
 
 export default useFetchPlace;

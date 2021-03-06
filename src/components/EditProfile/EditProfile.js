@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../../context/UserContext';
 import IconButton from '../IconButton/IconButton';
 import NameInput from '../NameInput/NameInput';
@@ -16,21 +16,6 @@ function EditProfile(props) {
   const [picture, setPicture] = useState(null);
   const [error] = useContext(ErrorContext);
 
-  const handleBtnClick = async () => {
-    setShowDarkBackground(() => false);
-    setShowEdit(() => false);
-    const newUser = createNewUser();
-    if (newUser) {
-      try {
-        if (picture.file) addPictureToDB();
-        error.isDBActive && (await db.profile.update(1, { username }));
-        dispatch({ type: 'EDIT_USER', payload: newUser });
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  };
-
   const addPictureToDB = async () => {
     const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
     error.isDBActive &&
@@ -43,6 +28,32 @@ function EditProfile(props) {
     if (username) propArr.push(['username', username]);
     if (picture) propArr.push(['picture', picture]);
     return editUser(userState, propArr);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setShowEdit(false);
+        setShowDarkBackground(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [setShowEdit, setShowDarkBackground]);
+
+  const handleBtnClick = async () => {
+    setShowDarkBackground(false);
+    setShowEdit(false);
+    const newUser = createNewUser();
+    if (newUser) {
+      try {
+        if (picture.file) addPictureToDB();
+        error.isDBActive && (await db.profile.update(1, { username }));
+        dispatch({ type: 'EDIT_USER', payload: newUser });
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (

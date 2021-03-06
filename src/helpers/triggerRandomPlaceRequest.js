@@ -6,21 +6,18 @@ import tryToSetLocation from './tryToSetLocation';
 
 async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
-  const [canUserRequest, setCanUserRequest] = requestState;
+  const [, setCanUserRequest] = requestState;
   const [userState, dispatch] = user;
   clearNotificationIfExist(userState, dispatch);
-  if (canUserRequest) {
-    const {
-      location: { lat },
-      location: { lon },
-    } = userState.profile.preferences;
 
-    preventRequestForAWhile(setRandomPlace, setCanUserRequest);
-    (!lat || !lon) && (await tryToSetLocation(user, errorState));
-    await requestRandomPlace({ user, errorState, setRandomPlace });
-  } else {
-    dispatch({ type: 'FAST_REQUEST' });
-  }
+  const {
+    location: { lat },
+    location: { lon },
+  } = userState.profile.preferences;
+
+  preventRequestForAWhile(setRandomPlace, setCanUserRequest);
+  (!lat || !lon) && (await tryToSetLocation(user, errorState));
+  await requestRandomPlace({ user, errorState, setRandomPlace });
 }
 
 const preventRequestForAWhile = (setRandomPlace, setCanUserRequest) => {

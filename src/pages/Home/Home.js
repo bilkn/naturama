@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -8,59 +8,61 @@ import Loader from '../../components/Loader/Loader';
 import AppHead from '../../components/AppHead/AppHead';
 import Logo from '../../components/Logo/Logo';
 import Error from '../../components/Error/Error';
-import UserRequestContext from '../../context/UserRequestContext';
-import triggerRandomPlaceRequest from '../../helpers/triggerRandomPlaceRequest';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
+import useFetchPlace from '../../hooks/useFetchPlace';
+import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
 
 function Home() {
-  const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
-  const [userState, dispatch] = useContext(UserContext);
-  const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
+  const [randomPlace] = useContext(RandomPlaceContext);
+  const [userState] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const [error, setError] = useContext(ErrorContext);
+  const [error] = useContext(ErrorContext);
+  const { fetchPlace } = useFetchPlace();
+  const [showAside, setShowAside] = useState(false);
 
-  const handleClick = () => setSelectedPlace(randomPlace);
-
-  useEffect(() => {
+  /*  useEffect(() => {
     let didMount = true;
     async function fetchData() {
-      if (!randomPlace && userState && error.isGeoActive && canUserRequest) {
-        const errorState = [error, setError];
-        const requestState = [canUserRequest, setCanUserRequest];
-        const user = [userState, dispatch];
-        const args = {
-          user,
-          requestState,
-          errorState,
-          setRandomPlace,
-        };
-        try {
-          await triggerRandomPlaceRequest(args);
-        } catch (err) {
-          if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });
-        }
+      if (!randomPlace) {
+        await fetchPlace();
       }
     }
     if (didMount) fetchData();
     return () => (didMount = false);
-  }, [
-    userState,
-    canUserRequest,
-    setCanUserRequest,
-    dispatch,
-    error,
-    setError,
-    randomPlace,
-    setRandomPlace,
-  ]);
+  }, [randomPlace]); 
+ */
+  useEffect(() => {
+    const mql = window.matchMedia('(min-width:1024px)');
+    if (mql.matches) setShowAside(true);
+    else setShowAside(false);
+  }, []);
 
+  useEffect(() => {
+    let enableCall = true;
+    const handleResize = () => {
+      if (!enableCall) return;
+      enableCall = false;
+      const mql = window.matchMedia('(min-width:1024px)');
+      if (mql.matches) setShowAside(true);
+      else setShowAside(false);
+      setTimeout(() => (enableCall = true), 100);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleClick = () => setSelectedPlace(randomPlace);
   return (
     <>
       <AppHead>
         <Logo />
       </AppHead>
       <div className="home">
-        <AsideShuffle userState={userState} />
+        {showAside && (
+          <>
+            <AsideShuffle userState={userState} /> <AsidePictureToolbar />
+          </>
+        )}
         {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||

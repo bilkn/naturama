@@ -45,10 +45,9 @@ function userReducer(state, action) {
       const { history, shufflePlace } = action.payload;
       const { shuffleHistory } = state;
       const shuffleHistoryArr =
-        shuffleHistory.length > 4
-          ? [...shuffleHistory.slice(1, 4), shufflePlace]
-          : [...shuffleHistory, shufflePlace];
-
+        shuffleHistory.length < 4
+          ? [...shuffleHistory, shufflePlace]
+          : [...shuffleHistory.slice(1, shuffleHistory.length), shufflePlace];
       return {
         ...state,
         history,
@@ -77,6 +76,7 @@ function userReducer(state, action) {
         history: action.payload,
         notification: 'Place history has been removed.',
         isNotificationOpen: true,
+        shuffleHistory: [],
       };
     }
     case 'INVALID_FILE_SIZE': {

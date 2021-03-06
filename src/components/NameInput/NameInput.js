@@ -23,6 +23,7 @@ function NameInput(props) {
       placeholder="Name"
       value={username || ''}
       onChange={handleChange}
+      autoFocus
     />
   );
 }

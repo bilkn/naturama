@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Contact.scss';
 function Contact() {
+  const link = useRef(null)
+
+  useEffect(() => {
+    link.current.focus();
+  }, [])
   return (
     <div className="contact">
       <ul className="contact-list">
@@ -10,6 +15,7 @@ function Contact() {
             className="contact-list__link"
             target="_blank"
             rel="noreferrer"
+            ref={link}
           >
             <i className="fab fa-github contact-list__icon"></i>
           </a>

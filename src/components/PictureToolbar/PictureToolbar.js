@@ -1,61 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import ErrorContext from '../../context/ErrorContext';
-import UserContext from '../../context/UserContext';
-import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
-import db from '../../helpers/dexie';
 import './PictureToolbar.scss';
-
+import useFavourite from '../../hooks/useFavourite';
 function PictureToolbar(props) {
-  const { place, setShowShareLinks, setShowDarkBackground } = props;
-  const [userState, dispatch] = useContext(UserContext);
-  const [error] = useContext(ErrorContext);
-
+  const { setShowShareLinks, setShowDarkBackground } = props;
+  const { handleFavClick, isPlaceInFav } = useFavourite();
+  
   const handleShareClick = () => {
     setShowDarkBackground(true);
     setShowShareLinks(true);
-  };
-
-  const isPlaceInFav = () => {
-    return userState.favourites.some((favPlace) => favPlace.xid === place.xid);
-  };
-
-  const handleFavClick = async () => {
-    clearNotificationIfExist(userState, dispatch);
-
-
-    const favResult = isPlaceInFav();
-    const newPlaces = favResult
-      ? [
-          ...userState.favourites.filter(
-            (favPlace) => favPlace.xid !== place.xid
-          ),
-        ]
-      : [...userState.favourites, place];
-    try {
-      await handleFavOperation({ newPlaces, favResult });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleFavOperation = async (args) => {
-    const { newPlaces, favResult } = args;
-    const payload = newPlaces;
-    if (!favResult) {
-      error.isDBActive && (await db.favourites.add(place, place.xid));
-      dispatch({
-        type: 'ADD_PLACE',
-        payload,
-      });
-    } else {
-      error.isDBActive &&
-        (await db.favourites.where('xid').equals(place.xid).delete());
-      dispatch({
-        type: 'REMOVE_PLACE',
-        payload,
-      });
-    }
   };
 
   return (

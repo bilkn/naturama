@@ -1,22 +1,32 @@
 @import '../../styles/variables';
 .aside-shuffle {
-  display: none;
+  align-items: center;
+  background: #b5b5b580;
+  border-radius: 25px;
+  box-shadow: 10px 10px 10px #0000004d;
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  margin-top: -225px;
+  padding: 0.7rem 0;
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  width: 200px;
+
+  // aside-shuffle__btn
+  &__btn {
+    background: $third-color;
+    box-shadow: 0 7px 20px black;
+    border-radius: 50%;
+    height: 60px;
+    margin-bottom: 1rem;
+    width: 60px;
+  }
 }
 
-@media (min-width: 1024px) {
-  .aside-shuffle {
-    background: gainsboro;
-    display: initial;
-    height: 70vh;
-    position: fixed;
-    right: 50px;
-    top: $mobile-nav-height+60px;
-    width: 200px;
-  }
-  .aside-shuffle-place-list {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.aside-shuffle-place-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
 }
