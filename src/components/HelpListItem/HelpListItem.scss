@@ -1,14 +1,33 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 .help-list-item {
-    margin-bottom: 1rem;
-    &__title {
-        color: black;
-        font-size: 2rem;
-        margin-bottom: 1rem;
-    }
-    &__text {
-        font-size: 1.2rem;
-        color: ghostwhite;
-    }
+  background: rgba(255, 255, 255, 0.945);
+  border-radius: 20px;
+  box-shadow: 5px 5px 7px rgba(75, 75, 75, 0.301);
+  margin-bottom: 1rem;
+  // help-list-item__title
+  &__title {
+    align-items: center;
+    background: lighten($sec-color, 5%);
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    color: $icon-color;
+    display: flex;
+    font-size: 1.6rem;
+    padding: 0.6rem 1rem;
+  }
+  // help-list-item__icon
+  &__icon {
+    font-size: 1.8rem;
+    height: 30px;
+    margin-right: 10px;
+    width: 30px;
+  }
+  // help-list-item__text
+  &__text {
+    color: black;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    padding: 1.2rem 1rem;
+  }
 }

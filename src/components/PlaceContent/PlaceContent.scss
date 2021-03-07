@@ -1,9 +1,9 @@
 @import '../../styles/variables';
 
 .place-content {
-  height: max-content;
   margin-top: $mobile-place-margin-top;
-  width: 95vw;
+  padding-bottom: 2rem;
+  width: 90vw;
 }
 
 @media (min-width: 768px) {

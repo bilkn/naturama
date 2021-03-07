@@ -21,8 +21,17 @@
     display: flex;
     font-size: inherit;
     height: 100%;
-    padding: 0.3rem 1rem;
+    padding: 0.6rem 1rem;
     text-align: start;
     width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile-menu-list {
+    &__link,
+    &__btn {
+      padding: 0.7rem 1.5rem;
+    }
   }
 }

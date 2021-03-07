@@ -2,6 +2,7 @@
 
 .aside-picture-toolbar {
   align-items: center;
+  animation: slide-in-toolbar-aside 1s ease both;
   background: #b5b5b580;
   border-bottom-right-radius: 25px;
   border-top-right-radius: 25px;
@@ -42,5 +43,14 @@
   }
   &__btn--margin-left {
     margin-left: 5px;
+  }
+}
+
+@keyframes slide-in-toolbar-aside {
+  from {
+    transform: translateX(-170%);
+  }
+  to {
+    transform: translateX(0);
   }
 }

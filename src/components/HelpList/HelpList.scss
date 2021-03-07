@@ -2,5 +2,6 @@
 @import '../../styles/variables';
 .help-list {
   @include ListStyle;
+  grid-template-columns: 90%;
   margin-top: 2rem;
 }

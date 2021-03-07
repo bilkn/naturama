@@ -2,10 +2,7 @@ import React from 'react';
 import './LocationItem.scss';
 function LocationItem(props) {
   const { latValue, lonValue, setLatValue, setLonValue } = props;
-  const style = {
-    marginRight: '1rem',
-    marginLeft: '2.5rem',
-  };
+
 
   const handleChangeLat = (e) => {
     e.preventDefault();
@@ -22,11 +19,12 @@ function LocationItem(props) {
 
   return (
     <li className="location-item">
-      <label htmlFor="location" className="location-item__label">
+      <label htmlFor="lat" className="location-item__label">
         Location:
       </label>
       <div className="location-input-container">
         <input
+          id ="lat"
           type="number"
           className="location-input-container__input"
           placeholder="lat"
@@ -37,7 +35,6 @@ function LocationItem(props) {
           type="number"
           className="location-input-container__input"
           placeholder="lon"
-          style={style}
           value={lonValue}
           onChange={handleChangeLon}
         />

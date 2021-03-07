@@ -5,8 +5,8 @@ import PlaceItem from '../PlaceItem/PlaceItem';
 import PlaceName from '../PlaceName/PlaceName';
 import './AsideShuffle.scss';
 const placeItemStyle = {
-  height: "100px",
-  marginBottom:"0.5rem"
+  animation: 'slide-in-home 1s ease both',
+  height: 'unset',
 };
 const placeNameStyle = {
   bottom: 0,
@@ -30,11 +30,14 @@ function AsideShuffle({ userState }) {
       </div>
       <ul className="aside-shuffle-place-list">
         {userState &&
-          userState.shuffleHistory.slice(-4).map((place) => (
-            <PlaceItem place={place} key={place.xid} style={placeItemStyle}>
-              <PlaceName name={place.content.name} style={placeNameStyle} />
-            </PlaceItem>
-          ))}
+          userState.shuffleHistory
+            .slice(-4)
+            .reverse()
+            .map((place) => (
+              <PlaceItem place={place} key={place.xid} style={placeItemStyle}>
+                <PlaceName name={place.content.name} style={placeNameStyle} />
+              </PlaceItem>
+            ))}
       </ul>
     </aside>
   );

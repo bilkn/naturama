@@ -1,16 +1,17 @@
 @import '../../styles/variables';
 .aside-shuffle {
   align-items: center;
+  animation: slide-in-shuffle-aside 1s ease both;
   background: #b5b5b580;
   border-radius: 25px;
   box-shadow: 10px 10px 10px #0000004d;
   display: flex;
   flex-direction: column;
-  height: 550px;
-  margin-top: -225px;
+  height: 650px;
+  margin-top: -300px;
   padding: 0.7rem 0;
   position: fixed;
-  right: 30px;
+  right: 40px;
   top: 50%;
   width: 200px;
 
@@ -26,7 +27,19 @@
 }
 
 .aside-shuffle-place-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(4, 25%);
   padding: 0 15px;
+  height: 80%;
+}
+
+@keyframes slide-in-shuffle-aside {
+  from {
+    transform: translateX(170%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }

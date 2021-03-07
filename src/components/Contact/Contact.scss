@@ -4,6 +4,7 @@
   @include CenteredAndFixedElement(80%, 180px);
   background: $sec-color;
   border: 1px solid black;
+  border-radius: 20px;
   color: $icon-color;
   display: flex;
   flex-direction: column;
@@ -22,7 +23,7 @@
 
   // contact-list__link
   &__link {
-    color: $icon-color;
+    color: darken($icon-color,5%);
     font-size: $social-icon-font-size;
   }
 }
