@@ -2,6 +2,7 @@
 
 .aside-picture-toolbar {
   align-items: center;
+  animation: slide-in-toolbar-aside 1s ease both;
   background: #b5b5b580;
   border-bottom-right-radius: 25px;
   border-top-right-radius: 25px;
@@ -14,6 +15,7 @@
   position: fixed;
   top: 50%;
   width: 100px;
+  z-index: $aside-index;
 }
 
 .aside-picture-toolbar-list {
@@ -44,3 +46,4 @@
     margin-left: 5px;
   }
 }
+

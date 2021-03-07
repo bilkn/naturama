@@ -25,16 +25,13 @@ function Dialog(props) {
     <div className="dialog">
       <p className="dialog__text">{text}</p>
       <div className="dialog-controls">
-        <button
-          className="dialog-controls__btn"
-          onClick={handleClick}
-          autoFocus
-        >
+        <button className="dialog-controls__btn" onClick={handleClick}>
           Yes
         </button>
         <button
           className="dialog-controls__btn dialog-controls__btn--no-btn"
           onClick={handleClick}
+          autoFocus
         >
           No
         </button>

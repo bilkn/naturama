@@ -4,7 +4,7 @@
   @include AppHeadFixed($mobile-nav-height, $mobile-nav-index);
   align-items: center;
   background: $sec-color;
-  box-shadow: 0 3px 20px rgb(41, 41, 41); 
+  box-shadow: 0 3px 20px rgb(41, 41, 41);
   color: $icon-color;
   display: flex;
   font-size: 1.5rem;
@@ -25,3 +25,5 @@
     justify-content: space-between;
   }
 }
+
+

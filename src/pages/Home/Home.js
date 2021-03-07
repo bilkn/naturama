@@ -11,6 +11,7 @@ import Error from '../../components/Error/Error';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
 import useFetchPlace from '../../hooks/useFetchPlace';
 import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
+import useMediaMatch from '../../hooks/useMediaMatch';
 
 function Home() {
   const [randomPlace] = useContext(RandomPlaceContext);
@@ -18,7 +19,7 @@ function Home() {
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const { fetchPlace } = useFetchPlace();
-  const [showAside, setShowAside] = useState(false);
+  const { isMatched } = useMediaMatch();
 
   /*  useEffect(() => {
     let didMount = true;
@@ -31,25 +32,8 @@ function Home() {
     return () => (didMount = false);
   }, [randomPlace]); 
  */
-  useEffect(() => {
-    const mql = window.matchMedia('(min-width:1024px)');
-    if (mql.matches) setShowAside(true);
-    else setShowAside(false);
-  }, []);
 
-  useEffect(() => {
-    let enableCall = true;
-    const handleResize = () => {
-      if (!enableCall) return;
-      enableCall = false;
-      const mql = window.matchMedia('(min-width:1024px)');
-      if (mql.matches) setShowAside(true);
-      else setShowAside(false);
-      setTimeout(() => (enableCall = true), 100);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+ console.log(isMatched)
 
   const handleClick = () => setSelectedPlace(randomPlace);
   return (
@@ -58,7 +42,7 @@ function Home() {
         <Logo />
       </AppHead>
       <div className="home">
-        {showAside && (
+        {isMatched && (
           <>
             <AsideShuffle userState={userState} /> <AsidePictureToolbar />
           </>
@@ -67,7 +51,11 @@ function Home() {
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
           (randomPlace ? (
-            <Place place={randomPlace} handleClick={handleClick} />
+            <Place
+              place={randomPlace}
+              handleClick={handleClick}
+              isMatched={isMatched}
+            />
           ) : error.isPlaceFound ? (
             <Loader />
           ) : (

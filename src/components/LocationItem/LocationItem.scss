@@ -11,12 +11,14 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 40%;
   // location-item-container__input
   &__input {
+    border: 1px solid darken($site-background,5%);
+    border-radius: 10px;
     font-size: 1.1rem;
-    padding: 1px 5px;
+    padding: 3px 10px;
     text-align: center;
-    width: 35%;
+    width: 45%;
   }
 }

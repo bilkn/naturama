@@ -8,6 +8,7 @@ import db from '../../helpers/dexie';
 import blobToArrayBuffer from '../../helpers/blobToArrayBuffer';
 import editUser from '../../helpers/editUser';
 import ErrorContext from '../../context/ErrorContext';
+import useCloseUI from '../../hooks/useCloseUI';
 
 function EditProfile(props) {
   const { setShowEdit, setShowDarkBackground } = props;
@@ -15,6 +16,7 @@ function EditProfile(props) {
   const [username, setUsername] = useState('');
   const [picture, setPicture] = useState(null);
   const [error] = useContext(ErrorContext);
+  useCloseUI([setShowEdit, setShowDarkBackground]);
 
   const addPictureToDB = async () => {
     const pictureArrayBuffer = await blobToArrayBuffer(picture.file);
@@ -29,17 +31,6 @@ function EditProfile(props) {
     if (picture) propArr.push(['picture', picture]);
     return editUser(userState, propArr);
   };
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setShowEdit(false);
-        setShowDarkBackground(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [setShowEdit, setShowDarkBackground]);
 
   const handleBtnClick = async () => {
     setShowDarkBackground(false);

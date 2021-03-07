@@ -22,13 +22,24 @@ function DailyPlaceList() {
     return <Redirect to="/" />;
   }
 
-  const handlePlaceClick = (place) => {
+  const handlePlaceClick = async (place) => {
+    setSelectedPlace(place);
     const newHistory = [...userState.history, place.xid];
+    const dailyList = userState.dailyList.filter(
+      (dailyPlace) => dailyPlace.xid !== place.xid
+    );
     dispatch({
-      type: 'ADD_HISTORY',
-      payload: { history: newHistory, shufflePlace: place },
+      type: 'ADD_HISTORY_DAILY_LIST',
+      payload: { history: newHistory, shufflePlace: place, dailyList },
     });
-    error.isDBActive && db.history.put({ xid: place.xid });
+    if (error.isDBActive) {
+      try {
+        await db.history.put({ xid: place.xid });
+        await db.dailyList.where('xid').equals(place.xid).delete();
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   return (

@@ -2,16 +2,11 @@
 @import '../../styles/variables';
 .search-radius-item {
   @include PreferencesItemStyle;
+  border-bottom: 1px solid black;
   justify-content: space-between;
-
   // search-radius-item__label
   &__label {
     margin-right: 10px;
-  }
-
-  // search-radius-item__span
-  &__span {
-    font-size: 0.9rem;
   }
 
   // search-radius-item__input
@@ -20,13 +15,11 @@
     border: none;
     color: $icon-color;
     font-size: $preferences-font-size;
-    max-width: 90px;
-    min-width: 0;
+    max-width: 75px;
   }
 
-  // search-radius-item__empty-span
-  &__empty-span {
-    height: 16px;
-    width: 21px;
+  // search-radius-item__span
+  &__span {
+    font-size: 1rem;
   }
 }

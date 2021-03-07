@@ -1,9 +1,10 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 .place {
   align-items: center;
   display: flex;
   flex-direction: column;
   padding: $mobile-page-padding;
+  padding-bottom: 6rem;
 }
 
 @media (min-width: 768px) {

@@ -126,7 +126,11 @@ function ProfileMenu() {
           setShowDarkBackground={setShowDarkBackground}
         />
       )}
-      {showContact && <Contact />}
+      {showContact && (
+        <Contact
+          setShowContact={setShowContact}
+        />
+      )}
       {showDarkBackground && (
         <DarkBackground
           setShowDarkBackground={setShowDarkBackground}

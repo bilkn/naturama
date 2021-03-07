@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
+import useCloseUI from '../../hooks/useCloseUI';
 import './Contact.scss';
-function Contact() {
+function Contact({setShowContact}) {
+  useCloseUI([setShowContact]);
   const link = useRef(null)
 
   useEffect(() => {

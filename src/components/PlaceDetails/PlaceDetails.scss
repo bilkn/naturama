@@ -2,12 +2,10 @@
 
 .place-details {
   align-items: center;
-  background: $sec-color;
-  box-shadow: 0 8px 15px #1b1b1b;
+  background: $place-name-bg;
+  color: whitesmoke;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
-  margin-top: -5px;
   padding: 0.8rem 1rem;
 }
 

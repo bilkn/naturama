@@ -1,5 +1,6 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 .dark-background {
+  animation: opacity 0.2s ease both;
   background-color: rgba(0, 0, 0, 0.8);
   height: 100vh;
   left: 0;
@@ -9,5 +10,3 @@
   width: 100vw;
   z-index: $dark-background-index;
 }
-
-

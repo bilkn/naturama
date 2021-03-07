@@ -1,4 +1,6 @@
+@import "../../styles/variables";
 .app-head-nav {
+  
   display: none;
 }
 
@@ -10,11 +12,12 @@
     display: flex;
     // app-head-nav-list__item
     &__item {
+      color: $icon-color;
       margin-right: 20px;
     }
     // app-head-nav-list__link
     &__link {
-      color: black;
+      color: $icon-color;
     }
   }
 }

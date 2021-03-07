@@ -8,20 +8,19 @@ function SearchRadiusItem({ radiusValue, setRadiusValue }) {
   };
   return (
     <li className="search-radius-item">
-      <label
-        htmlFor="search-radius-item__label"
-        className="search-radius-item__label"
-      >
+      <label htmlFor="search-radius" className="search-radius-item__label">
         Search Radius:
       </label>
-      <input
-        id="search-radius"
-        type="number"
-        className="search-radius-item__input"
-        value={radiusValue || ''}
-        onChange={handleChange}
-      />
-      <span className="search-radius-item__span">KM</span>
+      <div className="search-radius-item__input-wrapper">
+        <input
+          id="search-radius"
+          type="number"
+          className="search-radius-item__input"
+          value={radiusValue || ''}
+          onChange={handleChange}
+        />
+        <span className="search-radius-item__span">KM</span>
+      </div>
     </li>
   );
 }

@@ -1,5 +1,6 @@
 @import '../../styles/variables';
 .place-item {
+  animation: slide-in .5s ease both;
   box-shadow: 0 8px 15px #1b1b1b;
   height: 200px;
   position: relative;
@@ -30,3 +31,4 @@
     position: absolute;
   }
 }
+

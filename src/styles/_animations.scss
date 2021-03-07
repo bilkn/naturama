@@ -1,0 +1,55 @@
+@keyframes slide-in-toolbar-aside {
+  from {
+    transform: translateX(-170%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-shuffle-aside {
+  from {
+    transform: translateX(170%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-home {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-popup {
+  from {
+    transform: translateX(-150%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-bottom-to-top {
+  from {
+    transform: translateY(150%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

@@ -4,6 +4,7 @@
 .edit-profile {
   @include CenteredAndFixedElement(300px, 180px);
   align-items: center;
+  animation: slide-in-popup 0.2s ease both;
   background: $sec-color;
   border-radius: 10px;
   display: flex;

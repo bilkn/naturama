@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 .dialog {
   @include CenteredAndFixedElement(306px, 130px);
-  background: #eaeaea;
+  background: $main-ui-bg;
   border-radius: 10px;
   padding: 0.9rem;
   z-index: 10000000;
@@ -39,7 +39,7 @@
 
     margin: 0;
     &:hover {
-      background: lighten(#d11c1ceb, 2%)
+      background: lighten(#d11c1ceb, 2%);
     }
   }
 }
