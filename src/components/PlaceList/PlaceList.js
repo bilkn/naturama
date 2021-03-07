@@ -10,14 +10,15 @@ const placeNameStyle = {
   width: '100%',
 };
 function PlaceList(props) {
-  const { list, setSelectedPlace, ...otherProps } = props;
+  const { list, handlePlaceClick, ...otherProps } = props;
+
   return (
     <ul className="place-list">
       {list &&
         list.map((place) => (
           <PlaceItem
             place={place}
-            setSelectedPlace={setSelectedPlace}
+            onClick={handlePlaceClick}
             key={place.xid}
             {...otherProps}
           >

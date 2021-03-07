@@ -4,15 +4,14 @@ import noImg from '../../assets/no-image-item.png';
 import './PlaceItem.scss';
 
 function PlaceItem(props) {
-  const { place, setSelectedPlace, children, ...otherProps } = props;
+  const { place, children, ...otherProps } = props;
   const { onClick: handler, style } = otherProps;
   const handleClick = () => {
-    setSelectedPlace(place);
     if (handler) handler(place);
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') setSelectedPlace(place);
+    if (e.key === 'Enter') handler(place);
   };
   return (
     <li

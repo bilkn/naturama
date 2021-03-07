@@ -1,7 +1,7 @@
 @import '../../styles/mixins';
 @import '../../styles/variables';
 .contact {
-  @include CenteredAndFixedElement(80%, 180px);
+  @include CenteredAndFixedElement(300px, 180px);
   animation: slide-in-popup 0.2s ease both;
   background: $main-ui-bg;
   border: 1px solid black;

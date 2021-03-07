@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import RandomPlaceContext from '../../context/RandomPlaceContext';
 import useFetchPlace from '../../hooks/useFetchPlace';
 import IconButton from '../IconButton/IconButton';
 import PlaceItem from '../PlaceItem/PlaceItem';
@@ -18,7 +19,12 @@ const placeNameStyle = {
   width: '100%',
 };
 function AsideShuffle({ userState }) {
+  const [, setRandomPlace] = useContext(RandomPlaceContext);
   const { fetchPlace } = useFetchPlace();
+
+  const handlePlaceClick = (place) => {
+    setRandomPlace(place);
+  };
   return (
     <aside className="aside-shuffle">
       <div className="aside-shuffle__btn-wrapper">
@@ -34,7 +40,12 @@ function AsideShuffle({ userState }) {
             .slice(-4)
             .reverse()
             .map((place) => (
-              <PlaceItem place={place} key={place.xid} style={placeItemStyle}>
+              <PlaceItem
+                place={place}
+                key={place.xid}
+                style={placeItemStyle}
+                onClick={handlePlaceClick}
+              >
                 <PlaceName name={place.content.name} style={placeNameStyle} />
               </PlaceItem>
             ))}
