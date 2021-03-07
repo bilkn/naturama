@@ -20,7 +20,7 @@ function AppHeadNav() {
             Daily List
           </Link>
         </li>
-        <li className="app-head-nav-list__item no-margin">
+        <li className="app-head-nav-list__item">
           <Link to="/profile" className="app-head-nav-list__link">
             <i className="fa fa-user" aria-hidden="true" />
           </Link>

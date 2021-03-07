@@ -22,7 +22,6 @@ function useMediaMatch() {
       if (!enableCall) return;
       enableCall = false;
       const mql = matchMedia('min', '1024px');
-      console.log('hanlde resize');
       if (mql) {
         setIsMatched(true);
       } else {

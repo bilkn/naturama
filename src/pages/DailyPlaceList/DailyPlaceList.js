@@ -18,12 +18,14 @@ function DailyPlaceList() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const handleNavClick = () => setSelectedPlace(null);
+  
   if (!userState) {
     return <Redirect to="/" />;
   }
 
   const handlePlaceClick = async (place) => {
     setSelectedPlace(place);
+    console.log(place)
     const newHistory = [...userState.history, place.xid];
     const dailyList = userState.dailyList.filter(
       (dailyPlace) => dailyPlace.xid !== place.xid

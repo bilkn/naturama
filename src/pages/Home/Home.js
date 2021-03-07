@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -32,8 +32,6 @@ function Home() {
     return () => (didMount = false);
   }, [randomPlace]); 
  */
-
- console.log(isMatched)
 
   const handleClick = () => setSelectedPlace(randomPlace);
   return (

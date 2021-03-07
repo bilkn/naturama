@@ -5,6 +5,7 @@ import UserContext from '../../context/UserContext';
 import IconButton from '../IconButton/IconButton';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import useFetchPlace from '../../hooks/useFetchPlace';
+import useActiveTab from '../../hooks/useActiveTab';
 
 function MobileNav() {
   const [userState] = useContext(UserContext);
@@ -12,6 +13,7 @@ function MobileNav() {
   const {fetchPlace} =  useFetchPlace();
   const location = useLocation();
   const history = useHistory();
+  useActiveTab();
 
   useEffect(() => {
     const neglectedPaths = ['/fullscreen-picture', '/map'];
@@ -21,37 +23,7 @@ function MobileNav() {
     }
   }, [location.pathname, setSelectedPlace, history]);
 
-  // It adds "active-tab" class for styling, and removes the class from other tabs according to the path.
-  useEffect(() => {
-    let itemOrder = null;
-    const path = location.pathname;
-    switch (path) {
-      case '/':
-        itemOrder = 1;
-        break;
-      case '/favourites':
-        itemOrder = 2;
-        break;
-      case '/profile':
-      case '/help':
-      case '/preferences':
-        itemOrder = 4;
-        break;
-      case '/daily-place-list':
-        itemOrder = 5;
-        break;
-      default:
-        return;
-    }
-    const navItems = document.querySelectorAll('.mobile-nav-list li');
-    navItems.forEach((item) => {
-      item.classList.remove('active-tab');
-    });
-    const navItem = document.querySelector(
-      `.mobile-nav-list li:nth-of-type(${itemOrder})`
-    );
-    navItem.classList.add('active-tab');
-  }, [location.pathname, setSelectedPlace]);
+  
 
   return (
     <nav

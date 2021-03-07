@@ -16,7 +16,7 @@ function Favourites() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
 
   const handleBtnClick = () => setSelectedPlace(null);
-
+  const handlePlaceClick = (place) => setSelectedPlace(place);
   if (!userState) {
     return <Redirect to="/" />;
   }
@@ -41,10 +41,7 @@ function Favourites() {
             </MobileNavTop>
           </Place>
         )) || (
-          <PlaceList
-            list={userState.favourites}
-            setSelectedPlace={setSelectedPlace}
-          />
+          <PlaceList list={userState.favourites} onClick={handlePlaceClick} />
         )}
     </div>
   );
