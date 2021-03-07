@@ -54,6 +54,20 @@ function userReducer(state, action) {
         shuffleHistory: shuffleHistoryArr,
       };
     }
+    case 'ADD_HISTORY_DAILY_LIST': {
+      const { history, shufflePlace, dailyList } = action.payload;
+      const { shuffleHistory } = state;
+      const shuffleHistoryArr =
+        shuffleHistory.length < 4
+          ? [...shuffleHistory, shufflePlace]
+          : [...shuffleHistory.slice(1, shuffleHistory.length), shufflePlace];
+      return {
+        ...state,
+        history,
+        shuffleHistory: shuffleHistoryArr,
+        dailyList
+      };
+    }
 
     case 'CLEAR_NOTIFICATION': {
       return {

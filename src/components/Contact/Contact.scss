@@ -3,7 +3,7 @@
 .contact {
   @include CenteredAndFixedElement(80%, 180px);
   animation: slide-in-popup 0.2s ease both;
-  background: $social-bg;
+  background: $main-ui-bg;
   border: 1px solid black;
   border-radius: 20px;
   color: $icon-color;
@@ -24,7 +24,7 @@
 
   // contact-list__link
   &__link {
-    color: darken($icon-color,5%);
+    color: darken($icon-color, 5%);
     font-size: $social-icon-font-size;
   }
 }
