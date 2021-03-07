@@ -2,7 +2,8 @@
 @import '../../styles/variables';
 .contact {
   @include CenteredAndFixedElement(80%, 180px);
-  background: $sec-color;
+  animation: slide-in-popup 0.2s ease both;
+  background: $social-bg;
   border: 1px solid black;
   border-radius: 20px;
   color: $icon-color;

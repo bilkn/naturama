@@ -1,11 +1,12 @@
 @import '../../styles/variables';
 
 .share-link-list {
-  background-color: gainsboro;
+  animation: slide-in-bottom-to-top 0.3s ease both;
+  background-color: $social-bg;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   bottom: 0;
-  color: black;
+  color: #252624;
   left: 0;
   list-style: none;
   position: fixed;
@@ -40,7 +41,6 @@
     text-align: left;
     width: 100%;
   }
-  
 
   // share-link-list__line {
   .share-link-list__line {
@@ -56,11 +56,10 @@
     position: absolute;
     right: 10px;
     width: max-content;
-    
+
     // person-options-container__name
     &__name {
       display: none;
     }
   }
-
 }

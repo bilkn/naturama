@@ -1,5 +1,6 @@
+@import "../../styles/variables";
 .place-name {
-  background: #000000c9;
+  background: $place-name-bg;
   border-bottom-right-radius: 20px;
   color: #fff;
   font-size: 1.2rem;
