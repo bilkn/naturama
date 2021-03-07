@@ -15,6 +15,7 @@
   position: fixed;
   top: 50%;
   width: 100px;
+  z-index: $aside-index;
 }
 
 .aside-picture-toolbar-list {

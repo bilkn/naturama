@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import useFetchPlace from '../../hooks/useFetchPlace';
 import IconButton from '../IconButton/IconButton';
 import PlaceItem from '../PlaceItem/PlaceItem';
@@ -20,10 +21,12 @@ const placeNameStyle = {
 };
 function AsideShuffle({ userState }) {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
+  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const { fetchPlace } = useFetchPlace();
 
   const handlePlaceClick = (place) => {
     setRandomPlace(place);
+    setSelectedPlace(place);
   };
   return (
     <aside className="aside-shuffle">

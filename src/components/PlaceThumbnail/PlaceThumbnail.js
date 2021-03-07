@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './PlaceThumbnail.scss';
 import NoImg from '../../assets/no-image.png';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,20 @@ function PlaceThumbnail(props) {
   const placeImg = (preview && preview.source) || NoImg;
   const imgHeight = (preview && preview.height) || 300;
   const imgWidth = (preview && preview.width) || 300;
-  const { content: {name}} = place;
+  const {
+    content: { name },
+  } = place;
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Tab') {
+        return matchMedia('min',"1024");
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className="place-thumbnail">
       <Link to="/fullscreen-picture" className="place-thumbnail__link">
@@ -24,7 +37,7 @@ function PlaceThumbnail(props) {
       </Link>
       <i className={`${icon} place-thumbnail__icon`}></i>
       {children || ''}
-      <PlaceName name={name}/>
+      <PlaceName name={name} />
     </div>
   );
 }

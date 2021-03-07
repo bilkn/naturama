@@ -1,39 +1,16 @@
 import './ShareLinkList.scss';
-import React, { useContext } from 'react';
-import SelectedPlaceContext from '../../context/SelectedPlaceContext';
+import React from 'react';
+import useShareURL from '../../hooks/useShareURL';
+
 function ShareLinkList() {
-  const [place] = useContext(SelectedPlaceContext);
-  
-  const getTwitterURL = () => {
-    const {
-      content: { wikipedia: wikiURL, name },
-    } = place;
+  const { twitterURL, facebookURL, mailURL } = useShareURL();
 
-    // Solves spaced url bug for Twitter.
-    const replacedURL = wikiURL.replace(/%20/g, '_');
-    return `https://twitter.com/intent/tweet?text=${name}&url=${replacedURL}`;
-  };
-
-  const getFacebookURL = () => {
-    const {
-      content: { wikipedia: wikiURL },
-    } = place;
-
-    return `https://www.facebook.com/sharer/sharer.php?u=${wikiURL}`;
-  };
-
-  const getMailURL = () => {
-    const {
-      content: { wikipedia: wikiURL, name },
-    } = place;
-    return `mailto:?&body=${name}%0D%0A%0D%0A${wikiURL}`;
-  };
   return (
     <ul className="share-link-list">
       <li className="share-link-list__item">
         <a
           className="share-link-list__link twitter-share-button"
-          href={getTwitterURL()}
+          href={twitterURL}
           rel="noopeener noreferrer"
           target="_blank"
         >
@@ -47,7 +24,7 @@ function ShareLinkList() {
       <hr className="share-link-list__line" />
       <li className="share-link-list__item">
         <a
-          href={getFacebookURL()}
+          href={facebookURL}
           className="share-link-list__link"
           rel="noopeener noreferrer"
           target="_blank"
@@ -61,7 +38,7 @@ function ShareLinkList() {
       </li>
       <hr className="share-link-list__line" />
       <li className="share-link-list__item">
-        <a href={getMailURL()} className="share-link-list__link">
+        <a href={mailURL} className="share-link-list__link">
           <i className="fas fa-envelope share-link-list__icon"></i>
           Email
         </a>

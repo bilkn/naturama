@@ -4,7 +4,8 @@ import PlaceDescription from '../PlaceDescription/PlaceDescription';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import PlaceThumbnail from '../PlaceThumbnail/PlaceThumbnail';
 import './Place.scss';
-function Place({ place, handleClick, children }) {
+function Place(props) {
+  const { place, handleClick, children, isMatched } = props;
   return (
     <div className="place" onClick={handleClick}>
       {children}

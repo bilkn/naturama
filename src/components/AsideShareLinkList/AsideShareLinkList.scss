@@ -1,0 +1,39 @@
+.aside-share-link-list {
+  align-items: center;
+  background: #b5b5b580;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  display: flex;
+  font-size: 2rem;
+  height: 50px;
+  justify-content: space-between;
+  left: 100px;
+  padding: 0 10px;
+  position: fixed;
+  transform: translateX(-250%);
+  transition: 300ms ease;
+  transition-property: box-shadow, transform, opacity;
+  top: 12%;
+  width: 150px;
+  z-index: 0;
+
+  // aside-share-link-list__item
+  &__item {
+    margin-right: 10px;
+    opacity: 0;
+  }
+  // aside-share-link-list__item
+  &__icon {
+    color: black;
+  }
+}
+
+.aside-share-link-list--open {
+  box-shadow: 10px 10px 10px #0000004d;
+  transform: translateX(0);
+  // .aside-share-link-list--open aside-share-link-list__item
+  & .aside-share-link-list__item {
+    opacity: 1;
+  }
+}
