@@ -1,8 +1,8 @@
 .aside-share-link-list {
   align-items: center;
   background: #b5b5b580;
-  border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
   display: flex;
   font-size: 2rem;
   height: 50px;
@@ -23,10 +23,12 @@
     opacity: 0;
     
   }
+  
   // aside-share-link-list__icon
   &__icon {
     color: black;
     transition: color 200ms ease;
+
     // aside-share-link-list__icon:hover
     &:hover {
       color: lighten(black,20%);

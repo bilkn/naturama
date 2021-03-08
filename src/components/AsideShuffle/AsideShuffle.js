@@ -5,6 +5,7 @@ import PlaceItem from '../PlaceItem/PlaceItem';
 import PlaceName from '../PlaceName/PlaceName';
 import ShuffleBtn from '../ShuffleBtn/ShuffleBtn';
 import './AsideShuffle.scss';
+
 const placeItemStyle = {
   animation: 'slide-in-home 1s ease both',
   height: 'unset',
@@ -18,6 +19,7 @@ const placeNameStyle = {
   top: 'unset',
   width: '100%',
 };
+
 function AsideShuffle({ userState }) {
   const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);

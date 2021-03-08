@@ -5,7 +5,6 @@ import LocationItem from '../LocationItem/LocationItem';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
 import db from '../../helpers/dexie';
-import MobileNavTop from '../MobileNavTop/MobileNavTop';
 import EmptyDiv from '../EmptyDiv/EmptyDiv';
 import ReturnLink from '../ReturnLink/ReturnLink';
 import ErrorContext from '../../context/ErrorContext';

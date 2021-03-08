@@ -1,6 +1,7 @@
 import React from 'react';
 import './Avatar.scss';
 import NoAvatar from '../../assets/no-avatar.png';
+
 function Avatar({url, userState }) {
   return (
     <div className="avatar-container">

@@ -1,5 +1,6 @@
 import './Avatar.scss';
 import React from 'react';
+
 function Avatar({ createFileURL, currentPicture, nameContainer }) {
   return (
     <div className="avatar-container">

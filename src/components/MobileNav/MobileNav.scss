@@ -23,6 +23,7 @@
     transition: background 200ms ease;
     width: 100%;
   }
+  // mobile-nav-list-item__btn:focus
   &__btn:focus {
     background: lighten($third-color, 3%);
     outline: none;

@@ -4,6 +4,7 @@ import './PictureInput.scss';
 import Avatar from '../Avatar/Avatar';
 import validatePictureFormat from '../../helpers/validatePictureFormat';
 import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
+
 function PictureInput(props) {
   const { picture, setPicture, userState, dispatch } = props;
 

@@ -6,7 +6,6 @@ import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import useActiveTab from '../../hooks/useActiveTab';
 import ShuffleBtn from '../ShuffleBtn/ShuffleBtn';
 
-const shuffleBtnStyle = {};
 function MobileNav() {
   const [userState] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);

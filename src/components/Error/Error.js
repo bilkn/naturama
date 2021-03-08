@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Error.scss"
+
 function Error({text}) {
   return (
     <div className="error">

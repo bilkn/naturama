@@ -20,8 +20,8 @@
 }
 @media (min-width: 1024px) {
   .app-head {
-    padding: $desktop-nav-padding;
     height: $desktop-nav-height;
+    padding: $desktop-nav-padding;
     justify-content: space-between;
   }
 }

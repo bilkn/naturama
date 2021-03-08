@@ -1,6 +1,7 @@
 import React from 'react';
 import useShareURL from '../../hooks/useShareURL';
 import './AsideShareLinkList.scss';
+
 function AsideShareLinkList({ shareLinkList }) {
   const { twitterURL, facebookURL, mailURL } = useShareURL();
 

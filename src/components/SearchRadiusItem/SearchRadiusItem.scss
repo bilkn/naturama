@@ -1,5 +1,6 @@
 @import '../../styles/mixins';
 @import '../../styles/variables';
+
 .search-radius-item {
   @include PreferencesItemStyle;
   border-bottom: 1px solid #ffffffad;

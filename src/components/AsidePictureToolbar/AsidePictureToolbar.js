@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import AsideShareLinkList from '../AsideShareLinkList/AsideShareLinkList';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
+
 function AsidePictureToolbar() {
   const { handleFavClick, isPlaceInFav } = useFavourite(true);
   const [selectedPlace] = useContext(SelectedPlaceContext);

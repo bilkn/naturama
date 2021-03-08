@@ -19,7 +19,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 2.5rem;
-  // .dialog-controls__btn
+  // dialog-controls__btn
   &__btn {
     background: #114b10c9;
     border-radius: 5px;
@@ -29,14 +29,17 @@
     text-align: center;
     transition: background 100ms ease;
     width: 60px;
+
+    // dialog-controls__btn:hover
     &:hover {
       background: lighten(#114b10c9, 2%);
     }
   }
+  // dialog-controls__btn--no-btn
   &__btn--no-btn {
     background: #d11c1ceb;
-
     margin: 0;
+   // dialog-controls__btn--no-btn:hover
     &:hover {
       background: lighten(#d11c1ceb, 2%);
     }

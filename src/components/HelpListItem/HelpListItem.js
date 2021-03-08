@@ -1,5 +1,6 @@
 import React from 'react';
 import './HelpListItem.scss';
+
 function HelpListItem({ title, text, iconClass }) {
   return (
     <li className="help-list-item">

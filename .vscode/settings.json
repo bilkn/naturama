@@ -9,7 +9,7 @@
         "**/*.json": true,
         ".gitignore": true,
         ".babelrc": true,
-        "webpack.config.js": false,
+        "webpack.config.js": true,
         "node_modules": true,
         "**/.babelrc": true,
         ".eslintrc.js": true,

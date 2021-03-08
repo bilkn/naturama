@@ -1,10 +1,13 @@
 .profile-menu {
   padding-bottom: 3rem;
+
   // profile-menu__footer
   &__footer {
     color: ivory;
     text-align: center;
   }
+
+  // profile-menu__attribute-link
   &__attribute-link {
     color: blue;
     margin-left: 0.5rem;
@@ -13,7 +16,7 @@
 
 .profile-menu-reset-container {
   margin-bottom: 2rem;
-
+  
   // profile-menu-reset-container__btn
   &__btn {
     background-color: ivory;

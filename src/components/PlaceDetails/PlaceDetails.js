@@ -1,5 +1,6 @@
 import React from 'react';
 import './PlaceDetails.scss';
+
 function PlaceDetails({ place }) {
   const location = place ? place.content.location : null;
 
