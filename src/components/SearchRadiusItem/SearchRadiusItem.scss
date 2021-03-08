@@ -2,7 +2,7 @@
 @import '../../styles/variables';
 .search-radius-item {
   @include PreferencesItemStyle;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ffffffad;
   justify-content: space-between;
   // search-radius-item__label
   &__label {

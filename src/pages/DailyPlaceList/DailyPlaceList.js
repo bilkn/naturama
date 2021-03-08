@@ -25,7 +25,6 @@ function DailyPlaceList() {
 
   const handlePlaceClick = async (place) => {
     setSelectedPlace(place);
-    console.log(place)
     const newHistory = [...userState.history, place.xid];
     const dailyList = userState.dailyList.filter(
       (dailyPlace) => dailyPlace.xid !== place.xid

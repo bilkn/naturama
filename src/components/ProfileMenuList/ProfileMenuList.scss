@@ -23,7 +23,12 @@
     height: 100%;
     padding: 0.6rem 1rem;
     text-align: start;
+    transition: background 100ms ease;
     width: 100%;
+  }
+  &__link:hover,
+  &__btn:hover {
+    background: #eee;
   }
 }
 

@@ -4,8 +4,7 @@ import noImg from '../../assets/no-image-item.png';
 import './PlaceItem.scss';
 
 function PlaceItem(props) {
-  const { place, children, ...otherProps } = props;
-  const { onClick: handler, style } = otherProps;
+  const { place, children, onClick: handler, style } = props;
   const handleClick = () => {
     if (handler) handler(place);
   };

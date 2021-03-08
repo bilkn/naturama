@@ -1,11 +1,11 @@
 @import '../../styles/variables';
 .place-item {
-  animation: slide-in .5s ease both;
+  animation: opacity .5s ease both;
   box-shadow: 0 8px 15px #1b1b1b;
+  cursor: pointer;
   height: 200px;
   position: relative;
   width: 100%;
-
   // place-item__img
   &__img {
     height: 100%;
@@ -32,3 +32,6 @@
   }
 }
 
+.place-item:hover {
+  opacity: 0.9 !important;
+}

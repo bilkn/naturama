@@ -2,15 +2,14 @@ import React, { useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
 import UserContext from '../../context/UserContext';
-import IconButton from '../IconButton/IconButton';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
-import useFetchPlace from '../../hooks/useFetchPlace';
 import useActiveTab from '../../hooks/useActiveTab';
+import ShuffleBtn from '../ShuffleBtn/ShuffleBtn';
 
+const shuffleBtnStyle = {};
 function MobileNav() {
   const [userState] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const { fetchPlace } = useFetchPlace();
   const location = useLocation();
   const history = useHistory();
   useActiveTab('.mobile-nav-list-item__link', 'active-tab');
@@ -42,12 +41,8 @@ function MobileNav() {
             <i className="fas fa-star mobile-nav-list-item__icon" />
           </Link>
         </li>
-        <li className="mobile-nav-list-item mobile-nav-list-item--shuffle-item">
-          <IconButton
-            btnClass="mobile-nav-list-item__btn"
-            iconClass="fas fa-random  mobile-nav-list-item__icon"
-            onClick={() => fetchPlace()}
-          />
+        <li className="mobile-nav-list-item">
+          <ShuffleBtn className={'mobile-nav-list-item--shuffle-btn'} />
         </li>
         <li className="mobile-nav-list-item ">
           <Link to="/profile" className="mobile-nav-list-item__link">
