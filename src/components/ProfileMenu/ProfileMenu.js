@@ -40,8 +40,8 @@ function ProfileMenu() {
   };
 
   const resetAllData = async () => {
+    
     clearNotificationIfExist(userState, dispatch);
-
     await db.delete();
     await db.open();
     await initialize(errorState, dispatch);
@@ -52,8 +52,8 @@ function ProfileMenu() {
   };
 
   const removePlaceHistory = async () => {
-    clearNotificationIfExist(userState, dispatch);
 
+    clearNotificationIfExist(userState, dispatch);
     await db.history.clear();
     dispatch({
       type: 'CLEAR_HISTORY',

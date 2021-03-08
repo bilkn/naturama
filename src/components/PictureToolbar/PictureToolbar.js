@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './PictureToolbar.scss';
 import useFavourite from '../../hooks/useFavourite';
+
 function PictureToolbar(props) {
   const { setShowShareLinks, setShowDarkBackground } = props;
   const { handleFavClick, isPlaceInFav } = useFavourite();
-  
+
   const handleShareClick = () => {
     setShowDarkBackground(true);
     setShowShareLinks(true);

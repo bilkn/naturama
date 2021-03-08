@@ -23,12 +23,22 @@
     height: 100%;
     padding: 0.6rem 1rem;
     text-align: start;
+    transition: background 100ms ease;
     width: 100%;
+  }
+
+  // profile-menu-list__link:hover,
+  // profile-menu-list__btn:hover
+  &__link:hover,
+  &__btn:hover {
+    background: #eee;
   }
 }
 
 @media (min-width: 768px) {
   .profile-menu-list {
+    // profile-menu-list__link,
+    // profile-menu-list__btn
     &__link,
     &__btn {
       padding: 0.7rem 1.5rem;

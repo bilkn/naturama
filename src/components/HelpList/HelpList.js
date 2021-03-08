@@ -1,6 +1,7 @@
 import React from 'react';
 import HelpListItem from '../HelpListItem/HelpListItem';
 import './HelpList.scss';
+
 function HelpList() {
   return (
     <ol className="help-list">

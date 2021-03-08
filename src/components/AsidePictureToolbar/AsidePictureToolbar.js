@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef} from 'react';
 import IconButton from '../IconButton/IconButton';
 import useFavourite from '../../hooks/useFavourite';
 import './AsidePictureToolbar.scss';
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import AsideShareLinkList from '../AsideShareLinkList/AsideShareLinkList';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
+
 function AsidePictureToolbar() {
   const { handleFavClick, isPlaceInFav } = useFavourite(true);
   const [selectedPlace] = useContext(SelectedPlaceContext);

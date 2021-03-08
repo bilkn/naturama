@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import UserContext from '../../context/UserContext';
 import IconButton from '../IconButton/IconButton';
 import NameInput from '../NameInput/NameInput';

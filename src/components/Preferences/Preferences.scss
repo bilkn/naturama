@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+
 .preferences {
   align-items: center;
   background: $profile-bg-color;
@@ -7,22 +8,26 @@
   height: 100%;
   padding: 6rem 0 75px 0;
   z-index: 1000;
+
   // preferences__map-options-list
   &__map-options-list {
     color: $icon-color;
     display: flex;
     flex-direction: column;
+    width: 100%;
   }
+
   // preferences__header
   &__header {
     color: $icon-color;
     font-size: 1.4rem;
   }
+
   // preferences__btn
   &__btn {
     background: ivory;
     font-size: 1.3rem;
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1.2rem;
     width: max-content;
   }
 }

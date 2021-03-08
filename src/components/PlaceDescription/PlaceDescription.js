@@ -1,5 +1,6 @@
 import React from 'react';
 import './PlaceDescription.scss';
+
 function PlaceDescription({ place }) {
   const placeText = (place && place.content.text) || "No description.";
   return (

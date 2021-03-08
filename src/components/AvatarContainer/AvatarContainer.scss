@@ -7,8 +7,8 @@
   // avatar-container__img
   &__img {
     border-radius: 50%;
-    object-fit: cover;
     height: $person-img-size;
+    object-fit: cover;
     width: $person-img-size;
   }
 }

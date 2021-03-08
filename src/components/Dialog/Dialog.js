@@ -1,5 +1,6 @@
 import React from 'react';
 import './Dialog.scss';
+
 function Dialog(props) {
   const {
     text,

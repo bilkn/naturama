@@ -18,6 +18,7 @@ function DailyPlaceList() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const handleNavClick = () => setSelectedPlace(null);
+  
   if (!userState) {
     return <Redirect to="/" />;
   }
@@ -49,7 +50,7 @@ function DailyPlaceList() {
         <PageName pageName="Daily List" />
       </AppHead>
 
-      {(!userState.dailyList.length && <Error text="No place was found." />) ||
+      {(!userState.dailyList.length && !selectedPlace && <Error text="No place was found." />) ||
         (selectedPlace && (
           <Place place={selectedPlace}>
             <MobileNavTop>

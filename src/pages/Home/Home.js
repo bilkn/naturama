@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -11,7 +11,7 @@ import Error from '../../components/Error/Error';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
 import useFetchPlace from '../../hooks/useFetchPlace';
 import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
-import useMediaMatch from '../../hooks/useMediaMatch';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 function Home() {
   const [randomPlace] = useContext(RandomPlaceContext);
@@ -19,7 +19,7 @@ function Home() {
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const { fetchPlace } = useFetchPlace();
-  const { isMatched } = useMediaMatch();
+  const { isMatched } = useMatchMedia('(min-width:1024px)');
 
   /*  useEffect(() => {
     let didMount = true;
@@ -33,8 +33,6 @@ function Home() {
   }, [randomPlace]); 
  */
 
- console.log(isMatched)
-
   const handleClick = () => setSelectedPlace(randomPlace);
   return (
     <>
@@ -44,7 +42,8 @@ function Home() {
       <div className="home">
         {isMatched && (
           <>
-            <AsideShuffle userState={userState} /> <AsidePictureToolbar />
+            <AsideShuffle userState={userState} /> 
+            <AsidePictureToolbar />
           </>
         )}
         {(!error.isGeoActive && (
@@ -54,7 +53,6 @@ function Home() {
             <Place
               place={randomPlace}
               handleClick={handleClick}
-              isMatched={isMatched}
             />
           ) : error.isPlaceFound ? (
             <Loader />

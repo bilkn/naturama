@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import './NameInput.scss';
+
 function NameInput(props) {
   const { username, setUsername, userState } = props;
 
   useEffect(() => {
-    const {
-      profile: { username },
-    } = userState;
+    const { profile: { username } } = userState;
     username && setUsername(username);
   }, [setUsername, userState]);
 

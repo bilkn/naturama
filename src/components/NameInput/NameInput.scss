@@ -5,16 +5,20 @@
   border-radius: 10px;
   display: block;
   font-size: 1.2rem;
+  height: 35px;
   margin-bottom: 0.5rem;
   padding: 0.2rem 0.4rem;
-  height: 35px;
   text-align: center;
   width: 100%;
-
-  &:focus::placeholder {
-    color: #e0e0e0;
-  }
+  
+  // name-input::placeholder
   &::placeholder {
     color: #2e2e31;
   }
+
+  // name-input:focus::placeholder
+  &:focus::placeholder {
+    color: #e0e0e0;
+  }
+  
 }

@@ -26,22 +26,26 @@
   justify-content: space-between;
   height: 100%;
   width: 100%;
+  // aside-picture-toolbar-list__btn
   &__btn {
     height: 60px;
     width: 60px;
   }
+  // aside-picture-toolbar-list__link
   &__link {
     align-items: center;
     color: inherit;
     display: flex;
     font-size: 2rem;
-    justify-content: center;
     height: 60px;
+    justify-content: center;
     width: 60px;
   }
+  // aside-picture-toolbar-list__btn
   &__btn {
     color: inherit;
   }
+  // aside-picture-toolbar-list__btn--margin-left
   &__btn--margin-left {
     margin-left: 5px;
   }

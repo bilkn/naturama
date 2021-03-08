@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import UserContext from '../../context/UserContext';
 import './Notification.scss';
+
 function Notification({ duration, dispatch }) {
   const [userState] = useContext(UserContext);
 
