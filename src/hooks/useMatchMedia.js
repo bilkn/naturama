@@ -1,27 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-function useMediaMatch() {
+function useMatchMedia(query) {
   const [isMatched, setIsMatched] = useState(false);
 
-  const matchMedia = (type, width) => {
-    const mql = window.matchMedia(`(${type}-width:${width})`);
+  const matchMedia = useCallback(() => {
+    const mql = window.matchMedia(query);
     return mql.matches;
-  };
+  }, [query]);
 
   useEffect(() => {
-    if (matchMedia('min', '1024px')) {
+    if (matchMedia(query)) {
       setIsMatched(true);
     } else {
       setIsMatched(false);
     }
-  }, []);
+  }, [query, matchMedia]);
 
   useEffect(() => {
     let enableCall = true;
     const handleResize = () => {
       if (!enableCall) return;
       enableCall = false;
-      const mql = matchMedia('min', '1024px');
+      const mql = matchMedia(query);
       if (mql) {
         setIsMatched(true);
       } else {
@@ -31,9 +31,9 @@ function useMediaMatch() {
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [matchMedia, query]);
 
   return { isMatched };
 }
 
-export default useMediaMatch;
+export default useMatchMedia;

@@ -10,11 +10,11 @@ import AppHead from '../../components/AppHead/AppHead';
 import PageName from '../../components/PageName/PageName';
 import Error from '../../components/Error/Error';
 import Logo from '../../components/Logo/Logo';
-
+import useMatchMedia from '../../hooks/useMatchMedia';
 function Favourites() {
   const [userState] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  
+  const isMatched = useMatchMedia('(min-width:1024px)');
 
   const handleBtnClick = () => setSelectedPlace(null);
   const handlePlaceClick = (place) => setSelectedPlace(place);
@@ -24,24 +24,21 @@ function Favourites() {
 
   return (
     <div className="favourites">
-      <AppHead>
-        <Logo className={'logo--large-screen'} />
-        <PageName pageName="Favourites" />
-      </AppHead>
+      {isMatched ? (
+        <AppHead>
+          <Logo className={'logo--large-screen'} />
+          <PageName pageName="Favourites" />
+        </AppHead>
+      ) : (
+        <MobileNavTop>
+          <IconButton iconClass="fa fa-arrow-left" onClick={handleBtnClick} />
+        </MobileNavTop>
+      )}
 
       {(!userState.favourites.length && (
         <Error text="Your favourite list is empty." />
       )) ||
-        (selectedPlace && (
-          <Place place={selectedPlace}>
-            <MobileNavTop>
-              <IconButton
-                iconClass="fa fa-arrow-left"
-                onClick={handleBtnClick}
-              />
-            </MobileNavTop>
-          </Place>
-        )) || (
+        (selectedPlace && <Place place={selectedPlace} />) || (
           <PlaceList list={userState.favourites} onClick={handlePlaceClick} />
         )}
     </div>

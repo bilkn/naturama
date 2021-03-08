@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef} from 'react';
 import IconButton from '../IconButton/IconButton';
 import useFavourite from '../../hooks/useFavourite';
 import './AsidePictureToolbar.scss';

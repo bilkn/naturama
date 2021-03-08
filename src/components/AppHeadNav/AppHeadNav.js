@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import "./AppHeadNav.scss"
+import useActiveTab from '../../hooks/useActiveTab';
+import './AppHeadNav.scss';
 function AppHeadNav() {
+  useActiveTab('.app-head-nav-list li');
   return (
     <nav className="app-head-nav">
       <ul className="app-head-nav-list">

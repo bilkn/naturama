@@ -26,7 +26,7 @@ function PlaceThumbnail(props) {
 
   return (
     <div className="place-thumbnail">
-      <Link to="/fullscreen-picture" className="place-thumbnail__link">
+      <Link to="/fullscreen-picture" className="place-thumbnail__link" >
         <img
           src={placeImg}
           alt={name}

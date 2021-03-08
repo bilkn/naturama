@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 
-function useActiveTab() {
+function useActiveTab(query) {
   const location = useLocation();
 
   // It adds "active-tab" class for styling, and removes the class from other tabs according to the path.
@@ -26,7 +26,7 @@ function useActiveTab() {
       default:
         return;
     }
-    const navItems = document.querySelectorAll('.mobile-nav-list li');
+    const navItems = document.querySelectorAll(query);
     navItems.forEach((item) => {
       item.classList.remove('active-tab');
     });
@@ -34,7 +34,7 @@ function useActiveTab() {
       `.mobile-nav-list li:nth-of-type(${itemOrder})`
     );
     navItem.classList.add('active-tab');
-  }, [location.pathname]);
+  }, [location.pathname, query]);
 }
 
 export default useActiveTab;

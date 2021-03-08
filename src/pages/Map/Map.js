@@ -7,10 +7,12 @@ import IconButton from '../../components/IconButton/IconButton';
 import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import PageName from '../../components/PageName/PageName';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
+import RandomPlaceContext from '../../context/RandomPlaceContext';
 function Map({ history }) {
   const [selectedPlace] = useContext(SelectedPlaceContext);
-
-  if (!selectedPlace) {
+  const [randomPlace] = useContext(RandomPlaceContext);
+  const place = selectedPlace || randomPlace;
+  if (!place) {
     return <Redirect to="/" />;
   }
   const handleBtnClick = () => {
@@ -20,8 +22,8 @@ function Map({ history }) {
   const {
     point,
     preview: { source, height, width },
-  } = selectedPlace;
-  const { name, text } = selectedPlace.content;
+  } = place;
+  const { name, text } = place.content;
   const position = [point.lat, point.lon];
 
   return (

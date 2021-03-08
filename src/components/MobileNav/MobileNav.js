@@ -13,7 +13,7 @@ function MobileNav() {
   const {fetchPlace} =  useFetchPlace();
   const location = useLocation();
   const history = useHistory();
-  useActiveTab();
+  useActiveTab(".mobile-nav-list li");
 
   useEffect(() => {
     const neglectedPaths = ['/fullscreen-picture', '/map'];
