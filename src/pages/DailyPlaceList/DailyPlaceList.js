@@ -51,7 +51,7 @@ function DailyPlaceList() {
         <PageName pageName="Daily List" />
       </AppHead>
 
-      {(!userState.dailyList.length && <Error text="No place was found." />) ||
+      {(!userState.dailyList.length && !selectedPlace && <Error text="No place was found." />) ||
         (selectedPlace && (
           <Place place={selectedPlace}>
             <MobileNavTop>

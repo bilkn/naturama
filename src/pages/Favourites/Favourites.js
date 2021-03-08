@@ -14,6 +14,7 @@ import Logo from '../../components/Logo/Logo';
 function Favourites() {
   const [userState] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  
 
   const handleBtnClick = () => setSelectedPlace(null);
   const handlePlaceClick = (place) => setSelectedPlace(place);
