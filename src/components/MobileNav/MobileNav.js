@@ -10,10 +10,10 @@ import useActiveTab from '../../hooks/useActiveTab';
 function MobileNav() {
   const [userState] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const {fetchPlace} =  useFetchPlace();
+  const { fetchPlace } = useFetchPlace();
   const location = useLocation();
   const history = useHistory();
-  useActiveTab(".mobile-nav-list li");
+  useActiveTab('.mobile-nav-list-item__link', 'active-tab');
 
   useEffect(() => {
     const neglectedPaths = ['/fullscreen-picture', '/map'];
@@ -22,8 +22,6 @@ function MobileNav() {
       setSelectedPlace(null);
     }
   }, [location.pathname, setSelectedPlace, history]);
-
-  
 
   return (
     <nav

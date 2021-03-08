@@ -1,40 +1,30 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router';
 
-function useActiveTab(query) {
+function useActiveTab(query, styleClass) {
   const location = useLocation();
+  console.log(styleClass);
+  // It adds class to the current tab element for styling, and removes the class from other tabs according to the path.
+  const addClassToTheCurrentTab = useCallback(
+    (path, navElements) => {
+      navElements.forEach((elem) => {
+        const pagePath = ['/', elem.href.split('/').slice(-1)].join('');
+        console.log(styleClass);
+  
+        if (path === pagePath) {
+          elem.classList.add(styleClass);
+          console.log(elem);
+        } else elem.classList.remove(styleClass);
+      });
+    },
+    [styleClass]
+  );
 
-  // It adds "active-tab" class for styling, and removes the class from other tabs according to the path.
   useEffect(() => {
-    let itemOrder = null;
     const path = location.pathname;
-    switch (path) {
-      case '/':
-        itemOrder = 1;
-        break;
-      case '/favourites':
-        itemOrder = 2;
-        break;
-      case '/profile':
-      case '/help':
-      case '/preferences':
-        itemOrder = 4;
-        break;
-      case '/daily-place-list':
-        itemOrder = 5;
-        break;
-      default:
-        return;
-    }
-    const navItems = document.querySelectorAll(query);
-    navItems.forEach((item) => {
-      item.classList.remove('active-tab');
-    });
-    const navItem = document.querySelector(
-      `.mobile-nav-list li:nth-of-type(${itemOrder})`
-    );
-    navItem.classList.add('active-tab');
-  }, [location.pathname, query]);
+    const navElements = document.querySelectorAll(query);
+    addClassToTheCurrentTab(path, navElements);
+  }, [location.pathname, query, styleClass, addClassToTheCurrentTab]);
 }
 
 export default useActiveTab;
