@@ -17,7 +17,7 @@ function HelpList() {
       />
       <HelpListItem
         title="Profile"
-        text="You can customize your profile or contact with me on the profile page."
+        text="You can customize your profile or find my contact information on the profile page."
         iconClass="fas fa-user"
       />
       <HelpListItem

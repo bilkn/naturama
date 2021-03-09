@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+.badge {
+  align-items: center;
+  background: black;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  font-family: $main-font;
+  font-size: 0.9rem;
+  height: 23px;
+  justify-content: center;
+  position: absolute;
+  right: -6px;
+  top: -8px;
+  width: 23px;
+}

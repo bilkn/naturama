@@ -1,16 +1,14 @@
 import React, { useContext, useState } from 'react';
 import './FullscreenPicture.scss';
-import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import PictureToolbar from '../../components/PictureToolbar/PictureToolbar';
 import NoImg from '../../assets/no-image.png';
 import ShareLinkList from '../../components/ShareLinkList/ShareLinkList';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import DarkBackground from '../../components/DarkBackground/DarkBackground';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
-import EmptyDiv from '../../components/EmptyDiv/EmptyDiv';
-import IconButton from '../../components/IconButton/IconButton';
 import { Redirect } from 'react-router';
-function FullscreenPicture({ history }) {
+
+function FullscreenPicture() {
   const [showShareLink, setShowShareLinks] = useState(false);
   const [showDarkBackground, setShowDarkBackground] = useContext(
     DarkBackgroundContext
@@ -26,9 +24,7 @@ function FullscreenPicture({ history }) {
   let imgWidth = (preview && preview.source) || 300;
   let placeName = place.name || '';
 
-  const handleBtnClick = () => {
-    history.goBack();
-  };
+  
 
   return (
     <div className="fullscreen-picture">
@@ -39,11 +35,6 @@ function FullscreenPicture({ history }) {
         height={imgHeight}
         className="fullscreen-picture__img"
       />
-      <MobileNavTop>
-        <IconButton iconClass="fa fa-arrow-left" onClick={handleBtnClick} />
-        <p className="fullscreen-picture_name">{place && place.content.name}</p>
-        <EmptyDiv />
-      </MobileNavTop>
       <PictureToolbar
         place={selectedPlace}
         setShowShareLinks={setShowShareLinks}

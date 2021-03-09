@@ -5,6 +5,7 @@ import UserContext from '../../context/UserContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import useActiveTab from '../../hooks/useActiveTab';
 import ShuffleBtn from '../ShuffleBtn/ShuffleBtn';
+import Badge from '../Badge/Badge';
 
 function MobileNav() {
   const [userState] = useContext(UserContext);
@@ -40,7 +41,7 @@ function MobileNav() {
             <i className="fas fa-star mobile-nav-list-item__icon" />
           </Link>
         </li>
-        <li className="mobile-nav-list-item">
+        <li className="mobile-nav-list-item mobile-nav-list-item--no-hover-effect">
           <ShuffleBtn className={'mobile-nav-list-item--shuffle-btn'} />
         </li>
         <li className="mobile-nav-list-item ">
@@ -53,9 +54,7 @@ function MobileNav() {
             <i className="fas fa-list-alt mobile-nav-list-item__icon">
               {userState ? (
                 userState.dailyList.length ? (
-                  <span className="mobile-nav-list-item__counter">
-                    {userState.dailyList.length}
-                  </span>
+                  <Badge count={userState.dailyList.length} />
                 ) : (
                   ''
                 )

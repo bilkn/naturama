@@ -15,7 +15,13 @@
   display: flex;
   flex: 1;
   justify-content: center;
-
+  transition: 100ms ease;
+  transition-property: background, opacity;
+  // mobile-nav-list-item:hover
+  &:hover {
+    background: rgb(235, 235, 235);
+    opacity: 0.9;
+  }
   // mobile-nav-list-item__btn
   &__btn {
     border-radius: 50%;
@@ -41,25 +47,14 @@
     position: relative;
     width: 100%;
   }
-
-  // mobile-nav-list-item__counter
-  &__counter {
-    align-items: center;
-    background: black;
-    border-radius: 50%;
-    color: white;
-    display: flex;
-    font-family: $main-font;
-    font-size: 0.9rem;
-    height: 23px;
-    justify-content: center;
-    position: absolute;
-    right: -6px;
-    top: -8px;
-    width: 23px;
+}
+.mobile-nav-list-item--no-hover-effect {
+  // mobile-nav-list-item--no-hover-effect:hover
+  &:hover {
+    background: initial;
+    opacity: 1;
   }
 }
-
 .mobile-nav-list-item--shuffle-btn {
   bottom: 25px;
   flex: none;

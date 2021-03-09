@@ -4,7 +4,7 @@ import useFetchPlace from '../../hooks/useFetchPlace';
 import './ShuffleBtn.scss';
 
 function ShuffleBtn({ className }) {
-  const { fetchPlace } = useFetchPlace();
+  const { fetchPlace } = useFetchPlace({autoFetch:false});
   return (
     <IconButton
       btnClass={`shuffle-btn ${className || ''}`}

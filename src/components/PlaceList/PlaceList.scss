@@ -3,14 +3,13 @@
 
 .place-list {
   @include ListStyle;
-  margin-top: $mobile-place-margin-top;
+  padding: $mobile-list-padding;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .place-list {
     grid-template-columns: repeat(auto-fill, 320px);
-    margin-top: $tablet-place-margin-top;
-    padding: $tablet-page-padding;
+    padding: $tablet-place-list-padding;
 
     // place-list__btn
     &__btn {

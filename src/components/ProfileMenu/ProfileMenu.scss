@@ -16,13 +16,19 @@
 
 .profile-menu-reset-container {
   margin-bottom: 2rem;
-  
+
   // profile-menu-reset-container__btn
   &__btn {
-    background-color: ivory;
+    background: ivory;
+    border-radius: 10px;
     display: block;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     padding: 0.5rem 1rem;
+    transition: background 100ms ease;
     margin: 0 auto;
+    // profile-menu-reset-container__btn:hover
+    &:hover {
+      background: rgb(236, 236, 234);
+    }
   }
 }
