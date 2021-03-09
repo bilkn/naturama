@@ -10,6 +10,7 @@ function AppHeadNav() {
   const [userState] = useContext(UserContext);
 
   const { dailyList } = userState ? userState : { dailyList: [] };
+  const count = dailyList.length || '';
 
   return (
     <nav className="app-head-nav">
@@ -28,7 +29,10 @@ function AppHeadNav() {
           className="app-head-nav-list__item"
           style={{ position: 'relative' }}
         >
-          <Badge count={dailyList.length} className={"app-head-nav-list__badge"}/>
+          {count && (
+            <Badge count={count} className={'app-head-nav-list__badge'} />
+          )}
+
           <Link to="/daily-place-list" className="app-head-nav-list__link">
             Daily List
           </Link>
