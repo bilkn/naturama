@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import useActiveTab from '../../hooks/useActiveTab';
 import './AppHeadNav.scss';
+import Badge from '../Badge/Badge';
+import UserContext from '../../context/UserContext';
 
 function AppHeadNav() {
-  useActiveTab('.app-head-nav-list__link', "active-tab");
+  useActiveTab('.app-head-nav-list__link', 'active-tab');
+  const [userState] = useContext(UserContext);
+
+  const { dailyList } = userState ? userState : { dailyList: [] };
+
   return (
     <nav className="app-head-nav">
       <ul className="app-head-nav-list">
@@ -18,7 +24,11 @@ function AppHeadNav() {
             Favourites
           </Link>
         </li>
-        <li className="app-head-nav-list__item">
+        <li
+          className="app-head-nav-list__item"
+          style={{ position: 'relative' }}
+        >
+          <Badge count={dailyList.length} className={"app-head-nav-list__badge"}/>
           <Link to="/daily-place-list" className="app-head-nav-list__link">
             Daily List
           </Link>

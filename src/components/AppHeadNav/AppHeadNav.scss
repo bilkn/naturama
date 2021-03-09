@@ -33,5 +33,14 @@
     &__link:focus {
       background: #e6e6e6;
     }
+
+    // app-head-nav-list__badge
+    &__badge {
+      height: 20px !important;
+      right: 2px !important;
+      top: 5px !important;
+      opacity: 0.7;
+      width: 20px !important;
+    }
   }
 }
