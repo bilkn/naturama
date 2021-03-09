@@ -41,7 +41,7 @@ function MobileNav() {
             <i className="fas fa-star mobile-nav-list-item__icon" />
           </Link>
         </li>
-        <li className="mobile-nav-list-item">
+        <li className="mobile-nav-list-item mobile-nav-list-item--no-hover-effect">
           <ShuffleBtn className={'mobile-nav-list-item--shuffle-btn'} />
         </li>
         <li className="mobile-nav-list-item ">
