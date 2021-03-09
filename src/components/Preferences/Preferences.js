@@ -5,13 +5,9 @@ import LocationItem from '../LocationItem/LocationItem';
 import SearchRadiusItem from '../SearchRadiusItem/SearchRadiusItem';
 import './Preferences.scss';
 import db from '../../helpers/dexie';
-import EmptyDiv from '../EmptyDiv/EmptyDiv';
-import ReturnLink from '../ReturnLink/ReturnLink';
 import ErrorContext from '../../context/ErrorContext';
 import clearNotificationIfExist from '../../helpers/clearNotificationIfExist';
-import PageName from '../PageName/PageName';
-import Logo from '../Logo/Logo';
-import AppHead from '../AppHead/AppHead';
+
 
 function Preferences() {
   const [userState, dispatch] = useContext(UserContext);
@@ -80,12 +76,6 @@ function Preferences() {
 
   return (
     <div className="preferences">
-      <AppHead style={{ justifyContent: 'space-between' }}>
-        <Logo className="logo--large-screen" />
-        <ReturnLink path="/profile" />
-        <PageName pageName="Preferences" />
-        <EmptyDiv />
-      </AppHead>
       <ul className="preferences__map-options-list">
         <SearchRadiusItem
           radiusValue={radiusValue}

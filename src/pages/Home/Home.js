@@ -25,9 +25,6 @@ function Home() {
   const handleClick = () => setSelectedPlace(randomPlace);
   return (
     <>
-      <AppHead>
-        <Logo />
-      </AppHead>
       <div className="home">
         {isMatched && (
           <>

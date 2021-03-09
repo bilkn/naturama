@@ -18,6 +18,7 @@ import MobileNav from '../MobileNav/MobileNav';
 import Help from '../../pages/Help/Help';
 import Map from '../../pages/Map/Map';
 import NotificationContainer from '../NotificationContainer/NotificationContainer';
+import AppHead from '../AppHead/AppHead';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <SelectedPlaceProvider>
                 <PlaceProvider>
                   <Router>
+                    <AppHead />
                     <MobileNav />
                     <NotificationContainer />
                     <Switch>

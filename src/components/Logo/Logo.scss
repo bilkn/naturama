@@ -14,12 +14,3 @@
   }
 }
 
-.logo--large-screen {
-  display: none;
-}
-
-@media (min-width: 1024px) {
-  .logo--large-screen {
-    display: flex;
-  }
-}

@@ -4,21 +4,16 @@ import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import Place from '../../components/Place/Place';
 import PlaceList from '../../components/PlaceList/PlaceList';
 import { Redirect } from 'react-router';
-import AppHead from '../../components/AppHead/AppHead';
-import PageName from '../../components/PageName/PageName';
-import IconButton from '../../components/IconButton/IconButton';
-import MobileNavTop from '../../components/MobileNavTop/MobileNavTop';
 import Error from '../../components/Error/Error';
 import db from '../../helpers/dexie';
 import ErrorContext from '../../context/ErrorContext';
-import Logo from '../../components/Logo/Logo';
 
 function DailyPlaceList() {
   const [userState, dispatch] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
-  const handleNavClick = () => setSelectedPlace(null);
-  
+
+
   if (!userState) {
     return <Redirect to="/" />;
   }
@@ -45,21 +40,13 @@ function DailyPlaceList() {
 
   return (
     <div className="daily-place-list">
-      <AppHead>
-        <Logo className="logo--large-screen" />
-        <PageName pageName="Daily List" />
-      </AppHead>
-
-      {(!userState.dailyList.length && !selectedPlace && <Error text="No place was found." />) ||
+      {(!userState.dailyList.length && !selectedPlace && (
+        <Error text="No place was found." />
+      )) ||
         (selectedPlace && (
-          <Place place={selectedPlace}>
-            <MobileNavTop>
-              <IconButton
-                iconClass="fa fa-arrow-left"
-                onClick={handleNavClick}
-              />
-            </MobileNavTop>
-          </Place>
+          <>
+            <Place place={selectedPlace} />
+          </>
         )) || (
           <PlaceList
             list={userState.dailyList}

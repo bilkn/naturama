@@ -3,5 +3,11 @@
 .help-list {
   @include ListStyle;
   grid-template-columns: 90%;
-  margin-top: 2rem;
+  padding: $mobile-list-padding;
+}
+
+@media (min-width: 768px) {
+  .help-list {
+    padding: 7rem 0;
+  }
 }
