@@ -1,10 +1,17 @@
 @import '../../styles/variables';
 .logo {
-  font-family: $logo-font;
-  font-size: 2rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   letter-spacing: 0.3rem;
-  text-align: center;
   user-select: none;
+  // logo__link
+  &__link {
+    color: inherit;
+    font-family: $logo-font;
+    font-size: 2rem;
+    text-align: center;
+  }
 }
 
 .logo--large-screen {
@@ -13,6 +20,6 @@
 
 @media (min-width: 1024px) {
   .logo--large-screen {
-    display: block;
+    display: flex;
   }
 }

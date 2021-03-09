@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -18,20 +18,9 @@ function Home() {
   const [userState] = useContext(UserContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
-  const { fetchPlace } = useFetchPlace();
   const { isMatched } = useMatchMedia('(min-width:1024px)');
+  useFetchPlace({ autoFetch: true });
 
-  /*  useEffect(() => {
-    let didMount = true;
-    async function fetchData() {
-      if (!randomPlace) {
-        await fetchPlace();
-      }
-    }
-    if (didMount) fetchData();
-    return () => (didMount = false);
-  }, [randomPlace]); 
- */
 
   const handleClick = () => setSelectedPlace(randomPlace);
   return (
@@ -42,7 +31,7 @@ function Home() {
       <div className="home">
         {isMatched && (
           <>
-            <AsideShuffle userState={userState} /> 
+            <AsideShuffle userState={userState} />
             <AsidePictureToolbar />
           </>
         )}
@@ -50,10 +39,7 @@ function Home() {
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
           (randomPlace ? (
-            <Place
-              place={randomPlace}
-              handleClick={handleClick}
-            />
+            <Place place={randomPlace} handleClick={handleClick} />
           ) : error.isPlaceFound ? (
             <Loader />
           ) : (
