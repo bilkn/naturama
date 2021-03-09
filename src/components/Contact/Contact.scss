@@ -2,7 +2,7 @@
 @import '../../styles/variables';
 .contact {
   @include CenteredAndFixedElement(300px, 180px);
-  animation: slide-in-popup 0.2s ease both;
+  animation: slidein-popup 0.2s ease ;
   background: $main-ui-bg;
   border: 1px solid black;
   border-radius: 20px;

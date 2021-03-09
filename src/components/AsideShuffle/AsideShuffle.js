@@ -7,7 +7,7 @@ import ShuffleBtn from '../ShuffleBtn/ShuffleBtn';
 import './AsideShuffle.scss';
 
 const placeItemStyle = {
-  animation: 'slide-in-home 1s ease both',
+  animation: 'slidein-home 1s ease',
   height: 'unset',
 };
 const placeNameStyle = {

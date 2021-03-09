@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .share-link-list {
-  animation: slide-in-bottom-to-top 0.3s ease both;
+  animation: slidein-bottom-to-top 0.3s ease;
   background-color: $main-ui-bg;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;

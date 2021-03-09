@@ -1,4 +1,4 @@
-@keyframes slide-in-toolbar-aside {
+@keyframes slidein-toolbar-aside {
   from {
     transform: translateX(-170%);
   }
@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes slide-in-shuffle-aside {
+@keyframes slidein-shuffle-aside {
   from {
     transform: translateX(170%);
   }
@@ -36,7 +36,7 @@
   }
 }
 
-@keyframes slide-in-popup {
+@keyframes slidein-popup {
   from {
     transform: translateX(-120vw);
   }
@@ -45,7 +45,7 @@
   }
 }
 
-@keyframes slide-in-bottom-to-top {
+@keyframes slidein-bottom-to-top {
   from {
     transform: translateY(150%);
   }

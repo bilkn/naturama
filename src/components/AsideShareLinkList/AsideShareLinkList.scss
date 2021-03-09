@@ -9,11 +9,11 @@
   justify-content: space-between;
   left: 100px;
   padding: 0 10px;
-  position: fixed;
+  position: absolute;
   transform: translateX(-250%);
   transition: 300ms ease;
   transition-property: box-shadow, transform, opacity;
-  top: 12%;
+  top: 50px;
   width: 150px;
   z-index: 0;
 
