@@ -16,6 +16,7 @@ function Favourites() {
   }
   return (
     <div className="favourites">
+      
       {(!userState.favourites.length && (
         <Error text="Your favourite list is empty." />
       )) ||

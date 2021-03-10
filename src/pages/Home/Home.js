@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -20,11 +20,10 @@ function Home() {
   const { isMatched } = useMatchMedia('(min-width:1024px)');
   useFetchPlace({ autoFetch: true });
 
+  const handleClick = () => {
+    !isMatched && setSelectedPlace(randomPlace);
+  };
 
-  const handleClick = () =>  {
-    setSelectedPlace(randomPlace);
-  }
-  
   return (
     <>
       <div className="home">
