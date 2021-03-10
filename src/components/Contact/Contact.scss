@@ -26,7 +26,7 @@
   &__link {
     color: darken($icon-color, 5%);
     font-size: $social-icon-font-size;
-    transition: color 100ms ease;
+    transition: color 150ms ease;
     // contact-list__link:hover
     &:hover {
       color: black;

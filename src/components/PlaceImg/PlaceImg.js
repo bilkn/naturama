@@ -2,7 +2,6 @@ import React from 'react';
 import './PlaceImg.scss';
 import NoImg from '../../assets/no-image.png';
 function PlaceImg({place}) {
-  console.log(place)
   const preview = place && place.preview;
   const placeImg = (preview && preview.source) || NoImg;
   const imgHeight = (preview && preview.height) || 300;

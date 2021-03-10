@@ -18,6 +18,7 @@ function Home() {
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
+
   useFetchPlace({ autoFetch: true });
 
   const handleClick = () => {

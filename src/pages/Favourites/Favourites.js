@@ -5,10 +5,13 @@ import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import PlaceList from '../../components/PlaceList/PlaceList';
 import { Redirect } from 'react-router-dom';
 import Error from '../../components/Error/Error';
+import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 function Favourites() {
   const [userState] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const { isMatched } = useMatchMedia('(min-width:1024px)');
 
   const handlePlaceClick = (place) => setSelectedPlace(place);
   if (!userState) {
@@ -16,7 +19,7 @@ function Favourites() {
   }
   return (
     <div className="favourites">
-      
+      {isMatched && selectedPlace && <AsidePictureToolbar />}
       {(!userState.favourites.length && (
         <Error text="Your favourite list is empty." />
       )) ||

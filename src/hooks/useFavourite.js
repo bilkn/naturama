@@ -6,13 +6,13 @@ import UserContext from '../context/UserContext';
 import clearNotificationIfExist from '../helpers/clearNotificationIfExist';
 import db from '../helpers/dexie';
 
-function useFavourite(isRandomPlace = false) {
+function useFavourite() {
   const [selectedPlace] = useContext(SelectedPlaceContext);
   const [randomPlace] = useContext(RandomPlaceContext);
   const [userState, dispatch] = useContext(UserContext);
   const [error] = useContext(ErrorContext);
 
-  const place = isRandomPlace ? randomPlace : selectedPlace;
+  const place = selectedPlace || randomPlace;
 
   const isPlaceInFav = () => {
     if (place) {
