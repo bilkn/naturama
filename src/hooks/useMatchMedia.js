@@ -17,17 +17,13 @@ function useMatchMedia(query) {
   }, [query, matchMedia]);
 
   useEffect(() => {
-    let enableCall = true;
     const handleResize = () => {
-      if (!enableCall) return;
-      enableCall = false;
       const mql = matchMedia(query);
       if (mql) {
         setIsMatched(true);
       } else {
         setIsMatched(false);
       }
-      setTimeout(() => (enableCall = true), 100);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);

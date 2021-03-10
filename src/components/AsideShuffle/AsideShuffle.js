@@ -28,6 +28,7 @@ function AsideShuffle({ userState }) {
     setRandomPlace(place);
     setSelectedPlace(place);
   };
+
   return (
     <aside className="aside-shuffle">
       <div className="aside-shuffle__btn-wrapper">

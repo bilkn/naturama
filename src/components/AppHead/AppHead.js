@@ -6,17 +6,26 @@ import IconButton from '../IconButton/IconButton';
 import EmptyDiv from '../EmptyDiv/EmptyDiv';
 import PageName from '../PageName/PageName';
 import './AppHead.scss';
+import { useHistory, useLocation } from 'react-router';
 
 function AppHead() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
+  const location = useLocation();
+  const history = useHistory();
+
   const handleBtnClick = () => {
-    setSelectedPlace(null);
+    switch (location.pathname) {
+      case '/map':
+      case '/fullscreen-picture':
+        history.goBack();
+        break;
+      default:
+        setSelectedPlace(null);
+        break;
+    }
   };
-  // !!! Add location.  const handleBtnClick = () => {
-  /*     history.goBack();
-  }; */
-  /*    <p className="fullscreen-picture_name">{place && place.content.name}</p>; */
+
 
   return (
     <header

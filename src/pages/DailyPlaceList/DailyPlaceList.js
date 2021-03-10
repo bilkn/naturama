@@ -7,12 +7,14 @@ import { Redirect } from 'react-router';
 import Error from '../../components/Error/Error';
 import db from '../../helpers/dexie';
 import ErrorContext from '../../context/ErrorContext';
+import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
+import useMatchMedia from '../../hooks/useMatchMedia';
 
 function DailyPlaceList() {
   const [userState, dispatch] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
-
+  const { isMatched } = useMatchMedia('(min-width:1024px)');
 
   if (!userState) {
     return <Redirect to="/" />;
@@ -40,6 +42,7 @@ function DailyPlaceList() {
 
   return (
     <div className="daily-place-list">
+      {isMatched && selectedPlace && <AsidePictureToolbar />}
       {(!userState.dailyList.length && !selectedPlace && (
         <Error text="No place was found." />
       )) ||

@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import ErrorContext from '../../context/ErrorContext';
 import Loader from '../../components/Loader/Loader';
-import AppHead from '../../components/AppHead/AppHead';
-import Logo from '../../components/Logo/Logo';
+
 import Error from '../../components/Error/Error';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
 import useFetchPlace from '../../hooks/useFetchPlace';
@@ -19,10 +18,13 @@ function Home() {
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
+
   useFetchPlace({ autoFetch: true });
 
+  const handleClick = () => {
+    !isMatched && setSelectedPlace(randomPlace);
+  };
 
-  const handleClick = () => setSelectedPlace(randomPlace);
   return (
     <>
       <div className="home">

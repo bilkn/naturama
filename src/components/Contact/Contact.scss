@@ -2,7 +2,7 @@
 @import '../../styles/variables';
 .contact {
   @include CenteredAndFixedElement(300px, 180px);
-  animation: slidein-popup 0.2s ease ;
+  animation: slidein-popup 0.2s ease;
   background: $main-ui-bg;
   border: 1px solid black;
   border-radius: 20px;
@@ -26,5 +26,10 @@
   &__link {
     color: darken($icon-color, 5%);
     font-size: $social-icon-font-size;
+    transition: color 150ms ease;
+    // contact-list__link:hover
+    &:hover {
+      color: black;
+    }
   }
 }
