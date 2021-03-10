@@ -10,8 +10,8 @@ function PageName() {
   const [pageName, setPageName] = useState('');
   const [place] = useContext(SelectedPlaceContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
+
   useEffect(() => {
-    setPageName('');
     if (location.pathname === '/fullscreen-picture' && place) {
       setPageName(place.content.name);
     }
