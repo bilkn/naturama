@@ -26,9 +26,8 @@ function EditProfile(props) {
 
   const createNewUser = () => {
     let propArr = [];
-    if (!picture && !username) return null;
-    if (username) propArr.push(['username', username]);
     if (picture) propArr.push(['picture', picture]);
+    propArr.push(['username', username]);
     return editUser(userState, propArr);
   };
 

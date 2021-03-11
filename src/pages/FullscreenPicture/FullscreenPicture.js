@@ -18,7 +18,6 @@ function FullscreenPicture() {
   const [selectedPlace] = useContext(SelectedPlaceContext);
   const place = selectedPlace;
 
-  console.log(isMatched)
   if (!place || isMatched) {
     return <Redirect to="/" />;
   }
