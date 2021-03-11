@@ -1,11 +1,10 @@
 import NoImg from '../assets/no-image.png';
 
-
 async function createPlaceForUserData(place) {
   const { wikipedia_extracts: wiki } = place;
   const placeText = (wiki && wiki.text) || '';
 
-  const { preview, img } = await createImgURLForUserData(place);
+  const { preview, img } =  createImgURLForUserData(place);
   const {
     name,
     distance,
@@ -36,7 +35,7 @@ async function createPlaceForUserData(place) {
   return imgArrayBuffer;
 }; */
 
-const createImgURLForUserData = async (place) => {
+const createImgURLForUserData = (place) => {
   const url = (place.preview && place.preview.source) || '';
   const preview = url ? createWikiImgURLForPlaceData(url, 350) : NoImg;
 

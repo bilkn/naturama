@@ -7,8 +7,8 @@ import AsideShareLinkList from '../AsideShareLinkList/AsideShareLinkList';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 
-function AsidePictureToolbar({isRandomPlace}) {
-  const { handleFavClick, isPlaceInFav } = useFavourite(isRandomPlace);
+function AsidePictureToolbar() {
+  const { handleFavClick, isPlaceInFav } = useFavourite();
   const [selectedPlace] = useContext(SelectedPlaceContext);
   const [randomPlace] = useContext(RandomPlaceContext);
   const shareLinkList = useRef(null);

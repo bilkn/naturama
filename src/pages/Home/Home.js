@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -20,28 +20,29 @@ function Home() {
   const { isMatched } = useMatchMedia('(min-width:1024px)');
   const displayedPlace = randomPlace || selectedPlace;
 
-  useFetchPlace({ autoFetch: true });
+  const { isLoading } = useFetchPlace({ autoFetch: true });
 
   const handleClick = () => {
     !isMatched && setSelectedPlace(displayedPlace);
   };
 
+  console.log("isloading", isLoading)
   return (
     <>
       <div className="home">
         {isMatched && (
           <>
             <AsideShuffle userState={userState} />
-            <AsidePictureToolbar />
+            {displayedPlace && <AsidePictureToolbar />}
           </>
         )}
         {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
-          (displayedPlace ? (
-            <Place place={displayedPlace} handleClick={handleClick} />
-          ) : error.isPlaceFound ? (
+          (isLoading ? (
             <Loader />
+          ) : error.isPlaceFound && displayedPlace ? (
+            <Place place={displayedPlace} handleClick={handleClick} />
           ) : (
             <Error text="No place was found." />
           ))}

@@ -1,4 +1,3 @@
-import clearNotificationIfExist from './clearNotificationIfExist';
 import createPlaceForUserData from './createPlaceForUserData';
 import db from './dexie';
 import { getRandomPlace } from './getRandomPlace';
@@ -7,24 +6,22 @@ import tryToSetLocation from './tryToSetLocation';
 async function triggerRandomPlaceRequest(args) {
   const { user, requestState, errorState, setRandomPlace } = args;
   const [, setCanUserRequest] = requestState;
-  const [userState, dispatch] = user;
-  clearNotificationIfExist(userState, dispatch);
+  const [userState] = user;
 
   const {
     location: { lat },
     location: { lon },
   } = userState.profile.preferences;
 
-  preventRequestForAWhile(setRandomPlace, setCanUserRequest);
+  preventRequestForAWhile(setCanUserRequest);
   (!lat || !lon) && (await tryToSetLocation(user, errorState));
   await requestRandomPlace({ user, errorState, setRandomPlace });
 }
 
-const preventRequestForAWhile = (setRandomPlace, setCanUserRequest) => {
-  setRandomPlace(null);
+const preventRequestForAWhile = (setCanUserRequest) => {
   setCanUserRequest(false);
   const timeout = setTimeout(() => {
-    setCanUserRequest(true);
+    setCanUserRequest(() => true);
     clearTimeout(timeout);
   }, 2000);
 };
