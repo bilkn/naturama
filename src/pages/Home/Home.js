@@ -25,8 +25,6 @@ function Home() {
   const handleClick = () => {
     !isMatched && setSelectedPlace(displayedPlace);
   };
-
-  console.log("isloading", isLoading)
   return (
     <>
       <div className="home">
