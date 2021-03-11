@@ -12,15 +12,18 @@ function MobileNav() {
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();
   const history = useHistory();
+  const { pathname } = location;
   useActiveTab('.mobile-nav-list-item__link', 'active-tab');
 
   useEffect(() => {
     const neglectedPaths = ['/fullscreen-picture', '/map'];
-    const path = location.pathname;
+    const path = pathname;
     if (!neglectedPaths.includes(path)) {
       setSelectedPlace(null);
     }
-  }, [location.pathname, setSelectedPlace, history]);
+  }, [pathname, setSelectedPlace, history]);
+  
+  if (pathname === '/map' || pathname === '/fullscreen-picture') return <></>;
 
   return (
     <nav

@@ -31,7 +31,7 @@ function AppHead() {
     <header
       className="app-head"
       style={
-        selectedPlace || location.pathname === '/preferences'
+        selectedPlace || location.pathname === '/preferences' 
           ? { justifyContent: 'space-between' }
           : {}
       }
