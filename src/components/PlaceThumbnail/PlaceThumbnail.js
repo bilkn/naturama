@@ -6,13 +6,13 @@ import useMatchMedia from '../../hooks/useMatchMedia';
 import PlaceImg from '../PlaceImg/PlaceImg';
 
 function PlaceThumbnail(props) {
-  const { icon, children, place } = props;
+  const { icon, children, place, handleClick} = props;
   const { isMatched } = useMatchMedia('(min-width:1024px)');
   const {
     content: { name },
   } = place;
   return (
-    <div className="place-thumbnail">
+    <div className="place-thumbnail" onClick={handleClick}>
       {(isMatched && (
         <div className="place-thumbnail-img-container">
           <PlaceImg place={place} />

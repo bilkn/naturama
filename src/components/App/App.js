@@ -19,6 +19,7 @@ import Help from '../../pages/Help/Help';
 import Map from '../../pages/Map/Map';
 import NotificationContainer from '../NotificationContainer/NotificationContainer';
 import AppHead from '../AppHead/AppHead';
+import LoadingProvider from '../../providers/LoadingProvider/LoadingProvider';
 
 function App() {
   return (
@@ -29,34 +30,40 @@ function App() {
             <UserProvider>
               <SelectedPlaceProvider>
                 <PlaceProvider>
-                  <Router>
-                    <AppHead />
-                    <MobileNav />
-                    <NotificationContainer />
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <Route exact path="/favourites" component={Favourites} />
-                      <Route exact path="/profile" component={Profile} />
-                      <Route
-                        exact
-                        path="/daily-place-list"
-                        component={DailyPlaceList}
-                      />
-                      <Route
-                        exact
-                        path="/fullscreen-picture"
-                        component={FullscreenPicture}
-                      />
-                      <Route
-                        exact
-                        path="/preferences"
-                        component={Preferences}
-                      />
-                      <Route exact path="/help" component={Help} />
-                      <Route exact path="/map" component={Map} />
-                      {/*      <Route exact path="/*" component={ErrorPage} /> */}
-                    </Switch>
-                  </Router>
+                  <LoadingProvider>
+                    <Router>
+                      <AppHead />
+                      <MobileNav />
+                      <NotificationContainer />
+                      <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route
+                          exact
+                          path="/favourites"
+                          component={Favourites}
+                        />
+                        <Route exact path="/profile" component={Profile} />
+                        <Route
+                          exact
+                          path="/daily-place-list"
+                          component={DailyPlaceList}
+                        />
+                        <Route
+                          exact
+                          path="/fullscreen-picture"
+                          component={FullscreenPicture}
+                        />
+                        <Route
+                          exact
+                          path="/preferences"
+                          component={Preferences}
+                        />
+                        <Route exact path="/help" component={Help} />
+                        <Route exact path="/map" component={Map} />
+                        {/*      <Route exact path="/*" component={ErrorPage} /> */}
+                      </Switch>
+                    </Router>
+                  </LoadingProvider>
                 </PlaceProvider>
               </SelectedPlaceProvider>
             </UserProvider>

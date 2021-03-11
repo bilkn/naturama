@@ -18,6 +18,7 @@ function AppHead() {
     switch (location.pathname) {
       case '/map':
       case '/fullscreen-picture':
+      case '/preferences':
         history.goBack();
         break;
       default:
@@ -26,13 +27,16 @@ function AppHead() {
     }
   };
 
-
   return (
     <header
       className="app-head"
-      style={selectedPlace ? { justifyContent: 'space-between' } : {}}
+      style={
+        selectedPlace || location.pathname === '/preferences' 
+          ? { justifyContent: 'space-between' }
+          : {}
+      }
     >
-      {(selectedPlace && (
+      {((selectedPlace || location.pathname === '/preferences') && (
         <>
           {!isMatched && (
             <IconButton iconClass="fa fa-arrow-left" onClick={handleBtnClick} />

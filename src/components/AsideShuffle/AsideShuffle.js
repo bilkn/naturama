@@ -21,11 +21,9 @@ const placeNameStyle = {
 };
 
 function AsideShuffle({ userState }) {
-  const [, setRandomPlace] = useContext(RandomPlaceContext);
   const [, setSelectedPlace] = useContext(SelectedPlaceContext);
 
   const handlePlaceClick = (place) => {
-    setRandomPlace(place);
     setSelectedPlace(place);
   };
 

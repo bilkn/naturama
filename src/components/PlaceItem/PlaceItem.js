@@ -1,6 +1,4 @@
 import React from 'react';
-import createFileURL from '../../helpers/createFileURL';
-import noImg from '../../assets/no-image-item.png';
 import './PlaceItem.scss';
 
 function PlaceItem(props) {
@@ -12,6 +10,8 @@ function PlaceItem(props) {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') handler(place);
   };
+ 
+  const img = place.preview
   return (
     <li
       className="place-item"
@@ -22,7 +22,7 @@ function PlaceItem(props) {
     >
       <img
         className="place-item__img"
-        src={place.img ? createFileURL(place.img) : noImg}
+        src={img}
         alt={place.content.name}
       />
 

@@ -15,32 +15,32 @@ import useMatchMedia from '../../hooks/useMatchMedia';
 function Home() {
   const [randomPlace] = useContext(RandomPlaceContext);
   const [userState] = useContext(UserContext);
-  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
+  const displayedPlace = selectedPlace || randomPlace;
 
-  useFetchPlace({ autoFetch: true });
+  const { isLoading } = useFetchPlace({ autoFetch: true });
 
   const handleClick = () => {
-    !isMatched && setSelectedPlace(randomPlace);
+    !isMatched && setSelectedPlace(displayedPlace);
   };
-
   return (
     <>
       <div className="home">
         {isMatched && (
           <>
             <AsideShuffle userState={userState} />
-            <AsidePictureToolbar />
+            <AsidePictureToolbar /> 
           </>
         )}
         {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
-          (randomPlace ? (
-            <Place place={randomPlace} handleClick={handleClick} />
-          ) : error.isPlaceFound ? (
+          (isLoading ? (
             <Loader />
+          ) : displayedPlace ? (
+            <Place place={displayedPlace} handleClick={handleClick} />
           ) : (
             <Error text="No place was found." />
           ))}
