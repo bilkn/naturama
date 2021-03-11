@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect } from 'react';
 import ErrorContext from '../context/ErrorContext';
 import LoadingContext from '../context/LoadingContext';
 import RandomPlaceContext from '../context/RandomPlaceContext';
+import SelectedPlaceContext from '../context/SelectedPlaceContext';
 import UserContext from '../context/UserContext';
 import UserRequestContext from '../context/UserRequestContext';
 import clearNotificationIfExist from '../helpers/clearNotificationIfExist';
@@ -12,8 +13,8 @@ function useFetchPlace({ autoFetch = false }) {
   const [error, setError] = useContext(ErrorContext);
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
+  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [isLoading, setIsLoading] = useContext(LoadingContext);
-
   const fetchPlace = useCallback(async () => {
     if (error.isGeoActive && userState && !isLoading) {
       if (canUserRequest) {
@@ -28,6 +29,8 @@ function useFetchPlace({ autoFetch = false }) {
           setIsLoading,
         };
         try {
+          setRandomPlace(null);
+          setSelectedPlace(null);
           setIsLoading(true);
           await triggerRandomPlaceRequest(args);
           setIsLoading(false);
@@ -50,6 +53,7 @@ function useFetchPlace({ autoFetch = false }) {
     setError,
     setRandomPlace,
     isLoading,
+    setIsLoading,
   ]);
 
   useEffect(() => {

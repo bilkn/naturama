@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
@@ -18,7 +18,7 @@ function Home() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
-  const displayedPlace = randomPlace || selectedPlace;
+  const displayedPlace =  selectedPlace ||randomPlace;
 
   const { isLoading } = useFetchPlace({ autoFetch: true });
 
@@ -39,7 +39,7 @@ function Home() {
         )) ||
           (isLoading ? (
             <Loader />
-          ) : error.isPlaceFound && displayedPlace ? (
+          ) : displayedPlace ? (
             <Place place={displayedPlace} handleClick={handleClick} />
           ) : (
             <Error text="No place was found." />
