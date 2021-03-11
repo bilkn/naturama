@@ -36,7 +36,6 @@ const requestRandomPlace = async (args) => {
   const place = await getRandomPlace(userState);
   const userPlace = await createPlaceForUserData(place);
   const newHistory = [...userState.history, userPlace.xid];
-  console.log(place);
   if (!error.isPlaceFound) setError({ ...error, isPlaceFound: true });
   setRandomPlace(userPlace);
   dispatch({

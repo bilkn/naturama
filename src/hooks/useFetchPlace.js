@@ -39,11 +39,12 @@ function useFetchPlace({ autoFetch = false }) {
   useEffect(() => {
     let didMount = true;
     async function fetchData() {
-      if (!randomPlace && canUserRequest) {
-        await fetchPlace();
-      }
+      await fetchPlace();
     }
-    if (didMount && autoFetch) fetchData();
+    if (didMount && autoFetch && !randomPlace && canUserRequest) {
+      fetchData();
+      console.log('autofetch');
+    }
     return () => (didMount = false);
   }, [randomPlace, fetchPlace, autoFetch, canUserRequest]);
   return { fetchPlace };

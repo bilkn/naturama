@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './FullscreenPicture.scss';
 import PictureToolbar from '../../components/PictureToolbar/PictureToolbar';
-import NoImg from '../../assets/no-image.png';
 import ShareLinkList from '../../components/ShareLinkList/ShareLinkList';
 import DarkBackgroundContext from '../../context/DarkBackGroundContext';
 import DarkBackground from '../../components/DarkBackground/DarkBackground';
@@ -13,26 +12,24 @@ function FullscreenPicture() {
   const [showDarkBackground, setShowDarkBackground] = useContext(
     DarkBackgroundContext
   );
+
   const [selectedPlace] = useContext(SelectedPlaceContext);
   const place = selectedPlace;
   if (!place) {
     return <Redirect to="/" />;
   }
-  const { preview } = place;
-  let placeImg = (preview && preview.source) || NoImg;
-  let imgHeight = (preview && preview.height) || 300;
-  let imgWidth = (preview && preview.source) || 300;
-  let placeName = place.name || '';
 
-  
+
+  const img = (place.img && place.img.large.source) || place.preview;
+  const width = (place.img && place.img.large.width) || 300;
+  const { name } = place.content;
 
   return (
     <div className="fullscreen-picture">
       <img
-        src={placeImg}
-        alt={placeName}
-        width={imgWidth}
-        height={imgHeight}
+        src={img}
+        alt={name}
+        width={width}
         className="fullscreen-picture__img"
       />
       <PictureToolbar
