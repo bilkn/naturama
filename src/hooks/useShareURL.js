@@ -11,8 +11,8 @@ function useShareURL() {
     const {
       content: { wikipedia: wikiURL, name },
     } = place;
-
-    // Solves spaced url bug for Twitter.
+  
+    // Solves spaced url bug for the Twitter.
     const replacedURL = wikiURL.replace(/%20/g, '_');
     return `https://twitter.com/intent/tweet?text=${name}&url=${replacedURL}`;
   };

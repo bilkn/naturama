@@ -12,6 +12,7 @@ async function createPlaceForUserData(place) {
     point,
     address: { state },
   } = place;
+
   const userPlace = {
     xid: place.xid,
     content: {
@@ -19,7 +20,7 @@ async function createPlaceForUserData(place) {
       location: state,
       distance,
       text: placeText,
-      wikipedia,
+      wikipedia: wikipedia || '',
     },
     preview,
     img,
@@ -38,7 +39,6 @@ async function createPlaceForUserData(place) {
 const createImgURLForUserData = async (place) => {
   const url = (place.preview && place.preview.source) || '';
   const preview = url ? createWikiImgURLForPlaceData(url, 350) : NoImg;
-
   if (url) {
     const fileName = url.split('-').slice(-1).join('');
     const attribution = await createAttributionObjectForWikiFile(fileName);
