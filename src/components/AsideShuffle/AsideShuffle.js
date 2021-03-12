@@ -9,6 +9,7 @@ import './AsideShuffle.scss';
 const activePlaceStyle = {
   outline: '3px solid #000',
 };
+
 const placeNameStyle = {
   bottom: 0,
   borderBottomRightRadius: 0,

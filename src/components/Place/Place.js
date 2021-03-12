@@ -12,10 +12,14 @@ function Place(props) {
     <div className="place">
       {children}
       <PlaceContent>
-        <PlaceThumbnail place={place} icon="fas fa-map" handleClick={handleClick} />
+        <PlaceThumbnail
+          place={place}
+          icon="fas fa-map"
+          handleClick={handleClick}
+        />
         <PlaceDetails place={place} />
         <PlaceDescription place={place} />
-        <Attribution place={place}/>
+        <Attribution place={place} />
       </PlaceContent>
     </div>
   );
