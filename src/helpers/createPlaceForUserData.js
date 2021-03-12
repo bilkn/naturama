@@ -6,21 +6,22 @@ async function createPlaceForUserData(place) {
 
   const { preview, img } = await createImgURLForUserData(place);
   const {
-    name,
-    distance,
-    wikipedia,
-    point,
-    address: { state },
+    name = 'Unknown',
+    distance = 'Unknown',
+    wikipedia = '',
+    point = '',
   } = place;
+
+  const state = place.address?.state || 'Unknown';
 
   const userPlace = {
     xid: place.xid,
     content: {
-      name: name || '',
+      name,
       location: state,
       distance,
       text: placeText,
-      wikipedia: wikipedia || '',
+      wikipedia,
     },
     preview,
     img,
