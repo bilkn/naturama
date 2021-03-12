@@ -2,7 +2,7 @@ import editUser from './editUser';
 import getUserLocation from './getUserLocation';
 import db from './dexie';
 
-// If location values are empty, it tries to set location (useful if the user has activated geolocation after disabling it).
+// If location values are empty, it tries to set location (useful if the user has activated geolocation after disabling it or has changed manually).
 const tryToSetLocation = async (user, errorState) => {
   const [error, setError] = errorState;
   const [userState, dispatch] = user;
