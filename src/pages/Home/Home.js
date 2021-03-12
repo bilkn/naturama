@@ -27,11 +27,12 @@ function Home() {
   };
   return (
     <>
+      <Loader />
       <div className="home">
         {isMatched && (
           <>
             <AsideShuffle userState={userState} />
-            <AsidePictureToolbar /> 
+            <AsidePictureToolbar />
           </>
         )}
         {(!error.isGeoActive && (

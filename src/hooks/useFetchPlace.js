@@ -13,7 +13,7 @@ function useFetchPlace({ autoFetch = false }) {
   const [error, setError] = useContext(ErrorContext);
   const [canUserRequest, setCanUserRequest] = useContext(UserRequestContext);
   const [randomPlace, setRandomPlace] = useContext(RandomPlaceContext);
-  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [isLoading, setIsLoading] = useContext(LoadingContext);
   const fetchPlace = useCallback(async () => {
     if (error.isGeoActive && userState && !isLoading) {
@@ -54,6 +54,7 @@ function useFetchPlace({ autoFetch = false }) {
     setRandomPlace,
     isLoading,
     setIsLoading,
+    setSelectedPlace
   ]);
 
   useEffect(() => {

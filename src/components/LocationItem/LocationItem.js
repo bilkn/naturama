@@ -5,17 +5,18 @@ function LocationItem(props) {
   const { latValue, lonValue, setLatValue, setLonValue } = props;
 
 
+
   const handleChangeLat = (e) => {
     e.preventDefault();
     let value = e.target.value;
-    value = value > 90 ? 90 : value < -90 ? -90 : value;
-    setLatValue(+value);
+    value = !value ? value : value > 90 ? 90 : value < -90 ? -90 : value;
+    setLatValue(value);
   };
   const handleChangeLon = (e) => {
     e.preventDefault();
     let value = e.target.value;
-    value = value > 180 ? 180 : value < -180 ? -180 : value;
-    setLonValue(+value);
+    value = !value ? value : value > 180 ? 180 : value < -180 ? -180 : value;
+    setLonValue(value);
   };
 
   return (
@@ -25,18 +26,18 @@ function LocationItem(props) {
       </label>
       <div className="location-input-container">
         <input
-          id ="lat"
-          type="number"
+          id="lat"
+          type="number" // number type
           className="location-input-container__input"
           placeholder="lat"
-          value={latValue}
+          value={latValue || ''}
           onChange={handleChangeLat}
         />
         <input
           type="number"
           className="location-input-container__input"
           placeholder="lon"
-          value={lonValue}
+          value={lonValue || ''}
           onChange={handleChangeLon}
         />
       </div>

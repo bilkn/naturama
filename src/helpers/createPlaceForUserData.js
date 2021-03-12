@@ -6,16 +6,18 @@ async function createPlaceForUserData(place) {
 
   const { preview, img } = await createImgURLForUserData(place);
   const {
-    name,
-    distance,
-    wikipedia,
-    point,
-    address: { state },
+    name = 'Unknown',
+    distance = 'Unknown',
+    wikipedia = '',
+    point = '',
   } = place;
+
+  const state = place.address?.state || 'Unknown';
+
   const userPlace = {
     xid: place.xid,
     content: {
-      name: name || '',
+      name,
       location: state,
       distance,
       text: placeText,
@@ -28,17 +30,9 @@ async function createPlaceForUserData(place) {
   return userPlace;
 }
 
-/* const getImgArrayBuffer = async (url) => {
-  const response = await fetch(url);
-  const imgBlob = await response.blob();
-  const imgArrayBuffer = await blobToArrayBuffer(imgBlob);
-  return imgArrayBuffer;
-}; */
-
 const createImgURLForUserData = async (place) => {
   const url = (place.preview && place.preview.source) || '';
   const preview = url ? createWikiImgURLForPlaceData(url, 350) : NoImg;
-
   if (url) {
     const fileName = url.split('-').slice(-1).join('');
     const attribution = await createAttributionObjectForWikiFile(fileName);
@@ -72,11 +66,12 @@ const createWikiImgURLForPlaceData = (url, imageSize) => {
 const createAttributionObjectForWikiFile = async (fileName) => {
   const url = `https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File%3a${fileName}&format=json&origin=*`;
   const extmetadata = await extractMetadata(url);
-  if (!extmetadata || extmetadata.Copyrighted.value === 'False') return null;
+  if (!extmetadata || extmetadata.Copyrighted?.value === 'False' || '')
+    return null;
   const attribution = {
     artist: extmetadata.Artist?.value || '',
-    licenseShort: extmetadata.LicenseShortName.value,
-    licenseURL: extmetadata.LicenseUrl.value,
+    licenseShort: extmetadata.LicenseShortName?.value || '',
+    licenseURL: extmetadata.LicenseUrl?.value || '',
   };
   // !!! Fallback can be added in the future for licenses.
   return attribution;

@@ -13,10 +13,7 @@ function Map() {
     return <Redirect to="/" />;
   }
 
-  const {
-    point,
-    preview: { source, height, width },
-  } = place;
+  const { point, preview } = place;
   const { name, text } = place.content;
   const position = [point.lat, point.lon];
 
@@ -31,11 +28,9 @@ function Map() {
           <Popup position={position}>
             <h2 className="map__place-name">{name}</h2>
             <img
-              src={source}
+              src={preview}
               alt=""
               className="map__img"
-              height={height}
-              width={width}
             />
             <p className="map__text">{text}</p>
           </Popup>

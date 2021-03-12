@@ -71,7 +71,7 @@ async function initializeDB() {
 
   await db.dailyList.bulkAdd([...dailyPlaceList]);
   await db.profile.bulkAdd([
-    { username: '' },
+    { username: 'Anonymous' },
     {
       picture: null,
     },
