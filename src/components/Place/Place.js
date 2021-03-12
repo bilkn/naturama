@@ -1,4 +1,5 @@
 import React from 'react';
+import Attribution from '../Attribution/Attribution';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import PlaceDescription from '../PlaceDescription/PlaceDescription';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
@@ -14,6 +15,7 @@ function Place(props) {
         <PlaceThumbnail place={place} icon="fas fa-map" handleClick={handleClick} />
         <PlaceDetails place={place} />
         <PlaceDescription place={place} />
+        <Attribution place={place}/>
       </PlaceContent>
     </div>
   );

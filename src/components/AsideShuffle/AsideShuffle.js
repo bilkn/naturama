@@ -6,9 +6,8 @@ import PlaceName from '../PlaceName/PlaceName';
 import ShuffleBtn from '../ShuffleBtn/ShuffleBtn';
 import './AsideShuffle.scss';
 
-const placeItemStyle = {
-  animation: 'slidein-home 1s ease both',
-  height: 'unset',
+const activePlaceStyle = {
+  outline: '3px solid #000',
 };
 const placeNameStyle = {
   bottom: 0,
@@ -21,8 +20,9 @@ const placeNameStyle = {
 };
 
 function AsideShuffle({ userState }) {
-  const [, setSelectedPlace] = useContext(SelectedPlaceContext);
-
+  const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
+  const [randomPlace] = useContext(RandomPlaceContext);
+  const displayedPlace = selectedPlace || randomPlace;
   const handlePlaceClick = (place) => {
     setSelectedPlace(place);
   };
@@ -30,7 +30,7 @@ function AsideShuffle({ userState }) {
   return (
     <aside className="aside-shuffle">
       <div className="aside-shuffle__btn-wrapper">
-        <ShuffleBtn className={"aside-shuffle__btn"} />
+        <ShuffleBtn className={'aside-shuffle__btn'} />
       </div>
       <ul className="aside-shuffle-place-list">
         {userState &&
@@ -39,10 +39,13 @@ function AsideShuffle({ userState }) {
             .reverse()
             .map((place) => (
               <PlaceItem
+                className="aside-shuffle__place-item"
                 place={place}
                 key={place.xid}
-                style={placeItemStyle}
                 onClick={handlePlaceClick}
+                style={
+                  (place.xid === displayedPlace?.xid && activePlaceStyle) || {}
+                }
               >
                 <PlaceName name={place.content.name} style={placeNameStyle} />
               </PlaceItem>

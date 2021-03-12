@@ -16,6 +16,16 @@
   width: 200px;
   z-index: $aside-index;
 
+  // aside-shuffle__place-item
+  &__place-item {
+    animation: slidein-home 1s ease both;
+    height: unset;
+    &:active {
+      outline: none;
+    }
+  }
+
+
   // aside-shuffle__btn
   &__btn {
     height: 60px;
