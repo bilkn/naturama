@@ -66,7 +66,6 @@ const createWikiImgURLForPlaceData = (url, imageSize) => {
 const createAttributionObjectForWikiFile = async (fileName) => {
   const url = `https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File%3a${fileName}&format=json&origin=*`;
   const extmetadata = await extractMetadata(url);
-  console.log(extmetadata)
   if (!extmetadata || extmetadata.Copyrighted?.value === 'False' || '')
     return null;
   const attribution = {

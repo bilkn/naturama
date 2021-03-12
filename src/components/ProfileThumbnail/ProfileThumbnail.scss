@@ -1,6 +1,6 @@
 .profile-thumbnail {
   align-items: center;
-  background: url('../../assets/img.jpg') no-repeat center;
+  background: rgb(100 122 96 / 95%);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -13,17 +13,6 @@
   // profile-thumbnail__person-username
   &__person-username {
     z-index: 1;
-  }
-  // profile-thumbnail::before
-  &::before {
-    background: rgba(0, 0, 0, 0.3);
-    content: '';
-    display: block;
-    height: 230px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
   }
 }
 

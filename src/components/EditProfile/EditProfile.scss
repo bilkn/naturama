@@ -22,5 +22,10 @@
     position: absolute;
     right: -50px;
     top: 0;
+    transition: color 100ms ease;
+    // edit-profile-name-container__btn:hover
+    &:hover {
+      color: lighten($icon-color, 5%);
+    }
   }
 }

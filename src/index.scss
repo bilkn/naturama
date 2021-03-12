@@ -56,4 +56,15 @@ img {
   overflow: hidden;
 }
 
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  appearance: none;
+}
 
+.fa-arrow-left {
+  transition: color 100ms ease;
+}
+
+.fa-arrow-left:hover {
+  color: darken($icon-color, 10%);
+}

@@ -4,7 +4,7 @@ async function createUser() {
   const location = await getUserLocation();
   const userTemplate = {
     profile: {
-      username: '',
+      username: 'Anonymous',
       picture: {
         file: null,
         url: '',

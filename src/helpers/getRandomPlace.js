@@ -8,7 +8,6 @@ export async function getRandomPlace(user) {
   const places = await getPlaces(user);
   const filteredPlaces = filterPlacesByPreferences(user, places);
   const randomPlace = pickRandomPlace(filteredPlaces);
-  console.log(randomPlace)
   const xid = randomPlace.properties.xid;
   const placeData = await getPlaceByXID(xid);
   const place = {
