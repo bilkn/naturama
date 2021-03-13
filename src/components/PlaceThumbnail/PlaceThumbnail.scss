@@ -33,5 +33,18 @@
   height: 100%;
   justify-content: center;
 }
+
+.place-thumbnail--no-img {
+  height: 300px;
+}
+
 @media (min-width: 768px) {
+  .place-thumbnail--no-img {
+    height: 400px;
+  }
+}
+@media (min-width: 2040px) {
+  .place-thumbnail--no-img {
+    height: 600px;
+  }
 }

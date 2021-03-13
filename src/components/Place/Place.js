@@ -36,6 +36,7 @@ function Place({ isMatched }) {
               place={place}
               icon="fas fa-map"
               handleClick={handleClick}
+              className={place.img ? '' : 'place-thumbnail--no-img '}
             />
             <PlaceDetails place={place} />
             <PlaceDescription place={place} />
