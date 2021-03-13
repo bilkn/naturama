@@ -3,7 +3,6 @@ import ErrorContext from '../../context/ErrorContext';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import useFetchPlace from '../../hooks/useFetchPlace';
-import useMatchMedia from '../../hooks/useMatchMedia';
 import Attribution from '../Attribution/Attribution';
 import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
@@ -40,7 +39,7 @@ function Place({ isMatched }) {
             />
             <PlaceDetails place={place} />
             <PlaceDescription place={place} />
-            <Attribution place={place} />
+            {place.img?.attribution && <Attribution place={place} />}
           </PlaceContent>
         ) : (
           <Error text="No place was found." />

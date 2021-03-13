@@ -30,7 +30,7 @@ async function createPlaceForUserData(place) {
   return userPlace;
 }
 
-const createImgURLForUserData = async (place) => {
+async function createImgURLForUserData(place) {
   const url = (place.preview && place.preview.source) || '';
   const preview = url ? createWikiImgURLForPlaceData(url, 350) : NoImg;
   if (url) {
@@ -57,27 +57,35 @@ const createImgURLForUserData = async (place) => {
     return { preview, img };
   }
   return { preview, img: null };
-};
+}
 
-const createWikiImgURLForPlaceData = (url, imageSize) => {
+function createWikiImgURLForPlaceData(url, imageSize) {
   return url.replace(/\d+px/, `${imageSize}px`);
-};
+}
 
-const createAttributionObjectForWikiFile = async (fileName) => {
+async function createAttributionObjectForWikiFile(fileName) {
   const url = `https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File%3a${fileName}&format=json&origin=*`;
   const extmetadata = await extractMetadata(url);
+
   if (!extmetadata || extmetadata.Copyrighted?.value === 'False' || '')
     return null;
+  const artistValue = extmetadata.Artist?.value;
+  console.log(artistValue)
+  const { artist = '', href = '' } =
+    artistValue && extractHrefAndUsernameFromArtistValue(artistValue);
   const attribution = {
-    artist: extmetadata.Artist?.value || '',
+    artist,
+    href,
     licenseShort: extmetadata.LicenseShortName?.value || '',
     licenseURL: extmetadata.LicenseUrl?.value || '',
   };
+  console.log(attribution);
+
   // !!! Fallback can be added in the future for licenses.
   return attribution;
-};
+}
 
-const extractMetadata = async (url) => {
+async function extractMetadata(url) {
   const data = await fetch(url);
   const json = await data.json();
   const extmetadata = _.get(
@@ -85,6 +93,18 @@ const extractMetadata = async (url) => {
     'query.pages["-1"].imageinfo["0"].extmetadata'
   );
   return extmetadata;
-};
+}
+
+function extractHrefAndUsernameFromArtistValue(value) {
+  console.log('value', value);
+  const hrefRegex = /href="(.*?)"/;
+  const artistRegex = /User:(\w*?)(\W|$)/;
+  const hrefMatchResult = value.match(hrefRegex);
+  const artistMatchResult = value.match(artistRegex);
+  const href = hrefMatchResult ? hrefMatchResult[1] : '';
+  const artist = artistMatchResult ? value.match(artistRegex)[1] : 'source';
+  console.log(href);
+  return { href, artist };
+}
 
 export default createPlaceForUserData;
