@@ -14,12 +14,13 @@ function Attribution({ place }) {
             href={attr.href}
             className="attribution__link"
           >
-            {attr.artist}
-          </a>,
+            {attr.artist}{' '}
+          </a>
+          ,
         </>
       )) || (
         <>
-          {attr.artist }
+          {attr.artist}
           (Source link could not found)
         </>
       )}{' '}

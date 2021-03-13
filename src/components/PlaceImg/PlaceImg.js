@@ -4,8 +4,7 @@ import NoImg from '../../assets/no-img.svg';
 
 const NoImgStyle = { height: '150px', width: '150px' };
 function PlaceImg({ place }) {
-  console.log(place)
-  const { small="", medium="", large="" } = place.img || {};
+  const { small = '', medium = '', large = '' } = place.img || {};
 
   // !!! Could be refactored in the future.
   const { name } = place.content;
@@ -20,6 +19,7 @@ function PlaceImg({ place }) {
       alt={name}
       className="place-img"
       style={place.img ? {} : NoImgStyle}
+      width={250}
     />
   );
 }

@@ -22,7 +22,7 @@ function ShareLinkList() {
         </a>
       </li>
       <hr className="share-link-list__line" />
-      <li className="share-link-list__item">
+      <li className="share-link-list__item no-border-radius">
         <a
           href={facebookURL}
           className="share-link-list__link"
@@ -37,7 +37,7 @@ function ShareLinkList() {
         </a>
       </li>
       <hr className="share-link-list__line" />
-      <li className="share-link-list__item">
+      <li className="share-link-list__item no-border-radius">
         <a href={mailURL} className="share-link-list__link">
           <i className="fas fa-envelope share-link-list__icon"></i>
           Email
