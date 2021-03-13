@@ -4,6 +4,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .loader {
+    margin-top: 0;
+  }
 }
 
 .lds-facebook {

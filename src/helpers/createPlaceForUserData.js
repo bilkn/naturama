@@ -1,4 +1,4 @@
-import NoImg from '../assets/no-image.png';
+import NoImg from '../assets/no-img.svg';
 import _ from 'lodash';
 async function createPlaceForUserData(place) {
   const { wikipedia_extracts: wiki } = place;

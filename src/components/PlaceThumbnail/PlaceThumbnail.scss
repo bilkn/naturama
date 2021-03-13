@@ -1,13 +1,15 @@
 @import '../../styles/variables';
 
 .place-thumbnail {
+  height: auto;
+  
   position: relative;
   width: 100%;
 
   // place-thumbnail__link
   &__link {
+    height: 100%;
     display: block;
-    max-height: 100%;
   }
 
   // place-thumbnail__icon
@@ -25,5 +27,4 @@
   height: 100%;
 }
 @media (min-width: 768px) {
-
 }

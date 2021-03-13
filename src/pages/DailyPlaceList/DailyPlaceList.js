@@ -44,7 +44,7 @@ function DailyPlaceList() {
     <div className="daily-place-list">
       {isMatched && selectedPlace && <AsidePictureToolbar />}
       {(!userState.dailyList.length && !selectedPlace && (
-        <Error text="No place was found." />
+        <Error text="No place was found." style={{marginTop:"2rem"}} />
       )) ||
         (selectedPlace && (
           <>

@@ -2,7 +2,7 @@
 @import '../../styles/variables';
 
 .picture-toolbar {
-  @include MobileNavBottomFixed($mobile-nav-height, $mobile-picture-nav-index);
+  @include MobileNavBottomFixed($nav-height, $mobile-picture-nav-index);
   background: $sec-color;
 }
 
@@ -12,7 +12,7 @@
   height: 100%;
   justify-content: space-between;
   padding: $mobile-nav-padding;
-  
+
   // picture-toolbar-list__btn,
   // picture-toolbar-list__link
   &__btn,

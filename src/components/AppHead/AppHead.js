@@ -8,6 +8,7 @@ import PageName from '../PageName/PageName';
 import './AppHead.scss';
 import { useHistory, useLocation } from 'react-router';
 
+const specialPaths = ['/preferences', '/fullscreen-picture',"/map"];
 function AppHead() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
@@ -26,17 +27,17 @@ function AppHead() {
         break;
     }
   };
-
+  console.log(location.pathname)
   return (
     <header
       className="app-head"
       style={
-        selectedPlace || location.pathname === '/preferences' 
+        selectedPlace || location.pathname === '/preferences'
           ? { justifyContent: 'space-between' }
           : {}
       }
-    >
-      {((selectedPlace || location.pathname === '/preferences') && (
+    > 
+      {(specialPaths.includes(location.pathname) && (
         <>
           {!isMatched && (
             <IconButton iconClass="fa fa-arrow-left" onClick={handleBtnClick} />

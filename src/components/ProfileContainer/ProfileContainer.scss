@@ -5,8 +5,8 @@
   padding: $mobile-page-padding;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .profile-container {
-    padding: $tablet-page-padding;
+    padding: 0;
   }
 }

@@ -1,21 +1,20 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 .leaflet-container {
-    height: 100%;
-    width: 100%;
-    z-index: $map-index;
+  height: 100%;
+  width: 100%;
+  z-index: $map-index;
 }
 
 .map {
-     height: 100vh;
-     padding-top: $mobile-nav-height;
-    // map__place-name
-    &__place-name {
-        margin-bottom: 0.5rem;
-    }
-    // map__img
-    &__img {
-        display: block;
-        height: auto;
-        width: 100%;
-    }
+  height: 100vh;
+  // map__place-name
+  &__place-name {
+    margin-bottom: 0.5rem;
+  }
+  // map__img
+  &__img {
+    display: block;
+    height: auto;
+    width: 100%;
+  }
 }

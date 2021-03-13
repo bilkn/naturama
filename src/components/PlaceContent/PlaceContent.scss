@@ -1,13 +1,11 @@
 @import '../../styles/variables';
 
 .place-content {
-  margin-top: $mobile-place-margin-top;
   width: 90vw;
 }
 
 @media (min-width: 768px) {
   .place-content {
-    margin-top: $tablet-place-margin-top;
     width: 80vw;
   }
 }
