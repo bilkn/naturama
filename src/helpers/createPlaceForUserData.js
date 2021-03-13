@@ -1,4 +1,3 @@
-import NoImg from '../assets/no-image.png';
 import _ from 'lodash';
 async function createPlaceForUserData(place) {
   const { wikipedia_extracts: wiki } = place;
@@ -30,9 +29,9 @@ async function createPlaceForUserData(place) {
   return userPlace;
 }
 
-const createImgURLForUserData = async (place) => {
+async function createImgURLForUserData(place) {
   const url = (place.preview && place.preview.source) || '';
-  const preview = url ? createWikiImgURLForPlaceData(url, 350) : NoImg;
+  const preview = url ? createWikiImgURLForPlaceData(url, 350) : null;
   if (url) {
     const fileName = url.split('-').slice(-1).join('');
     const attribution = await createAttributionObjectForWikiFile(fileName);
@@ -57,27 +56,34 @@ const createImgURLForUserData = async (place) => {
     return { preview, img };
   }
   return { preview, img: null };
-};
+}
 
-const createWikiImgURLForPlaceData = (url, imageSize) => {
+function createWikiImgURLForPlaceData(url, imageSize) {
   return url.replace(/\d+px/, `${imageSize}px`);
-};
+}
 
-const createAttributionObjectForWikiFile = async (fileName) => {
+async function createAttributionObjectForWikiFile(fileName) {
   const url = `https://en.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=extmetadata&titles=File%3a${fileName}&format=json&origin=*`;
   const extmetadata = await extractMetadata(url);
+
   if (!extmetadata || extmetadata.Copyrighted?.value === 'False' || '')
     return null;
+  const artistValue = extmetadata.Artist?.value;
+  const { artist, href } = artistValue
+    ? extractHrefAndUsernameFromArtistValue(artistValue)
+    : { artist: '', href: '' };
   const attribution = {
-    artist: extmetadata.Artist?.value || '',
+    artist,
+    href,
     licenseShort: extmetadata.LicenseShortName?.value || '',
     licenseURL: extmetadata.LicenseUrl?.value || '',
   };
+
   // !!! Fallback can be added in the future for licenses.
   return attribution;
-};
+}
 
-const extractMetadata = async (url) => {
+async function extractMetadata(url) {
   const data = await fetch(url);
   const json = await data.json();
   const extmetadata = _.get(
@@ -85,6 +91,16 @@ const extractMetadata = async (url) => {
     'query.pages["-1"].imageinfo["0"].extmetadata'
   );
   return extmetadata;
-};
+}
+
+function extractHrefAndUsernameFromArtistValue(value) {
+  const hrefRegex = /href="(.*?)"/;
+  const artistRegex = /User:(\w*?)(\W|$)/;
+  const hrefMatchResult = value.match(hrefRegex);
+  const artistMatchResult = value.match(artistRegex);
+  const href = hrefMatchResult ? hrefMatchResult[1] : '';
+  const artist = artistMatchResult ? value.match(artistRegex)[1] : 'source';
+  return { href, artist };
+}
 
 export default createPlaceForUserData;

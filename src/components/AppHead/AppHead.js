@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
-import useMatchMedia from '../../hooks/useMatchMedia';
 import AppHeadNav from '../AppHeadNav/AppHeadNav';
 import IconButton from '../IconButton/IconButton';
 import EmptyDiv from '../EmptyDiv/EmptyDiv';
@@ -8,9 +7,11 @@ import PageName from '../PageName/PageName';
 import './AppHead.scss';
 import { useHistory, useLocation } from 'react-router';
 
+const specialPaths = ['/preferences', '/map', '/help'];
+
+const justifyStyle = { justifyContent: 'space-between' };
 function AppHead() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const { isMatched } = useMatchMedia('(min-width:1024px)');
   const location = useLocation();
   const history = useHistory();
 
@@ -19,6 +20,7 @@ function AppHead() {
       case '/map':
       case '/fullscreen-picture':
       case '/preferences':
+      case '/help':
         history.goBack();
         break;
       default:
@@ -31,20 +33,24 @@ function AppHead() {
     <header
       className="app-head"
       style={
-        selectedPlace || location.pathname === '/preferences' 
-          ? { justifyContent: 'space-between' }
+        selectedPlace || specialPaths.includes(location.pathname)
+          ? justifyStyle
           : {}
       }
     >
-      {((selectedPlace || location.pathname === '/preferences') && (
-        <>
-          {!isMatched && (
-            <IconButton iconClass="fa fa-arrow-left" onClick={handleBtnClick} />
-          )}
-          <PageName />
-          <EmptyDiv />
-        </>
-      )) || <PageName />}
+      {(selectedPlace || specialPaths.includes(location.pathname)) && (
+        <IconButton
+          ariaLabel ="Previous page"
+          btnClass="app-head__icon"
+          iconClass="fa fa-arrow-left"
+          onClick={handleBtnClick}
+        />
+      )}
+
+      <PageName />
+      {(selectedPlace || specialPaths.includes(location.pathname)) && (
+        <EmptyDiv />
+      )}
       <AppHeadNav />
     </header>
   );

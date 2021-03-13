@@ -38,7 +38,7 @@ function AppHeadNav() {
           </Link>
         </li>
         <li className="app-head-nav-list__item">
-          <Link to="/profile" className="app-head-nav-list__link">
+          <Link to="/profile" className="app-head-nav-list__link" aria-label="Profile">
             <i className="fa fa-user" aria-hidden="true" />
           </Link>
         </li>

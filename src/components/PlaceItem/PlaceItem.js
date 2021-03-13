@@ -1,6 +1,7 @@
 import React from 'react';
 import './PlaceItem.scss';
-
+import NoImg from '../../assets/no-img.svg';
+const NoImgStyle = { height: '100px', width: '100px' };
 function PlaceItem(props) {
   const { place, children, onClick: handler, style, className } = props;
   const handleClick = () => {
@@ -20,7 +21,12 @@ function PlaceItem(props) {
       style={style}
       tabIndex="0"
     >
-      <img className="place-item__img" src={img} alt={place.content.name} />
+      <img
+        className="place-item__img"
+        src={img || NoImg}
+        style={img ? {} : NoImgStyle}
+        alt={place.content.name}
+      />
 
       {children}
     </li>

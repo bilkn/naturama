@@ -13,13 +13,20 @@ html,
 body {
   background: $site-background;
   font-family: $main-font;
-  height: 100%;
   overflow-x: hidden;
 }
 
-#root,
-.home {
+html {
   height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+#root {
+  min-height: 100%;
+  padding-top: $nav-height;
 }
 
 a {
@@ -38,6 +45,10 @@ button {
 
 .no-border {
   border: none;
+}
+
+.no-border-radius {
+  border-radius: 0;
 }
 
 .no-margin {

@@ -1,6 +1,7 @@
 .place-img {
-  min-height: 20vh;
-  max-height: 70vh;
+  height: 100%;
+  max-height: 700px;
   object-fit: cover;
+  object-position: center;
   width: 100%;
 }

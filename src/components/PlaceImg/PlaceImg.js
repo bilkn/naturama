@@ -1,20 +1,25 @@
 import React from 'react';
 import './PlaceImg.scss';
+import NoImg from '../../assets/no-img.svg';
 
+const NoImgStyle = { height: '150px', width: '150px' };
 function PlaceImg({ place }) {
-  const largeImg = place.img?.large?.source || place.preview;
-  const mediumImg = place.img?.medium?.source || place.preview;
-  const smallImg = place.img?.small?.source || place.preview;
-  const width = place.img?.large?.width || 300;
-  console.log(width);
+  const { small = '', medium = '', large = '' } = place.img || {};
+
   // !!! Could be refactored in the future.
   const { name } = place.content;
+  const img = place.preview;
   return (
     <img
-      src={smallImg}
-      srcSet={`${smallImg} 250w,${mediumImg} 500w, ${largeImg} 1000w`}
+      src={place.img ? small.source : NoImg}
+      srcSet={
+        place.img &&
+        `${small.source} 250w,${medium.source} 500w, ${large.source} 1000w`
+      }
       alt={name}
       className="place-img"
+      style={place.img ? {} : NoImgStyle}
+      width={250}
     />
   );
 }

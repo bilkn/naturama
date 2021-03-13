@@ -2,7 +2,7 @@
 @import '../../styles/mixins';
 
 .mobile-nav {
-  @include MobileNavBottomFixed($mobile-nav-height, $mobile-nav-index);
+  @include MobileNavBottomFixed($nav-height, $mobile-nav-index);
 }
 .mobile-nav-list {
   background: $sec-color;
@@ -67,12 +67,6 @@
 
 .fa-list-alt {
   position: relative;
-}
-
-@media (min-width: 768px) {
-  .mobile-nav {
-    height: $tablet-nav-height;
-  }
 }
 
 @media (min-width: 1024px) {

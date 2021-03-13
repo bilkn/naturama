@@ -11,6 +11,10 @@
   &__attribute-link {
     color: blue;
     margin-left: 0.5rem;
+    // profile-menu__attribute-link:hover
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

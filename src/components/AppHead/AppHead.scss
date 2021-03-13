@@ -1,28 +1,27 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 .app-head {
-  @include AppHeadFixed($mobile-nav-height, $mobile-nav-index);
+  @include AppHeadFixed($nav-height, $mobile-nav-index);
   align-items: center;
   background: $sec-color;
   box-shadow: 0 3px 20px rgb(41, 41, 41);
   color: $icon-color;
   display: flex;
   font-size: 1.5rem;
+  height: $nav-height;
   justify-content: center;
   padding: $mobile-nav-padding;
 }
 
 @media (min-width: 768px) {
-  .app-head {
-    height: $tablet-nav-height;
-  }
 }
 @media (min-width: 1024px) {
   .app-head {
-    height: $desktop-nav-height;
     padding: $desktop-nav-padding;
     justify-content: space-between;
+    // app-head__icon
+    &__icon {
+      display: none;
+    }
   }
 }
-
-

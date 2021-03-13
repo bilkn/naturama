@@ -1,13 +1,18 @@
 @import '../../styles/variables';
 
 .place-thumbnail {
+  height: auto;
+
   position: relative;
   width: 100%;
 
   // place-thumbnail__link
   &__link {
-    display: block;
-    max-height: 100%;
+    align-items: center;
+    background: #fff;
+    display: flex;
+    height: 100%;
+    justify-content: center;
   }
 
   // place-thumbnail__icon
@@ -22,8 +27,24 @@
 }
 
 .place-thumbnail-img-container {
+  align-items: center;
+  background: #fff;
+  display: flex;
   height: 100%;
+  justify-content: center;
 }
-@media (min-width: 768px) {
 
+.place-thumbnail--no-img {
+  height: 300px;
+}
+
+@media (min-width: 768px) {
+  .place-thumbnail--no-img {
+    height: 400px;
+  }
+}
+@media (min-width: 2040px) {
+  .place-thumbnail--no-img {
+    height: 600px;
+  }
 }

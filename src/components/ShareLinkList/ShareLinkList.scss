@@ -2,7 +2,7 @@
 
 .share-link-list {
   animation: slidein-bottom-to-top 0.3s ease;
-  background-color: $main-ui-bg;
+  background: $main-ui-bg;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   bottom: 0;
@@ -21,6 +21,9 @@
     padding: 0 0.3rem;
     padding-top: 0.7rem;
     transition: background 200ms ease;
+    &:hover {
+      background: darken($main-ui-bg,5%);
+    }
   }
 
   // share-link-list__icon

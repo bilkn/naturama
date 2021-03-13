@@ -40,7 +40,6 @@ function ProfileMenu() {
   };
 
   const resetAllData = async () => {
-    
     clearNotificationIfExist(userState, dispatch);
     await db.delete();
     await db.open();
@@ -52,7 +51,6 @@ function ProfileMenu() {
   };
 
   const removePlaceHistory = async () => {
-
     clearNotificationIfExist(userState, dispatch);
     await db.history.clear();
     dispatch({
@@ -126,11 +124,7 @@ function ProfileMenu() {
           setShowDarkBackground={setShowDarkBackground}
         />
       )}
-      {showContact && (
-        <Contact
-          setShowContact={setShowContact}
-        />
-      )}
+      {showContact && <Contact setShowContact={setShowContact} />}
       {showDarkBackground && (
         <DarkBackground
           setShowDarkBackground={setShowDarkBackground}
@@ -166,7 +160,6 @@ function ProfileMenu() {
           href="https://opentripmap.io/product"
           className="profile-menu__attribute-link"
         >
-          {' '}
           OpenTripMap
         </a>
       </footer>

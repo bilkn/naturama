@@ -61,6 +61,7 @@ function EditProfile(props) {
           userState={userState}
         />
         <IconButton
+          ariaLabel="Accept"
           btnClass="edit-profile-name-container__btn"
           iconClass="fas fa-check-circle"
           onClick={handleBtnClick}
