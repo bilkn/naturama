@@ -2,14 +2,17 @@
 
 .place-thumbnail {
   height: auto;
-  
+
   position: relative;
   width: 100%;
 
   // place-thumbnail__link
   &__link {
+    align-items: center;
+    background: #fff;
+    display: flex;
     height: 100%;
-    display: block;
+    justify-content: center;
   }
 
   // place-thumbnail__icon
@@ -24,7 +27,11 @@
 }
 
 .place-thumbnail-img-container {
+  align-items: center;
+  background: #fff;
+  display: flex;
   height: 100%;
+  justify-content: center;
 }
 @media (min-width: 768px) {
 }

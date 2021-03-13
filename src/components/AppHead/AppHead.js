@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
-import useMatchMedia from '../../hooks/useMatchMedia';
 import AppHeadNav from '../AppHeadNav/AppHeadNav';
 import IconButton from '../IconButton/IconButton';
 import EmptyDiv from '../EmptyDiv/EmptyDiv';
@@ -8,8 +7,8 @@ import PageName from '../PageName/PageName';
 import './AppHead.scss';
 import { useHistory, useLocation } from 'react-router';
 
-const specialPaths = ['/preferences'];
-const placeDisplayPaths = ['/favourites', '/daily-place-list'];
+const specialPaths = ['/preferences', '/map', '/help'];
+
 const justifyStyle = { justifyContent: 'space-between' };
 function AppHead() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
@@ -21,6 +20,7 @@ function AppHead() {
       case '/map':
       case '/fullscreen-picture':
       case '/preferences':
+      case '/help':
         history.goBack();
         break;
       default:
@@ -28,12 +28,12 @@ function AppHead() {
         break;
     }
   };
-  console.log(location.pathname);
+
   return (
     <header
       className="app-head"
       style={
-        selectedPlace || location.pathname === '/preferences'
+        selectedPlace || specialPaths.includes(location.pathname)
           ? justifyStyle
           : {}
       }

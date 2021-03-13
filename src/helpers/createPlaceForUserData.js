@@ -1,4 +1,3 @@
-import NoImg from '../assets/no-img.svg';
 import _ from 'lodash';
 async function createPlaceForUserData(place) {
   const { wikipedia_extracts: wiki } = place;
@@ -32,7 +31,7 @@ async function createPlaceForUserData(place) {
 
 async function createImgURLForUserData(place) {
   const url = (place.preview && place.preview.source) || '';
-  const preview = url ? createWikiImgURLForPlaceData(url, 350) : NoImg;
+  const preview = url ? createWikiImgURLForPlaceData(url, 350) : null;
   if (url) {
     const fileName = url.split('-').slice(-1).join('');
     const attribution = await createAttributionObjectForWikiFile(fileName);
@@ -79,7 +78,6 @@ async function createAttributionObjectForWikiFile(fileName) {
     licenseShort: extmetadata.LicenseShortName?.value || '',
     licenseURL: extmetadata.LicenseUrl?.value || '',
   };
-
 
   // !!! Fallback can be added in the future for licenses.
   return attribution;

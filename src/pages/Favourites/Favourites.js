@@ -19,7 +19,9 @@ function Favourites() {
   }
   return (
     <div className="favourites">
-      {isMatched && selectedPlace && <AsidePictureToolbar />}
+      {isMatched && selectedPlace && userState.favourites.length > 0 && (
+        <AsidePictureToolbar />
+      )}
       {(!userState.favourites.length && (
         <Error
           text="Your favourite list is empty."

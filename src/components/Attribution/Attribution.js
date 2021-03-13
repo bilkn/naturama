@@ -3,7 +3,6 @@ import './Attribution.scss';
 
 function Attribution({ place }) {
   const { attribution: attr } = place.img;
-  console.log(attr);
   return (
     <p className="attribution">
       {attr.artist && <>Image by </>}
