@@ -6,20 +6,25 @@ function Attribution({ place }) {
   console.log(attr);
   return (
     <p className="attribution">
-      {attr.href && (
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href={attr.href}
-          className="attribution__link"
-        >
-          {attr.artist}
-        </a>
-      ) || <>
-        {attr.artist}
-        
-      </>}
-
+      {attr.artist && <>Image </>}
+      {(attr.href && (
+        <>
+          {attr.artist && 'by '}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={attr.href}
+            className="attribution__link"
+          >
+            {attr.artist}
+          </a>,
+        </>
+      )) || (
+        <>
+          {attr.artist }
+          (Source link could not found)
+        </>
+      )}{' '}
       <a
         target="_blank"
         rel="noreferrer"

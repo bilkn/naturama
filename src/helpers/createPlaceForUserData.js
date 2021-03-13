@@ -70,9 +70,10 @@ async function createAttributionObjectForWikiFile(fileName) {
   if (!extmetadata || extmetadata.Copyrighted?.value === 'False' || '')
     return null;
   const artistValue = extmetadata.Artist?.value;
-  console.log(artistValue)
-  const { artist = '', href = '' } =
-    artistValue && extractHrefAndUsernameFromArtistValue(artistValue);
+  console.log(artistValue);
+  const { artist, href } = artistValue
+    ? extractHrefAndUsernameFromArtistValue(artistValue)
+    : { artist: '', href: '' };
   const attribution = {
     artist,
     href,
