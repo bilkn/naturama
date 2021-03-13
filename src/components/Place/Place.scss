@@ -5,6 +5,16 @@
   justify-content: center;
   min-height: calc(100vh - #{$nav-height});
   padding: $mobile-page-padding;
+  position: relative;
+  transition: opacity 1s;
+}
+
+.place--hidden {
+  opacity: 0;
+
+}
+.place--visible {
+  opacity: 1;
 }
 
 @media (min-width: 768px) {

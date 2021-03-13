@@ -78,8 +78,6 @@ async function createAttributionObjectForWikiFile(fileName) {
     licenseShort: extmetadata.LicenseShortName?.value || '',
     licenseURL: extmetadata.LicenseUrl?.value || '',
   };
-
-  // !!! Fallback can be added in the future for licenses.
   return attribution;
 }
 
