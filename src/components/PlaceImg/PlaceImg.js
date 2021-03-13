@@ -6,7 +6,6 @@ function PlaceImg({ place }) {
   const mediumImg = place.img?.medium?.source || place.preview;
   const smallImg = place.img?.small?.source || place.preview;
   const width = place.img?.large?.width || 300;
-  console.log(width);
   // !!! Could be refactored in the future.
   const { name } = place.content;
   return (

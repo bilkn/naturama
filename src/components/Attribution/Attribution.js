@@ -6,10 +6,9 @@ function Attribution({ place }) {
   console.log(attr);
   return (
     <p className="attribution">
-      {attr.artist && <>Image </>}
+      {attr.artist && <>Image by </>}
       {(attr.href && (
         <>
-          {attr.artist && 'by '}
           <a
             target="_blank"
             rel="noreferrer"

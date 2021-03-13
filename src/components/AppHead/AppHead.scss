@@ -19,5 +19,9 @@
   .app-head {
     padding: $desktop-nav-padding;
     justify-content: space-between;
+    // app-head__icon
+    &__icon {
+      display: none;
+    }
   }
 }

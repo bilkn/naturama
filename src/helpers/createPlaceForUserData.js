@@ -70,7 +70,6 @@ async function createAttributionObjectForWikiFile(fileName) {
   if (!extmetadata || extmetadata.Copyrighted?.value === 'False' || '')
     return null;
   const artistValue = extmetadata.Artist?.value;
-  console.log(artistValue);
   const { artist, href } = artistValue
     ? extractHrefAndUsernameFromArtistValue(artistValue)
     : { artist: '', href: '' };
@@ -80,7 +79,7 @@ async function createAttributionObjectForWikiFile(fileName) {
     licenseShort: extmetadata.LicenseShortName?.value || '',
     licenseURL: extmetadata.LicenseUrl?.value || '',
   };
-  console.log(attribution);
+
 
   // !!! Fallback can be added in the future for licenses.
   return attribution;
@@ -97,14 +96,12 @@ async function extractMetadata(url) {
 }
 
 function extractHrefAndUsernameFromArtistValue(value) {
-  console.log('value', value);
   const hrefRegex = /href="(.*?)"/;
   const artistRegex = /User:(\w*?)(\W|$)/;
   const hrefMatchResult = value.match(hrefRegex);
   const artistMatchResult = value.match(artistRegex);
   const href = hrefMatchResult ? hrefMatchResult[1] : '';
   const artist = artistMatchResult ? value.match(artistRegex)[1] : 'source';
-  console.log(href);
   return { href, artist };
 }
 

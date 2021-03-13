@@ -8,10 +8,11 @@ import PageName from '../PageName/PageName';
 import './AppHead.scss';
 import { useHistory, useLocation } from 'react-router';
 
-const specialPaths = ['/preferences', '/fullscreen-picture',"/map"];
+const specialPaths = ['/preferences'];
+const placeDisplayPaths = ['/favourites', '/daily-place-list'];
+const justifyStyle = { justifyContent: 'space-between' };
 function AppHead() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const { isMatched } = useMatchMedia('(min-width:1024px)');
   const location = useLocation();
   const history = useHistory();
 
@@ -27,25 +28,28 @@ function AppHead() {
         break;
     }
   };
-  console.log(location.pathname)
+  console.log(location.pathname);
   return (
     <header
       className="app-head"
       style={
         selectedPlace || location.pathname === '/preferences'
-          ? { justifyContent: 'space-between' }
+          ? justifyStyle
           : {}
       }
-    > 
-      {(specialPaths.includes(location.pathname) && (
-        <>
-          {!isMatched && (
-            <IconButton iconClass="fa fa-arrow-left" onClick={handleBtnClick} />
-          )}
-          <PageName />
-          <EmptyDiv />
-        </>
-      )) || <PageName />}
+    >
+      {(selectedPlace || specialPaths.includes(location.pathname)) && (
+        <IconButton
+          btnClass="app-head__icon"
+          iconClass="fa fa-arrow-left"
+          onClick={handleBtnClick}
+        />
+      )}
+
+      <PageName />
+      {(selectedPlace || specialPaths.includes(location.pathname)) && (
+        <EmptyDiv />
+      )}
       <AppHeadNav />
     </header>
   );
