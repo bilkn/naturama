@@ -1,4 +1,4 @@
-import React, { useContext, useRef} from 'react';
+import React, { useContext, useRef } from 'react';
 import IconButton from '../IconButton/IconButton';
 import useFavourite from '../../hooks/useFavourite';
 import './AsidePictureToolbar.scss';
@@ -25,6 +25,7 @@ function AsidePictureToolbar() {
       <ul className="aside-picture-toolbar-list">
         <li className="aside-picture-toolbar-list__item">
           <IconButton
+            ariaLabel="Share"
             btnClass=" aside-picture-toolbar-list__btn aside-picture-toolbar-list__btn--margin-left"
             iconClass="fas fa-share-square aside-picture-toolbar-list__icon"
             onClick={handleShareClick}
@@ -32,6 +33,7 @@ function AsidePictureToolbar() {
         </li>
         <li className="aside-picture-toolbar-list__item">
           <IconButton
+            ariaLabel="Add to favourites"
             btnClass="aside-picture-toolbar-list__btn"
             iconClass={`${
               isPlaceInFav() ? 'fas' : 'far'
@@ -40,7 +42,7 @@ function AsidePictureToolbar() {
           />
         </li>
         <li className="aside-picture-toolbar-list__item">
-          <Link to="/map" className="aside-picture-toolbar-list__link">
+          <Link to="/map" className="aside-picture-toolbar-list__link" aria-label="Map">
             <i className="fas fa-map aside-picture-toolbar-list__icon" />
           </Link>
         </li>

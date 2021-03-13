@@ -35,12 +35,16 @@ function MobileNav() {
     >
       <ul className="mobile-nav-list">
         <li className="mobile-nav-list-item ">
-          <Link to="/" className="mobile-nav-list-item__link">
+          <Link to="/" className="mobile-nav-list-item__link" aria-label="Home">
             <i className="fas fa-home mobile-nav-list-item__icon" />
           </Link>
         </li>
-        <li className="mobile-nav-list-item ">
-          <Link to="/favourites" className="mobile-nav-list-item__link">
+        <li className="mobile-nav-list-item">
+          <Link
+            to="/favourites"
+            className="mobile-nav-list-item__link"
+            aria-label="Favourites"
+          >
             <i className="fas fa-star mobile-nav-list-item__icon" />
           </Link>
         </li>
@@ -48,12 +52,12 @@ function MobileNav() {
           <ShuffleBtn className={'mobile-nav-list-item--shuffle-btn'} />
         </li>
         <li className="mobile-nav-list-item ">
-          <Link to="/profile" className="mobile-nav-list-item__link">
+          <Link to="/profile" className="mobile-nav-list-item__link" aria-label="Profile">
             <i className="fas fa-user mobile-nav-list-item__icon" />
           </Link>
         </li>
         <li className="mobile-nav-list-item ">
-          <Link to="/daily-place-list" className="mobile-nav-list-item__link">
+          <Link to="/daily-place-list" className="mobile-nav-list-item__link" aria-label="Daily place list">
             <i className="fas fa-list-alt mobile-nav-list-item__icon">
               {userState ? (
                 userState.dailyList.length ? (

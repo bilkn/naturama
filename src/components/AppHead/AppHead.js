@@ -40,6 +40,7 @@ function AppHead() {
     >
       {(selectedPlace || specialPaths.includes(location.pathname)) && (
         <IconButton
+          ariaLabel ="Previous page"
           btnClass="app-head__icon"
           iconClass="fa fa-arrow-left"
           onClick={handleBtnClick}

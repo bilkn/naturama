@@ -38,13 +38,14 @@ function PictureInput(props) {
   }, [setPicture, userState.profile]);
 
   const handleOnKeyUp = (e) => {
-    if (e.key === "Enter") e.target.click();
+    if (e.key === 'Enter') e.target.click();
   };
 
   return (
     <div className="picture-input-container">
       {picture ? (
         <label
+          aria-label="Picture"
           tabIndex="0"
           htmlFor="picture"
           className="picture-input-container__label"
@@ -53,7 +54,11 @@ function PictureInput(props) {
           <Avatar url={picture ? picture.url : ''} />
         </label>
       ) : (
-        <label htmlFor="picture" className="picture-input-container__label">
+        <label
+          aria-label="Picture"
+          htmlFor="picture"
+          className="picture-input-container__label"
+        >
           <i
             className="fas fa-camera picture-input-container__icon"
             aria-hidden

@@ -2,18 +2,19 @@ import React, { useEffect, useRef } from 'react';
 import useCloseUI from '../../hooks/useCloseUI';
 import './Contact.scss';
 
-function Contact({setShowContact}) {
+function Contact({ setShowContact }) {
   useCloseUI([setShowContact]);
-  const link = useRef(null)
+  const link = useRef(null);
 
   useEffect(() => {
     link.current.focus();
-  }, [])
+  }, []);
   return (
     <div className="contact">
       <ul className="contact-list">
         <li className="contact-list__item">
           <a
+            aria-label="Github"
             href="https://github.com/bilkn"
             className="contact-list__link"
             target="_blank"
@@ -25,6 +26,7 @@ function Contact({setShowContact}) {
         </li>
         <li className="contact-list__item">
           <a
+            aria-label="Linkedin"
             href="https://www.linkedin.com/in/bilkankonus/"
             className="contact-list__link"
             target="_blank"
@@ -38,6 +40,7 @@ function Contact({setShowContact}) {
         </li>
         <li className="contact-list__item">
           <a
+            aria-label="Email"
             href="mailto:bilkan.konus@hotmail.com"
             className="contact-list__link"
           >
