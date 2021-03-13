@@ -14,16 +14,11 @@ function Attribution({ place }) {
             href={attr.href}
             className="attribution__link"
           >
-            {attr.artist}{' '}
+            {attr.artist || 'source'}
           </a>
           ,
         </>
-      )) || (
-        <>
-          {attr.artist}
-          (Source link could not found)
-        </>
-      )}{' '}
+      )) || <>{attr.artist} (Source link could not found)</>}{' '}
       <a
         target="_blank"
         rel="noreferrer"

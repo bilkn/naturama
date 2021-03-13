@@ -97,7 +97,7 @@ function extractHrefAndUsernameFromArtistValue(value) {
   const hrefMatchResult = value.match(hrefRegex);
   const artistMatchResult = value.match(artistRegex);
   const href = hrefMatchResult ? hrefMatchResult[1] : '';
-  const artist = artistMatchResult ? value.match(artistRegex)[1] : 'source';
+  const artist = artistMatchResult ? value.match(artistRegex)[1] : '';
   return { href, artist };
 }
 
