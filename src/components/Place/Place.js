@@ -24,15 +24,8 @@ function Place({ isMatched }) {
     !isMatched && setSelectedPlace(place);
   };
 
-  if (!error.isGeoActive) {
-    return (
-      <Error text="Your location couldn't be set, try to set your location manually." />
-    );
-  }
-  if (!error.isPlaceFound) {
-    return <Error text="No place was found." />;
-  }
-
+ 
+ 
   return (
     <div className="place">
       {isLoading && <Loader />}
@@ -54,23 +47,5 @@ function Place({ isMatched }) {
     </div>
   );
 }
-
-/*   (isLoading ? (
-          <Loader />
-        ) : place ? (
-          <PlaceContent>
-            <PlaceThumbnail
-              place={place}
-              icon="fas fa-map"
-              handleClick={handleClick}
-              className={place.img ? '' : 'place-thumbnail--no-img '}
-            />
-            <PlaceDetails place={place} />
-            <PlaceDescription place={place} />
-            {place.img?.attribution && <Attribution place={place} />}
-          </PlaceContent>
-        ) : (
-          <Error text="No place was found." />
-        ))} */
 
 export default Place;
