@@ -30,7 +30,7 @@ function DailyPlaceList() {
     );
     dispatch({
       type: 'ADD_HISTORY_DAILY_LIST',
-      payload: { history: newHistory, shufflePlace: place, dailyList },
+      payload: { history: newHistory, dailyList },
     });
     if (error.isDBActive) {
       try {
