@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
@@ -7,10 +7,13 @@ import useMatchMedia from '../../hooks/useMatchMedia';
 import Error from '../../components/Error/Error';
 import ErrorContext from '../../context/ErrorContext';
 
+
 function Home() {
   const [userState] = useContext(UserContext);
-  const { isMatched } = useMatchMedia('(min-width:1024px)');
   const [error] = useContext(ErrorContext);
+  const { isMatched } = useMatchMedia('(min-width:1024px)');
+
+
 
   return (
     <>

@@ -13,7 +13,7 @@ function Favourites() {
   const [userState] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
-  const [,setIsLoading] = useContext(LoadingContext);
+  const [, setIsLoading] = useContext(LoadingContext);
   const handlePlaceClick = (place) => {
     setIsLoading(true);
     setSelectedPlace(place);
@@ -24,7 +24,7 @@ function Favourites() {
   return (
     <div className="favourites">
       {isMatched && selectedPlace && userState.favourites.length > 0 && (
-        <AsidePictureToolbar  />
+        <AsidePictureToolbar />
       )}
       {(!userState.favourites.length && (
         <Error
@@ -33,7 +33,10 @@ function Favourites() {
         />
       )) ||
         (selectedPlace && <Place place={selectedPlace} />) || (
-          <PlaceList list={userState.favourites} onClick={handlePlaceClick} />
+          <PlaceList
+            list={userState.favourites}
+            onClick={handlePlaceClick}
+          />
         )}
     </div>
   );

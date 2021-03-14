@@ -1,7 +1,14 @@
 import React from 'react';
 import './PlaceItem.scss';
 import NoImg from '../../assets/no-img.svg';
-const NoImgStyle = { height: '100px', width: '100px' };
+const NoImgStyle = {
+  height: '100px',
+  display: 'block',
+  left: '50%',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '100px',
+};
 function PlaceItem(props) {
   const { place, children, onClick: handler, style, className } = props;
   const handleClick = () => {
