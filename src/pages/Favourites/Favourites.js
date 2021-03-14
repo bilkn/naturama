@@ -13,8 +13,9 @@ function Favourites() {
   const [userState] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
-  const [isLoading, setIsLoading] = useContext(LoadingContext);
+  const [,setIsLoading] = useContext(LoadingContext);
   const handlePlaceClick = (place) => {
+    setIsLoading(true);
     setSelectedPlace(place);
   };
   if (!userState) {

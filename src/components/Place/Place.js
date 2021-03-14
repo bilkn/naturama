@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
-import ErrorContext from '../../context/ErrorContext';
 import RandomPlaceContext from '../../context/RandomPlaceContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import useFetchPlace from '../../hooks/useFetchPlace';
 import Attribution from '../Attribution/Attribution';
-import Error from '../Error/Error';
 import Loader from '../Loader/Loader';
 import PlaceContent from '../PlaceContent/PlaceContent';
 import PlaceDescription from '../PlaceDescription/PlaceDescription';
@@ -15,7 +13,6 @@ import './Place.scss';
 function Place({ isMatched }) {
   const [randomPlace] = useContext(RandomPlaceContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
-  const [error] = useContext(ErrorContext);
   const { isLoading } = useFetchPlace({ autoFetch: true });
   const place = selectedPlace || randomPlace;
 
@@ -24,8 +21,6 @@ function Place({ isMatched }) {
     !isMatched && setSelectedPlace(place);
   };
 
- 
- 
   return (
     <div className="place">
       {isLoading && <Loader />}

@@ -12,18 +12,14 @@ function Home() {
   const { isMatched } = useMatchMedia('(min-width:1024px)');
   const [error] = useContext(ErrorContext);
 
-  if (!error.isGeoActive) {
-    return (
-      <Error text="Your location couldn't be set, try to set your location manually." />
-    );
-  }
-  if (!error.isPlaceFound) {
-    return <Error text="No place was found." />;
-  }
-
+  
   return (
     <>
       <div className="home">
+        {!error.isGeoActive && (
+          <Error text="Your location couldn't be set, try to set your location manually." />
+        )}
+        {!error.isPlaceFound && <Error text="No place was found." />}
         {isMatched && (
           <>
             <AsideShuffle userState={userState} />
