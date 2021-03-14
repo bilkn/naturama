@@ -1,4 +1,4 @@
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useContext} from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';

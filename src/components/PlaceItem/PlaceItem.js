@@ -29,6 +29,7 @@ function PlaceItem(props) {
       tabIndex="0"
     >
       <img
+        loading="lazy"
         className="place-item__img"
         src={img || NoImg}
         style={img ? {} : NoImgStyle}
