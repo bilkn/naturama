@@ -7,13 +7,17 @@ import { Redirect } from 'react-router-dom';
 import Error from '../../components/Error/Error';
 import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import LoadingContext from '../../context/LoadingContext';
 
 function Favourites() {
   const [userState] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
-
-  const handlePlaceClick = (place) => setSelectedPlace(place);
+  const [, setIsLoading] = useContext(LoadingContext);
+  const handlePlaceClick = (place) => {
+    setIsLoading(true);
+    setSelectedPlace(place);
+  };
   if (!userState) {
     return <Redirect to="/" />;
   }
@@ -29,7 +33,10 @@ function Favourites() {
         />
       )) ||
         (selectedPlace && <Place place={selectedPlace} />) || (
-          <PlaceList list={userState.favourites} onClick={handlePlaceClick} />
+          <PlaceList
+            list={userState.favourites}
+            onClick={handlePlaceClick}
+          />
         )}
     </div>
   );

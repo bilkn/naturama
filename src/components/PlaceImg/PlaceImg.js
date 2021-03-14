@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './PlaceImg.scss';
 import NoImg from '../../assets/no-img.svg';
+import LoadingContext from '../../context/LoadingContext';
 
 const NoImgStyle = { height: '150px', width: '150px' };
 function PlaceImg({ place }) {
   const { small = '', medium = '', large = '' } = place.img || {};
-
-  // !!! Could be refactored in the future.
+  const [, setIsLoading] = useContext(LoadingContext);
   const { name } = place.content;
-  const img = place.preview;
+
+  const handleOnload = () => {
+    setIsLoading(false);
+  };
+
   return (
     <img
+      onLoad={handleOnload}
       src={place.img ? small.source : NoImg}
       srcSet={
         place.img &&
@@ -19,7 +24,6 @@ function PlaceImg({ place }) {
       alt={name}
       className="place-img"
       style={place.img ? {} : NoImgStyle}
-      width={250}
     />
   );
 }

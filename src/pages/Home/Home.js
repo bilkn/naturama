@@ -1,24 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
 import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import Error from '../../components/Error/Error';
+import ErrorContext from '../../context/ErrorContext';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
+
 
 function Home() {
   const [userState] = useContext(UserContext);
+  const [error] = useContext(ErrorContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
+  const [selectedPlace] = useContext(SelectedPlaceContext);
+
 
   return (
     <>
       <div className="home">
+        {(!error.isGeoActive && (
+          <Error text="Your location couldn't be set, try to set your location manually." />
+        )) ||
+          (!error.isPlaceFound && !selectedPlace && <Error text="No place was found." />) || (
+            <Place isMatched={isMatched} />
+          )}
+
         {isMatched && (
           <>
             <AsideShuffle userState={userState} />
             <AsidePictureToolbar />
           </>
         )}
-        <Place isMatched={isMatched} />
       </div>
     </>
   );

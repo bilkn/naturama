@@ -9,18 +9,20 @@ import db from '../../helpers/dexie';
 import ErrorContext from '../../context/ErrorContext';
 import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictureToolbar';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import LoadingContext from '../../context/LoadingContext';
 
 function DailyPlaceList() {
   const [userState, dispatch] = useContext(UserContext);
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const [error] = useContext(ErrorContext);
+  const [, setIsLoading] = useContext(LoadingContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
-
   if (!userState) {
     return <Redirect to="/" />;
   }
 
   const handlePlaceClick = async (place) => {
+    setIsLoading(true);
     setSelectedPlace(place);
     const newHistory = [...userState.history, place.xid];
     const dailyList = userState.dailyList.filter(
@@ -28,7 +30,7 @@ function DailyPlaceList() {
     );
     dispatch({
       type: 'ADD_HISTORY_DAILY_LIST',
-      payload: { history: newHistory, shufflePlace: place, dailyList },
+      payload: { history: newHistory, dailyList },
     });
     if (error.isDBActive) {
       try {
@@ -42,11 +44,9 @@ function DailyPlaceList() {
 
   return (
     <div className="daily-place-list">
-      {isMatched && selectedPlace && userState.dailyList.length > 0 && (
-        <AsidePictureToolbar />
-      )}
+      {isMatched && selectedPlace && <AsidePictureToolbar />}
       {(!userState.dailyList.length && !selectedPlace && (
-        <Error text="No place was found." style={{ marginTop: '2rem' }} />
+        <Error text="No place was found." />
       )) ||
         (selectedPlace && (
           <>

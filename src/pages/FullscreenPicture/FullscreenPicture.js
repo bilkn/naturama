@@ -7,6 +7,7 @@ import DarkBackground from '../../components/DarkBackground/DarkBackground';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import { Redirect } from 'react-router';
 import useMatchMedia from '../../hooks/useMatchMedia';
+import PlaceImg from '../../components/PlaceImg/PlaceImg';
 
 function FullscreenPicture() {
   const [showShareLink, setShowShareLinks] = useState(false);
@@ -15,27 +16,17 @@ function FullscreenPicture() {
   );
   const { isMatched } = useMatchMedia('(min-width:1024px)');
 
-  const [selectedPlace] = useContext(SelectedPlaceContext);
-  const place = selectedPlace;
+  const [place] = useContext(SelectedPlaceContext);
 
   if (!place || isMatched) {
     return <Redirect to="/" />;
   }
 
-  const img = (place.img && place.img.large.source) || place.preview;
-  const width = (place.img && place.img.large.width) || 300;
-  const { name } = place.content;
-
   return (
     <div className="fullscreen-picture">
-      <img
-        src={img}
-        alt={name}
-        width={width}
-        className="fullscreen-picture__img"
-      />
+      <PlaceImg place={place} />
       <PictureToolbar
-        place={selectedPlace}
+        place={place}
         setShowShareLinks={setShowShareLinks}
         setShowDarkBackground={setShowDarkBackground}
       />

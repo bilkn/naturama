@@ -20,7 +20,7 @@ function useFavourite() {
         (favPlace) => favPlace.xid === place.xid
       );
     }
-    return;
+    return false;
   };
 
   const handleFavClick = async () => {
@@ -45,8 +45,9 @@ function useFavourite() {
     if (place) {
       const { newPlaces, favResult } = args;
       const payload = newPlaces;
+      console.log(newPlaces, favResult, place)
       if (!favResult) {
-        error.isDBActive && (await db.favourites.add(place, place.xid));
+        error.isDBActive && (await db.favourites.put(place, place.xid));
         dispatch({
           type: 'ADD_PLACE',
           payload,

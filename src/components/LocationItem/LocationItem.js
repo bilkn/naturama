@@ -1,10 +1,9 @@
 import React from 'react';
 import './LocationItem.scss';
 
+
 function LocationItem(props) {
   const { latValue, lonValue, setLatValue, setLonValue } = props;
-
-
 
   const handleChangeLat = (e) => {
     e.preventDefault();

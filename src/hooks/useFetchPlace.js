@@ -33,7 +33,6 @@ function useFetchPlace({ autoFetch = false }) {
           setSelectedPlace(null);
           setIsLoading(true);
           await triggerRandomPlaceRequest(args);
-          setIsLoading(false);
         } catch (err) {
           console.log(err);
           if (error.isPlaceFound) setError({ ...error, isPlaceFound: false });

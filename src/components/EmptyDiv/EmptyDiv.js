@@ -1,8 +1,8 @@
-import React from 'react'
-import "./EmptyDiv.scss";
+import React from 'react';
+import './EmptyDiv.scss';
 
-function EmptyDiv() {
-    return <div className="empty-div"></div>;
+function EmptyDiv({ className }) {
+  return <div className={`empty-div ${className || ''}`}></div>;
 }
 
-export default EmptyDiv
+export default EmptyDiv;
