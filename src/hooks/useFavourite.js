@@ -47,7 +47,7 @@ function useFavourite() {
       const payload = newPlaces;
       console.log(newPlaces, favResult, place)
       if (!favResult) {
-        error.isDBActive && (await db.favourites.add(place, place.xid));
+        error.isDBActive && (await db.favourites.put(place, place.xid));
         dispatch({
           type: 'ADD_PLACE',
           payload,
