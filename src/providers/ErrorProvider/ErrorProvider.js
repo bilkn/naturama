@@ -8,7 +8,7 @@ function ErrorProvider(props) {
     isPlaceFound: true,
   };
   const [error, setError] = useState(defaultState);
-
+  
   return <ErrorContext.Provider value={[error, setError]} {...props} />;
 }
 

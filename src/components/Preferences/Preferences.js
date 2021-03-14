@@ -60,15 +60,13 @@ function Preferences() {
     const { profile } = userState;
     const { preferences } = profile;
     const {
-      location: { lat },
-      location: { lon },
       radius,
     } = preferences;
     const newPreferences = {
       radius: radiusValue || radius,
       location: {
-        lat: latValue || lat,
-        lon: lonValue || lon,
+        lat: latValue, 
+        lon: lonValue
       },
     };
     return editUser(userState, [['preferences', newPreferences]]);
