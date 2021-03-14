@@ -24,7 +24,7 @@ function Favourites() {
   return (
     <div className="favourites">
       {isMatched && selectedPlace && userState.favourites.length > 0 && (
-        <AsidePictureToolbar />
+        <AsidePictureToolbar  />
       )}
       {(!userState.favourites.length && (
         <Error
