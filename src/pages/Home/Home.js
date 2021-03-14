@@ -6,13 +6,14 @@ import AsidePictureToolbar from '../../components/AsidePictureToolbar/AsidePictu
 import useMatchMedia from '../../hooks/useMatchMedia';
 import Error from '../../components/Error/Error';
 import ErrorContext from '../../context/ErrorContext';
+import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 
 
 function Home() {
   const [userState] = useContext(UserContext);
   const [error] = useContext(ErrorContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
-
+  const [selectedPlace] = useContext(SelectedPlaceContext);
 
 
   return (
@@ -21,7 +22,7 @@ function Home() {
         {(!error.isGeoActive && (
           <Error text="Your location couldn't be set, try to set your location manually." />
         )) ||
-          (!error.isPlaceFound && <Error text="No place was found." />) || (
+          (!error.isPlaceFound && !selectedPlace && <Error text="No place was found." />) || (
             <Place isMatched={isMatched} />
           )}
 
