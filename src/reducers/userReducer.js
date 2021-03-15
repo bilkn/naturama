@@ -1,6 +1,7 @@
 function userReducer(state, action) {
   switch (action.type) {
     case 'INIT': {
+      console.log("INIT")
       return {
         ...action.payload,
       };
@@ -73,6 +74,7 @@ function userReducer(state, action) {
     }
 
     case 'RESET_DATABASE': {
+       console.log('RESET DATABASE');
       return {
         ...state,
         notification: 'Your data has been reset.',

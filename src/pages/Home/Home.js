@@ -16,6 +16,7 @@ function Home() {
   const { isMatched } = useMatchMedia('(min-width:1024px)');
   const [selectedPlace] = useContext(SelectedPlaceContext);
   const [isLoading] = useContext(LoadingContext);
+
   useEffect(() => {
     if (userState) {
       const { preferences } = userState.profile;
@@ -27,6 +28,7 @@ function Home() {
       }
     }
   }, [error, setError, userState]);
+  
   return (
     <>
       <div className="home">

@@ -19,7 +19,7 @@ function UserProvider(props) {
         if (error.isDBActive) setError({ ...error, isDBActive: false });
       }
     }
-    openDB();
+    !db.isOpen() && openDB();
   }, [error, setError]);
 
   useEffect(() => {
