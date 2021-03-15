@@ -9,13 +9,13 @@ import ErrorContext from '../../context/ErrorContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import LoadingContext from '../../context/LoadingContext';
 
+
 function Home() {
   const [userState] = useContext(UserContext);
   const [error, setError] = useContext(ErrorContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
   const [selectedPlace] = useContext(SelectedPlaceContext);
   const [isLoading] = useContext(LoadingContext);
-
   useEffect(() => {
     if (userState) {
       const { preferences } = userState.profile;
@@ -31,7 +31,7 @@ function Home() {
     <>
       <div className="home">
         {(!error.isGeoActive && (
-          <Error text="Your location couldn't be set, try to set your location manually." />
+          <Error text="Your location could not be set automatically, you can try to set your location manually." />
         )) ||
           (!error.isPlaceFound && !selectedPlace && !isLoading && (
             <Error text="No place was found." />

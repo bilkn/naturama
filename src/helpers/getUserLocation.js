@@ -1,7 +1,7 @@
 function getUserLocation() {
   return new Promise((resolve) => {
     const options = {
-      timeout: 15000,
+      timeout: 6000,
     };
     const error = () => {
       resolve({ lat: '', lon: '' });

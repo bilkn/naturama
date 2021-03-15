@@ -60,7 +60,6 @@ function App() {
                         />
                         <Route exact path="/help" component={Help} />
                         <Route exact path="/map" component={Map} />
-                        {/*      <Route exact path="/*" component={ErrorPage} /> */}
                       </Switch>
                     </Router>
                   </LoadingProvider>
