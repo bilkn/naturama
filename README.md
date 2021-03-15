@@ -47,7 +47,7 @@ Enjoy :)
 * [React](https://reactjs.org/) - The JavaScript framework used
 * [SASS](https://sass-lang.com/) - CSS Pre-Processor
 * [OpenTripMap API](https://opentripmap.io/) - REST API for place data
-* [Wikipedia API](https://en.wikipedia.org/w/api.php) - Images and metada used in application
+* [Wikipedia API](https://en.wikipedia.org/w/api.php) - Images and metadata used in application
 * [Leaflet Library](https://leafletjs.com/) - Map used in application
 
 
