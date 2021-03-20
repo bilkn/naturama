@@ -26,7 +26,7 @@ function LocationItem(props) {
       <div className="location-input-container">
         <input
           id="lat"
-          type="number" // number type
+          type="number" 
           className="location-input-container__input"
           placeholder="lat"
           value={latValue || ''}

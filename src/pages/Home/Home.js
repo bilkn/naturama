@@ -9,7 +9,6 @@ import ErrorContext from '../../context/ErrorContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import LoadingContext from '../../context/LoadingContext';
 
-
 function Home() {
   const [userState] = useContext(UserContext);
   const [error, setError] = useContext(ErrorContext);

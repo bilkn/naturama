@@ -49,7 +49,7 @@ function ProfileMenu() {
       });
     } catch (err) {
       console.log(err);
-      // !!! Add notif.
+      dispatch({ type: 'RESET_ERROR' });
     }
   };
 

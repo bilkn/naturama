@@ -8,7 +8,6 @@ import UserContext from '../../context/UserContext';
 function AppHeadNav() {
   useActiveTab('.app-head-nav-list__link', 'active-tab');
   const [userState] = useContext(UserContext);
-
   const { dailyList } = userState ? userState : { dailyList: [] };
   const count = dailyList.length || '';
 

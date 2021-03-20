@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import './MobileNav.scss';
 import UserContext from '../../context/UserContext';
@@ -15,7 +15,7 @@ function MobileNav() {
   const { pathname } = location;
   useActiveTab('.mobile-nav-list-item__link', 'active-tab');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const neglectedPaths = ['/fullscreen-picture', '/map'];
     const path = pathname;
     if (!neglectedPaths.includes(path)) {

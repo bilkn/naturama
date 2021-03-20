@@ -8,8 +8,8 @@ import './AppHead.scss';
 import { useHistory, useLocation } from 'react-router';
 
 const specialPaths = ['/preferences', '/map', '/help'];
-
 const justifyStyle = { justifyContent: 'space-between' };
+
 function AppHead() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();

@@ -1,7 +1,7 @@
 function userReducer(state, action) {
   switch (action.type) {
     case 'INIT': {
-      console.log("INIT")
+      console.log('INIT');
       return {
         ...action.payload,
       };
@@ -57,11 +57,11 @@ function userReducer(state, action) {
     }
     case 'ADD_HISTORY_DAILY_LIST': {
       const { history, dailyList } = action.payload;
-    
+
       return {
         ...state,
         history,
-        dailyList
+        dailyList,
       };
     }
 
@@ -74,7 +74,7 @@ function userReducer(state, action) {
     }
 
     case 'RESET_DATABASE': {
-       console.log('RESET DATABASE');
+      console.log('RESET DATABASE');
       return {
         ...state,
         notification: 'Your data has been reset.',
@@ -101,6 +101,13 @@ function userReducer(state, action) {
       return {
         ...state,
         notification: 'Picture must be in .png, or .jpeg format.',
+        isNotificationOpen: true,
+      };
+    }
+    case 'RESET_ERROR': {
+      return {
+        ...state,
+        notification: 'An error occurred while resetting your data.',
         isNotificationOpen: true,
       };
     }
