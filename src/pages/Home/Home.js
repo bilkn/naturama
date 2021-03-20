@@ -32,7 +32,7 @@ function Home() {
     <>
       <div className="home">
         {(!error.isGeoActive && (
-          <Error text="Your location could not be set automatically, you can try to set your location manually." />
+          <Error text="Your location could not be set automatically, you can try to set your location manually on the preferences section." />
         )) ||
           (!error.isPlaceFound && !selectedPlace && !isLoading && (
             <Error text="No place was found." />
