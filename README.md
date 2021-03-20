@@ -2,6 +2,8 @@
 
 A React application that randomly shows the popular natural places in your city.
 
+[Naturama](https://www.naturama.xyz/)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
