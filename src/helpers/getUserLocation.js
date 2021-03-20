@@ -4,16 +4,13 @@ function getUserLocation() {
       timeout: 6000,
     };
     const error = () => {
+      console.log("Location couldn't set.")
       resolve({ lat: '', lon: '' });
     };
     const success = (position) => {
       const lat = Math.round(position.coords.latitude);
       const lon = Math.round(position.coords.longitude);
-      const location = {
-        lat,
-        lon,
-      };
-      resolve(location);
+      resolve({lat, lon});
     };
 
     if (navigator.geolocation) {

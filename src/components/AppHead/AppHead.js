@@ -8,8 +8,8 @@ import './AppHead.scss';
 import { useHistory, useLocation } from 'react-router';
 
 const specialPaths = ['/preferences', '/map', '/help'];
-
 const justifyStyle = { justifyContent: 'space-between' };
+
 function AppHead() {
   const [selectedPlace, setSelectedPlace] = useContext(SelectedPlaceContext);
   const location = useLocation();
@@ -33,14 +33,16 @@ function AppHead() {
     <header
       className="app-head"
       style={
-        selectedPlace || specialPaths.includes(location.pathname)
+        (selectedPlace && location.pathname !== '/') ||
+        specialPaths.includes(location.pathname)
           ? justifyStyle
           : {}
       }
     >
-      {(selectedPlace || specialPaths.includes(location.pathname)) && (
+      {((selectedPlace && location.pathname !== '/') ||
+        specialPaths.includes(location.pathname)) && (
         <IconButton
-          ariaLabel ="Previous page"
+          ariaLabel="Previous page"
           btnClass="app-head__icon"
           iconClass="fa fa-arrow-left"
           onClick={handleBtnClick}
@@ -48,9 +50,8 @@ function AppHead() {
       )}
 
       <PageName />
-      {(selectedPlace || specialPaths.includes(location.pathname)) && (
-        <EmptyDiv />
-      )}
+      {((selectedPlace && location.pathname !== '/') ||
+        specialPaths.includes(location.pathname)) && <EmptyDiv />}
       <AppHeadNav />
     </header>
   );

@@ -1,11 +1,11 @@
 import db from './dexie';
 import createFileURL from './createFileURL';
 import arrayBufferToBlob from './arrayBufferToBlob';
-import getUserLocation from './getUserLocation';
 import getDailyPlaceList from './getDailyPlaceList';
 import initUserWithoutDB from './initUserWithoutDB';
 import isHoursPassed from './isHoursPassed';
 import editUser from './editUser';
+import createUser from './createUser';
 
 async function initialize(errorState, dispatch) {
   if (window.indexedDB) {
@@ -65,11 +65,15 @@ async function initUserWithDB(dispatch) {
 }
 
 async function initializeDB() {
-  const location = await getUserLocation();
+  const newUser = await createUser();
+  console.log(newUser)
+  const {location} = newUser.profile.preferences;
   const dailyPlaceList =
-    location.lat && location.lon ? await getDailyPlaceList() : [];
+    location.lat && location.lon ? await getDailyPlaceList(newUser) : [];
 
-  await db.dailyList.bulkAdd([...dailyPlaceList]);
+  if (dailyPlaceList.length !== 0) {
+    await db.dailyList.bulkAdd([...dailyPlaceList]);
+  }
   await db.profile.bulkAdd([
     { username: 'Anonymous' },
     {
@@ -78,9 +82,7 @@ async function initializeDB() {
     {
       preferences: {
         radius: 200,
-        location: {
-          ...location,
-        },
+        location,
       },
     },
     {

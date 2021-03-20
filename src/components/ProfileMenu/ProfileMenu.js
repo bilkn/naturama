@@ -6,7 +6,6 @@ import Contact from '../Contact/Contact';
 import EditProfile from '../EditProfile/EditProfile';
 import UserContext from '../../context/UserContext';
 import db from '../../helpers/dexie';
-import createUser from '../../helpers/createUser';
 import initialize from '../../helpers/initilalize';
 import ErrorContext from '../../context/ErrorContext';
 import Dialog from '../Dialog/Dialog';
@@ -40,19 +39,27 @@ function ProfileMenu() {
   };
 
   const resetAllData = async () => {
-    clearNotificationIfExist(userState, dispatch);
-    await db.delete();
-    await db.open();
-    await initialize(errorState, dispatch);
-    dispatch({
-      type: 'RESET_DATABASE',
-      payload: await createUser(),
-    });
+    userState && clearNotificationIfExist(userState, dispatch);
+    try {
+      await db.delete();
+      !db.isOpen() && (await db.open());
+      await initialize(errorState, dispatch);
+      dispatch({
+        type: 'RESET_DATABASE',
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: 'RESET_ERROR' });
+    }
   };
 
   const removePlaceHistory = async () => {
-    clearNotificationIfExist(userState, dispatch);
-    await db.history.clear();
+    userState && clearNotificationIfExist(userState, dispatch);
+    try {
+      await db.history.clear();
+    } catch (err) {
+      console.log(err);
+    }
     dispatch({
       type: 'CLEAR_HISTORY',
       payload: [],

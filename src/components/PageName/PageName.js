@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useLayoutEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import useMatchMedia from '../../hooks/useMatchMedia';
@@ -11,7 +11,7 @@ function PageName() {
   const [place] = useContext(SelectedPlaceContext);
   const { isMatched } = useMatchMedia('(min-width:1024px)');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (location.pathname === '/fullscreen-picture' && place) {
       setPageName(place.content.name);
     }

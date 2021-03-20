@@ -2,7 +2,7 @@ import getUserLocation from './getUserLocation';
 
 async function createUser() {
   const location = await getUserLocation();
-  const userTemplate = {
+  const user = {
     profile: {
       username: 'Anonymous',
       picture: {
@@ -11,9 +11,7 @@ async function createUser() {
       },
       preferences: {
         radius: 200,
-        location: {
-          ...location,
-        },
+        location,
       },
     },
     favourites: [],
@@ -23,7 +21,7 @@ async function createUser() {
     isNotificationOpen: false,
     notification: '',
   };
-  return userTemplate;
+  return user;
 }
 
 export default createUser;
