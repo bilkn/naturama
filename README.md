@@ -51,6 +51,7 @@ Enjoy :)
 * [OpenTripMap API](https://opentripmap.io/) - REST API for place data
 * [Wikipedia API](https://en.wikipedia.org/w/api.php) - Images and metadata used in application
 * [Leaflet Library](https://leafletjs.com/) - Map used in application
+* [Dexie](https://dexie.org/) - IndexedDB Wrapper
 
 
 ## Contributors
