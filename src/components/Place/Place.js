@@ -23,7 +23,7 @@ function Place({ isMatched }) {
 
   return (
     <div className="place">
-      {isLoading && <Loader />}
+      {isLoading && <Loader style={{all:"unset", margin: 'auto' }} />}
       {place && (
         <PlaceContent
           className={isLoading ? 'place--hidden' : 'place--visible'}

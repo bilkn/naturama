@@ -161,15 +161,6 @@ function ProfileMenu() {
           Reset all data
         </button>
       </div>
-      <footer className="profile-menu__footer">
-        &copy; Powered by
-        <a
-          href="https://opentripmap.io/product"
-          className="profile-menu__attribute-link"
-        >
-          OpenTripMap
-        </a>
-      </footer>
     </div>
   );
 }

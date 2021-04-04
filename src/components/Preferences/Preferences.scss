@@ -5,9 +5,14 @@
   background: $profile-bg-color;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  padding: 1rem 0 75px 0;
-  z-index: 1000;
+  min-height: calc(100vh - #{$nav-height});
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 16px 0 75px;
+
+  @media (min-width: 1441px) {
+    padding-top: 48px;
+  }
 
   // preferences__map-options-list
   &__map-options-list {
@@ -31,7 +36,7 @@
     padding: 0.5rem 1rem;
     transition: background 100ms ease;
     width: max-content;
-     &:hover {
+    &:hover {
       background: rgb(236, 236, 234);
     }
   }

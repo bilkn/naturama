@@ -1,8 +1,11 @@
 @import '../../styles/mixins';
 @import '../../styles/variables';
 .help-list {
+  align-items: center;
   @include ListStyle;
   grid-template-columns: 90%;
+  margin: 0 auto;
+  max-width: 1440px;
   padding: $mobile-list-padding;
 }
 

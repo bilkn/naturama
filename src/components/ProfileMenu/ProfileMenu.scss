@@ -1,21 +1,3 @@
-.profile-menu {
-  // profile-menu__footer
-  &__footer {
-    color: ivory;
-    text-align: center;
-  }
-
-  // profile-menu__attribute-link
-  &__attribute-link {
-    color: blue;
-    margin-left: 0.5rem;
-    // profile-menu__attribute-link:hover
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
 .profile-menu-reset-container {
   margin-bottom: 2rem;
 

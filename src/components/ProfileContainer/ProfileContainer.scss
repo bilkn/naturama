@@ -2,12 +2,41 @@
 .profile-container {
   background: $profile-bg-color;
   color: $icon-color;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1440px;
+  min-height: calc(100vh - #{$nav-height});
   padding: $mobile-page-padding;
+
+  // profile-container__footer
+  &__footer {
+    color: ivory;
+    margin-top: auto;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  // profile-container__attribute-link
+  &__attribute-link {
+    color: blue;
+    margin-left: 0.5rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 @media (min-width: 768px) {
   .profile-container {
     padding: $tablet-page-padding;
     padding-top: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .profile-container {
+    padding-bottom: 0;
   }
 }
