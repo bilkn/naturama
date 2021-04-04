@@ -14,7 +14,7 @@ function Contact({ setShowContact }) {
       <ul className="contact-list">
         <li className="contact-list__item">
           <a
-            aria-label="Github"
+            aria-label="GitHub"
             href="https://github.com/bilkn"
             className="contact-list__link"
             target="_blank"
@@ -26,7 +26,7 @@ function Contact({ setShowContact }) {
         </li>
         <li className="contact-list__item">
           <a
-            aria-label="Linkedin"
+            aria-label="LinkedIn"
             href="https://www.linkedin.com/in/bilkankonus/"
             className="contact-list__link"
             target="_blank"

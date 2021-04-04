@@ -48,10 +48,17 @@ function Home() {
         <Footer>
           <Footer.Text>&copy;2021 Code and design by Bilkan Konus</Footer.Text>
           <Footer.Wrapper>
-            <Footer.Link href="https://github.com/bilkn/naturama" style={{marginRight: "0.7em"}}>
+            <Footer.Link
+              href="https://github.com/bilkn/naturama"
+              aria-label="GitHub repo"
+              style={{ marginRight: '0.7em' }}
+            >
               <Footer.Icon classNames="fab fa-github" />
             </Footer.Link>
-            <Footer.Link href="https://www.linkedin.com/in/bilkankonus/">
+            <Footer.Link
+              aria-label="LinkedIn"
+              href="https://www.linkedin.com/in/bilkankonus/"
+            >
               <Footer.Icon classNames="fa fa-linkedin-square" />
             </Footer.Link>
           </Footer.Wrapper>
