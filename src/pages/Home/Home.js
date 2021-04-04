@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import "./Home.scss";
 import UserContext from '../../context/UserContext';
 import Place from '../../components/Place/Place';
 import AsideShuffle from '../../components/AsideShuffle/AsideShuffle';
@@ -9,7 +10,6 @@ import ErrorContext from '../../context/ErrorContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import LoadingContext from '../../context/LoadingContext';
 import Footer from '../../components/Footer/Footer';
-
 function Home() {
   const [userState] = useContext(UserContext);
   const [error, setError] = useContext(ErrorContext);
