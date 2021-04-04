@@ -21,7 +21,7 @@ function Contact({ setShowContact }) {
             rel="noreferrer"
             ref={link}
           >
-            <i className="fab fa-github contact-list__icon"></i>
+            <i className="fab fa-github contact-list__icon" />
           </a>
         </li>
         <li className="contact-list__item">
@@ -35,7 +35,7 @@ function Contact({ setShowContact }) {
             <i
               className="fa fa-linkedin-square contact-list__icon"
               aria-hidden="true"
-            ></i>
+            />
           </a>
         </li>
         <li className="contact-list__item">
@@ -44,11 +44,11 @@ function Contact({ setShowContact }) {
             href="mailto:bilkan.konus@hotmail.com"
             className="contact-list__link"
           >
-            <i className="fas fa-at contact-list__icon"></i>
+            <i className="fas fa-at contact-list__icon"/>
           </a>
         </li>
       </ul>
-      <p className="contact__signature">Design and coded by Bilkan Konus.</p>
+      <p className="contact__signature">&copy;2021 Code and Design by Bilkan Konus.</p>
     </div>
   );
 }

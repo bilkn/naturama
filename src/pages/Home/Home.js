@@ -8,6 +8,7 @@ import Error from '../../components/Error/Error';
 import ErrorContext from '../../context/ErrorContext';
 import SelectedPlaceContext from '../../context/SelectedPlaceContext';
 import LoadingContext from '../../context/LoadingContext';
+import Footer from '../../components/Footer/Footer';
 
 function Home() {
   const [userState] = useContext(UserContext);
@@ -27,7 +28,7 @@ function Home() {
       }
     }
   }, [error, setError, userState]);
-  
+
   return (
     <>
       <div className="home">
@@ -44,6 +45,17 @@ function Home() {
             <AsidePictureToolbar />
           </>
         )}
+        <Footer>
+          <Footer.Text>&copy;2021 Code and design by Bilkan Konus</Footer.Text>
+          <Footer.Wrapper>
+            <Footer.Link href="https://github.com/bilkn/naturama" style={{marginRight: "0.7em"}}>
+              <Footer.Icon classNames="fab fa-github" />
+            </Footer.Link>
+            <Footer.Link href="https://www.linkedin.com/in/bilkankonus/">
+              <Footer.Icon classNames="fa fa-linkedin-square" />
+            </Footer.Link>
+          </Footer.Wrapper>
+        </Footer>
       </div>
     </>
   );

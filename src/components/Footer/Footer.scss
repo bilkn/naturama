@@ -1,0 +1,38 @@
+@import '../../styles/variables';
+
+.footer {
+  color: #fff;
+  margin-bottom: $nav-height + 35px;
+  padding: 0.5em;
+  text-align: center;
+  @media (min-width: 1024px) {
+    margin: 0;
+  }
+
+  // footer__wrapper
+  &__wrapper {
+    display: inline-block;
+  }
+
+  // footer__text
+  &__text {
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+
+  // footer__link
+  &__link {
+    color: #fff;
+    display: inline-block;
+    transition: color 100ms;
+    &:hover {
+      color: rgba(255, 255, 255, 0.856);
+    }
+  }
+
+  // footer__icon
+  &__icon {
+    color: inherit;
+    font-size: 1.6rem;
+  }
+}
