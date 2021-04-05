@@ -10,6 +10,15 @@ function ProfileContainer() {
     <div className="profile-container">
       <ProfileThumbnail userState={userState} />
       <ProfileMenu />
+      <footer className="profile-container__footer">
+        &copy; Powered by
+        <a
+          href="https://opentripmap.io/product"
+          className="profile-container__attribute-link"
+        >
+          OpenTripMap
+        </a>
+      </footer>
     </div>
   );
 }
