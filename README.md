@@ -2,7 +2,7 @@
 
 A React application that randomly shows the popular natural places in your city.
 
-[Naturama](https://www.naturama.xyz/)
+[Naturama](https://naturama.netlify.app/)
 
 ## Getting Started
 
